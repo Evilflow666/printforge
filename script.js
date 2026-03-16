@@ -74,7 +74,10 @@ form.addEventListener('submit', (e) => {
     formData.append('file', fileInput.files[0]);
   }
 
-  fetch('http://69.62.105.159:3000/api/quote', {
+  const apiBase = window.location.hostname === 'evilflow666.github.io' 
+    ? 'http://69.62.105.159:3000' 
+    : '';
+  fetch(apiBase + '/api/quote', {
     method: 'POST',
     body: formData,
   })

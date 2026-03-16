@@ -49,11 +49,43 @@ form.addEventListener('submit', (e) => {
     notes: document.getElementById('notes').value,
   };
 
-  // TODO: Backend-Integration (E-Mail oder API)
-  console.log('Angebotsanfrage:', data);
-  alert('Vielen Dank! Ihre Anfrage wurde gesendet. Wir melden uns in Kürze.');
-  form.reset();
-  fileNameDisplay.textContent = '';
+  // Backend-Integration
+  const submitBtn = form.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Wird gesendet...';
+
+  const formData = new FormData();
+  formData.append('name', data.name);
+  formData.append('email', data.email);
+  formData.append('service', data.service);
+  formData.append('type', data.type);
+  formData.append('quantity', data.quantity);
+  formData.append('notes', data.notes);
+  if (fileInput.files[0]) {
+    formData.append('file', fileInput.files[0]);
+  }
+
+  fetch('http://69.62.105.159:3000/api/quote', {
+    method: 'POST',
+    body: formData,
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (res.success) {
+      alert('✅ ' + res.message);
+      form.reset();
+      fileNameDisplay.textContent = '';
+    } else {
+      alert('❌ ' + res.message);
+    }
+  })
+  .catch(() => {
+    alert('❌ Verbindungsfehler. Bitte versuchen Sie es später erneut.');
+  })
+  .finally(() => {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Angebot anfordern';
+  });
 });
 
 // Mobile Navigation Toggle

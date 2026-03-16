@@ -32,6 +32,15 @@ fileInput.addEventListener('change', () => {
 function showFileName(file) {
   const sizeMB = (file.size / 1024 / 1024).toFixed(2);
   fileNameDisplay.textContent = `✅ ${file.name} (${sizeMB} MB)`;
+
+  // STL/3MF → 3D Viewer aktivieren
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (ext === 'stl') {
+    const preview = document.getElementById('stlPreview');
+    preview.style.display = 'block';
+    if (!scene) initViewer('viewer3d');
+    loadSTL(file);
+  }
 }
 
 // Form Submit

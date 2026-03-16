@@ -159,6 +159,40 @@ select { cursor: pointer; }
 .file-drop small { display: block; margin-top: 8px; color: var(--text-secondary); }
 .file-name { margin-top: 8px; color: var(--accent); font-size: 0.9rem; }
 
+/* ===== STL VIEWER ===== */
+.stl-preview { margin: 20px 0; }
+.viewer-3d {
+  width: 100%; height: 350px;
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  overflow: hidden;
+}
+.analysis-panel {
+  margin: 16px 0;
+  padding: 20px;
+  background: var(--bg-primary);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+}
+.analysis-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  margin-bottom: 12px;
+}
+.analysis-card {
+  padding: 12px; text-align: center;
+  background: var(--bg-card); border-radius: 8px;
+  border: 1px solid var(--stroke);
+}
+.analysis-card h4 { font-size: 0.85rem; margin-bottom: 4px; }
+.analysis-card p { font-size: 1.1rem; color: var(--text-primary); font-weight: 600; }
+.printer-list { display: flex; flex-direction: column; gap: 8px; }
+.printer-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px; border-radius: 8px; font-size: 0.85rem;
+}
+.printer-ok { background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); }
+.printer-no { background: rgba(244, 67, 54, 0.1); border: 1px solid rgba(244, 67, 54, 0.3); }
+
 /* ===== GALLERY ===== */
 .gallery-placeholder {
   background: var(--bg-card);

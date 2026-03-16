@@ -70,8 +70,14 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 }
 .hero-sub {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  margin: 16px 0 32px;
+  margin: 16px 0 12px;
   color: var(--text-secondary);
+}
+.hero-eco {
+  font-size: 0.95rem;
+  color: #4CAF50;
+  margin-bottom: 32px;
+  font-weight: 500;
 }
 
 /* ===== BUTTONS ===== */

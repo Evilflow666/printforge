@@ -94,7 +94,7 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 .btn-full { width: 100%; text-align: center; }
 
 /* ===== CARDS ===== */
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 
 .card {
@@ -107,25 +107,6 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 }
 .card:hover { transform: translateY(-4px); border-color: var(--accent); }
 .card-icon { font-size: 2.5rem; margin-bottom: 16px; }
-
-/* ===== MATERIAL BANNER ===== */
-.material-banner {
-  margin-top: 48px;
-  padding: 32px 40px;
-  background: linear-gradient(135deg, var(--bg-card), var(--bg-secondary));
-  border: 1px solid var(--accent);
-  border-radius: var(--radius);
-  text-align: center;
-}
-.material-banner h3 {
-  font-size: 1.3rem;
-  margin-bottom: 12px;
-}
-.material-banner p {
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
 
 /* ===== STEPS ===== */
 .steps { display: flex; gap: 40px; justify-content: center; }
@@ -208,6 +189,7 @@ select { cursor: pointer; }
   .nav { display: none; }
   .mobile-toggle { display: block; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 > :last-child { grid-column: 1 / -1; }
   .grid-3 { grid-template-columns: 1fr; }
   .steps { flex-direction: column; align-items: center; }
   .footer-inner { flex-direction: column; text-align: center; }

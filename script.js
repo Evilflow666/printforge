@@ -105,6 +105,21 @@ mobileToggle.addEventListener('click', () => {
   nav.style.borderBottom = '1px solid #2A4468';
 });
 
+// Klick auf Leistungskarte → Service vorauswählen
+document.querySelectorAll('.card[data-service]').forEach(card => {
+  card.addEventListener('click', function(e) {
+    e.preventDefault();
+    const service = this.dataset.service;
+    const select = document.getElementById('service');
+    if (select) {
+      select.value = service;
+      select.style.borderColor = '#E8772E';
+      setTimeout(() => select.style.borderColor = '', 2000);
+    }
+    document.getElementById('angebot').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {

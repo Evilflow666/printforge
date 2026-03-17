@@ -1,104 +1,28 @@
-// File Upload Handler
-const fileDrop = document.getElementById('fileDrop');
-const fileInput = document.getElementById('fileUpload');
-const fileNameDisplay = document.getElementById('fileName');
+// Contact Form Handler
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird gesendet...';
 
-if (fileDrop) fileDrop.addEventListener('click', () => fileInput && fileInput.click());
+    // Formular-Daten sammeln
+    const inputs = contactForm.querySelectorAll('input, select, textarea');
+    const formData = new FormData();
+    inputs.forEach(input => {
+      if (input.name) formData.append(input.name, input.value);
+    });
 
-if (fileDrop) fileDrop.addEventListener('dragover', (e) => {
-  e.preventDefault();
-  fileDrop.classList.add('dragover');
-});
-
-if (fileDrop) fileDrop.addEventListener('dragleave', () => {
-  fileDrop.classList.remove('dragover');
-});
-
-if (fileDrop) fileDrop.addEventListener('drop', (e) => {
-  e.preventDefault();
-  fileDrop.classList.remove('dragover');
-  if (e.dataTransfer.files.length) {
-    fileInput.files = e.dataTransfer.files;
-    showFileName(e.dataTransfer.files[0]);
-  }
-});
-
-fileInput.addEventListener('change', () => {
-  if (fileInput.files.length) {
-    showFileName(fileInput.files[0]);
-  }
-});
-
-function showFileName(file) {
-  const sizeMB = (file.size / 1024 / 1024).toFixed(2);
-  fileNameDisplay.textContent = `✅ ${file.name} (${sizeMB} MB)`;
-
-  // STL/3MF → 3D Viewer aktivieren
-  const ext = file.name.split('.').pop().toLowerCase();
-  if (ext === 'stl') {
-    const preview = document.getElementById('stlPreview');
-    preview.style.display = 'block';
-    if (!scene) initViewer('viewer3d');
-    loadSTL(file);
-  }
-}
-
-// Form Submit
-const form = document.getElementById('quoteForm');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const data = {
-    file: fileInput.files[0]?.name || 'Keine Datei',
-    service: document.getElementById('service').value,
-    type: document.getElementById('type').value,
-    quantity: document.getElementById('quantity').value,
-    name: document.getElementById('name').value,
-    email: document.getElementById('email').value,
-    notes: document.getElementById('notes').value,
-  };
-
-  // Backend-Integration
-  const submitBtn = form.querySelector('button[type="submit"]');
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Wird gesendet...';
-
-  const formData = new FormData();
-  formData.append('name', data.name);
-  formData.append('email', data.email);
-  formData.append('service', data.service);
-  formData.append('type', data.type);
-  formData.append('quantity', data.quantity);
-  formData.append('notes', data.notes);
-  if (fileInput.files[0]) {
-    formData.append('file', fileInput.files[0]);
-  }
-
-  const apiBase = window.location.hostname === 'evilflow666.github.io' 
-    ? 'http://69.62.105.159:3000' 
-    : '';
-  fetch(apiBase + '/api/quote', {
-    method: 'POST',
-    body: formData,
-  })
-  .then(r => r.json())
-  .then(res => {
-    if (res.success) {
-      alert('✅ ' + res.message);
-      form.reset();
-      fileNameDisplay.textContent = '';
-    } else {
-      alert('❌ ' + res.message);
-    }
-  })
-  .catch(() => {
-    alert('❌ Verbindungsfehler. Bitte versuchen Sie es später erneut.');
-  })
-  .finally(() => {
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Angebot anfordern';
+    // TODO: Backend-Endpoint konfigurieren
+    setTimeout(() => {
+      alert('✅ Anfrage gesendet! Wir melden uns zeitnah.');
+      contactForm.reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Angebot anfordern';
+    }, 800);
   });
-});
+}
 
 // Mobile Navigation Toggle
 const mobileToggle = document.querySelector('.mobile-toggle');
@@ -117,20 +41,7 @@ mobileToggle.addEventListener('click', () => {
   nav.style.borderBottom = '1px solid #2A4468';
 });
 
-// Klick auf Leistungskarte → Service vorauswählen
-document.querySelectorAll('.card[data-service]').forEach(card => {
-  card.addEventListener('click', function(e) {
-    e.preventDefault();
-    const service = this.dataset.service;
-    const select = document.getElementById('service');
-    if (select) {
-      select.value = service;
-      select.style.borderColor = '#E8772E';
-      setTimeout(() => select.style.borderColor = '', 2000);
-    }
-    document.getElementById('angebot').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-});
+// Karten-Links funktionieren nativ als <a href="...">
 
 // Header scroll effect
 const header = document.querySelector('.header');

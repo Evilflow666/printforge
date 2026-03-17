@@ -1,5 +1,6 @@
 /* ===== VARIABLES ===== */
 :root {
+  --bg: #0B0F19;
   --bg-primary: #0B0F19;
   --bg-secondary: #12182A;
   --bg-card: #161D30;
@@ -560,7 +561,7 @@ select { cursor: pointer; appearance: none;
 .form-group select {
   width: 100%;
   padding: 10px 14px;
-  background: var(--bg);
+  background: var(--bg-primary);
   border: 1px solid var(--stroke);
   border-radius: var(--radius);
   color: var(--text-primary);

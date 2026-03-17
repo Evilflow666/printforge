@@ -54,7 +54,12 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 }
 .fade-in { animation: fadeInUp 0.6s ease-out both; }
 
-/* ===== HEADER ===== */
+/* ===== ALPS WRAPPER ===== */
+.alps-wrapper {
+  background: linear-gradient(rgba(11, 15, 25, 0.4), rgba(11, 15, 25, 0.55)), url('alps-hero.jpg') center/cover no-repeat;
+  /* Optionale Überblendung in den Seitenhintergrund am Ende */
+  /* mask-image: linear-gradient(to bottom, black 85%, transparent 100%); */
+}
 .header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: rgba(11, 15, 25, 0.92);

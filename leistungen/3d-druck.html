@@ -50,6 +50,12 @@
       </div>
       <p id="slicerFileName" class="file-name"></p>
 
+      <!-- 3D Preview -->
+      <div id="stlPreview" class="stl-preview" style="display:none;">
+        <div id="viewer3d" class="viewer-3d"></div>
+        <div id="analysisPanel" class="analysis-panel" style="display:none;"></div>
+      </div>
+
       <!-- Options -->
       <div class="slicer-options" id="slicerOptions" style="display:none;">
         <div class="form-row">
@@ -123,6 +129,11 @@
     <div class="footer-bottom"><p>&copy; 2026 Pit<span class="accent">A</span></p></div>
   </footer>
 
+  <!-- Three.js für 3D-Preview -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="../stl-viewer.js"></script>
   <script src="../js/stl-analyzer.js"></script>
   <script>
     const drop = document.getElementById('slicerDrop');
@@ -155,6 +166,14 @@
 
       if (ext === '3mf') {
         fileNameEl.textContent += ' — ⚠️ 3MF-Vorschau eingeschränkt, STL empfohlen für volle Analyse';
+      }
+
+      // STL → 3D-Preview aktivieren
+      if (ext === 'stl') {
+        const preview = document.getElementById('stlPreview');
+        preview.style.display = 'block';
+        if (typeof initViewer === 'function' && !scene) initViewer('viewer3d');
+        if (typeof loadSTL === 'function') loadSTL(file);
       }
 
       const reader = new FileReader();

@@ -96,6 +96,14 @@
           <img src="images/gallery-4.jpg" alt="Projekt 4">
           <p>Prototyping Gehäuse</p>
         </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/gallery-5.jpg" alt="Projekt 5">
+          <p>Lasergravur Holz</p>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/gallery-3.jpg" alt="Projekt 6">
+          <p>Präzisions-Prototyp</p>
+        </div>
       </div>
     </div>
   </section>
@@ -135,17 +143,23 @@
       <h2>Kontakt & <span class="accent">Angebot</span></h2>
       <form class="contact-form" id="contactForm">
         <div class="form-row">
-          <input type="text" placeholder="Name" required>
-          <input type="email" placeholder="E-Mail" required>
+          <input type="text" name="name" placeholder="Name" required>
+          <input type="email" name="email" placeholder="E-Mail" required>
         </div>
-        <select>
+        <select name="service">
           <option value="">Leistung wählen</option>
           <option value="3d-druck">3D-Druck</option>
           <option value="lasercutting">Lasercutting</option>
           <option value="lasergravur">Lasergravur</option>
           <option value="prototyping">Prototyping</option>
         </select>
-        <textarea rows="4" placeholder="Beschreibe dein Projekt..."></textarea>
+        <textarea name="message" rows="4" placeholder="Beschreibe dein Projekt..."></textarea>
+        <div class="file-drop" id="contactFileDrop" style="margin-bottom:12px;">
+          <p>📎 Datei anhängen (optional) — <span class="accent">klicken oder ziehen</span></p>
+          <small>STL, 3MF, SVG, DXF, PDF, JPG, PNG (max. 25 MB)</small>
+          <input type="file" name="file" id="contactFileInput" accept=".stl,.3mf,.svg,.dxf,.pdf,.jpg,.jpeg,.png" hidden>
+        </div>
+        <p id="contactFileName" class="file-name"></p>
         <button type="submit" class="btn btn-primary btn-full">Angebot anfordern</button>
       </form>
     </div>

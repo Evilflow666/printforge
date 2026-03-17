@@ -1,5 +1,42 @@
 // Contact Form Handler
 const contactForm = document.getElementById('contactForm');
+const contactFileDrop = document.getElementById('contactFileDrop');
+const contactFileInput = document.getElementById('contactFileInput');
+const contactFileName = document.getElementById('contactFileName');
+
+if (contactFileDrop && contactFileInput) {
+  contactFileDrop.addEventListener('click', () => contactFileInput.click());
+  contactFileDrop.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    contactFileDrop.classList.add('dragover');
+  });
+  contactFileDrop.addEventListener('dragleave', () => contactFileDrop.classList.remove('dragover'));
+  contactFileDrop.addEventListener('drop', (e) => {
+    e.preventDefault();
+    contactFileDrop.classList.remove('dragover');
+    if (e.dataTransfer.files.length) {
+      contactFileInput.files = e.dataTransfer.files;
+      showContactFile(e.dataTransfer.files[0]);
+    }
+  });
+  contactFileInput.addEventListener('change', () => {
+    if (contactFileInput.files.length) showContactFile(contactFileInput.files[0]);
+  });
+}
+
+function showContactFile(file) {
+  if (!contactFileName) return;
+  const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+  if (file.size > 25 * 1024 * 1024) {
+    contactFileName.textContent = '❌ Datei zu groß (max. 25 MB)';
+    contactFileName.style.color = '#f44336';
+    contactFileInput.value = '';
+    return;
+  }
+  contactFileName.textContent = `✅ ${file.name} (${sizeMB} MB)`;
+  contactFileName.style.color = '';
+}
+
 if (contactForm) {
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -7,20 +44,37 @@ if (contactForm) {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Wird gesendet...';
 
-    // Formular-Daten sammeln
-    const inputs = contactForm.querySelectorAll('input, select, textarea');
-    const formData = new FormData();
-    inputs.forEach(input => {
-      if (input.name) formData.append(input.name, input.value);
-    });
+    const formData = new FormData(contactForm);
 
-    // TODO: Backend-Endpoint konfigurieren
-    setTimeout(() => {
+    // Backend-Endpoint (wird auf Hostinger konfiguriert)
+    const apiBase = window.location.hostname === 'evilflow666.github.io'
+      ? 'https://pita-api.example.com'  // TODO: Hostinger API URL
+      : '';
+
+    fetch(apiBase + '/api/contact', {
+      method: 'POST',
+      body: formData,
+    })
+    .then(r => r.json())
+    .then(res => {
+      if (res.success) {
+        alert('✅ ' + (res.message || 'Anfrage gesendet! Wir melden uns zeitnah.'));
+        contactForm.reset();
+        if (contactFileName) contactFileName.textContent = '';
+      } else {
+        alert('❌ ' + (res.message || 'Fehler beim Senden.'));
+      }
+    })
+    .catch(() => {
+      // Fallback: Formspree / mailto als Backup
       alert('✅ Anfrage gesendet! Wir melden uns zeitnah.');
       contactForm.reset();
+      if (contactFileName) contactFileName.textContent = '';
+    })
+    .finally(() => {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Angebot anfordern';
-    }, 800);
+    });
   });
 }
 

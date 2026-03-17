@@ -1,213 +1,60 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Printing in the Alps — 3D-Druck, Lasercutting, Lasergravur</title>
-  <meta name="description" content="Printing in the Alps — Professioneller 3D-Druck, Lasercutting, Lasergravur und Prototyping. Einzelstücke und Serien. Angebot anfragen.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Printing in the Alps – 3D-Druck, Lasercutting, Lasergravur</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
-  <!-- HEADER -->
   <header class="header">
     <div class="container header-inner">
-      <a href="#" class="logo"><img src="logo.jpg" alt="Printing in the Alps" style="height:40px;vertical-align:middle;margin-right:8px;">Printing in the <span class="accent">Alps</span></a>
+      <a class="logo" href="#">Printing in the Alps</a>
       <nav class="nav">
         <a href="#leistungen">Leistungen</a>
-        <a href="#ablauf">Ablauf</a>
-        <a href="#angebot">Angebot</a>
+        <a href="#galerie">Galerie</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
-      <button class="mobile-toggle" aria-label="Menü öffnen">☰</button>
     </div>
   </header>
 
-  <!-- ALPS BACKGROUND WRAPPER -->
-  <div class="alps-wrapper">
-
-  <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="top">
     <div class="container">
-      <h1>Printing in the <span class="accent">Alps</span></h1>
+      <h1>Printing in the Alps</h1>
       <p class="hero-sub">3D-Druck · Lasercutting · Lasergravur · Prototyping</p>
-      <p class="hero-eco">☀️ Überwiegend mit PV-Energie produziert</p>
-      <a href="#angebot" class="btn btn-primary">Angebot anfragen</a>
+      <a href="#angebot" class="btn btn-primary">Angebot anfordern</a>
     </div>
   </section>
 
-  <!-- LEISTUNGEN -->
   <section id="leistungen" class="section">
     <div class="container">
-      <h2>Unsere <span class="accent">Leistungen</span></h2>
-      <div class="grid-4">
-
-        <a href="#angebot" class="card" data-service="3d-druck">
-          <div class="card-icon">🖨️</div>
-          <h3>3D-Druck</h3>
-          <p>FDM mit Bambu Lab H2D & P1S — vom Prototyp bis zur Großserie. Multi-Material, skalierbar, zuverlässig.</p>
-        </a>
-
-        <a href="#angebot" class="card" data-service="lasercut">
-          <div class="card-icon">⚡</div>
-          <h3>Lasercut</h3>
-          <p>Millimetergenaue Schnitte mit Creality & Snapmaker — Holz, Acryl und mehr.</p>
-        </a>
-
-        <a href="#angebot" class="card" data-service="beschriftung">
-          <div class="card-icon">🔄</div>
-          <h3>360° Beschriftung</h3>
-          <p>Rundum-Gravur und -Beschriftung für zylindrische und komplexe Formen.</p>
-        </a>
-
-        <a href="#angebot" class="card" data-service="prototyping">
-          <div class="card-icon">📐</div>
-          <h3>Prototyping</h3>
-          <p>Von der Idee zum Anfassen — schnelle Iterationen für Entwickler, Maker und Startups.</p>
-        </a>
-
-      </div>
-
+      <h2>Leistungen</h2>
+      <div class="grid-4" id="leistungen-grid"></div>
     </div>
   </section>
 
-  <!-- ABLAUF -->
-  <section id="ablauf" class="section section-alt">
+  <section id="galerie" class="section section-alt">
     <div class="container">
-      <h2>So <span class="accent">funktioniert's</span></h2>
-      <div class="steps">
-
-        <div class="step">
-          <div class="step-number">01</div>
-          <h3>Datei hochladen</h3>
-          <p>STL, 3MF, DXF oder andere gängige Formate — einfach hochladen.</p>
-        </div>
-
-        <div class="step">
-          <div class="step-number">02</div>
-          <h3>Projekt konfigurieren</h3>
-          <p>Einzelstück oder Serie? Material und Menge wählen.</p>
-        </div>
-
-        <div class="step">
-          <div class="step-number">03</div>
-          <h3>Angebot erhalten</h3>
-          <p>Wir prüfen Ihre Datei und senden Ihnen ein individuelles Angebot.</p>
-        </div>
-
-      </div>
+      <h2>Galerie</h2>
+      <div id="gallery" class="grid-3"></div>
     </div>
   </section>
 
-  <!-- ANGEBOT / UPLOAD -->
-  <section id="angebot" class="section">
+  <section id="kontakt" class="section">
     <div class="container">
-      <h2>Angebot <span class="accent">anfragen</span></h2>
-      <form class="upload-form" id="quoteForm">
-
-        <div class="form-group">
-          <label for="fileUpload">Datei hochladen</label>
-          <div class="file-drop" id="fileDrop">
-            <input type="file" id="fileUpload" accept=".stl,.3mf,.dxf,.step,.obj,.svg" hidden>
-            <p>📁 Datei hierher ziehen oder <span class="accent clickable">durchsuchen</span></p>
-            <small>STL, 3MF, DXF, STEP, OBJ, SVG</small>
-          </div>
-          <div id="fileName" class="file-name"></div>
-        </div>
-
-        <!-- 3D Preview & Analyse -->
-        <div id="stlPreview" class="stl-preview" style="display:none;">
-          <div id="viewer3d" class="viewer-3d"></div>
-        </div>
-        <div id="analysisPanel" class="analysis-panel" style="display:none;"></div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="service">Leistung</label>
-            <select id="service">
-              <option value="">Bitte wählen</option>
-              <option value="3d-druck">3D-Druck</option>
-              <option value="lasercut">Lasercutting</option>
-              <option value="beschriftung">Lasergravur</option>
-              <option value="prototyping">Prototyping</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="type">Art</label>
-            <select id="type">
-              <option value="einzel">Einzelstück</option>
-              <option value="serie">Serie</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="quantity">Menge</label>
-            <input type="number" id="quantity" min="1" value="1" placeholder="1">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Ihr Name" required>
-          </div>
-
-          <div class="form-group">
-            <label for="email">E-Mail</label>
-            <input type="email" id="email" placeholder="ihre@email.de" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="notes">Anmerkungen</label>
-          <textarea id="notes" rows="3" placeholder="Material, Farbe, besondere Wünsche..."></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-full">Angebot anfordern</button>
+      <h2>Kontakt / Angebot anfordern</h2>
+      <p>Nutze das Kontaktformular oder sende eine Nachricht per Telegram.</p>
+      <form>
+        <input placeholder="Name" style="width:100%;padding:8px;margin:6px 0"/>
+        <input placeholder="Email" type="email" style="width:100%;padding:8px;margin:6px 0"/>
+        <textarea placeholder="Nachricht" style="width:100%;height:100px;margin:6px 0"></textarea>
+        <button class="btn btn-primary" type="submit">Angebot anfordern</button>
       </form>
     </div>
   </section>
 
-  <!-- GALERIE -->
-  <section id="galerie" class="section section-alt">
-    <div class="container">
-      <h2>Unsere <span class="accent">Projekte</span></h2>
-      <div class="grid-3">
-        <div class="gallery-placeholder">Bild folgt</div>
-        <div class="gallery-placeholder">Bild folgt</div>
-        <div class="gallery-placeholder">Bild folgt</div>
-      </div>
-    </div>
-  </section>
+  <footer class="section" style="text-align:center;padding:20px 0">© 2026 Printing in the Alps</footer>
 
-  <!-- KONTAKT / FOOTER -->
-  <footer id="kontakt" class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="logo">Printing in the <span class="accent">Alps</span></span>
-        <p>Präzision trifft Design.</p>
-      </div>
-      <div class="footer-links">
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
-        <a href="#">AGBs</a>
-      </div>
-      <div class="footer-contact">
-        <p>Kontakt: <a href="mailto:info@printforge.de" class="accent">info@printforge.de</a></p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Printing in the Alps. Alle Rechte vorbehalten.</p>
-    </div>
-  </footer>
-
-  <script src="stl-viewer.js"></script>
-  <script src="script.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

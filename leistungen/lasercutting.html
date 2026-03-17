@@ -11,35 +11,164 @@
 <body>
   <header class="header">
     <div class="container header-inner">
-      <a href="../index.html" class="logo">← PitA</a>
+      <a href="../index.html" class="logo">← Pit<span class="accent">A</span></a>
     </div>
   </header>
 
   <section class="section" style="padding-top:100px">
     <div class="container">
       <h1>⚡ Laser<span class="accent">cutting</span></h1>
-      <p>Millimetergenaue Schnitte mit Creality & Snapmaker.</p>
+      <p>Millimetergenaue Schnitte mit Creality Falcon & Snapmaker A350T.</p>
 
       <h3>Materialien</h3>
       <ul>
-        <li>Holz (Sperrholz, MDF, Massivholz)</li>
-        <li>Acryl (transparent, farbig)</li>
-        <li>Leder, Papier, Karton</li>
+        <li>Sperrholz, MDF, Massivholz (bis 8mm)</li>
+        <li>Acryl transparent & farbig (bis 6mm)</li>
+        <li>Leder, Papier, Karton, Stoff</li>
       </ul>
 
-      <h3>Anwendungen</h3>
+      <h3>Equipment</h3>
       <ul>
-        <li>Schilder & Displays</li>
-        <li>Deko & Geschenke</li>
-        <li>Technische Teile & Einlagen</li>
+        <li>Creality Falcon (400 × 400 mm Arbeitsfläche)</li>
+        <li>Snapmaker A350T (320 × 350 mm Arbeitsfläche)</li>
       </ul>
+    </div>
+  </section>
 
-      <a href="../index.html#kontakt" class="btn btn-primary">Angebot anfragen</a>
+  <!-- ANALYZER -->
+  <section class="section section-alt" id="analyzer">
+    <div class="container">
+      <h2>Datei <span class="accent">prüfen</span></h2>
+      <p style="text-align:center; color:var(--text-secondary); margin-bottom:32px;">
+        Lade deine SVG- oder DXF-Datei hoch — wir prüfen Maße und Machbarkeit.
+      </p>
+
+      <div class="slicer-upload" id="laserDrop">
+        <div class="upload-icon">📂</div>
+        <p>SVG / DXF / PDF hier ablegen oder <span class="accent">klicken</span></p>
+        <input type="file" id="laserFile" accept=".svg,.dxf,.pdf,.ai" hidden>
+      </div>
+      <p id="laserFileName" class="file-name"></p>
+
+      <div class="slicer-options" id="laserOptions" style="display:none;">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Material</label>
+            <select id="laserMaterial">
+              <option value="Sperrholz" selected>Sperrholz / Holz</option>
+              <option value="MDF">MDF</option>
+              <option value="Acryl">Acryl</option>
+              <option value="Leder">Leder</option>
+              <option value="Papier">Papier / Karton</option>
+              <option value="Stoff">Stoff / Filz</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Materialstärke</label>
+            <select id="laserThickness">
+              <option value="2">2 mm</option>
+              <option value="3" selected>3 mm</option>
+              <option value="4">4 mm</option>
+              <option value="5">5 mm</option>
+              <option value="6">6 mm</option>
+              <option value="8">8 mm</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Maschine</label>
+            <select id="laserMachine">
+              <option value="creality">Creality Falcon (400×400mm)</option>
+              <option value="snapmaker">Snapmaker A350T (320×350mm)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Menge</label>
+            <select id="laserQty">
+              <option value="1">1 Stück</option>
+              <option value="5">5 Stück</option>
+              <option value="10">10 Stück</option>
+              <option value="25">25 Stück</option>
+              <option value="50">50+ Stück</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-full" id="laserAnalyze">🔍 Datei analysieren</button>
+      </div>
+
+      <div id="laserResults"></div>
+      <div id="laserCTA" style="display:none; text-align:center; margin-top:32px;">
+        <a href="../index.html#kontakt" class="btn btn-primary">📬 Angebot anfragen</a>
+      </div>
     </div>
   </section>
 
   <footer class="footer">
-    <div class="footer-bottom"><p>&copy; 2026 PitA</p></div>
+    <div class="footer-bottom"><p>&copy; 2026 Pit<span class="accent">A</span></p></div>
   </footer>
+
+  <script src="../js/laser-analyzer.js"></script>
+  <script>
+    const drop = document.getElementById('laserDrop');
+    const fileInput = document.getElementById('laserFile');
+    const fileNameEl = document.getElementById('laserFileName');
+    const options = document.getElementById('laserOptions');
+    const results = document.getElementById('laserResults');
+    const cta = document.getElementById('laserCTA');
+    let currentData = null;
+    let currentType = null;
+
+    drop.addEventListener('click', () => fileInput.click());
+    drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
+    drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
+    drop.addEventListener('drop', e => {
+      e.preventDefault(); drop.classList.remove('dragover');
+      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+    });
+    fileInput.addEventListener('change', () => { if (fileInput.files.length) handleFile(fileInput.files[0]); });
+
+    function handleFile(file) {
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (!['svg', 'dxf', 'pdf', 'ai'].includes(ext)) {
+        alert('Nur SVG, DXF, PDF oder AI Dateien erlaubt.');
+        return;
+      }
+      fileNameEl.textContent = '📄 ' + file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
+      options.style.display = 'block';
+      results.innerHTML = '';
+      cta.style.display = 'none';
+      currentType = ext;
+
+      if (ext === 'svg') {
+        const reader = new FileReader();
+        reader.onload = () => { currentData = reader.result; };
+        reader.readAsText(file);
+      } else {
+        currentData = file;
+        fileNameEl.textContent += ' — Vorschau nur für SVG, Maße manuell prüfen';
+      }
+    }
+
+    document.getElementById('laserAnalyze').addEventListener('click', () => {
+      if (!currentData) { alert('Bitte zuerst eine Datei hochladen.'); return; }
+      try {
+        let analysis;
+        if (currentType === 'svg') {
+          analysis = analyzeSVG(currentData);
+        } else {
+          analysis = { type: 'OTHER', dims: { x: 0, y: 0 }, elements: { total: 0 } };
+        }
+        const material = document.getElementById('laserMaterial').value;
+        const thickness = parseInt(document.getElementById('laserThickness').value);
+        const machine = document.getElementById('laserMachine').value;
+        results.innerHTML = formatLaserAnalysis(analysis, 'cut', material, thickness, null, machine);
+        cta.style.display = 'block';
+        results.scrollIntoView({ behavior: 'smooth' });
+      } catch(e) {
+        results.innerHTML = '<div class="analysis-card card-error"><h4>❌ Fehler</h4><p>' + e.message + '</p></div>';
+      }
+    });
+  </script>
 </body>
 </html>

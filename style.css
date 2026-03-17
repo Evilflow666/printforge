@@ -139,25 +139,25 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
   letter-spacing: 0.5px;
 }
 .btn-primary {
-  background: linear-gradient(135deg, rgba(198,125,74,0.7), rgba(198,125,74,0.4));
+  background: rgba(255,255,255,0.08);
   color: #fff;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(255,255,255,0.05);
 }
 .btn-primary::before {
   content: ''; position: absolute; top: 0; left: -100%;
   width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
   transition: left 0.6s ease;
 }
 .btn-primary:hover::before { left: 100%; }
 .btn-primary:hover {
-  background: linear-gradient(135deg, rgba(198,125,74,0.85), rgba(198,125,74,0.55));
+  background: rgba(255,255,255,0.15);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 32px rgba(198,125,74,0.3), inset 0 1px 0 rgba(255,255,255,0.25);
-  border-color: rgba(255,255,255,0.25);
+  box-shadow: 0 12px 32px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.35);
 }
 .btn-primary:active { transform: translateY(0) scale(0.98); }
 .btn-full { width: 100%; text-align: center; }

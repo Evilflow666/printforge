@@ -152,8 +152,21 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
   color: #fff;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(255,255,255,0.05);
+  border: 2px solid transparent;
+  background-image: linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.08)), 
+                    conic-gradient(from 0deg, #C67D4A, #FFD700, #4CAF50, #2196F3, #C67D4A);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15), 
+              inset 0 1px 0 rgba(255,255,255,0.15), 
+              0 0 20px rgba(198, 125, 74, 0.3),
+              0 0 40px rgba(198, 125, 74, 0.1);
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(30deg); }
 }
 .btn-primary::before {
   content: ''; position: absolute; top: 0; left: -100%;
@@ -163,10 +176,25 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 }
 .btn-primary:hover::before { left: 100%; }
 .btn-primary:hover {
-  background: rgba(255,255,255,0.15);
+  background-image: linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)), 
+                    conic-gradient(from 45deg, #FFD700, #C67D4A, #4CAF50, #2196F3, #FFD700);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 32px rgba(255,255,255,0.1), inset 0 1px 0 rgba(255,255,255,0.25);
-  border-color: rgba(255,255,255,0.35);
+  box-shadow: 0 12px 32px rgba(255,255,255,0.15), 
+              inset 0 1px 0 rgba(255,255,255,0.25),
+              0 0 30px rgba(255, 215, 0, 0.4),
+              0 0 60px rgba(198, 125, 74, 0.2);
+  animation: borderGlow 2s ease-in-out infinite, pulseGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 12px 32px rgba(255,255,255,0.15), 
+                         inset 0 1px 0 rgba(255,255,255,0.25),
+                         0 0 30px rgba(255, 215, 0, 0.4),
+                         0 0 60px rgba(198, 125, 74, 0.2); }
+  50% { box-shadow: 0 12px 32px rgba(255,255,255,0.15), 
+                    inset 0 1px 0 rgba(255,255,255,0.25),
+                    0 0 40px rgba(255, 215, 0, 0.6),
+                    0 0 80px rgba(198, 125, 74, 0.3); }
 }
 .btn-primary:active { transform: translateY(0) scale(0.98); }
 .btn-full { width: 100%; text-align: center; }

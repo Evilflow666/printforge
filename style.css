@@ -461,3 +461,75 @@ select { cursor: pointer; appearance: none;
   left: 0;
   color: var(--accent);
 }
+
+/* ===== SLICER / ANALYZER ===== */
+.slicer-upload {
+  border: 2px dashed rgba(198,125,74,0.4);
+  border-radius: 16px;
+  padding: 48px 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: rgba(198,125,74,0.05);
+}
+.slicer-upload:hover, .slicer-upload.dragover {
+  border-color: var(--accent);
+  background: rgba(198,125,74,0.1);
+}
+.slicer-upload .upload-icon { font-size: 2.5rem; margin-bottom: 12px; }
+.slicer-upload p { color: var(--text-secondary); margin: 0; }
+.file-name { text-align: center; margin-top: 12px; color: var(--accent); font-weight: 500; }
+
+.slicer-options {
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+}
+.slicer-options .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 600px) { .slicer-options .form-row { grid-template-columns: 1fr; } }
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 0.95rem;
+}
+
+.analysis-results { margin-top: 24px; }
+.analysis-card {
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  background: var(--bg-card);
+}
+.analysis-card h4 { font-size: 1.2rem; margin-bottom: 16px; }
+.card-ok { border-color: #4CAF50; }
+.card-error { border-color: #f44336; }
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+.stat { display: flex; flex-direction: column; }
+.stat-label { font-size: 0.8rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-value { font-size: 1.1rem; color: var(--text-primary); font-weight: 600; margin-top: 4px; }
+.check-issues, .check-warnings { margin-top: 16px; }
+.check-issues p { color: #f44336; }
+.check-warnings p { color: #FF9800; }

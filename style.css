@@ -37,9 +37,9 @@ body {
 /* Entfernt - nur Hero hat jetzt Alpenbild */
 
 /* ===== TYPOGRAPHY ===== */
-h1, h2, h3 { color: var(--text-primary); font-weight: 700; line-height: 1.2; }
-h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); letter-spacing: -0.5px; }
-h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); text-align: center; margin-bottom: 48px; }
+h1, h2, h3 { color: var(--text-primary); font-weight: 700; line-height: 1.2; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+h1 { font-size: clamp(2.5rem, 5.5vw, 4rem); letter-spacing: -0.5px; }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); text-align: center; margin-bottom: 48px; }
 h3 { font-size: 1.15rem; margin-bottom: 8px; }
 .accent { color: var(--accent); }
 
@@ -112,12 +112,14 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
   background: radial-gradient(circle, rgba(198, 125, 74, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
-.hero h1 { position: relative; }
+.hero h1 { position: relative; text-shadow: 0 3px 16px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.3); }
 .hero-sub {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
   margin: 16px 0 12px;
-  color: var(--text-secondary);
-  letter-spacing: 1px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+  font-weight: 500;
 }
 .hero-eco {
   font-size: 0.9rem;

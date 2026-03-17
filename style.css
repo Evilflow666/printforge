@@ -140,6 +140,12 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
   letter-spacing: 0.5px;
 }
 
+/* ===== CTA DIVIDER ===== */
+.cta-divider {
+  text-align: center;
+  padding: 48px 0;
+}
+
 /* ===== BUTTONS (Apple Glass Style) ===== */
 .btn {
   display: inline-block; padding: 16px 40px; border-radius: 16px;

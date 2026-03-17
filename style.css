@@ -56,7 +56,7 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 
 /* ===== ALPS WRAPPER ===== */
 .alps-wrapper {
-  background: linear-gradient(rgba(11, 15, 25, 0.4), rgba(11, 15, 25, 0.55)), url('alps-hero.jpg') center/cover no-repeat;
+  background: linear-gradient(rgba(11, 15, 25, 0.55), rgba(11, 15, 25, 0.7)), url('alps-hero.jpg') center/cover no-repeat;
   /* Optionale Überblendung in den Seitenhintergrund am Ende */
   /* mask-image: linear-gradient(to bottom, black 85%, transparent 100%); */
 }
@@ -112,14 +112,14 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
   background: radial-gradient(circle, rgba(198, 125, 74, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
-.hero h1 { position: relative; text-shadow: 0 3px 16px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.3); }
+.hero h1 { position: relative; text-shadow: 0 4px 20px rgba(0,0,0,0.9), 0 0 60px rgba(0,0,0,0.5); font-weight: 700; color: #ffffff; }
 .hero-sub {
   font-size: clamp(1.1rem, 2.2vw, 1.4rem);
   margin: 16px 0 12px;
   color: #ffffff;
   letter-spacing: 2px;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
-  font-weight: 500;
+  text-shadow: 0 3px 16px rgba(0,0,0,0.9);
+  font-weight: 600;
 }
 .hero-eco {
   font-size: 0.9rem;

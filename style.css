@@ -339,8 +339,20 @@ select { cursor: pointer; appearance: none;
   color: var(--accent);
 }
 
+/* ===== MOUNTAIN DIVIDER ===== */
+.mountain-divider {
+  width: 100%;
+  line-height: 0;
+  margin-bottom: -1px;
+}
+.mountain-divider svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* ===== FOOTER ===== */
-.footer { padding: 48px 0 0; border-top: 1px solid var(--stroke); }
+.footer { padding: 48px 0 0; border-top: none; }
 .footer-inner {
   display: flex; justify-content: space-between; align-items: flex-start;
   flex-wrap: wrap; gap: 24px; padding-bottom: 32px;

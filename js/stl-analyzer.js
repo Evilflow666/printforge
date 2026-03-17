@@ -1,7 +1,12 @@
 // STL Analyzer for Bambu Lab H2D & P1S
 // Build volume: 256 x 256 x 256 mm
 
-const BAMBU_BUILD = { x: 256, y: 256, z: 256 };
+const BAMBU_PRINTERS = {
+  'H2D': { x: 325, y: 320, z: 325, name: 'Bambu Lab H2D' },
+  'H2D-dual': { x: 300, y: 320, z: 325, name: 'Bambu Lab H2D (Dual Nozzle)' },
+  'P1S': { x: 256, y: 256, z: 256, name: 'Bambu Lab P1S' },
+  'auto': null // auto-select
+};
 
 function parseSTL(buffer) {
   const view = new DataView(buffer);
@@ -93,14 +98,35 @@ function signedVolume(a, b, c) {
   return (a.x * (b.y * c.z - b.z * c.y) + a.y * (b.z * c.x - b.x * c.z) + a.z * (b.x * c.y - b.y * c.x)) / 6.0;
 }
 
-function checkPrintability(analysis) {
+function checkPrintability(analysis, printer) {
   const issues = [];
   const warnings = [];
   const d = analysis.dims;
+  
+  // Auto-select best printer
+  let bed;
+  if (printer && printer !== 'auto') {
+    bed = BAMBU_PRINTERS[printer];
+  } else {
+    // Try H2D first (bigger), fall back to P1S
+    const h2d = BAMBU_PRINTERS['H2D'];
+    const p1s = BAMBU_PRINTERS['P1S'];
+    if (d.x <= p1s.x && d.y <= p1s.y && d.z <= p1s.z) {
+      bed = p1s;
+    } else {
+      bed = h2d;
+    }
+  }
+  analysis._selectedPrinter = bed.name;
 
   // Size check
-  if (d.x > BAMBU_BUILD.x || d.y > BAMBU_BUILD.y || d.z > BAMBU_BUILD.z) {
-    issues.push(`❌ Zu groß für Druckbett! (${d.x.toFixed(1)} × ${d.y.toFixed(1)} × ${d.z.toFixed(1)} mm) — Max: ${BAMBU_BUILD.x} × ${BAMBU_BUILD.y} × ${BAMBU_BUILD.z} mm`);
+  if (d.x > bed.x || d.y > bed.y || d.z > bed.z) {
+    issues.push(`❌ Zu groß für ${bed.name}! (${d.x.toFixed(1)} × ${d.y.toFixed(1)} × ${d.z.toFixed(1)} mm) — Max: ${bed.x} × ${bed.y} × ${bed.z} mm`);
+    // Check if it fits on the other printer
+    const other = bed === BAMBU_PRINTERS['P1S'] ? BAMBU_PRINTERS['H2D'] : BAMBU_PRINTERS['P1S'];
+    if (d.x <= other.x && d.y <= other.y && d.z <= other.z) {
+      warnings.push(`💡 Passt auf ${other.name} (${other.x}×${other.y}×${other.z} mm)`);
+    }
   }
 
   // Very thin check
@@ -148,8 +174,8 @@ function estimateWeight(volumeMM3, material) {
   return (effectiveVolume * density / 1000).toFixed(1); // grams
 }
 
-function formatAnalysis(analysis, material, color, surface) {
-  const check = checkPrintability(analysis);
+function formatAnalysis(analysis, material, color, surface, printer) {
+  const check = checkPrintability(analysis, printer);
   const time = estimatePrintTime(analysis, material);
   const weight = estimateWeight(analysis.volume, material);
   const d = analysis.dims;
@@ -166,6 +192,7 @@ function formatAnalysis(analysis, material, color, surface) {
   html += `<div class="stat"><span class="stat-label">Druckzeit (ca.)</span><span class="stat-value">${time < 60 ? time + ' min' : Math.floor(time/60) + 'h ' + (time%60) + 'min'}</span></div>`;
   if (color) html += `<div class="stat"><span class="stat-label">Farbe</span><span class="stat-value">${color}</span></div>`;
   if (surface) html += `<div class="stat"><span class="stat-label">Oberfläche</span><span class="stat-value">${surface}</span></div>`;
+  html += `<div class="stat"><span class="stat-label">Drucker</span><span class="stat-value">${analysis._selectedPrinter || 'Auto'}</span></div>`;
   html += `</div>`;
 
   if (check.issues.length) {

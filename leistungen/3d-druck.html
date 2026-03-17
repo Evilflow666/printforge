@@ -28,7 +28,7 @@
 
       <h3>Equipment</h3>
       <ul>
-        <li>1× Bambu Lab H2D (256 × 256 × 256 mm)</li>
+        <li>1× Bambu Lab H2D (325 × 320 × 325 mm, Dual Nozzle)</li>
         <li>2× Bambu Lab P1S (256 × 256 × 256 mm)</li>
       </ul>
     </div>
@@ -91,9 +91,10 @@
           <div class="form-group">
             <label>Drucker</label>
             <select id="slicerPrinter">
-              <option value="auto">Automatisch</option>
-              <option value="H2D">Bambu Lab H2D</option>
-              <option value="P1S">Bambu Lab P1S</option>
+              <option value="auto">Automatisch (bester Drucker)</option>
+              <option value="H2D">Bambu Lab H2D (325×320×325mm)</option>
+              <option value="H2D-dual">Bambu Lab H2D Dual Nozzle (300×320×325mm)</option>
+              <option value="P1S">Bambu Lab P1S (256×256×256mm)</option>
             </select>
           </div>
         </div>
@@ -161,7 +162,8 @@
         const material = document.getElementById('slicerMaterial').value;
         const color = document.getElementById('slicerColor').value;
         const surface = document.getElementById('slicerSurface').value;
-        results.innerHTML = formatAnalysis(analysis, material, color, surface);
+        const printer = document.getElementById('slicerPrinter').value;
+        results.innerHTML = formatAnalysis(analysis, material, color, surface, printer);
         cta.style.display = 'block';
         results.scrollIntoView({ behavior: 'smooth' });
       } catch(e) {

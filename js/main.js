@@ -1,2 +1,2 @@
-console.log('PrintForge MVP CMS scaffold loaded');
-// Simple placeholder to load gallery from data/gallery.json in future
+console.log('PrintForge MVP CMS scaffold loaded (Phase 1)');
+// Simple gallery loader (to be replaced with real data)

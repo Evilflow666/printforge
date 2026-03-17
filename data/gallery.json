@@ -1,4 +1,6 @@
 [
-  {"id":"1","title":"Beispiel D","description":"Platzhalterbild","img":"gallery-1.jpg"},
-  {"id":"2","title":"Beispiel E","description":"Platzhalterbild","img":"gallery-2.jpg"}
+  {"id":"1","title":"Beispiel D","description":"Platzhalter","img":"gallery-1.jpg"},
+  {"id":"2","title":"Beispiel E","description":"Platzhalter","img":"gallery-2.jpg"},
+  {"id":"3","title":"Beispiel F","description":"Platzhalter","img":"gallery-4.jpg"},
+  {"id":"4","title":"Beispiel G","description":"Platzhalter","img":"gallery-5.jpg"}
 ]

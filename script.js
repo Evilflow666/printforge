@@ -3,18 +3,18 @@ const fileDrop = document.getElementById('fileDrop');
 const fileInput = document.getElementById('fileUpload');
 const fileNameDisplay = document.getElementById('fileName');
 
-fileDrop.addEventListener('click', () => fileInput.click());
+if (fileDrop) fileDrop.addEventListener('click', () => fileInput && fileInput.click());
 
-fileDrop.addEventListener('dragover', (e) => {
+if (fileDrop) fileDrop.addEventListener('dragover', (e) => {
   e.preventDefault();
   fileDrop.classList.add('dragover');
 });
 
-fileDrop.addEventListener('dragleave', () => {
+if (fileDrop) fileDrop.addEventListener('dragleave', () => {
   fileDrop.classList.remove('dragover');
 });
 
-fileDrop.addEventListener('drop', (e) => {
+if (fileDrop) fileDrop.addEventListener('drop', (e) => {
   e.preventDefault();
   fileDrop.classList.remove('dragover');
   if (e.dataTransfer.files.length) {
@@ -151,6 +151,23 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.card, .step, .upload-form, .gallery-placeholder').forEach(el => {
   el.style.opacity = '0';
   observer.observe(el);
+});
+
+// ===== LIGHTBOX =====
+function openLightbox(el) {
+  const img = el.querySelector('img');
+  if (!img) return;
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  lb.classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
 });
 
 // Smooth scroll for anchor links

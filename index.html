@@ -3,52 +3,168 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Printing in the Alps – MVP</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Printing in the Alps – 3D-Druck, Lasercutting, Lasergravur</title>
+  <meta name="description" content="Printing in the Alps — Professioneller 3D-Druck, Lasercutting, Lasergravur und Prototyping aus den Alpen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- HEADER -->
   <header class="header">
     <div class="container header-inner">
-      <span class="logo">Printing in the Alps</span>
+      <a href="#" class="logo"><img src="logo.jpg" alt="Logo" style="height:40px;vertical-align:middle;margin-right:8px;">Printing in the <span class="accent">Alps</span></a>
       <nav class="nav">
         <a href="#leistungen">Leistungen</a>
         <a href="#galerie">Galerie</a>
+        <a href="#ablauf">Ablauf</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
+      <button class="mobile-toggle" aria-label="Menü öffnen">☰</button>
     </div>
   </header>
 
-  <section class="hero" id="top">
+  <!-- ALPS BACKGROUND WRAPPER -->
+  <div class="alps-wrapper">
+
+  <!-- HERO -->
+  <section class="hero">
     <div class="container">
-      <h1>Printing in the Alps</h1>
-      <p class="hero-sub">3D-Druck • Lasercutting • Lasergravur • Prototyping</p>
-      <a href="#kontakt" class="btn-primary btn">Angebot anfordern</a>
+      <h1>Printing in the <span class="accent">Alps</span></h1>
+      <p class="hero-sub">3D-Druck · Lasercutting · Lasergravur · Prototyping</p>
+      <p class="hero-eco">☀️ Überwiegend mit PV-Energie produziert</p>
+      <a href="#kontakt" class="btn btn-primary">Angebot anfragen</a>
     </div>
   </section>
 
+  <!-- LEISTUNGEN -->
   <section id="leistungen" class="section">
     <div class="container">
-      <h2>Leistungen</h2>
-      <div id="leistungen-grid" class="grid-4"></div>
+      <h2>Unsere <span class="accent">Leistungen</span></h2>
+      <div class="grid-4">
+
+        <a href="leistungen/3d-druck.html" class="card">
+          <div class="card-icon">🖨️</div>
+          <h3>3D-Druck</h3>
+          <p>FDM mit Bambu Lab H2D & P1S — vom Prototyp bis zur Serie. Multi-Material, skalierbar, zuverlässig.</p>
+        </a>
+
+        <a href="leistungen/lasercutting.html" class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Lasercutting</h3>
+          <p>Millimetergenaue Schnitte in Holz, Acryl und mehr — mit Creality & Snapmaker.</p>
+        </a>
+
+        <a href="leistungen/lasergravur.html" class="card">
+          <div class="card-icon">🔄</div>
+          <h3>Lasergravur</h3>
+          <p>Präzise Gravuren auf Holz, Metall, Glas und Leder — Branding und Personalisierung.</p>
+        </a>
+
+        <a href="leistungen/prototyping.html" class="card">
+          <div class="card-icon">📐</div>
+          <h3>Prototyping</h3>
+          <p>Von der Idee zum Anfassen — schnelle Iterationen für Entwickler, Maker und Startups.</p>
+        </a>
+
+      </div>
     </div>
   </section>
 
+  </div><!-- /alps-wrapper -->
+
+  <!-- GALERIE -->
   <section id="galerie" class="section section-alt">
     <div class="container">
-      <h2>Galerie</h2>
-      <div id="gallery" class="grid-3"></div>
+      <h2>Unsere <span class="accent">Projekte</span></h2>
+      <div class="grid-3">
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/gallery-1.jpg" alt="Projekt 1">
+          <p>3D-Druck Prototyp</p>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/gallery-2.jpg" alt="Projekt 2">
+          <p>Lasercut Holzschild</p>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/gallery-3.jpg" alt="Projekt 3">
+          <p>Lasergravur Detail</p>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+          <img src="images/gallery-4.jpg" alt="Projekt 4">
+          <p>Prototyping Gehäuse</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="kontakt" class="section">
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <!-- ABLAUF -->
+  <section id="ablauf" class="section">
     <div class="container">
-      <h2>Kontakt</h2>
-      <p>Kontaktformular folgt.</p>
+      <h2>So <span class="accent">funktioniert's</span></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h3>Anfrage senden</h3>
+          <p>Beschreibe dein Projekt oder lade eine Datei hoch — STL, 3MF, DXF, SVG.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h3>Angebot erhalten</h3>
+          <p>Wir prüfen deine Datei und senden dir ein individuelles Angebot.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h3>Fertigung & Versand</h3>
+          <p>Nach Freigabe produzieren wir und liefern direkt zu dir.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <footer class="section" style="text-align:center">© 2026 Printing in the Alps</footer>
+  <!-- KONTAKT -->
+  <section id="kontakt" class="section section-alt">
+    <div class="container">
+      <h2>Kontakt & <span class="accent">Angebot</span></h2>
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <input type="text" placeholder="Name" required>
+          <input type="email" placeholder="E-Mail" required>
+        </div>
+        <select>
+          <option value="">Leistung wählen</option>
+          <option value="3d-druck">3D-Druck</option>
+          <option value="lasercutting">Lasercutting</option>
+          <option value="lasergravur">Lasergravur</option>
+          <option value="prototyping">Prototyping</option>
+        </select>
+        <textarea rows="4" placeholder="Beschreibe dein Projekt..."></textarea>
+        <button type="submit" class="btn btn-primary btn-full">Angebot anfordern</button>
+      </form>
+    </div>
+  </section>
 
-  <script src="js/main.js"></script>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo">Printing in the <span class="accent">Alps</span></span>
+      <p>Präzision aus den Alpen.</p>
+      <div class="footer-links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Printing in the Alps. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

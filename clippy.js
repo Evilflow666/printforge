@@ -16,7 +16,7 @@
     <div id="clippy-chat" class="clippy-chat clippy-hidden">
       <div class="clippy-header">
         <span>📎 Clippy — PitA Assistent</span>
-        <button onclick="toggleClippy()" class="clippy-close" aria-label="Clippy schließen">✕</button>
+        <button id="clippy-close-btn" class="clippy-close" aria-label="Clippy schließen">✕</button>
       </div>
       <div id="clippy-messages" class="clippy-messages">
         <div class="clippy-msg clippy-bot">
@@ -25,7 +25,7 @@
       </div>
       <div class="clippy-input-row">
         <input type="text" id="clippy-input" placeholder="Frag mich was..." autocomplete="off">
-        <button onclick="sendClippy()" id="clippy-send" aria-label="Senden">➤</button>
+        <button id="clippy-send" aria-label="Senden">➤</button>
       </div>
     </div>
 
@@ -34,7 +34,7 @@
       <span id="clippy-bubble-text"></span>
     </div>
 
-    <button id="clippy-toggle" class="clippy-toggle" onclick="toggleClippy()" aria-label="Clippy öffnen">
+    <button id="clippy-toggle" class="clippy-toggle" aria-label="Clippy öffnen">
       <svg viewBox="0 0 100 160" width="56" height="84" class="clippy-svg" id="clippy-svg">
         <!-- Body -->
         <ellipse cx="50" cy="95" rx="18" ry="50" fill="none" stroke="#B0B0B0" stroke-width="8" stroke-linecap="round"/>
@@ -62,10 +62,19 @@
 
   document.body.insertAdjacentHTML('beforeend', html);
 
-  // Enter key listener
+  // Bind all event listeners (no inline onclick — CSP safe)
   setTimeout(() => {
     const inp = document.getElementById('clippy-input');
     if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter') sendClippy(); });
+
+    const toggleBtn = document.getElementById('clippy-toggle');
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleClippy);
+
+    const closeBtn = document.getElementById('clippy-close-btn');
+    if (closeBtn) closeBtn.addEventListener('click', toggleClippy);
+
+    const sendBtn = document.getElementById('clippy-send');
+    if (sendBtn) sendBtn.addEventListener('click', sendClippy);
   }, 100);
 })();
 

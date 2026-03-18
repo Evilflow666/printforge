@@ -877,9 +877,74 @@ select { cursor: pointer; appearance: none;
   background: rgba(198,125,74,0.3);
   transform: scale(1.05);
 }
+/* Clippy Wiggle Animation */
+@keyframes clippy-wiggle {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(-8deg); }
+  30% { transform: rotate(6deg); }
+  45% { transform: rotate(-4deg); }
+  60% { transform: rotate(3deg); }
+  75% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+.clippy-wiggle { animation: clippy-wiggle 0.6s ease; }
+
+/* Clippy Hover Bounce */
+@keyframes clippy-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.clippy-toggle:not(:hover) .clippy-svg {
+  animation: clippy-bounce 3s ease-in-out infinite;
+}
+.clippy-toggle:hover .clippy-svg {
+  animation: none;
+}
+
+/* Speech Bubble */
+.clippy-bubble {
+  position: absolute;
+  bottom: 110px;
+  right: 0;
+  background: rgba(18,24,42,0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 12px 16px;
+  max-width: 260px;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+.clippy-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 30px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid rgba(18,24,42,0.95);
+}
+
+/* SVG Eye Transitions */
+.clippy-pupil-l, .clippy-pupil-r,
+.clippy-glint-l, .clippy-glint-r,
+.clippy-lid-l, .clippy-lid-r,
+.clippy-brow-l, .clippy-brow-r,
+.clippy-mouth {
+  transition: all 0.15s ease;
+}
+
 @media (max-width: 480px) {
   .clippy-chat { width: calc(100vw - 48px); right: 0; bottom: 90px; }
   .clippy-container { bottom: 16px; right: 16px; }
+  .clippy-bubble { max-width: 200px; }
 }
 
 /* ===== SECTION IMAGE ===== */

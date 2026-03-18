@@ -681,6 +681,74 @@ select { cursor: pointer; appearance: none;
   }
 }
 
+/* ===== KATALOG ===== */
+.katalog-sparte {
+  margin-bottom: 48px;
+}
+.katalog-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.katalog-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+.katalog-header h2 {
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+.katalog-sub {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+.katalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.katalog-item {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.katalog-item:hover {
+  border-color: rgba(198,125,74,0.25);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.katalog-item-placeholder {
+  width: 100%;
+  height: 140px;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+  opacity: 0.4;
+}
+.katalog-item h4 {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+.katalog-item p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
 /* ===== BLOG ===== */
 .blog-card {
   background: rgba(255,255,255,0.04);

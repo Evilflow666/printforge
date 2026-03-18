@@ -621,6 +621,51 @@ select { cursor: pointer; appearance: none;
   font-size: 0.95rem;
 }
 
+/* ===== DEVICE IMAGE LAYOUT ===== */
+.device-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.device-showcase .device-img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--stroke);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  transition: var(--transition);
+}
+.device-showcase .device-img:hover {
+  box-shadow: 0 12px 48px rgba(198, 125, 74, 0.15);
+  transform: translateY(-2px);
+}
+.device-showcase .device-info h3 {
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+.device-showcase .device-info h3:first-child {
+  margin-top: 0;
+}
+.device-showcase .device-info p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.device-showcase .device-info ul {
+  color: var(--text-secondary);
+  padding-left: 20px;
+}
+.device-showcase .device-info ul li {
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+@media (max-width: 768px) {
+  .device-showcase {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
 .analysis-results { margin-top: 24px; }
 .analysis-card {
   padding: 24px;

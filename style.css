@@ -111,6 +111,17 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
   transition: color var(--transition);
 }
 .logo:hover { color: var(--accent); }
+.cart-icon {
+  font-size: 1.3rem;
+  text-decoration: none;
+  margin-left: 8px;
+  transition: transform var(--transition);
+  filter: grayscale(0.3);
+}
+.cart-icon:hover {
+  transform: scale(1.15);
+  filter: grayscale(0);
+}
 .nav { display: flex; gap: 28px; }
 .nav a {
   color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;
@@ -665,6 +676,50 @@ select { cursor: pointer; appearance: none;
     grid-template-columns: 1fr;
     gap: 24px;
   }
+}
+
+/* ===== MATERIAL GRID ===== */
+.material-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.material-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+.material-card:hover {
+  border-color: rgba(198, 125, 74, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.material-card h4 {
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+.material-card p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.material-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  background: rgba(198, 125, 74, 0.1);
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(198, 125, 74, 0.2);
 }
 
 .analysis-results { margin-top: 24px; }

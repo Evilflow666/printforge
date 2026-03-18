@@ -549,11 +549,14 @@ select { cursor: pointer; appearance: none;
 }
 
 /* ===== LEISTUNGEN UNTERSEITEN ===== */
+.sub-page-wrapper {
+  background: linear-gradient(rgba(11,15,25,0.45), rgba(11,15,25,0.6) 30%, rgba(11,15,25,0.75)),
+              url('images/sub-hero.webp') center top/cover no-repeat fixed;
+  min-height: 100vh;
+}
 .sub-hero {
   position: relative;
   padding: 140px 0 80px;
-  background: linear-gradient(rgba(11,15,25,0.5), rgba(11,15,25,0.85)),
-              url('images/sub-hero.jpg') center/cover no-repeat;
   text-align: center;
   overflow: hidden;
 }

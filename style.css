@@ -681,6 +681,62 @@ select { cursor: pointer; appearance: none;
   }
 }
 
+/* ===== BLOG ===== */
+.blog-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+.blog-card:hover {
+  border-color: rgba(198,125,74,0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.blog-date {
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.blog-card h3 {
+  color: var(--text-primary);
+  margin: 8px 0 12px;
+  font-size: 1.2rem;
+}
+.blog-card p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+.blog-tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+.blog-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  background: rgba(198,125,74,0.1);
+  padding: 3px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(198,125,74,0.2);
+}
+.blog-coming-soon {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  opacity: 0.7;
+}
+
 /* ===== FAQ ===== */
 .faq-item {
   border: 1px solid rgba(255,255,255,0.08);

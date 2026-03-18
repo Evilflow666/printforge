@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://evilflow666.github.io/printforge/sitemap.xml

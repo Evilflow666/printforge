@@ -4,26 +4,68 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PitA – 3D-Druck, Lasercutting, Lasergravur</title>
-  <meta name="description" content="PitA — Professioneller 3D-Druck, Lasercutting, Lasergravur und Prototyping aus den Alpen.">
+  <meta name="description" content="PitA — Professioneller 3D-Druck, Lasercutting, Lasergravur und Prototyping aus den Alpen."/>
+  <!-- Canonical -->
+  <link rel="canonical" href="https://evilflow666.github.io/printforge/"/>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PitA – 3D-Druck, Lasercutting, Lasergravur aus den Alpen">
+  <meta property="og:description" content="Professioneller 3D-Druck, Lasercutting, Lasergravur und Prototyping — überwiegend mit PV-Energie produziert.">
+  <meta property="og:url" content="https://evilflow666.github.io/printforge/">
+  <meta property="og:image" content="https://evilflow666.github.io/printforge/images/gallery-1.jpg">
+  <meta property="og:locale" content="de_DE">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PitA – 3D-Druck, Lasercutting, Lasergravur aus den Alpen">
+  <meta name="twitter:description" content="Professioneller 3D-Druck, Lasercutting, Lasergravur und Prototyping — überwiegend mit PV-Energie produziert.">
+  <meta name="twitter:image" content="https://evilflow666.github.io/printforge/images/gallery-1.jpg">
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "PitA – Printing in the Alps",
+    "description": "Professioneller 3D-Druck, Lasercutting, Lasergravur und Prototyping aus den Alpen.",
+    "url": "https://evilflow666.github.io/printforge/",
+    "image": "https://evilflow666.github.io/printforge/images/gallery-1.jpg",
+    "areaServed": "DE",
+    "serviceType": ["3D-Druck", "Lasercutting", "Lasergravur", "Prototyping"]
+  }
+  </script>
+  <!-- Content Security Policy (basic) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline';"> 
+  <!-- Theme color -->
+  <meta name="theme-color" content="#0B0F19">
+  <!-- Plausible Analytics (privacy-friendly) -->
+  <script defer data-domain="evilflow666.github.io" src="https://plausible.io/js/plausible.js"></script>
 </head>
 <body>
+
+  <!-- Skip Navigation -->
+  <a href="#leistungen" class="skip-link">Zum Inhalt springen</a>
 
   <!-- HEADER -->
   <header class="header">
     <div class="container header-inner">
-      <a href="#" class="logo"><img src="logo.jpg" alt="Logo" style="height:40px;vertical-align:middle;margin-right:8px;">Pit<span class="accent">A</span></a>
-      <nav class="nav">
+      <a href="#" class="logo"><img src="logo.jpg" alt="PitA Logo" style="height:40px;vertical-align:middle;margin-right:8px;">Pit<span class="accent">A</span></a>
+      <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
         <a href="#leistungen">Leistungen</a>
         <a href="#galerie">Galerie</a>
         <a href="#ablauf">Ablauf</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
-      <button class="mobile-toggle" aria-label="Menü öffnen">☰</button>
+      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
     </div>
   </header>
+
+  <main id="content" role="main">
 
   <!-- ALPS BACKGROUND WRAPPER -->
   <div class="alps-wrapper">
@@ -73,6 +115,12 @@
           <p>Von der Idee zum Anfassen — schnelle Iterationen für Entwickler, Maker und Startups.</p>
         </a>
 
+        <a href="leistungen/resin-druck.html" class="card card-glassy new-feature">
+          <div class="card-icon">💧</div>
+          <h3>Resin Druck<span class="badge">Incoming</span></h3>
+          <p>Hochpräzise Harz-Drucke für Detailarbeiten und Oberflächenqualität.</p>
+        </a>
+
       </div>
     </div>
   </section>
@@ -85,27 +133,27 @@
       <h2>Unsere <span class="accent">Projekte</span></h2>
       <div class="grid-3">
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-1.jpg" alt="Projekt 1">
+          <img src="images/gallery-1.jpg" alt="3D-gedruckter Prototyp aus PLA in Nahaufnahme" loading="lazy">
           <p>3D-Druck Prototyp</p>
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-2.jpg" alt="Projekt 2">
+          <img src="images/gallery-2.jpg" alt="Lasergeschnittenes Holzschild mit graviertem Logo" loading="lazy">
           <p>Lasercut Holzschild</p>
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-3.jpg" alt="Projekt 3">
+          <img src="images/gallery-3.jpg" alt="Detailaufnahme einer Lasergravur auf Holz" loading="lazy">
           <p>Lasergravur Detail</p>
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-4.jpg" alt="Projekt 4">
+          <img src="images/gallery-4.jpg" alt="3D-gedrucktes Elektronik-Gehäuse als Prototyp" loading="lazy">
           <p>Prototyping Gehäuse</p>
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-5.jpg" alt="Projekt 5">
+          <img src="images/gallery-5.jpg" alt="Lasergravur auf massivem Holzbrett" loading="lazy">
           <p>Lasergravur Holz</p>
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-3.jpg" alt="Projekt 6">
+          <img src="images/gallery-3.jpg" alt="Hochpräziser 3D-Druck-Prototyp im Detail" loading="lazy">
           <p>Präzisions-Prototyp</p>
         </div>
       </div>
@@ -113,7 +161,7 @@
   </section>
 
   <!-- LIGHTBOX -->
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()" role="dialog" aria-label="Bildvorschau" aria-hidden="true">
     <img id="lightbox-img" src="" alt="">
   </div>
 
@@ -145,19 +193,31 @@
   <section id="kontakt" class="section section-alt">
     <div class="container">
       <h2>Kontakt & <span class="accent">Angebot</span></h2>
-      <form class="contact-form" id="contactForm">
+      <form class="contact-form" id="contactForm" novalidate>
         <div class="form-row">
-          <input type="text" name="name" placeholder="Name" required>
-          <input type="email" name="email" placeholder="E-Mail" required>
+          <div class="form-group">
+            <label for="contact-name">Name</label>
+            <input type="text" name="name" id="contact-name" aria-label="Ihr Name" placeholder="Name" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">E-Mail</label>
+            <input type="email" name="email" id="contact-email" aria-label="Ihre E-Mail-Adresse" placeholder="E-Mail" required>
+          </div>
         </div>
-        <select name="service">
-          <option value="">Leistung wählen</option>
-          <option value="3d-druck">3D-Druck</option>
-          <option value="lasercutting">Lasercutting</option>
-          <option value="lasergravur">Lasergravur</option>
-          <option value="prototyping">Prototyping</option>
-        </select>
-        <textarea name="message" rows="4" placeholder="Beschreibe dein Projekt..."></textarea>
+        <div class="form-group">
+          <label for="contact-service">Leistung</label>
+          <select name="service" id="contact-service">
+            <option value="">Leistung wählen</option>
+            <option value="3d-druck">3D-Druck</option>
+            <option value="lasercutting">Lasercutting</option>
+            <option value="lasergravur">Lasergravur</option>
+            <option value="prototyping">Prototyping</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Projektbeschreibung</label>
+          <textarea name="message" id="contact-message" rows="4" placeholder="Beschreibe dein Projekt..."></textarea>
+        </div>
         <div class="file-drop" id="contactFileDrop" style="margin-bottom:12px;">
           <p>📎 Datei anhängen (optional) — <span class="accent">klicken oder ziehen</span></p>
           <small>STL, 3MF, SVG, DXF, PDF, JPG, PNG (max. 25 MB)</small>
@@ -168,6 +228,8 @@
       </form>
     </div>
   </section>
+
+  </main>
 
   <!-- MOUNTAIN DIVIDER -->
   <div class="mountain-divider">
@@ -182,8 +244,8 @@
       <span class="logo">Pit<span class="accent">A</span></span>
       <p>Präzision aus den Alpen.</p>
       <div class="footer-links">
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
       </div>
     </div>
     <div class="footer-bottom">

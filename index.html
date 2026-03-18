@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="PitA – 3D-Druck, Lasercutting, Lasergravur aus den Alpen">
   <meta name="twitter:description" content="Professioneller 3D-Druck, Lasercutting, Lasergravur und Prototyping — überwiegend mit PV-Energie produziert.">
-  <meta name="twitter:image" content="https://evilflow666.github.io/printforge/images/gallery-1.jpg">
+  <meta name="twitter:image" content="https://evilflow666.github.io/printforge/images/gallery-1.webp">
   <!-- Favicon -->
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -34,13 +34,13 @@
     "name": "PitA – Printing in the Alps",
     "description": "Professioneller 3D-Druck, Lasercutting, Lasergravur und Prototyping aus den Alpen.",
     "url": "https://evilflow666.github.io/printforge/",
-    "image": "https://evilflow666.github.io/printforge/images/gallery-1.jpg",
+    "image": "https://evilflow666.github.io/printforge/images/gallery-1.webp",
     "areaServed": "DE",
     "serviceType": ["3D-Druck", "Lasercutting", "Lasergravur", "Prototyping"]
   }
   </script>
   <!-- Content Security Policy (basic) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline';"> 
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' https://cdnjs.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://plausible.io;"> 
   <!-- Theme color -->
   <meta name="theme-color" content="#0B0F19">
   <!-- Plausible Analytics (privacy-friendly) -->
@@ -135,28 +135,28 @@
       <h2>Unsere <span class="accent">Projekte</span></h2>
       <div class="grid-3">
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-1.jpg" alt="3D-gedruckter Prototyp aus PLA in Nahaufnahme" loading="lazy">
+          <img src="images/gallery-1.webp" alt="3D-gedruckter Prototyp aus PLA in Nahaufnahme" loading="lazy">
           <p>3D-Druck Prototyp</p>
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-2.jpg" alt="Lasergeschnittenes Holzschild mit graviertem Logo" loading="lazy">
+          <img src="images/gallery-2.webp" alt="Lasergeschnittenes Holzschild mit graviertem Logo" loading="lazy">
           <p>Lasercut Holzschild</p>
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-3.jpg" alt="Detailaufnahme einer Lasergravur auf Holz" loading="lazy">
+          <img src="images/gallery-3.webp" alt="Detailaufnahme einer Lasergravur auf Holz" loading="lazy">
           <p>Lasergravur Detail</p>
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-4.jpg" alt="3D-gedrucktes Elektronik-Gehäuse als Prototyp" loading="lazy">
+          <img src="images/gallery-4.webp" alt="3D-gedrucktes Elektronik-Gehäuse als Prototyp" loading="lazy">
           <p>Prototyping Gehäuse</p>
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-5.jpg" alt="Lasergravur auf massivem Holzbrett" loading="lazy">
+          <img src="images/gallery-5.webp" alt="Lasergravur auf massivem Holzbrett" loading="lazy">
           <p>Lasergravur Holz</p>
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
-          <img src="images/gallery-3.jpg" alt="Hochpräziser 3D-Druck-Prototyp im Detail" loading="lazy">
-          <p>Präzisions-Prototyp</p>
+          <img src="images/device-resin.webp" alt="Resin-Druck Detailmodell in UV-Licht" loading="lazy">
+          <p>Resin Druck</p>
         </div>
       </div>
     </div>
@@ -214,6 +214,7 @@
             <option value="lasercutting">Lasercutting</option>
             <option value="lasergravur">Lasergravur</option>
             <option value="prototyping">Prototyping</option>
+            <option value="resin-druck">Resin Druck</option>
           </select>
         </div>
         <div class="form-group">

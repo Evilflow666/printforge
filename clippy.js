@@ -37,19 +37,19 @@
     <button id="clippy-toggle" class="clippy-toggle" aria-label="Clippy öffnen">
       <svg viewBox="0 0 100 160" width="56" height="84" class="clippy-svg" id="clippy-svg">
         <!-- Body -->
-        <ellipse cx="50" cy="95" rx="18" ry="50" fill="none" stroke="#B0B0B0" stroke-width="8" stroke-linecap="round"/>
+        <ellipse cx="50" cy="95" rx="18" ry="50" fill="none" stroke="#5C5C5C" stroke-width="8" stroke-linecap="round"/>
         <!-- Left Eye -->
         <ellipse cx="42" cy="55" rx="8" ry="10" fill="white" stroke="#888" stroke-width="2"/>
         <ellipse cx="43" cy="56" rx="3.5" ry="4.5" fill="#222" class="clippy-pupil-l"/>
         <ellipse cx="44" cy="54" rx="1.5" ry="2" fill="white" class="clippy-glint-l"/>
         <!-- Left Eyelid (for blinking) -->
-        <ellipse cx="42" cy="55" rx="8" ry="0" fill="var(--bg, #0B0F19)" class="clippy-lid-l"/>
+        <ellipse cx="42" cy="55" rx="8" ry="0" fill="#E8A000" class="clippy-lid-l"/>
         <!-- Right Eye -->
         <ellipse cx="58" cy="55" rx="8" ry="10" fill="white" stroke="#888" stroke-width="2"/>
         <ellipse cx="59" cy="56" rx="3.5" ry="4.5" fill="#222" class="clippy-pupil-r"/>
         <ellipse cx="60" cy="54" rx="1.5" ry="2" fill="white" class="clippy-glint-r"/>
         <!-- Right Eyelid (for blinking) -->
-        <ellipse cx="58" cy="55" rx="8" ry="0" fill="var(--bg, #0B0F19)" class="clippy-lid-r"/>
+        <ellipse cx="58" cy="55" rx="8" ry="0" fill="#E8A000" class="clippy-lid-r"/>
         <!-- Eyebrows -->
         <path d="M34 44 Q42 38 50 44" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" class="clippy-brow-l"/>
         <path d="M50 44 Q58 38 66 44" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" class="clippy-brow-r"/>

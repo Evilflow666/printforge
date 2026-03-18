@@ -6,10 +6,12 @@
   <title>Lasergravur – PitA | Branding & Personalisierung</title>
   <meta name="description" content="Lasergravur für Holz, Metall, Glas, Leder und mehr. Branding, Personalisierung, QR-Codes und Foto-Gravuren.">
   <link rel="canonical" href="https://evilflow666.github.io/printforge/leistungen/lasergravur.html">
+  <meta property="og:type" content="website">
   <meta property="og:title" content="Lasergravur – PitA | Branding & Personalisierung">
   <meta property="og:description" content="Präzise Gravuren für Holz, Metall, Glas, Leder und mehr. Ideal für Branding und Einzelstücke.">
   <meta property="og:url" content="https://evilflow666.github.io/printforge/leistungen/lasergravur.html">
   <meta property="og:image" content="https://evilflow666.github.io/printforge/images/gallery-3.jpg">
+  <meta property="og:locale" content="de_DE">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -46,72 +48,19 @@
         <li>QR-Codes & Seriennummern</li>
         <li>Foto-Gravuren</li>
       </ul>
+
+      <h3>Detailgrade</h3>
+      <ul>
+        <li>Standard (0.1mm) — für Text & Logos</li>
+        <li>Fein (0.05mm) — Foto-Qualität</li>
+        <li>Grob (0.15mm) — schnelle Großflächen</li>
+      </ul>
     </div>
   </section>
 
-  <!-- ANALYZER -->
-  <section class="section section-alt" id="analyzer">
+  <section class="section section-alt" style="text-align:center;">
     <div class="container">
-      <h2>Datei <span class="accent">prüfen</span></h2>
-      <p style="text-align:center; color:var(--text-secondary); margin-bottom:32px;">
-        Lade dein Bild oder SVG hoch — wir prüfen Auflösung, Kontrast und Machbarkeit.
-      </p>
-
-      <div class="slicer-upload" id="gravurDrop">
-        <div class="upload-icon">📂</div>
-        <p>PNG / JPG / SVG hier ablegen oder <span class="accent">klicken</span></p>
-        <input type="file" id="gravurFile" accept=".png,.jpg,.jpeg,.svg,.bmp,.tiff" hidden>
-      </div>
-      <p id="gravurFileName" class="file-name"></p>
-
-      <!-- Preview -->
-      <div id="gravurPreview" style="display:none; text-align:center; margin-top:16px;">
-        <img id="gravurPreviewImg" style="max-width:300px; max-height:200px; border-radius:8px; border:1px solid var(--stroke);">
-      </div>
-
-      <div class="slicer-options" id="gravurOptions" style="display:none;">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Material</label>
-            <select id="gravurMaterial">
-              <option value="Holz" selected>Holz / Bambus</option>
-              <option value="Metall">Metall (beschichtet)</option>
-              <option value="Glas">Glas / Keramik</option>
-              <option value="Leder">Leder</option>
-              <option value="Acryl">Acryl</option>
-              <option value="Stein">Stein</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Detailgrad</label>
-            <select id="gravurDetail">
-              <option value="Standard" selected>Standard (0.1mm)</option>
-              <option value="Fein">Fein (0.05mm) — Foto-Qualität</option>
-              <option value="Grob">Grob (0.15mm) — Schnell</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Gravur-Größe (Breite in mm)</label>
-            <input type="number" id="gravurWidth" placeholder="z.B. 100" value="100" min="5" max="400"
-              style="width:100%; padding:10px 14px; background:var(--bg); border:1px solid var(--stroke); border-radius:var(--radius); color:var(--text-primary); font-family:var(--font); font-size:0.95rem;">
-          </div>
-          <div class="form-group">
-            <label>Maschine</label>
-            <select id="gravurMachine">
-              <option value="creality">Creality Falcon (400×400mm)</option>
-              <option value="snapmaker">Snapmaker A350T (320×350mm)</option>
-            </select>
-          </div>
-        </div>
-        <button class="btn btn-primary btn-full" id="gravurAnalyze">🔍 Datei analysieren</button>
-      </div>
-
-      <div id="gravurResults"></div>
-      <div id="gravurCTA" style="display:none; text-align:center; margin-top:32px;">
-        <a href="../index.html#kontakt" class="btn btn-primary">📬 Angebot anfragen</a>
-      </div>
+      <a href="../index.html#kontakt" class="btn btn-primary">📬 Angebot anfragen</a>
     </div>
   </section>
 
@@ -125,96 +74,5 @@
   <footer class="footer">
     <div class="footer-bottom"><p>&copy; 2026 Pit<span class="accent">A</span></p></div>
   </footer>
-
-  <script src="../js/laser-analyzer.js"></script>
-  <script>
-    const drop = document.getElementById('gravurDrop');
-    const fileInput = document.getElementById('gravurFile');
-    const fileNameEl = document.getElementById('gravurFileName');
-    const preview = document.getElementById('gravurPreview');
-    const previewImg = document.getElementById('gravurPreviewImg');
-    const options = document.getElementById('gravurOptions');
-    const results = document.getElementById('gravurResults');
-    const cta = document.getElementById('gravurCTA');
-    let currentData = null;
-    let currentType = null;
-    let loadedImg = null;
-    let currentFile = null;
-
-    drop.addEventListener('click', () => fileInput.click());
-    drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
-    drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
-    drop.addEventListener('drop', e => {
-      e.preventDefault(); drop.classList.remove('dragover');
-      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-    });
-    fileInput.addEventListener('change', () => { if (fileInput.files.length) handleFile(fileInput.files[0]); });
-
-    function handleFile(file) {
-      const ext = file.name.split('.').pop().toLowerCase();
-      fileNameEl.textContent = '📄 ' + file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
-      options.style.display = 'block';
-      results.innerHTML = '';
-      cta.style.display = 'none';
-      currentType = ext;
-      currentFile = file;
-
-      if (ext === 'svg') {
-        const reader = new FileReader();
-        reader.onload = () => { currentData = reader.result; };
-        reader.readAsText(file);
-        preview.style.display = 'none';
-      } else {
-        // Image file — show preview
-        const reader = new FileReader();
-        reader.onload = () => {
-          previewImg.src = reader.result;
-          preview.style.display = 'block';
-          const img = new Image();
-          img.onload = () => { loadedImg = img; };
-          img.src = reader.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    document.getElementById('gravurAnalyze').addEventListener('click', () => {
-      if (!currentType) { alert('Bitte zuerst eine Datei hochladen.'); return; }
-      try {
-        let analysis;
-        const targetWidth = parseInt(document.getElementById('gravurWidth').value) || 100;
-
-        if (currentType === 'svg') {
-          analysis = analyzeSVG(currentData);
-          // Scale to target width
-          if (analysis.dims.x > 0) {
-            const scale = targetWidth / analysis.dims.x;
-            analysis.dims.y = analysis.dims.y * scale;
-            analysis.dims.x = targetWidth;
-          } else {
-            analysis.dims.x = targetWidth;
-            analysis.dims.y = targetWidth; // assume square
-          }
-        } else if (loadedImg) {
-          analysis = analyzeImage(loadedImg, currentFile);
-          // Override with target width
-          const ratio = loadedImg.naturalHeight / loadedImg.naturalWidth;
-          analysis.dims.x = targetWidth;
-          analysis.dims.y = targetWidth * ratio;
-        } else {
-          analysis = { type: 'OTHER', dims: { x: targetWidth, y: targetWidth } };
-        }
-
-        const material = document.getElementById('gravurMaterial').value;
-        const detail = document.getElementById('gravurDetail').value;
-        const machine = document.getElementById('gravurMachine').value;
-        results.innerHTML = formatLaserAnalysis(analysis, 'engrave', material, null, detail, machine);
-        cta.style.display = 'block';
-        results.scrollIntoView({ behavior: 'smooth' });
-      } catch(e) {
-        results.innerHTML = '<div class="analysis-card card-error"><h4>❌ Fehler</h4><p>' + e.message + '</p></div>';
-      }
-    });
-  </script>
 </body>
 </html>

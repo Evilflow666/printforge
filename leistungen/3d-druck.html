@@ -6,10 +6,12 @@
   <title>3D-Druck – PitA | FDM-Druck mit Bambu Lab</title>
   <meta name="description" content="Professioneller 3D-Druck mit Bambu Lab H2D & P1S — PLA, PETG, ABS, TPU. Vom Einzelstück bis zur Kleinserie.">
   <link rel="canonical" href="https://evilflow666.github.io/printforge/leistungen/3d-druck.html">
+  <meta property="og:type" content="website">
   <meta property="og:title" content="3D-Druck – PitA | FDM-Druck mit Bambu Lab">
   <meta property="og:description" content="Professioneller 3D-Druck mit Bambu Lab H2D & P1S — PLA, PETG, ABS, TPU. Vom Einzelstück bis zur Kleinserie.">
   <meta property="og:url" content="https://evilflow666.github.io/printforge/leistungen/3d-druck.html">
   <meta property="og:image" content="https://evilflow666.github.io/printforge/images/gallery-1.jpg">
+  <meta property="og:locale" content="de_DE">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -42,90 +44,20 @@
         <li>1× Bambu Lab H2D (325 × 320 × 325 mm, Dual Nozzle)</li>
         <li>2× Bambu Lab P1S (256 × 256 × 256 mm)</li>
       </ul>
+
+      <h3>Leistungen</h3>
+      <ul>
+        <li>Einzelstücke & Kleinserien</li>
+        <li>Funktionsprototypen & Gehäuse</li>
+        <li>Multi-Material-Druck (z.B. TPU + PLA)</li>
+        <li>Nachbearbeitung auf Wunsch (Schleifen, Lackieren)</li>
+      </ul>
     </div>
   </section>
 
-  <!-- SLICER / ANALYZER -->
-  <section class="section section-alt" id="slicer">
+  <section class="section section-alt" style="text-align:center;">
     <div class="container">
-      <h2>Datei <span class="accent">prüfen</span></h2>
-      <p style="text-align:center; color:var(--text-secondary); margin-bottom:32px;">
-        Lade deine STL- oder 3MF-Datei hoch — wir prüfen Maße, Druckbarkeit und schätzen Material & Zeit.
-      </p>
-
-      <!-- Upload -->
-      <div class="slicer-upload" id="slicerDrop">
-        <div class="upload-icon">📂</div>
-        <p>STL / 3MF hier ablegen oder <span class="accent">klicken</span></p>
-        <input type="file" id="slicerFile" accept=".stl,.3mf" hidden>
-      </div>
-      <p id="slicerFileName" class="file-name"></p>
-
-      <!-- 3D Preview -->
-      <div id="stlPreview" class="stl-preview" style="display:none;">
-        <div id="viewer3d" class="viewer-3d"></div>
-        <div id="analysisPanel" class="analysis-panel" style="display:none;"></div>
-      </div>
-
-      <!-- Options -->
-      <div class="slicer-options" id="slicerOptions" style="display:none;">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Material</label>
-            <select id="slicerMaterial">
-              <option value="PLA" selected>PLA</option>
-              <option value="PETG">PETG</option>
-              <option value="ABS">ABS</option>
-              <option value="TPU">TPU (flexibel)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Farbe</label>
-            <select id="slicerColor">
-              <option value="">Egal</option>
-              <option value="Schwarz">Schwarz</option>
-              <option value="Weiß">Weiß</option>
-              <option value="Rot">Rot</option>
-              <option value="Blau">Blau</option>
-              <option value="Grün">Grün</option>
-              <option value="Orange">Orange</option>
-              <option value="Grau">Grau</option>
-              <option value="Transparent">Transparent (PETG)</option>
-              <option value="Andere">Andere (im Kommentar)</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Oberfläche</label>
-            <select id="slicerSurface">
-              <option value="Standard">Standard (0.2mm Layer)</option>
-              <option value="Fein">Fein (0.12mm Layer)</option>
-              <option value="Draft">Draft/Schnell (0.28mm Layer)</option>
-              <option value="Glatt">Glatt (nachbearbeitet)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Drucker</label>
-            <select id="slicerPrinter">
-              <option value="auto">Automatisch (bester Drucker)</option>
-              <option value="H2D">Bambu Lab H2D (325×320×325mm)</option>
-              <option value="H2D-dual">Bambu Lab H2D Dual Nozzle (300×320×325mm)</option>
-              <option value="P1S">Bambu Lab P1S (256×256×256mm)</option>
-            </select>
-          </div>
-        </div>
-        <button class="btn btn-primary btn-full" id="slicerAnalyze">🔍 Datei analysieren</button>
-      </div>
-
-      <!-- Results -->
-      <div id="slicerResults"></div>
-
-      <!-- CTA -->
-      <div id="slicerCTA" style="display:none; text-align:center; margin-top:32px;">
-        <a href="../index.html#kontakt" class="btn btn-primary">📬 Angebot anfragen</a>
-      </div>
-
+      <a href="../index.html#kontakt" class="btn btn-primary">📬 Angebot anfragen</a>
     </div>
   </section>
 
@@ -139,74 +71,5 @@
   <footer class="footer">
     <div class="footer-bottom"><p>&copy; 2026 Pit<span class="accent">A</span></p></div>
   </footer>
-
-  <!-- Three.js für 3D-Preview -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-  <script src="../stl-viewer.js"></script>
-  <script src="../js/stl-analyzer.js"></script>
-  <script>
-    const drop = document.getElementById('slicerDrop');
-    const fileInput = document.getElementById('slicerFile');
-    const fileNameEl = document.getElementById('slicerFileName');
-    const options = document.getElementById('slicerOptions');
-    const results = document.getElementById('slicerResults');
-    const cta = document.getElementById('slicerCTA');
-    let currentBuffer = null;
-
-    drop.addEventListener('click', () => fileInput.click());
-    drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
-    drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
-    drop.addEventListener('drop', e => {
-      e.preventDefault(); drop.classList.remove('dragover');
-      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-    });
-    fileInput.addEventListener('change', () => { if (fileInput.files.length) handleFile(fileInput.files[0]); });
-
-    function handleFile(file) {
-      const ext = file.name.split('.').pop().toLowerCase();
-      if (!['stl', '3mf'].includes(ext)) {
-        alert('Nur STL und 3MF Dateien erlaubt.');
-        return;
-      }
-      fileNameEl.textContent = '📄 ' + file.name + ' (' + (file.size / 1024).toFixed(0) + ' KB)';
-      options.style.display = 'block';
-      results.innerHTML = '';
-      cta.style.display = 'none';
-
-      if (ext === '3mf') {
-        fileNameEl.textContent += ' — ⚠️ 3MF-Vorschau eingeschränkt, STL empfohlen für volle Analyse';
-      }
-
-      // STL → 3D-Preview aktivieren
-      if (ext === 'stl') {
-        const preview = document.getElementById('stlPreview');
-        preview.style.display = 'block';
-        if (typeof initViewer === 'function' && !scene) initViewer('viewer3d');
-        if (typeof loadSTL === 'function') loadSTL(file);
-      }
-
-      const reader = new FileReader();
-      reader.onload = () => { currentBuffer = reader.result; };
-      reader.readAsArrayBuffer(file);
-    }
-
-    document.getElementById('slicerAnalyze').addEventListener('click', () => {
-      if (!currentBuffer) { alert('Bitte zuerst eine Datei hochladen.'); return; }
-      try {
-        const analysis = parseSTL(currentBuffer);
-        const material = document.getElementById('slicerMaterial').value;
-        const color = document.getElementById('slicerColor').value;
-        const surface = document.getElementById('slicerSurface').value;
-        const printer = document.getElementById('slicerPrinter').value;
-        results.innerHTML = formatAnalysis(analysis, material, color, surface, printer);
-        cta.style.display = 'block';
-        results.scrollIntoView({ behavior: 'smooth' });
-      } catch(e) {
-        results.innerHTML = '<div class="analysis-card card-error"><h4>❌ Fehler beim Lesen</h4><p>Datei konnte nicht analysiert werden. Bitte STL-Format prüfen.</p></div>';
-      }
-    });
-  </script>
 </body>
 </html>

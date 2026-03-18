@@ -62,20 +62,36 @@
 
   document.body.insertAdjacentHTML('beforeend', html);
 
-  // Bind all event listeners (no inline onclick — CSP safe)
-  setTimeout(() => {
-    const inp = document.getElementById('clippy-input');
-    if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter') sendClippy(); });
+  // Bind all event listeners immediately after injection
+  const toggleBtn = document.getElementById('clippy-toggle');
+  const closeBtn = document.getElementById('clippy-close-btn');
+  const sendBtn = document.getElementById('clippy-send');
+  const inp = document.getElementById('clippy-input');
 
-    const toggleBtn = document.getElementById('clippy-toggle');
-    if (toggleBtn) toggleBtn.addEventListener('click', toggleClippy);
+  if (toggleBtn) toggleBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleClippy();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleClippy();
+  });
+  if (sendBtn) sendBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    sendClippy();
+  });
+  if (inp) inp.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') sendClippy();
+  });
 
-    const closeBtn = document.getElementById('clippy-close-btn');
-    if (closeBtn) closeBtn.addEventListener('click', toggleClippy);
-
-    const sendBtn = document.getElementById('clippy-send');
-    if (sendBtn) sendBtn.addEventListener('click', sendClippy);
-  }, 100);
+  console.log('[Clippy] Initialized:', {
+    toggle: !!toggleBtn,
+    close: !!closeBtn,
+    send: !!sendBtn,
+    input: !!inp
+  });
 })();
 
 
@@ -83,10 +99,20 @@
 function toggleClippy() {
   const chat = document.getElementById('clippy-chat');
   const bubble = document.getElementById('clippy-bubble');
-  chat.classList.toggle('clippy-hidden');
-  if (!chat.classList.contains('clippy-hidden')) {
-    bubble.classList.add('clippy-hidden');
-    document.getElementById('clippy-input').focus();
+  if (!chat) { console.error('[Clippy] Chat element not found'); return; }
+
+  const isHidden = chat.classList.contains('clippy-hidden');
+  console.log('[Clippy] Toggle:', isHidden ? 'opening' : 'closing');
+
+  if (isHidden) {
+    chat.classList.remove('clippy-hidden');
+    if (bubble) bubble.classList.add('clippy-hidden');
+    setTimeout(() => {
+      const input = document.getElementById('clippy-input');
+      if (input) input.focus();
+    }, 100);
+  } else {
+    chat.classList.add('clippy-hidden');
   }
 }
 

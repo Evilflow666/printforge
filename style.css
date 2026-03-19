@@ -115,6 +115,7 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 }
 .logo:hover { color: var(--accent); }
 .cart-icon {
+  position: relative;
   font-size: 1.3rem;
   text-decoration: none;
   margin-left: 8px;
@@ -1363,11 +1364,7 @@ select { cursor: pointer; appearance: none;
 }
 
 /* ===== WARENKORB BADGE ===== */
-.cart-icon {
-  position: relative;
-  text-decoration: none;
-  font-size: 1.4rem;
-}
+/* .cart-icon base styles are in header section (line ~117) */
 .cart-badge {
   position: absolute;
   top: -6px;

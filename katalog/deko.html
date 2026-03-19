@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deko & Geschenke – PitA Katalog</title>
+  <meta name="description" content="Personalisierte Einzelstücke mit Charakter.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../i18n.js?v=1773954349"></script>
+  <style>
+    body {
+      background-image: linear-gradient(rgba(11,15,25,0.72), rgba(11,15,25,0.72)), url('../alps-hero.webp') !important;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../katalog.html" class="logo">← <span data-i18n="katalog.title">Katalog</span></a>
+      <div class="lang-switcher">
+        <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪</button>
+        <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧</button>
+        <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷</button>
+        <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸</button>
+        <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="sub-page-wrapper">
+    <section class="sub-hero">
+      <div class="container">
+        <h1>🎨 <span class="accent" data-i18n="kat.deko">Deko & Geschenke</span></h1>
+        <p data-i18n="kat.deko.desc">Personalisierte Einzelstücke mit Charakter.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="katalog-detail-grid">
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/katalog/deko-1.webp" alt="Gravierte Holzschilder" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <h3 data-i18n="kat.deko.item1">Gravierte Holzschilder</h3>
+            <p data-i18n="kat.deko.item1.long" class="katalog-detail-desc">Türschilder, Namensschilder, Sprüche und Logos — lasergraviert auf echtem Holz. Perfekt als Geschenk.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="kat.deko.item1.spec1">Material: Echtholz, Bambus</li>
+              <li data-i18n="kat.deko.item1.spec2">Gravur: 0.1mm Standard</li>
+              <li data-i18n="kat.deko.item1.spec3">Preis: ab 12 €</li>
+            </ul>
+            <a href="../index.html#kontakt" class="btn btn-primary btn-sm" data-i18n="kat.detail.cta">Jetzt anfragen</a>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/katalog/deko-2.webp" alt="3D-Druck Figuren" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <h3 data-i18n="kat.deko.item2">3D-Druck Figuren</h3>
+            <p data-i18n="kat.deko.item2.long" class="katalog-detail-desc">Miniaturen, Deko-Objekte, Vasen und Skulpturen. Resin für maximale Details oder FDM für größere Stücke.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="kat.deko.item2.spec1">FDM oder Resin</li>
+              <li data-i18n="kat.deko.item2.spec2">Bis 325mm Höhe</li>
+              <li data-i18n="kat.deko.item2.spec3">Preis: ab 8 €</li>
+            </ul>
+            <a href="../index.html#kontakt" class="btn btn-primary btn-sm" data-i18n="kat.detail.cta">Jetzt anfragen</a>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/katalog/deko-3.webp" alt="Personalisierte Geschenke" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <h3 data-i18n="kat.deko.item3">Personalisierte Geschenke</h3>
+            <p data-i18n="kat.deko.item3.long" class="katalog-detail-desc">Schlüsselanhänger, Untersetzer, Boxen, Handyhüllen — mit Namen, Datum oder eigenem Design.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="kat.deko.item3.spec1">3D-Druck + Lasergravur</li>
+              <li data-i18n="kat.deko.item3.spec2">Einzelstücke oder Sets</li>
+              <li data-i18n="kat.deko.item3.spec3">Preis: ab 6 €</li>
+            </ul>
+            <a href="../index.html#kontakt" class="btn btn-primary btn-sm" data-i18n="kat.detail.cta">Jetzt anfragen</a>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/katalog/deko-4.webp" alt="Lampen & Lichtspiele" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <h3 data-i18n="kat.deko.item4">Lampen & Lichtspiele</h3>
+            <p data-i18n="kat.deko.item4.long" class="katalog-detail-desc">Lithophane, Lampenschirme und LED-Halter — dein Foto als 3D-gedrucktes Lichtkunstwerk.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="kat.deko.item4.spec1">Material: weißes PLA</li>
+              <li data-i18n="kat.deko.item4.spec2">LED nicht enthalten</li>
+              <li data-i18n="kat.deko.item4.spec3">Preis: ab 15 €</li>
+            </ul>
+            <a href="../index.html#kontakt" class="btn btn-primary btn-sm" data-i18n="kat.detail.cta">Jetzt anfragen</a>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/katalog/deko-5.webp" alt="Weihnachts- & Saisonales" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <h3 data-i18n="kat.deko.item5">Weihnachts- & Saisonales</h3>
+            <p data-i18n="kat.deko.item5.long" class="katalog-detail-desc">Christbaumschmuck, Osterdeko, Halloween-Figuren — saisonal wechselnde Designs.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="kat.deko.item5.spec1">Multi-Color möglich</li>
+              <li data-i18n="kat.deko.item5.spec2">Auch als Serie</li>
+              <li data-i18n="kat.deko.item5.spec3">Preis: ab 4 €</li>
+            </ul>
+            <a href="../index.html#kontakt" class="btn btn-primary btn-sm" data-i18n="kat.detail.cta">Jetzt anfragen</a>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/katalog/deko-6.webp" alt="Acryl-Gravuren" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <h3 data-i18n="kat.deko.item6">Acryl-Gravuren</h3>
+            <p data-i18n="kat.deko.item6.long" class="katalog-detail-desc">Transparente Acrylplatten mit Lasergravur — leuchtend mit LED-Sockel. Fotos, Logos, Schriftzüge.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="kat.deko.item6.spec1">Material: Acryl 3–6mm</li>
+              <li data-i18n="kat.deko.item6.spec2">LED-Sockel optional</li>
+              <li data-i18n="kat.deko.item6.spec3">Preis: ab 18 €</li>
+            </ul>
+            <a href="../index.html#kontakt" class="btn btn-primary btn-sm" data-i18n="kat.detail.cta">Jetzt anfragen</a>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" style="text-align:center;">
+      <div class="container">
+        <p style="color:var(--text-secondary);margin-bottom:8px;" data-i18n="kat.custom.title">Du hast etwas anderes im Kopf?</p>
+        <p style="color:var(--text-secondary);margin-bottom:20px;font-size:0.9rem;" data-i18n="kat.custom.desc">Wir fertigen auch individuelle Projekte — schreib uns einfach.</p>
+        <a href="../index.html#kontakt" class="btn btn-primary" data-i18n="kat.custom.cta">📬 Projekt anfragen</a>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo">Pit<span class="accent">A</span></span>
+      <p><span data-i18n="footer.tagline">Präzision aus den Alpen.</span></p>
+      <div class="footer-links">
+        <a href="../blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="../faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="../impressum.html"><span data-i18n="footer.impressum">Impressum</span></a>
+        <a href="../datenschutz.html"><span data-i18n="footer.datenschutz">Datenschutz</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copy">&copy; 2026 PitA. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script src="../clippy.js"></script>
+</body>
+</html>

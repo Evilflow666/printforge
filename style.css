@@ -1280,3 +1280,75 @@ select { cursor: pointer; appearance: none;
   .clippy-qr-btn { font-size: 0.72rem; padding: 5px 10px; }
   .clippy-quick-replies { padding: 4px 10px 6px; }
 }
+
+/* ===== KATALOG DETAIL SEITEN ===== */
+.katalog-detail-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.katalog-detail-item {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  align-items: center;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 28px;
+  transition: all 0.3s ease;
+}
+.katalog-detail-item:hover {
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+}
+.katalog-detail-item:nth-child(even) {
+  direction: rtl;
+}
+.katalog-detail-item:nth-child(even) > * {
+  direction: ltr;
+}
+.katalog-detail-img img {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.katalog-detail-text h3 {
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.katalog-detail-desc {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.katalog-detail-specs {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+.katalog-detail-specs li {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.katalog-detail-specs li::before {
+  content: '→ ';
+  color: var(--accent);
+}
+.btn-sm {
+  padding: 10px 28px;
+  font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+  .katalog-detail-item {
+    grid-template-columns: 1fr;
+  }
+  .katalog-detail-item:nth-child(even) {
+    direction: ltr;
+  }
+}

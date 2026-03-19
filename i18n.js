@@ -286,6 +286,13 @@ const TRANSLATIONS = {
   'legal.datenschutz': { de:'Datenschutzerklärung', en:'Privacy Policy', fr:'Politique de confidentialité', es:'Política de privacidad',  it:'Informativa sulla privacy'     },
   'legal.note':        { de:'Dieser Text ist ausschließlich auf Deutsch verfügbar (rechtliche Anforderung).', en:'This text is only available in German (legal requirement).', fr:'Ce texte est uniquement disponible en allemand (exigence légale).', es:'Este texto solo está disponible en alemán (requisito legal).', it:'Questo testo è disponibile solo in tedesco (requisito legale).' },
   'legal.back':        { de:'← Zurück zur Startseite', en:'← Back to homepage', fr:"← Retour à l'accueil", es:'← Volver al inicio', it:'← Torna alla homepage' },
+  // ===== KATALOG DETAIL KEYS =====
+  'kat.funktionsteile.viewall': { de:'Alles anzeigen →', en:'View all →', fr:'Voir tout →', es:'Ver todo →', it:'Vedi tutto →' },
+  'kat.deko.viewall':  { de:'Alles anzeigen →', en:'View all →', fr:'Voir tout →', es:'Ver todo →', it:'Vedi tutto →' },
+  'kat.business.viewall': { de:'Alles anzeigen →', en:'View all →', fr:'Voir tout →', es:'Ver todo →', it:'Vedi tutto →' },
+  'kat.maker.viewall': { de:'Alles anzeigen →', en:'View all →', fr:'Voir tout →', es:'Ver todo →', it:'Vedi tutto →' },
+  'kat.detail.cta':    { de:'Jetzt anfragen', en:'Request now', fr:'Demander maintenant', es:'Solicitar ahora', it:'Richiedi ora' },
+
 };
 
 // ===== ENGINE =====

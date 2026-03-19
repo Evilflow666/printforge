@@ -310,6 +310,9 @@ function setLang(lang) {
   document.querySelectorAll('.lang-switcher button[data-lang]').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
+
+  // Clippy & andere Listener benachrichtigen
+  document.dispatchEvent(new CustomEvent('pita-lang-changed', { detail: { lang } }));
 }
 
 function getLang() {

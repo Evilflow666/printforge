@@ -50,7 +50,7 @@
 <body>
 
   <!-- Skip Navigation -->
-  <a href="#leistungen" class="skip-link">Zum Inhalt springen</a>
+  <a href="#leistungen" class="skip-link" data-i18n="skip.link">Zum Inhalt springen</a>
 
   <!-- HEADER -->
   <header class="header">
@@ -113,7 +113,7 @@
         <a href="leistungen/lasercutting.html" class="card">
           <div class="card-icon">⚡</div>
           <h3 data-i18n="card.laser">Lasercutting</h3>
-          <p>Millimetergenaue Schnitte in Holz, Acryl und mehr — mit Creality & Snapmaker.</p>
+          <p data-i18n="card.laser.desc">Millimetergenaue Schnitte in Holz, Acryl und mehr — mit Creality & Snapmaker.</p>
         </a>
 
         <a href="leistungen/lasergravur.html" class="card">
@@ -131,7 +131,7 @@
         <a href="leistungen/resin-druck.html" class="card card-glassy">
           <div class="card-icon">💧</div>
           <h3 data-i18n="card.resin">Resin Druck</h3>
-          <p><span data-i18n="card.resin.desc">Hochpräzise Harz-Drucke für Detailarbeiten und Oberflächenqualität.</span></p>
+          <p data-i18n="card.resin.desc">Hochpräzise Harz-Drucke für Detailarbeiten und Oberflächenqualität.</p>
         </a>
 
       </div>
@@ -167,7 +167,7 @@
         </div>
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="images/device-resin.webp" alt="Resin-Druck Detailmodell in UV-Licht" loading="lazy">
-          <p>Resin Druck</p>
+          <p><span data-i18n="galerie.6">Resin Druck</span></p>
         </div>
       </div>
     </div>
@@ -195,8 +195,8 @@
         </div>
         <div class="step">
           <div class="step-number">03</div>
-          <h3>Fertigung & Versand</h3>
-          <p>Nach Freigabe produzieren wir und liefern direkt zu dir.</p>
+          <h3 data-i18n="ablauf.step3">Fertigung & Versand</h3>
+          <p><span data-i18n="ablauf.step3.desc">Nach Freigabe fertigen wir dein Teil und liefern direkt zu dir.</span></p>
         </div>
       </div>
     </div>
@@ -209,32 +209,32 @@
       <form class="contact-form" id="contactForm" novalidate>
         <div class="form-row">
           <div class="form-group">
-            <label for="contact-name">Name</label>
-            <input type="text" name="name" id="contact-name" aria-label="Ihr Name" placeholder="Name" required>
+            <label for="contact-name" data-i18n="kontakt.label.name">Name</label>
+            <input type="text" name="name" id="contact-name" aria-label="Ihr Name" data-i18n="kontakt.ph.name" placeholder="Dein Name" required>
           </div>
           <div class="form-group">
-            <label for="contact-email">E-Mail</label>
-            <input type="email" name="email" id="contact-email" aria-label="Ihre E-Mail-Adresse" placeholder="E-Mail" required>
+            <label for="contact-email" data-i18n="kontakt.label.email">E-Mail</label>
+            <input type="email" name="email" id="contact-email" aria-label="Ihre E-Mail-Adresse" data-i18n="kontakt.ph.email" placeholder="deine@email.de" required>
           </div>
         </div>
         <div class="form-group">
-          <label for="contact-service">Leistung</label>
+          <label for="contact-service" data-i18n="kontakt.label.service">Leistung</label>
           <select name="service" id="contact-service">
-            <option value="">Leistung wählen</option>
-            <option value="3d-druck">3D-Druck</option>
-            <option value="lasercutting">Lasercutting</option>
-            <option value="lasergravur">Lasergravur</option>
-            <option value="prototyping">Prototyping</option>
-            <option value="resin-druck">Resin Druck</option>
+            <option value="" data-i18n="kontakt.select.default">Leistung wählen</option>
+            <option value="3d-druck" data-i18n="card.3ddruck">3D-Druck</option>
+            <option value="lasercutting" data-i18n="card.laser">Lasercutting</option>
+            <option value="lasergravur" data-i18n="card.gravur">Lasergravur</option>
+            <option value="prototyping" data-i18n="card.proto">Prototyping</option>
+            <option value="resin-druck" data-i18n="card.resin">Resin Druck</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="contact-message">Projektbeschreibung</label>
+          <label for="contact-message" data-i18n="kontakt.label.message">Projektbeschreibung</label>
           <textarea name="message" id="contact-message" rows="4" placeholder="Beschreibe dein Projekt..." data-i18n-attr="placeholder" data-i18n="kontakt.ph.msg"></textarea>
         </div>
         <div class="file-drop" id="contactFileDrop" style="margin-bottom:12px;">
-          <p>📎 Datei anhängen (optional) — <span class="accent">klicken oder ziehen</span></p>
-          <small>STL, 3MF, SVG, DXF, PDF, JPG, PNG (max. 25 MB)</small>
+          <p data-i18n="kontakt.filedrop">📎 Datei anhängen (optional) — <span class="accent">klicken oder ziehen</span></p>
+          <small data-i18n="kontakt.filedrop.formats">STL, 3MF, SVG, DXF, PDF, JPG, PNG (max. 25 MB)</small>
           <input type="file" name="file" id="contactFileInput" accept=".stl,.3mf,.svg,.dxf,.pdf,.jpg,.jpeg,.png" hidden>
         </div>
         <p id="contactFileName" class="file-name"></p>

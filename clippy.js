@@ -324,6 +324,16 @@ function getFallback(msg) {
   chat.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.remove('clippy-hidden'); });
   chat.addEventListener('dragleave', () => dropZone.classList.add('clippy-hidden'));
   chat.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.add('clippy-hidden'); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+
+  // Sprachänderung live übernehmen (Event von i18n.js)
+  document.addEventListener('pita-lang-changed', () => {
+    const greetEl = document.getElementById('clippy-greeting');
+    if (greetEl) greetEl.innerHTML = t('greeting');
+    const dropEl = document.getElementById('clippy-drop-text');
+    if (dropEl) dropEl.textContent = t('dropzone');
+    const langInp = document.getElementById('clippy-input');
+    if (langInp) langInp.placeholder = t('placeholder');
+  });
 })();
 
 // ─── TOGGLE ──────────────────────────────────────────────────────────────────

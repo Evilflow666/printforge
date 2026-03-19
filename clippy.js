@@ -1,49 +1,288 @@
 /**
- * Clippy — PitA KI-Assistent v2.0
- * Neu: STL/SVG Dateianalyse + Preisschätzung, Navigation, mehr Persönlichkeit
+ * Clippy — PitA KI-Assistent v3.0
+ * Mehrsprachig: DE / EN / FR / ES / IT
+ * Features: STL/SVG Analyse, Preisschätzung, Navigation, Idle-Animationen
  */
 
-// ===== INJECT CLIPPY HTML =====
+// ─── SPRACHE ────────────────────────────────────────────────────────────────
+function clippyLang() {
+  return localStorage.getItem('pita-lang') || 'de';
+}
+
+// ─── ÜBERSETZUNGEN ──────────────────────────────────────────────────────────
+const T = {
+  greeting: {
+    de: 'Hallo! 👋 Ich bin Clippy, dein PitA-Assistent.<br>Frag mich was über 3D-Druck, Laser oder lade eine <strong>STL/SVG-Datei</strong> hoch für eine Preisschätzung!',
+    en: 'Hello! 👋 I\'m Clippy, your PitA assistant.<br>Ask me anything about 3D printing, laser or upload an <strong>STL/SVG file</strong> for a price estimate!',
+    fr: 'Bonjour ! 👋 Je suis Clippy, votre assistant PitA.<br>Posez-moi des questions sur l\'impression 3D, le laser ou déposez un <strong>fichier STL/SVG</strong> pour une estimation !',
+    es: '¡Hola! 👋 Soy Clippy, tu asistente PitA.<br>Pregúntame sobre impresión 3D, láser o sube un <strong>archivo STL/SVG</strong> para una estimación de precio.',
+    it: 'Ciao! 👋 Sono Clippy, il tuo assistente PitA.<br>Chiedimi qualcosa sulla stampa 3D, laser o carica un <strong>file STL/SVG</strong> per una stima del prezzo!',
+  },
+  dropzone: {
+    de: '📂 STL, 3MF, OBJ oder SVG hier ablegen',
+    en: '📂 Drop STL, 3MF, OBJ or SVG here',
+    fr: '📂 Déposez STL, 3MF, OBJ ou SVG ici',
+    es: '📂 Arrastra STL, 3MF, OBJ o SVG aquí',
+    it: '📂 Trascina STL, 3MF, OBJ o SVG qui',
+  },
+  placeholder: {
+    de: 'Frag mich was...',
+    en: 'Ask me something...',
+    fr: 'Posez-moi une question...',
+    es: 'Pregúntame algo...',
+    it: 'Chiedimi qualcosa...',
+  },
+  typing: {
+    de: 'tippt', en: 'typing', fr: 'écrit', es: 'escribiendo', it: 'scrive',
+  },
+  contextHints: {
+    '3d-druck': {
+      de: 'Du schaust dir 3D-Druck an 🖨️ — lade einfach deine STL hoch, ich schätze den Preis!',
+      en: 'You\'re on the 3D printing page 🖨️ — just upload your STL, I\'ll estimate the price!',
+      fr: 'Vous êtes sur la page impression 3D 🖨️ — téléchargez votre STL, j\'estimerai le prix !',
+      es: 'Estás en la página de impresión 3D 🖨️ — sube tu STL, ¡estimaré el precio!',
+      it: 'Sei sulla pagina stampa 3D 🖨️ — carica il tuo STL, stimerò il prezzo!',
+    },
+    'lasercutting': {
+      de: 'Lasercutting-Seite! Schick mir deine SVG/DXF, ich schau was das kosten könnte ✂️',
+      en: 'Laser cutting page! Send me your SVG/DXF, I\'ll check what it might cost ✂️',
+      fr: 'Page découpe laser ! Envoyez votre SVG/DXF, j\'estimerai le coût ✂️',
+      es: '¡Página de corte láser! Envíame tu SVG/DXF, veré cuánto podría costar ✂️',
+      it: 'Pagina taglio laser! Mandami il tuo SVG/DXF, vedrò quanto potrebbe costare ✂️',
+    },
+    'lasergravur': {
+      de: 'Lasergravur! Ich helfe dir beim Material wählen oder Preise einschätzen 🔥',
+      en: 'Laser engraving! I\'ll help you choose materials or estimate prices 🔥',
+      fr: 'Gravure laser ! Je vous aide à choisir les matériaux ou estimer les prix 🔥',
+      es: '¡Grabado láser! Te ayudo a elegir materiales o estimar precios 🔥',
+      it: 'Incisione laser! Ti aiuto a scegliere i materiali o stimare i prezzi 🔥',
+    },
+    'materialien': {
+      de: 'Materialien-Seite! Ich erkläre dir den Unterschied zwischen allem — einfach fragen 🧪',
+      en: 'Materials page! I\'ll explain the difference between everything — just ask 🧪',
+      fr: 'Page matériaux ! Je vous expliquerai les différences — posez juste votre question 🧪',
+      es: '¡Página de materiales! Te explico las diferencias — solo pregunta 🧪',
+      it: 'Pagina materiali! Ti spiego le differenze tra tutto — chiedi pure 🧪',
+    },
+    'faq': {
+      de: 'FAQ? Wenn du hier keine Antwort findest, frag mich direkt! 😄',
+      en: 'FAQ? If you don\'t find an answer here, just ask me directly! 😄',
+      fr: 'FAQ ? Si vous ne trouvez pas de réponse ici, demandez-moi directement ! 😄',
+      es: '¿FAQ? ¡Si no encuentras una respuesta aquí, pregúntame directamente! 😄',
+      it: 'FAQ? Se non trovi una risposta qui, chiedimi direttamente! 😄',
+    },
+  },
+  idleTips: {
+    de: [
+      'Wusstest du? Wir drucken mit PV-Energie! ☀️',
+      'Tipp: STL hochladen → sofortige Preisschätzung!',
+      'Carbon ist 5× steifer als PLA 💪',
+      'Schau mal in unsere Materialien-Seite!',
+      'Eilauftrag? Prototypen in 24 Stunden! ⚡',
+      'Resin-Druck = Spritzguss-Qualität 🔬',
+      'Ich bin seit 1997 im Einsatz. Gut gealtert, oder? 😏',
+      'PLA schmilzt bei 60°C — nicht im Auto liegen lassen.',
+      'PETG + Spülmaschine = echte Liebe ❤️',
+      'Fun Fact: Unser H2D hat Dual Nozzle!',
+      'Lasergravur auf Glas? Kein Problem!',
+    ],
+    en: [
+      'Did you know? We print with solar energy! ☀️',
+      'Tip: Upload STL for an instant price estimate!',
+      'Carbon is 5× stiffer than PLA 💪',
+      'Check out our Materials page!',
+      'Rush order? Prototypes in 24 hours! ⚡',
+      'Resin printing = injection moulding quality 🔬',
+      'I\'ve been around since 1997. Aged well, right? 😏',
+      'PLA melts at 60°C — don\'t leave it in the car.',
+      'PETG + dishwasher = true love ❤️',
+      'Fun fact: Our H2D has dual nozzle!',
+      'Laser engraving on glass? No problem!',
+    ],
+    fr: [
+      'Le saviez-vous ? Nous imprimons avec de l\'énergie solaire ! ☀️',
+      'Conseil : téléchargez un STL pour une estimation instantanée !',
+      'Le carbone est 5× plus rigide que le PLA 💪',
+      'Consultez notre page Matériaux !',
+      'Commande urgente ? Prototypes en 24 heures ! ⚡',
+      'Impression résine = qualité moulage 🔬',
+      'Je suis là depuis 1997. Bien vieilli, non ? 😏',
+      'Le PLA fond à 60°C — ne pas laisser dans la voiture.',
+      'PETG + lave-vaisselle = vrai amour ❤️',
+      'Fun fait : notre H2D a une double buse !',
+    ],
+    es: [
+      '¿Sabías que imprimimos con energía solar? ☀️',
+      '¡Consejo: sube un STL para una estimación instantánea!',
+      'El carbono es 5× más rígido que el PLA 💪',
+      '¡Echa un vistazo a nuestra página de materiales!',
+      '¿Pedido urgente? ¡Prototipos en 24 horas! ⚡',
+      'Impresión en resina = calidad de moldeo 🔬',
+      'Llevo aquí desde 1997. He envejecido bien, ¿verdad? 😏',
+      'El PLA se funde a 60°C — no dejarlo en el coche.',
+      'PETG + lavavajillas = amor verdadero ❤️',
+      '¡Dato curioso: nuestro H2D tiene doble boquilla!',
+    ],
+    it: [
+      'Lo sapevi? Stampiamo con energia solare! ☀️',
+      'Consiglio: carica un STL per una stima immediata!',
+      'Il carbonio è 5× più rigido del PLA 💪',
+      'Dai un\'occhiata alla nostra pagina Materiali!',
+      'Ordine urgente? Prototipi in 24 ore! ⚡',
+      'Stampa in resina = qualità stampaggio 🔬',
+      'Sono qui dal 1997. Invecchiato bene, no? 😏',
+      'Il PLA si scioglie a 60°C — non lasciarlo in macchina.',
+      'PETG + lavastoviglie = amore vero ❤️',
+      'Fun fact: il nostro H2D ha doppio ugello!',
+    ],
+  },
+  fallback: {
+    de: {
+      material: "Über 20 Materialien! → <a href='materialien.html' style='color:var(--accent)'>Materialien</a> 📎",
+      kosten:   "Preise ab ~5 EUR (PLA). STL hochladen → sofortige Schätzung! 📎",
+      dauer:    "Prototypen: 24–72h · Kleinserien: 3–7 Tage · Laser: 1–3 Tage ⚡",
+      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — per 📂 hochladen!",
+      groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Laser: 400×400mm",
+      nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Leistungen</a> | <a href='materialien.html' style='color:var(--accent)'>Materialien</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Kontakt</a>",
+      witzig:   ["Ich bin eine Büroklammer-KI. Seit 1997. 📎", "Gute Frage! Wahrscheinlich die beste heute. 😄", "Falls das schiefgeht — nochmal fragen. Ich vergesse eh alles. 😅"],
+      default:  "Gute Frage! → <a href='index.html#kontakt' style='color:var(--accent)'>Kontaktformular</a>",
+    },
+    en: {
+      material: "Over 20 materials! → <a href='materialien.html' style='color:var(--accent)'>Materials</a> 📎",
+      kosten:   "Prices from ~5 EUR (PLA). Upload STL for instant estimate! 📎",
+      dauer:    "Prototypes: 24–72h · Small series: 3–7 days · Laser: 1–3 days ⚡",
+      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — upload via 📂!",
+      groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Laser: 400×400mm",
+      nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Materials</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>",
+      witzig:   ["I am a paperclip AI. Since 1997. 📎", "Great question! Probably the best today. 😄", "If this goes wrong — just ask again. I forget everything anyway. 😅"],
+      default:  "Good question! → <a href='index.html#kontakt' style='color:var(--accent)'>Contact form</a>",
+    },
+    fr: {
+      material: "Plus de 20 matériaux ! → <a href='materialien.html' style='color:var(--accent)'>Matériaux</a> 📎",
+      kosten:   "Prix à partir de ~5 EUR (PLA). Téléchargez STL pour une estimation ! 📎",
+      dauer:    "Prototypes : 24–72h · Petites séries : 3–7 jours · Laser : 1–3 jours ⚡",
+      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — via 📂 !",
+      groesse:  "H2D : 325×320×325mm · P1S : 256×256×256mm · Laser : 400×400mm",
+      nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Matériaux</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>",
+      witzig:   ["Je suis une IA trombone. Depuis 1997. 📎", "Bonne question ! Probablement la meilleure du jour. 😄", "Si ça rate — redemandez. J'oublie tout de toute façon. 😅"],
+      default:  "Bonne question ! → <a href='index.html#kontakt' style='color:var(--accent)'>Formulaire</a>",
+    },
+    es: {
+      material: "¡Más de 20 materiales! → <a href='materialien.html' style='color:var(--accent)'>Materiales</a> 📎",
+      kosten:   "Precios desde ~5 EUR (PLA). ¡Sube STL para estimación instantánea! 📎",
+      dauer:    "Prototipos: 24–72h · Series: 3–7 días · Láser: 1–3 días ⚡",
+      format:   "3D: STL/3MF/OBJ/STEP · Láser: SVG/DXF/AI/PDF — ¡vía 📂!",
+      groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Láser: 400×400mm",
+      nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Servicios</a> | <a href='materialien.html' style='color:var(--accent)'>Materiales</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contacto</a>",
+      witzig:   ["Soy un clip IA. Desde 1997. 📎", "¡Buena pregunta! Probablemente la mejor hoy. 😄", "Si algo falla — vuelve a preguntar. De todas formas lo olvido todo. 😅"],
+      default:  "¡Buena pregunta! → <a href='index.html#kontakt' style='color:var(--accent)'>Contacto</a>",
+    },
+    it: {
+      material: "Oltre 20 materiali! → <a href='materialien.html' style='color:var(--accent)'>Materiali</a> 📎",
+      kosten:   "Prezzi da ~5 EUR (PLA). Carica STL per stima immediata! 📎",
+      dauer:    "Prototipi: 24–72h · Piccole serie: 3–7 giorni · Laser: 1–3 giorni ⚡",
+      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — tramite 📂!",
+      groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Laser: 400×400mm",
+      nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Servizi</a> | <a href='materialien.html' style='color:var(--accent)'>Materiali</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contatto</a>",
+      witzig:   ["Sono una graffetta IA. Dal 1997. 📎", "Ottima domanda! Probabilmente la migliore oggi. 😄", "Se va storto — chiedi di nuovo. Tanto dimentico tutto. 😅"],
+      default:  "Ottima domanda! → <a href='index.html#kontakt' style='color:var(--accent)'>Contatto</a>",
+    },
+  },
+  errStl: {
+    de: "Hmm, die Datei konnte ich nicht lesen 🤔 Bitte STL im Binary-Format exportieren!",
+    en: "Hmm, couldn't read the file 🤔 Please export the STL in binary format!",
+    fr: "Hmm, impossible de lire le fichier 🤔 Veuillez exporter le STL en format binaire !",
+    es: "Hmm, no pude leer el archivo 🤔 Exporta el STL en formato binario.",
+    it: "Hmm, impossibile leggere il file 🤔 Esporta lo STL in formato binario!",
+  },
+  errSvg: {
+    de: "SVG-Analyse fehlgeschlagen 🤔 Versuch es mit einer Standard-SVG-Datei!",
+    en: "SVG analysis failed 🤔 Try with a standard SVG file!",
+    fr: "Analyse SVG échouée 🤔 Essayez avec un fichier SVG standard !",
+    es: "Análisis SVG fallido 🤔 Prueba con un archivo SVG estándar.",
+    it: "Analisi SVG fallita 🤔 Prova con un file SVG standard!",
+  },
+  matSuffix: {
+    de: "Anderes Material? Sag mir: PLA, PETG, ABS, TPU, Nylon oder Carbon!",
+    en: "Different material? Tell me: PLA, PETG, ABS, TPU, Nylon or Carbon!",
+    fr: "Autre matériau ? Dites-moi : PLA, PETG, ABS, TPU, Nylon ou Carbon !",
+    es: "¿Otro material? Dime: PLA, PETG, ABS, TPU, Nylon o Carbon.",
+    it: "Altro materiale? Dimmi: PLA, PETG, ABS, TPU, Nylon o Carbon!",
+  },
+};
+
+function t(key) { return T[key]?.[clippyLang()] ?? T[key]?.de ?? ''; }
+function fb() { return T.fallback[clippyLang()] ?? T.fallback.de; }
+
+// ─── OLLAMA & SYSTEM PROMPT ─────────────────────────────────────────────────
+const OLLAMA_URL = 'http://69.62.105.159:32768/api/chat';
+
+function buildSystemPrompt() {
+  const langInstr = {
+    de: 'Antworte immer auf Deutsch.',
+    en: 'Always respond in English.',
+    fr: 'Réponds toujours en français.',
+    es: 'Responde siempre en español.',
+    it: 'Rispondi sempre in italiano.',
+  };
+  const instr = langInstr[clippyLang()] ?? langInstr.de;
+  return `Du bist Clippy, der freundliche und leicht witzige KI-Assistent von PitA (Printing in the Alps). ${instr} Sei kurz und hilfreich. Gelegentlich ein lockerer Spruch ist erlaubt.
+
+Seitenstruktur: index.html, leistungen/3d-druck.html, leistungen/lasercutting.html, leistungen/lasergravur.html, leistungen/prototyping.html, leistungen/resin-druck.html, materialien.html, faq.html, katalog.html
+Equipment: Bambu Lab H2D (325x320x325mm, Dual Nozzle), 2x P1S (256x256x256mm), Creality Falcon Laser (400x400mm), Snapmaker A350T (320x350mm)
+FDM: PLA, PETG, ABS, ASA, TPU, PA, PC + CF/GF Varianten. Resin: Standard, Tough, Flexible, Castable.
+Laser-Schneiden: Holz bis 8mm, Acryl 6mm, Leder. Laser-Gravur: Metall, Glas, Keramik, Stein.
+Dateien: STL, 3MF, OBJ, STEP | SVG, DXF, AI, PDF. Lieferzeiten: Prototypen 24-72h, Kleinserien 3-7 Tage. Versand EU. PV-Energie.
+Preise: PLA ab 5 EUR, PETG ab 8 EUR, Carbon ab 15 EUR, Laser ab 8 EUR.
+Gib Navigationslinks als HTML: <a href="materialien.html" style="color:#E8A000">Materialien</a>`;
+}
+
+// ─── FALLBACK-LOGIK ──────────────────────────────────────────────────────────
+function getFallback(msg) {
+  const f = fb();
+  const m = msg.toLowerCase();
+  if (/material|filament|pla|petg|resin|harz|matér/.test(m)) return f.material;
+  if (/kost|preis|eur|price|prix|precio|prezzo|schätz|estim|€/.test(m)) return f.kosten;
+  if (/dauer|zeit|time|long|durée|tiempo|tempo|lief|deliv|schnell/.test(m)) return f.dauer;
+  if (/format|datei|file|stl|svg|upload|hochlad/.test(m)) return f.format;
+  if (/groß|size|taille|tamaño|dimens|maxim|maß/.test(m)) return f.groesse;
+  if (/wo |where|find|seite|page|navig|menü|menu/.test(m)) return f.nav;
+  if (/witz|joke|funny|humor|drôle|chiste|barzelletta/.test(m)) return f.witzig[Math.floor(Math.random() * f.witzig.length)];
+  return f.default;
+}
+
+// ─── HTML INJECTION ──────────────────────────────────────────────────────────
 (function injectClippy() {
   if (document.getElementById('clippy-container')) return;
-
   const isSubpage = window.location.pathname.includes('/leistungen/');
-  const prefix = isSubpage ? '../' : '';
-
   const html = `
   <div id="clippy-container" class="clippy-container">
     <div id="clippy-chat" class="clippy-chat clippy-hidden">
       <div class="clippy-header">
         <span>📎 Clippy — PitA Assistent</span>
-        <button id="clippy-close-btn" class="clippy-close" aria-label="Clippy schließen">✕</button>
+        <button id="clippy-close-btn" class="clippy-close" aria-label="Schließen">✕</button>
       </div>
       <div id="clippy-messages" class="clippy-messages">
-        <div class="clippy-msg clippy-bot">
-          <span>Hallo! 👋 Ich bin Clippy, dein PitA-Assistent.<br>Frag mich was über 3D-Druck, Laser oder lade eine <strong>STL/SVG-Datei</strong> hoch für eine Preisschätzung!</span>
-        </div>
+        <div class="clippy-msg clippy-bot"><span id="clippy-greeting"></span></div>
       </div>
-
-      <!-- Datei-Drop-Zone -->
       <div id="clippy-drop-zone" class="clippy-drop-zone clippy-hidden">
-        <span>📂 STL, 3MF, OBJ oder SVG hier ablegen</span>
+        <span id="clippy-drop-text"></span>
       </div>
-
       <div class="clippy-input-row">
-        <label id="clippy-file-btn" class="clippy-file-btn" title="Datei hochladen für Preisschätzung" aria-label="Datei hochladen">
+        <label class="clippy-file-btn" title="Datei hochladen">
           📂
           <input type="file" id="clippy-file-input" accept=".stl,.3mf,.obj,.svg,.dxf" style="display:none">
         </label>
-        <input type="text" id="clippy-input" placeholder="Frag mich was..." autocomplete="off">
+        <input type="text" id="clippy-input" autocomplete="off">
         <button id="clippy-send" aria-label="Senden">➤</button>
       </div>
     </div>
 
-    <!-- Speech Bubble (idle tips) -->
     <div id="clippy-bubble" class="clippy-bubble clippy-hidden">
       <span id="clippy-bubble-text"></span>
     </div>
 
-    <button id="clippy-toggle" class="clippy-toggle" aria-label="Clippy öffnen">
+    <button id="clippy-toggle" class="clippy-toggle" aria-label="Clippy">
       <svg viewBox="0 0 100 160" width="56" height="84" class="clippy-svg" id="clippy-svg">
         <ellipse cx="50" cy="95" rx="18" ry="50" fill="none" stroke="#5C5C5C" stroke-width="8" stroke-linecap="round"/>
         <ellipse cx="42" cy="55" rx="8" ry="10" fill="white" stroke="#888" stroke-width="2"/>
@@ -64,160 +303,125 @@
 
   document.body.insertAdjacentHTML('beforeend', html);
 
-  const toggleBtn  = document.getElementById('clippy-toggle');
-  const closeBtn   = document.getElementById('clippy-close-btn');
-  const sendBtn    = document.getElementById('clippy-send');
-  const inp        = document.getElementById('clippy-input');
-  const fileInput  = document.getElementById('clippy-file-input');
-  const dropZone   = document.getElementById('clippy-drop-zone');
-  const container  = document.getElementById('clippy-container');
+  // Texte setzen
+  const greetEl = document.getElementById('clippy-greeting');
+  if (greetEl) greetEl.innerHTML = t('greeting');
+  const dropEl = document.getElementById('clippy-drop-text');
+  if (dropEl) dropEl.textContent = t('dropzone');
+  const inp = document.getElementById('clippy-input');
+  if (inp) inp.placeholder = t('placeholder');
 
-  if (toggleBtn)  toggleBtn.addEventListener('click',  e => { e.preventDefault(); e.stopPropagation(); toggleClippy(); });
-  if (closeBtn)   closeBtn.addEventListener('click',   e => { e.preventDefault(); e.stopPropagation(); toggleClippy(); });
-  if (sendBtn)    sendBtn.addEventListener('click',    e => { e.preventDefault(); sendClippy(); });
-  if (inp)        inp.addEventListener('keydown',      e => { if (e.key === 'Enter') sendClippy(); });
-  if (fileInput)  fileInput.addEventListener('change', e => { if (fileInput.files[0]) handleFile(fileInput.files[0]); });
+  // Events
+  document.getElementById('clippy-toggle').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); toggleClippy(); });
+  document.getElementById('clippy-close-btn').addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); toggleClippy(); });
+  document.getElementById('clippy-send').addEventListener('click', e => { e.preventDefault(); sendClippy(); });
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') sendClippy(); });
+  document.getElementById('clippy-file-input').addEventListener('change', e => { if (e.target.files[0]) handleFile(e.target.files[0]); });
 
-  // Drag & Drop auf gesamtes Chat-Fenster
+  // Drag & Drop
   const chat = document.getElementById('clippy-chat');
-  if (chat) {
-    chat.addEventListener('dragover', e => { e.preventDefault(); if (dropZone) dropZone.classList.remove('clippy-hidden'); });
-    chat.addEventListener('dragleave', () => { if (dropZone) dropZone.classList.add('clippy-hidden'); });
-    chat.addEventListener('drop', e => {
-      e.preventDefault();
-      if (dropZone) dropZone.classList.add('clippy-hidden');
-      const file = e.dataTransfer.files[0];
-      if (file) handleFile(file);
-    });
-  }
-
-  console.log('[Clippy v2] Initialized');
+  const dropZone = document.getElementById('clippy-drop-zone');
+  chat.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.remove('clippy-hidden'); });
+  chat.addEventListener('dragleave', () => dropZone.classList.add('clippy-hidden'));
+  chat.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.add('clippy-hidden'); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
 })();
 
-
-// ===== TOGGLE =====
+// ─── TOGGLE ──────────────────────────────────────────────────────────────────
+let greeted = false;
 function toggleClippy() {
-  const chat   = document.getElementById('clippy-chat');
+  const chat = document.getElementById('clippy-chat');
   const bubble = document.getElementById('clippy-bubble');
   if (!chat) return;
-  const isHidden = chat.classList.contains('clippy-hidden');
-  if (isHidden) {
+  if (chat.classList.contains('clippy-hidden')) {
     chat.classList.remove('clippy-hidden');
     if (bubble) bubble.classList.add('clippy-hidden');
     setTimeout(() => { const i = document.getElementById('clippy-input'); if (i) i.focus(); }, 100);
-    // Kontext-Begrüßung je nach Seite
-    contextGreeting();
+    if (!greeted) { greeted = true; showContextHint(); }
   } else {
     chat.classList.add('clippy-hidden');
   }
 }
 
-// Kontext-abhängige Begrüßung beim ersten Öffnen pro Seite
-let greeted = false;
-function contextGreeting() {
-  if (greeted) return;
-  greeted = true;
+function showContextHint() {
   const path = window.location.pathname;
-  let hint = null;
-  if (path.includes('3d-druck'))       hint = 'Du schaust dir 3D-Druck an 🖨️ — lade einfach deine STL hoch, ich schätze den Preis!';
-  else if (path.includes('lasercutting')) hint = 'Lasercutting-Seite! Schick mir deine SVG/DXF, ich schau was das kosten könnte ✂️';
-  else if (path.includes('lasergravur')) hint = 'Lasergravur! Ich helfe dir beim Material wählen oder Preise einschätzen 🔥';
-  else if (path.includes('resin'))      hint = 'Resin-Druck — Spritzguss-Qualität ohne Spritzguss-Preise 🔬 Frag mich gerne!';
-  else if (path.includes('materialien')) hint = 'Materialien-Seite! Ich erkläre dir den Unterschied zwischen allem — einfach fragen 🧪';
-  else if (path.includes('faq'))        hint = 'FAQ? Wenn du hier keine Antwort findest, frag mich direkt! 😄';
-  if (hint) {
-    setTimeout(() => appendBot(hint), 600);
+  const lang = clippyLang();
+  for (const [key, hints] of Object.entries(T.contextHints)) {
+    if (path.includes(key)) {
+      const hint = hints[lang] ?? hints.de;
+      if (hint) setTimeout(() => appendBot(hint), 600);
+      return;
+    }
   }
 }
 
-
-// ===== IDLE ANIMATIONEN =====
-function getIdleTips() {
-  const tips = {
-    de: ["Wusstest du? Wir drucken mit PV-Energie! ☀️","Tipp: STL hochladen → sofortige Preisschätzung!","Carbon ist 5x steifer als PLA 💪","Schau mal in unsere Materialien-Seite!","Eilauftrag? Prototypen in 24 Stunden!","Resin-Druck = Spritzguss-Qualität 🔬","Ich bin seit 1997 im Einsatz. Gut gealtert, oder? 😏","PLA schmilzt bei 60°C. Nicht im Auto liegen lassen.","PETG + Spülmaschine = echte Liebe ❤️","Fun Fact: Unser H2D hat Dual Nozzle!"],
-    en: ["Did you know? We print with solar energy! ☀️","Tip: Upload STL for an instant price estimate!","Carbon is 5x stiffer than PLA 💪","Check out our Materials page!","Rush order? Prototypes in 24 hours!","Resin printing = injection moulding quality 🔬","I've been around since 1997. Aged well, right? 😏","PLA melts at 60 degrees. Do not leave in the car.","PETG + dishwasher = true love ❤️","Fun fact: Our H2D has dual nozzle!"],
-    fr: ["Nous imprimons avec de l'energie solaire ! ☀️","Conseil : telechargez un STL pour une estimation !","Le carbon est 5x plus rigide que le PLA 💪","Consultez notre page Materiaux !","Commande urgente ? Prototypes en 24 heures !","Impression resine = qualite moulage 🔬","Je suis la depuis 1997. Bien vieilli, non ? 😏","Petites series jusqu'a 50 pieces !","Fun fait : Notre H2D a double buse !"],
-    es: ["Imprimimos con energia solar! ☀️","Consejo: sube un STL para una estimacion!","El carbon es 5x mas rigido que el PLA 💪","Mira nuestra pagina de materiales!","Pedido urgente? Prototipos en 24 horas!","Impresion en resina = calidad de moldeo 🔬","Llevo aqui desde 1997. He envejecido bien, verdad? 😏","Series cortas hasta 50 piezas!","Fun hecho: Nuestro H2D tiene doble boquilla!"],
-    it: ["Stampiamo con energia solare! ☀️","Consiglio: carica un STL per una stima immediata!","Il carbon e 5x piu rigido del PLA 💪","Dai un'occhiata alla nostra pagina Materiali!","Ordine urgente? Prototipi in 24 ore!","Stampa in resina = qualita stampaggio 🔬","Sono qui dal 1997. Invecchiato bene, no? 😏","Piccole serie fino a 50 pezzi!","Fun fact: il nostro H2D ha doppio ugello!"],
-  };
-  return tips[getClippyLang()] || tips.de;
-}
-const idleTips = getIdleTips(); // legacy compat
-
+// ─── IDLE ANIMATIONEN ────────────────────────────────────────────────────────
 let lastTipIndex = -1;
 
 function blink() {
-  const lidL = document.querySelector('.clippy-lid-l');
-  const lidR = document.querySelector('.clippy-lid-r');
-  if (!lidL || !lidR) return;
-  lidL.setAttribute('ry', '10'); lidR.setAttribute('ry', '10');
-  setTimeout(() => { lidL.setAttribute('ry', '0'); lidR.setAttribute('ry', '0'); }, 150);
+  const lL = document.querySelector('.clippy-lid-l');
+  const lR = document.querySelector('.clippy-lid-r');
+  if (!lL) return;
+  lL.setAttribute('ry', '10'); lR.setAttribute('ry', '10');
+  setTimeout(() => { lL.setAttribute('ry', '0'); lR.setAttribute('ry', '0'); }, 150);
 }
 
 function doubleBlink() { blink(); setTimeout(blink, 300); }
 
 function lookAround() {
-  const pL = document.querySelector('.clippy-pupil-l');
-  const pR = document.querySelector('.clippy-pupil-r');
-  const gL = document.querySelector('.clippy-glint-l');
-  const gR = document.querySelector('.clippy-glint-r');
+  const pL = document.querySelector('.clippy-pupil-l'), pR = document.querySelector('.clippy-pupil-r');
+  const gL = document.querySelector('.clippy-glint-l'), gR = document.querySelector('.clippy-glint-r');
   if (!pL) return;
-  const dirs = [
-    {px:-2,py:0,gx:-1,gy:-2},{px:2,py:0,gx:3,gy:-2},
-    {px:0,py:-2,gx:1,gy:-4},{px:0,py:2,gx:1,gy:0},{px:0,py:0,gx:1,gy:-2}
-  ];
-  const dir = dirs[Math.floor(Math.random() * dirs.length)];
-  pL.setAttribute('cx', 43+dir.px); pL.setAttribute('cy', 56+dir.py);
-  pR.setAttribute('cx', 59+dir.px); pR.setAttribute('cy', 56+dir.py);
-  gL.setAttribute('cx', 44+dir.gx); gL.setAttribute('cy', 54+dir.gy);
-  gR.setAttribute('cx', 60+dir.gx); gR.setAttribute('cy', 54+dir.gy);
+  const dirs = [{px:-2,py:0,gx:-1,gy:-2},{px:2,py:0,gx:3,gy:-2},{px:0,py:-2,gx:1,gy:-4},{px:0,py:2,gx:1,gy:0},{px:0,py:0,gx:1,gy:-2}];
+  const d = dirs[Math.floor(Math.random() * dirs.length)];
+  pL.setAttribute('cx', 43 + d.px); pL.setAttribute('cy', 56 + d.py);
+  pR.setAttribute('cx', 59 + d.px); pR.setAttribute('cy', 56 + d.py);
+  gL.setAttribute('cx', 44 + d.gx); gL.setAttribute('cy', 54 + d.gy);
+  gR.setAttribute('cx', 60 + d.gx); gR.setAttribute('cy', 54 + d.gy);
   setTimeout(() => {
-    pL.setAttribute('cx','43'); pL.setAttribute('cy','56');
-    pR.setAttribute('cx','59'); pR.setAttribute('cy','56');
-    gL.setAttribute('cx','44'); gL.setAttribute('cy','54');
-    gR.setAttribute('cx','60'); gR.setAttribute('cy','54');
-  }, 1500 + Math.random()*1000);
+    pL.setAttribute('cx', '43'); pL.setAttribute('cy', '56');
+    pR.setAttribute('cx', '59'); pR.setAttribute('cy', '56');
+    gL.setAttribute('cx', '44'); gL.setAttribute('cy', '54');
+    gR.setAttribute('cx', '60'); gR.setAttribute('cy', '54');
+  }, 1500 + Math.random() * 1000);
 }
 
 function wiggle() {
-  const t = document.getElementById('clippy-toggle');
-  if (!t) return;
-  t.classList.add('clippy-wiggle');
-  setTimeout(() => t.classList.remove('clippy-wiggle'), 600);
+  const tog = document.getElementById('clippy-toggle');
+  if (!tog) return;
+  tog.classList.add('clippy-wiggle');
+  setTimeout(() => tog.classList.remove('clippy-wiggle'), 600);
 }
 
 function raiseBrows() {
-  const bL = document.querySelector('.clippy-brow-l');
-  const bR = document.querySelector('.clippy-brow-r');
+  const bL = document.querySelector('.clippy-brow-l'), bR = document.querySelector('.clippy-brow-r');
   if (!bL) return;
-  bL.setAttribute('d','M34 40 Q42 34 50 40'); bR.setAttribute('d','M50 40 Q58 34 66 40');
-  setTimeout(() => { bL.setAttribute('d','M34 44 Q42 38 50 44'); bR.setAttribute('d','M50 44 Q58 38 66 44'); }, 800);
+  bL.setAttribute('d', 'M34 40 Q42 34 50 40'); bR.setAttribute('d', 'M50 40 Q58 34 66 40');
+  setTimeout(() => { bL.setAttribute('d', 'M34 44 Q42 38 50 44'); bR.setAttribute('d', 'M50 44 Q58 38 66 44'); }, 800);
 }
 
 function showTip() {
   const chat = document.getElementById('clippy-chat');
   if (!chat || !chat.classList.contains('clippy-hidden')) return;
   const bubble = document.getElementById('clippy-bubble');
-  const text   = document.getElementById('clippy-bubble-text');
+  const text = document.getElementById('clippy-bubble-text');
   if (!bubble || !text) return;
+  const tips = T.idleTips[clippyLang()] ?? T.idleTips.de;
   let idx;
-  do { idx = Math.floor(Math.random() * idleTips.length); } while (idx === lastTipIndex);
+  do { idx = Math.floor(Math.random() * tips.length); } while (idx === lastTipIndex && tips.length > 1);
   lastTipIndex = idx;
-  text.textContent = idleTips[idx];
+  text.textContent = tips[idx];
   bubble.classList.remove('clippy-hidden');
   wiggle();
   setTimeout(() => bubble.classList.add('clippy-hidden'), 5000);
 }
 
-function idleAction() {
-  const actions = [blink, blink, doubleBlink, lookAround, lookAround, wiggle, raiseBrows];
-  actions[Math.floor(Math.random() * actions.length)]();
-}
-
 function startIdle() {
   setInterval(() => { if (Math.random() < 0.4) blink(); }, 3000);
-  setInterval(() => idleAction(), 4000 + Math.random()*4000);
-  setInterval(() => { if (Math.random() < 0.5) showTip(); }, 20000 + Math.random()*20000);
+  setInterval(() => {
+    const actions = [blink, blink, doubleBlink, lookAround, lookAround, wiggle, raiseBrows];
+    actions[Math.floor(Math.random() * actions.length)]();
+  }, 4000 + Math.random() * 4000);
+  setInterval(() => { if (Math.random() < 0.5) showTip(); }, 20000 + Math.random() * 20000);
   setTimeout(showTip, 8000);
 }
 
@@ -225,156 +429,115 @@ document.addEventListener('mousemove', e => {
   const svg = document.getElementById('clippy-svg');
   if (!svg) return;
   const rect = svg.getBoundingClientRect();
-  const cx = rect.left + rect.width/2;
-  const cy = rect.top + rect.height*0.35;
-  const dx = (e.clientX - cx) / window.innerWidth * 3;
-  const dy = (e.clientY - cy) / window.innerHeight * 2;
-  const clampX = Math.max(-2.5, Math.min(2.5, dx));
-  const clampY = Math.max(-2, Math.min(2, dy));
-  const pL = document.querySelector('.clippy-pupil-l');
-  const pR = document.querySelector('.clippy-pupil-r');
-  if (pL && pR) {
-    pL.setAttribute('cx', 43+clampX); pL.setAttribute('cy', 56+clampY);
-    pR.setAttribute('cx', 59+clampX); pR.setAttribute('cy', 56+clampY);
-  }
+  const dx = Math.max(-2.5, Math.min(2.5, (e.clientX - (rect.left + rect.width / 2)) / window.innerWidth * 3));
+  const dy = Math.max(-2, Math.min(2, (e.clientY - (rect.top + rect.height * 0.35)) / window.innerHeight * 2));
+  const pL = document.querySelector('.clippy-pupil-l'), pR = document.querySelector('.clippy-pupil-r');
+  if (pL && pR) { pL.setAttribute('cx', 43 + dx); pL.setAttribute('cy', 56 + dy); pR.setAttribute('cx', 59 + dx); pR.setAttribute('cy', 56 + dy); }
 });
 
 startIdle();
 
-
-// ===== STL PARSER =====
-function signedVolumeTriangle(ax,ay,az,bx,by,bz,cx,cy,cz) {
-  return (ax*(by*cz-bz*cy) + bx*(cy*az-cz*ay) + cx*(ay*bz-az*by)) / 6;
+// ─── STL PARSER ──────────────────────────────────────────────────────────────
+function signedVolTri(ax,ay,az,bx,by,bz,cx,cy,cz) {
+  return (ax*(by*cz-bz*cy)+bx*(cy*az-cz*ay)+cx*(ay*bz-az*by))/6;
 }
 
-function parseSTLBinary(buffer) {
-  const view = new DataView(buffer);
-  const numTri = view.getUint32(80, true);
-  let vol = 0;
-  let minX=Infinity,minY=Infinity,minZ=Infinity,maxX=-Infinity,maxY=-Infinity,maxZ=-Infinity;
-  for (let i=0; i<numTri; i++) {
-    const off = 84 + i*50;
-    const v1x=view.getFloat32(off+12,true), v1y=view.getFloat32(off+16,true), v1z=view.getFloat32(off+20,true);
-    const v2x=view.getFloat32(off+24,true), v2y=view.getFloat32(off+28,true), v2z=view.getFloat32(off+32,true);
-    const v3x=view.getFloat32(off+36,true), v3y=view.getFloat32(off+40,true), v3z=view.getFloat32(off+44,true);
-    vol += signedVolumeTriangle(v1x,v1y,v1z,v2x,v2y,v2z,v3x,v3y,v3z);
+function parseSTLBinary(buf) {
+  const v = new DataView(buf);
+  const n = v.getUint32(80, true);
+  let vol=0, minX=Infinity, minY=Infinity, minZ=Infinity, maxX=-Infinity, maxY=-Infinity, maxZ=-Infinity;
+  for (let i=0; i<n; i++) {
+    const o = 84 + i*50;
+    const [v1x,v1y,v1z,v2x,v2y,v2z,v3x,v3y,v3z] = [o+12,o+16,o+20,o+24,o+28,o+32,o+36,o+40,o+44].map(p => v.getFloat32(p, true));
+    vol += signedVolTri(v1x,v1y,v1z,v2x,v2y,v2z,v3x,v3y,v3z);
     minX=Math.min(minX,v1x,v2x,v3x); maxX=Math.max(maxX,v1x,v2x,v3x);
     minY=Math.min(minY,v1y,v2y,v3y); maxY=Math.max(maxY,v1y,v2y,v3y);
     minZ=Math.min(minZ,v1z,v2z,v3z); maxZ=Math.max(maxZ,v1z,v2z,v3z);
   }
-  return {
-    volumeCm3: Math.abs(vol) / 1000,
-    bbox: { x: Math.round(maxX-minX), y: Math.round(maxY-minY), z: Math.round(maxZ-minZ) },
-    triangles: numTri
-  };
+  return { volumeCm3: Math.abs(vol)/1000, bbox: {x:Math.round(maxX-minX), y:Math.round(maxY-minY), z:Math.round(maxZ-minZ)}, triangles:n };
 }
 
-function parseSTLAscii(text) {
-  const verts = [...text.matchAll(/vertex\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)/g)];
-  let vol=0, minX=Infinity,minY=Infinity,minZ=Infinity,maxX=-Infinity,maxY=-Infinity,maxZ=-Infinity;
-  for (let i=0; i<verts.length-2; i+=3) {
-    const [ax,ay,az] = verts[i].slice(1).map(Number);
-    const [bx,by,bz] = verts[i+1].slice(1).map(Number);
-    const [cx,cy,cz] = verts[i+2].slice(1).map(Number);
-    vol += signedVolumeTriangle(ax,ay,az,bx,by,bz,cx,cy,cz);
-    minX=Math.min(minX,ax,bx,cx); maxX=Math.max(maxX,ax,bx,cx);
-    minY=Math.min(minY,ay,by,cy); maxY=Math.max(maxY,ay,by,cy);
-    minZ=Math.min(minZ,az,bz,cz); maxZ=Math.max(maxZ,az,bz,cz);
+function analyzeSTL(buf) {
+  const h = String.fromCharCode(...new Uint8Array(buf, 0, 80));
+  if (h.startsWith('solid') && new TextDecoder().decode(buf).includes('facet normal')) {
+    const txt = new TextDecoder().decode(buf);
+    const verts = [...txt.matchAll(/vertex\s+([\d.e+-]+)\s+([\d.e+-]+)\s+([\d.e+-]+)/g)];
+    let vol=0, minX=Infinity, minY=Infinity, minZ=Infinity, maxX=-Infinity, maxY=-Infinity, maxZ=-Infinity;
+    for (let i=0; i<verts.length-2; i+=3) {
+      const [ax,ay,az]=[+verts[i][1],+verts[i][2],+verts[i][3]];
+      const [bx,by,bz]=[+verts[i+1][1],+verts[i+1][2],+verts[i+1][3]];
+      const [cx,cy,cz]=[+verts[i+2][1],+verts[i+2][2],+verts[i+2][3]];
+      vol+=signedVolTri(ax,ay,az,bx,by,bz,cx,cy,cz);
+      minX=Math.min(minX,ax,bx,cx); maxX=Math.max(maxX,ax,bx,cx);
+      minY=Math.min(minY,ay,by,cy); maxY=Math.max(maxY,ay,by,cy);
+      minZ=Math.min(minZ,az,bz,cz); maxZ=Math.max(maxZ,az,bz,cz);
+    }
+    return { volumeCm3:Math.abs(vol)/1000, bbox:{x:Math.round(maxX-minX),y:Math.round(maxY-minY),z:Math.round(maxZ-minZ)}, triangles:Math.floor(verts.length/3) };
   }
-  return {
-    volumeCm3: Math.abs(vol) / 1000,
-    bbox: { x: Math.round(maxX-minX), y: Math.round(maxY-minY), z: Math.round(maxZ-minZ) },
-    triangles: Math.floor(verts.length/3)
-  };
+  return parseSTLBinary(buf);
 }
 
-function analyzeSTL(buffer) {
-  const header8 = new Uint8Array(buffer, 0, 80);
-  const headerStr = String.fromCharCode(...header8);
-  if (headerStr.startsWith('solid')) {
-    const text = new TextDecoder().decode(buffer);
-    if (text.includes('facet normal')) return parseSTLAscii(text);
-  }
-  return parseSTLBinary(buffer);
-}
-
-// ===== PREISSCHÄTZUNG =====
-const MATERIALS = {
-  'PLA':   { density: 1.24, pricePerG: 0.04, label: 'PLA (Standard)' },
-  'PETG':  { density: 1.27, pricePerG: 0.05, label: 'PETG' },
-  'ABS':   { density: 1.05, pricePerG: 0.05, label: 'ABS' },
-  'TPU':   { density: 1.21, pricePerG: 0.08, label: 'TPU (Flexibel)' },
-  'PA':    { density: 1.14, pricePerG: 0.12, label: 'Nylon (PA)' },
-  'CF':    { density: 1.30, pricePerG: 0.18, label: 'Carbon-Filament' },
+// ─── PREISSCHÄTZUNG ──────────────────────────────────────────────────────────
+const MATS = {
+  PLA:  {density:1.24, ppg:0.04, label:'PLA'},
+  PETG: {density:1.27, ppg:0.05, label:'PETG'},
+  ABS:  {density:1.05, ppg:0.05, label:'ABS'},
+  TPU:  {density:1.21, ppg:0.08, label:'TPU'},
+  PA:   {density:1.14, ppg:0.12, label:'Nylon (PA)'},
+  CF:   {density:1.30, ppg:0.18, label:'Carbon-Filament'},
 };
 
-function estimatePrice(stlData, materialKey='PLA', infillPct=20) {
-  const mat = MATERIALS[materialKey] || MATERIALS['PLA'];
-  // Infill-Faktor: Wände (~25% des Volumens) + Infill
-  const infillFactor = 0.25 + (infillPct/100) * 0.75;
-  const weightG = stlData.volumeCm3 * mat.density * infillFactor;
-  const materialCost = weightG * mat.pricePerG;
-  // Maschinenzeit: ~2 cm³/min bei typischem Druck
-  const printMinutes = stlData.volumeCm3 / 2;
-  const machineCost = (printMinutes / 60) * 4; // €4/h
-  const setup = 3.50;
-  const total = Math.max(5, materialCost + machineCost + setup);
-  return {
-    weightG: weightG.toFixed(1),
-    priceMin: (total * 0.85).toFixed(2),
-    priceMax: (total * 1.25).toFixed(2),
-    material: mat.label,
-    infill: infillPct
-  };
+function estimatePrice(stl, matKey='PLA', infill=20) {
+  const m = MATS[matKey] || MATS.PLA;
+  const wG = stl.volumeCm3 * m.density * (0.25 + (infill/100)*0.75);
+  const matCost = wG * m.ppg;
+  const machineCost = (stl.volumeCm3 / 2 / 60) * 4;
+  const total = Math.max(5, matCost + machineCost + 3.5);
+  return { weightG: wG.toFixed(1), priceMin: (total*0.85).toFixed(2), priceMax: (total*1.25).toFixed(2), material: m.label };
 }
 
 function checkFitsInPrinter(bbox) {
-  const printers = [
-    { name: 'Bambu H2D', x:325, y:320, z:325 },
-    { name: 'Bambu P1S', x:256, y:256, z:256 },
-    { name: 'Snapmaker A350T (Laser)', x:320, y:350, z:0 },
-    { name: 'Creality Falcon (Laser)', x:400, y:400, z:0 },
-  ];
-  return printers.filter(p => bbox.x<=p.x && bbox.y<=p.y && bbox.z<=p.z);
+  return [
+    {name:'Bambu H2D', x:325, y:320, z:325},
+    {name:'Bambu P1S', x:256, y:256, z:256},
+  ].filter(p => bbox.x<=p.x && bbox.y<=p.y && bbox.z<=p.z);
 }
 
-// ===== SVG ANALYSE =====
-function analyzeSVG(text) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(text, 'image/svg+xml');
+function detectMaterial(msg) {
+  const m = msg.toLowerCase();
+  for (const [key] of Object.entries(MATS)) {
+    if (m.includes(key.toLowerCase())) return key;
+  }
+  if (m.includes('nylon')) return 'PA';
+  if (m.includes('carbon')) return 'CF';
+  return null;
+}
+
+// ─── SVG ANALYSE ─────────────────────────────────────────────────────────────
+function analyzeSVG(txt) {
+  const doc = new DOMParser().parseFromString(txt, 'image/svg+xml');
   const svg = doc.querySelector('svg');
-  let width = 0, height = 0;
+  let w=0, h=0;
   if (svg) {
     const vb = svg.getAttribute('viewBox');
-    if (vb) { const p = vb.split(/[\s,]+/); width=parseFloat(p[2]); height=parseFloat(p[3]); }
-    else {
-      width  = parseFloat(svg.getAttribute('width')  || 0);
-      height = parseFloat(svg.getAttribute('height') || 0);
-    }
+    if (vb) { const p=vb.split(/[\s,]+/); w=parseFloat(p[2]); h=parseFloat(p[3]); }
+    else { w=parseFloat(svg.getAttribute('width')||0); h=parseFloat(svg.getAttribute('height')||0); }
   }
-  const paths   = doc.querySelectorAll('path, line, polyline, polygon, rect, circle, ellipse').length;
-  return { width: Math.round(width), height: Math.round(height), elements: paths };
+  return { width:Math.round(w), height:Math.round(h), elements:doc.querySelectorAll('path,line,polyline,polygon,rect,circle,ellipse').length };
 }
 
-function estimateLaserPrice(svgData) {
-  // Schnittlänge grob schätzen: ~2 * Umfang * Anzahl Elemente / 10
-  const areaCm2 = (svgData.width/10) * (svgData.height/10);
-  const cuttingCost = areaCm2 * 0.08; // €0.08 pro cm² Schnittfläche
-  const setup = 5;
-  const total = Math.max(8, cuttingCost + setup);
-  return {
-    width: svgData.width,
-    height: svgData.height,
-    priceMin: (total * 0.85).toFixed(2),
-    priceMax: (total * 1.30).toFixed(2),
-    elements: svgData.elements
-  };
+function estimateLaserPrice(svg) {
+  const area = (svg.width/10)*(svg.height/10);
+  const total = Math.max(8, area*0.08 + 5);
+  return { priceMin:(total*0.85).toFixed(2), priceMax:(total*1.30).toFixed(2) };
 }
 
-// ===== DATEI HANDLER =====
+// ─── DATEI HANDLER ───────────────────────────────────────────────────────────
+let lastSTLData = null;
+
 function handleFile(file) {
   const name = file.name.toLowerCase();
-  appendUser(`📂 ${file.name}`);
+  appendUser('📂 ' + file.name);
   const typing = appendTyping();
   raiseBrows();
 
@@ -383,28 +546,25 @@ function handleFile(file) {
     reader.onload = e => {
       try {
         const data = analyzeSTL(e.target.result);
+        lastSTLData = data;
         typing.remove();
         const fits = checkFitsInPrinter(data.bbox);
         const price = estimatePrice(data, 'PLA', 20);
-        let msg = `📦 <strong>${file.name}</strong> analysiert!<br>`;
-        msg += `📐 Maße: ${data.bbox.x}×${data.bbox.y}×${data.bbox.z} mm<br>`;
-        msg += `⚖️ Volumen: ${data.volumeCm3.toFixed(1)} cm³<br>`;
-        msg += `🧱 Gewicht (~${price.infill}% Infill, PLA): ca. ${price.weightG}g<br><br>`;
-        if (fits.length > 0) {
-          msg += `✅ Passt in: ${fits.map(p=>p.name).join(', ')}<br><br>`;
-        } else {
-          msg += `⚠️ Zu groß für unsere Standard-Drucker — bitte anfragen!<br><br>`;
-        }
-        msg += `💶 <strong>Preisschätzung (PLA, 20% Infill):</strong><br>`;
-        msg += `ca. <strong>€${price.priceMin} – €${price.priceMax}</strong><br><br>`;
-        msg += `Anderes Material gewünscht? Sag mir: PLA, PETG, ABS, TPU, Nylon oder Carbon!<br>`;
-        msg += `Oder direkt <a href="${window.location.pathname.includes('/leistungen/') ? '../' : ''}index.html#kontakt" style="color:var(--accent)">Angebot anfragen →</a>`;
+        const prefix = window.location.pathname.includes('/leistungen/') ? '../' : '';
+        let msg = `📦 <strong>${file.name}</strong><br>`;
+        msg += `📐 ${data.bbox.x}×${data.bbox.y}×${data.bbox.z} mm · ${data.volumeCm3.toFixed(1)} cm³<br>`;
+        msg += `⚖️ ~${price.weightG}g (PLA, 20% Infill)<br>`;
+        msg += fits.length > 0
+          ? `✅ Passt in: ${fits.map(p=>p.name).join(', ')}<br><br>`
+          : `⚠️ Zu groß für Standard-Drucker — bitte anfragen!<br><br>`;
+        msg += `💶 <strong>~€${price.priceMin} – €${price.priceMax}</strong> (PLA, 20% Infill)<br>`;
+        msg += `<small>${t('matSuffix')}</small><br>`;
+        msg += `<a href="${prefix}index.html#kontakt" style="color:var(--accent)">Angebot anfragen →</a>`;
         appendBot(msg);
-        chatHistory.push({ role: 'assistant', content: `STL analysiert: ${data.bbox.x}×${data.bbox.y}×${data.bbox.z}mm, ${data.volumeCm3.toFixed(1)}cm³, Schätzung €${price.priceMin}-€${price.priceMax}` });
         wiggle();
       } catch(err) {
         typing.remove();
-        appendBot('Hmm, die Datei konnte ich nicht lesen 🤔 Bitte STL im Binary-Format exportieren!');
+        appendBot(t('errStl'));
       }
     };
     reader.readAsArrayBuffer(file);
@@ -416,141 +576,80 @@ function handleFile(file) {
         typing.remove();
         const data = analyzeSVG(e.target.result);
         const price = estimateLaserPrice(data);
-        let msg = `✂️ <strong>${file.name}</strong> analysiert!<br>`;
+        const prefix = window.location.pathname.includes('/leistungen/') ? '../' : '';
+        let msg = `✂️ <strong>${file.name}</strong><br>`;
         if (data.width && data.height) {
-          msg += `📐 Größe: ${data.width}×${data.height} mm<br>`;
-          if (data.width > 400 || data.height > 400) {
-            msg += `⚠️ Größer als unser Laser-Bett (400×400mm) — mehrteilig möglich!<br>`;
-          } else {
-            msg += `✅ Passt in unser Laser-Bett (400×400mm)<br>`;
-          }
+          msg += `📐 ${data.width}×${data.height} mm · ${data.elements} Elemente<br>`;
+          msg += data.width>400||data.height>400
+            ? `⚠️ Größer als Laser-Bett (400×400mm) — mehrteilig möglich!<br><br>`
+            : `✅ Passt ins Laser-Bett (400×400mm)<br><br>`;
         }
-        msg += `🔢 Elemente: ${data.elements}<br><br>`;
-        msg += `💶 <strong>Grobe Schätzung (Lasercutting, Holz/Acryl):</strong><br>`;
-        msg += `ca. <strong>€${price.priceMin} – €${price.priceMax}</strong><br><br>`;
-        msg += `Material und Dicke beeinflussen den Preis. <a href="${window.location.pathname.includes('/leistungen/') ? '../' : ''}index.html#kontakt" style="color:var(--accent)">Genaues Angebot →</a>`;
+        msg += `💶 <strong>~€${price.priceMin} – €${price.priceMax}</strong> (Lasercutting)<br>`;
+        msg += `<small>Material und Dicke beeinflussen den Preis.</small><br>`;
+        msg += `<a href="${prefix}index.html#kontakt" style="color:var(--accent)">Angebot anfragen →</a>`;
         appendBot(msg);
         wiggle();
       } catch(err) {
         typing.remove();
-        appendBot('SVG-Analyse fehlgeschlagen 🤔 Versuch es mit einer Standard-SVG-Datei!');
+        appendBot(t('errSvg'));
       }
     };
     reader.readAsText(file);
 
   } else {
     typing.remove();
-    appendBot(`📎 Format <strong>.${name.split('.').pop()}</strong> kenne ich noch nicht. Schick mir STL, OBJ, SVG oder DXF!`);
+    appendBot(`📎 Format <strong>.${name.split('.').pop()}</strong> nicht unterstützt. Bitte STL, OBJ, SVG oder DXF senden!`);
   }
 }
 
-
-// ===== CHAT HELPER =====
+// ─── CHAT HELPERS ────────────────────────────────────────────────────────────
 function appendUser(msg) {
-  const messages = document.getElementById('clippy-messages');
-  const div = document.createElement('div');
-  div.className = 'clippy-msg clippy-user';
-  div.innerHTML = `<span>${msg.replace(/</g,'&lt;')}</span>`;
-  messages.appendChild(div);
-  messages.scrollTop = messages.scrollHeight;
+  const el = document.createElement('div');
+  el.className = 'clippy-msg clippy-user';
+  el.innerHTML = `<span>${msg.replace(/</g,'&lt;')}</span>`;
+  const msgs = document.getElementById('clippy-messages');
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
 }
 
 function appendBot(msg) {
-  const messages = document.getElementById('clippy-messages');
-  const div = document.createElement('div');
-  div.className = 'clippy-msg clippy-bot';
-  div.innerHTML = `<span>${msg.replace(/\n/g,'<br>')}</span>`;
-  messages.appendChild(div);
-  messages.scrollTop = messages.scrollHeight;
-  return div;
+  const el = document.createElement('div');
+  el.className = 'clippy-msg clippy-bot';
+  el.innerHTML = `<span>${msg.replace(/\n/g,'<br>')}</span>`;
+  const msgs = document.getElementById('clippy-messages');
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  return el;
 }
 
 function appendTyping() {
-  const messages = document.getElementById('clippy-messages');
-  const div = document.createElement('div');
-  div.className = 'clippy-msg clippy-bot clippy-typing';
-  const tText = {de:'tippt',en:'typing',fr:'ecrit',es:'escribiendo',it:'scrive'}[getClippyLang()] || 'tippt';
-  div.innerHTML = `<span>📎 ${tText}...</span>`;
-  messages.appendChild(div);
-  messages.scrollTop = messages.scrollHeight;
-  return div;
+  const tText = T.typing[clippyLang()] ?? 'tippt';
+  const el = document.createElement('div');
+  el.className = 'clippy-msg clippy-bot clippy-typing';
+  el.innerHTML = `<span>📎 ${tText}...</span>`;
+  const msgs = document.getElementById('clippy-messages');
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  return el;
 }
 
-
-// ===== CHATBOT LOGIK =====
-const OLLAMA_URL = 'http://69.62.105.159:32768/api/chat';
-
-// Sprache sync mit i18n.js
-function getClippyLang() {
-  return localStorage.getItem('pita-lang') || 'de';
-}
-
-function buildSystemPrompt() {
-  const lang = getClippyLang();
-  const langInstr = {de:'Antworte immer auf Deutsch.', en:'Always respond in English.', fr:'Réponds toujours en français.', es:'Responde siempre en español.', it:'Rispondi sempre in italiano.'};
-  const instr = langInstr[lang] || langInstr.de;
-  return `Du bist Clippy, der freundliche und leicht witzige KI-Assistent von PitA (Printing in the Alps). Du beantwortest Fragen zu 3D-Druck, Lasercutting, Lasergravur, Prototyping und Materialien. Sei kurz, hilfreich und freundlich. ${instr} Gelegentlich ein lockerer Spruch ist erlaubt, aber bleib professionell.
-
-Seitenstruktur: index.html, leistungen/3d-druck.html, leistungen/lasercutting.html, leistungen/lasergravur.html, leistungen/prototyping.html, leistungen/resin-druck.html, materialien.html, faq.html, katalog.html
-Equipment: Bambu Lab H2D (325x320x325mm, Dual Nozzle), 2x P1S (256x256x256mm), Creality Falcon Laser (400x400mm), Snapmaker A350T (320x350mm)
-FDM: PLA, PETG, ABS, ASA, TPU, PA, PC + CF/GF Varianten. Resin: Standard, Tough, Flexible, Castable
-Laser-Schneiden: Holz bis 8mm, Acryl 6mm, Leder. Laser-Gravur: Metall, Glas, Keramik, Stein
-Dateien: STL, 3MF, OBJ, STEP | SVG, DXF, AI, PDF. Lieferzeiten: Prototypen 24-72h, Kleinserien 3-7 Tage. Versand EU. PV-Energie.
-Preise: PLA ab 5 EUR, PETG ab 8 EUR, Carbon ab 15 EUR, Laser ab 8 EUR.
-Navigationshilfe: Gib Links als HTML: <a href="materialien.html" style="color:#E8A000">Materialien</a>`;
-}
-
-const FALLBACKS = {
-  de: { material:"Über 20 Materialien! → <a href='materialien.html' style='color:var(--accent)'>Materialien</a>", kosten:"Preise ab 5 EUR (PLA). STL hochladen → sofortige Schätzung! 📎", dauer:"Prototypen: 24-72h · Kleinserien: 3-7 Tage · Laser: 1-3 Tage ⚡", format:"3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — per 📂 hochladen!", groesse:"H2D: 325x320x325mm · P1S: 256x256x256mm · Laser: 400x400mm", nav:"<a href='index.html#leistungen' style='color:var(--accent)'>Leistungen</a> | <a href='materialien.html' style='color:var(--accent)'>Materialien</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Kontakt</a>", witzig:["Ich bin eine Buroklammer-KI. Seit 1997. 📎","Gute Frage! Wahrscheinlich die beste heute. 😄","Falls das schiefgeht — nochmal fragen. Ich vergesse eh alles. 😅"], default:"Gute Frage! → <a href='index.html#kontakt' style='color:var(--accent)'>Kontaktformular</a>" },
-  en: { material:"Over 20 materials! → <a href='materialien.html' style='color:var(--accent)'>Materials</a>", kosten:"Prices from 5 EUR (PLA). Upload STL for instant estimate! 📎", dauer:"Prototypes: 24-72h · Small series: 3-7 days · Laser: 1-3 days ⚡", format:"3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — upload via 📂!", groesse:"H2D: 325x320x325mm · P1S: 256x256x256mm · Laser: 400x400mm", nav:"<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Materials</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>", witzig:["I am a paperclip AI. Since 1997. 📎","Great question! Probably the best today. 😄","If this goes wrong — just ask again. I forget everything anyway. 😅"], default:"Good question! → <a href='index.html#kontakt' style='color:var(--accent)'>Contact form</a>" },
-  fr: { material:"Plus de 20 materiaux ! → <a href='materialien.html' style='color:var(--accent)'>Materiaux</a>", kosten:"Prix a partir de 5 EUR (PLA). Telechargez STL pour une estimation ! 📎", dauer:"Prototypes : 24-72h · Petites series : 3-7 jours · Laser : 1-3 jours ⚡", format:"3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — via 📂 !", groesse:"H2D : 325x320x325mm · P1S : 256x256x256mm · Laser : 400x400mm", nav:"<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Materiaux</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>", witzig:["Je suis une IA trombone. Depuis 1997. 📎","Bonne question ! Probablement la meilleure du jour. 😄","Si ca rate — redemandez. Je tout oublie. 😅"], default:"Bonne question ! → <a href='index.html#kontakt' style='color:var(--accent)'>Formulaire</a>" },
-  es: { material:"Mas de 20 materiales! → <a href='materialien.html' style='color:var(--accent)'>Materiales</a>", kosten:"Precios desde 5 EUR (PLA). Sube STL para estimacion! 📎", dauer:"Prototipos: 24-72h · Series: 3-7 dias · Laser: 1-3 dias ⚡", format:"3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — via 📂!", groesse:"H2D: 325x320x325mm · P1S: 256x256x256mm · Laser: 400x400mm", nav:"<a href='index.html#leistungen' style='color:var(--accent)'>Servicios</a> | <a href='materialien.html' style='color:var(--accent)'>Materiales</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contacto</a>", witzig:["Soy un clip IA. Desde 1997. 📎","Buena pregunta! Probablemente la mejor hoy. 😄","Si algo falla — vuelve a preguntar. Olvido todo. 😅"], default:"Buena pregunta! → <a href='index.html#kontakt' style='color:var(--accent)'>Contacto</a>" },
-  it: { material:"Oltre 20 materiali! → <a href='materialien.html' style='color:var(--accent)'>Materiali</a>", kosten:"Prezzi da 5 EUR (PLA). Carica STL per stima immediata! 📎", dauer:"Prototipi: 24-72h · Piccole serie: 3-7 giorni · Laser: 1-3 giorni ⚡", format:"3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — tramite 📂!", groesse:"H2D: 325x320x325mm · P1S: 256x256x256mm · Laser: 400x400mm", nav:"<a href='index.html#leistungen' style='color:var(--accent)'>Servizi</a> | <a href='materialien.html' style='color:var(--accent)'>Materiali</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contatto</a>", witzig:["Sono una graffetta IA. Dal 1997. 📎","Ottima domanda! Probabilmente la migliore oggi. 😄","Se va storto — chiedi di nuovo. Dimentico tutto. 😅"], default:"Ottima domanda! → <a href='index.html#kontakt' style='color:var(--accent)'>Contatto</a>" },
-};
-function getFB() { return FALLBACKS[getClippyLang()] || FALLBACKS.de; }
-// legacy
-const FALLBACK = FALLBACKS.de;
-
-function getFallback(msg) {
-  const m = msg.toLowerCase();
-  if (m.includes('material') || m.includes('filament') || m.includes('pla') || m.includes('resin')) return FALLBACK.material;
-  if (m.includes('kost') || m.includes('preis') || m.includes('€') || m.includes('euro') || m.includes('teuer') || m.includes('günstig') || m.includes('schätz')) return FALLBACK.kosten;
-  if (m.includes('dauer') || m.includes('lang') || m.includes('zeit') || m.includes('schnell') || m.includes('lief')) return FALLBACK.dauer;
-  if (m.includes('format') || m.includes('datei') || m.includes('stl') || m.includes('svg') || m.includes('hochlad')) return FALLBACK.format;
-  if (m.includes('groß') || m.includes('maß') || m.includes('dimension') || m.includes('maxim')) return FALLBACK.groesse;
-  if (m.includes('wo ') || m.includes('find') || m.includes('seite') || m.includes('navig') || m.includes('menü')) return FALLBACK.nav;
-  if (m.includes('witz') || m.includes('joke') || m.includes('lustig') || m.includes('humor')) return FALLBACK.witzig[Math.floor(Math.random()*FALLBACK.witzig.length)];
-  return FALLBACK.default;
-}
-
-// Material-Wechsel nach STL-Analyse erkennen
-function checkMaterialChange(msg) {
-  const m = msg.toLowerCase();
-  for (const [key, mat] of Object.entries(MATERIALS)) {
-    if (m.includes(key.toLowerCase()) || m.includes(mat.label.toLowerCase())) {
-      return key;
-    }
-  }
-  return null;
-}
-
+// ─── CHAT LOGIK ──────────────────────────────────────────────────────────────
 let chatHistory = [];
-let lastSTLData = null;
 
 async function sendClippy() {
-  const input = document.getElementById('clippy-input');
-  const msg = input.value.trim();
+  const inp = document.getElementById('clippy-input');
+  const msg = inp.value.trim();
   if (!msg) return;
 
   appendUser(msg);
-  input.value = '';
+  inp.value = '';
 
   // Material-Wechsel nach STL-Upload?
   if (lastSTLData) {
-    const matKey = checkMaterialChange(msg);
+    const matKey = detectMaterial(msg);
     if (matKey) {
       const price = estimatePrice(lastSTLData, matKey, 20);
-      appendBot(`💶 <strong>${price.material}</strong> (20% Infill):<br>Gewicht: ~${price.weightG}g<br>Schätzung: <strong>€${price.priceMin} – €${price.priceMax}</strong><br><small>Anderes Material? PLA, PETG, ABS, TPU, Nylon, Carbon</small>`);
+      appendBot(`💶 <strong>${price.material}</strong> (20% Infill):<br>~${price.weightG}g · <strong>€${price.priceMin} – €${price.priceMax}</strong>`);
       wiggle();
       return;
     }
@@ -560,24 +659,24 @@ async function sendClippy() {
   const mouth = document.querySelector('.clippy-mouth');
   if (mouth) mouth.setAttribute('d', 'M42 70 Q50 74 58 70');
 
-  chatHistory.push({ role:'user', content: msg });
+  chatHistory.push({role:'user', content:msg});
 
   let reply;
   try {
     const res = await fetch(OLLAMA_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         model: 'mistral:7b',
-        messages: [{ role:'system', content:buildSystemPrompt() }, ...chatHistory.slice(-6)],
+        messages: [{role:'system', content:buildSystemPrompt()}, ...chatHistory.slice(-6)],
         stream: false,
-        options: { temperature: 0.7, num_predict: 300 }
+        options: {temperature:0.7, num_predict:300},
       }),
-      signal: AbortSignal.timeout(15000)
+      signal: AbortSignal.timeout(15000),
     });
     const data = await res.json();
     reply = data.message?.content || getFallback(msg);
-    chatHistory.push({ role:'assistant', content: reply });
+    chatHistory.push({role:'assistant', content:reply});
   } catch(e) {
     reply = getFallback(msg);
   }
@@ -587,7 +686,3 @@ async function sendClippy() {
   appendBot(reply);
   wiggle();
 }
-
-// STL-Daten für Material-Wechsel merken
-const _origHandleFile = handleFile;
-window._clippyLastSTL = null;

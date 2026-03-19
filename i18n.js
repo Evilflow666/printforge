@@ -105,24 +105,33 @@ const TRANSLATIONS = {
 
 // ===== ENGINE =====
 function setLang(lang) {
-  if (!TRANSLATIONS['nav.leistungen'][lang]) lang = 'de';
+  const supported = ['de','en','fr','es','it'];
+  if (!supported.includes(lang)) lang = 'de';
   localStorage.setItem('pita-lang', lang);
-  document.documentElement.setAttribute('lang', lang === 'de' ? 'de' : lang === 'en' ? 'en' : lang === 'fr' ? 'fr' : lang === 'es' ? 'es' : 'it');
+  document.documentElement.lang = lang;
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
+    const t = TRANSLATIONS[key];
+    if (!t || t[lang] === undefined) return;
+    const val = t[lang];
+
+    // data-i18n-attr: Attribut statt innerHTML setzen
     const attr = el.getAttribute('data-i18n-attr');
-    if (TRANSLATIONS[key] && TRANSLATIONS[key][lang] !== undefined) {
-      if (attr) {
-        el.setAttribute(attr, TRANSLATIONS[key][lang]);
-      } else {
-        el.innerHTML = TRANSLATIONS[key][lang];
-      }
-    }
+    if (attr) { el.setAttribute(attr, val); return; }
+
+    // <a>-Tags: nur textContent setzen, href bleibt erhalten
+    if (el.tagName === 'A') { el.textContent = val; return; }
+
+    // <input> / <button type=submit>: value oder placeholder
+    if (el.tagName === 'INPUT') { el.placeholder = val; return; }
+
+    // Alles andere: innerHTML (erlaubt HTML-Entities)
+    el.innerHTML = val;
   });
 
   // Aktiven Button markieren
-  document.querySelectorAll('.lang-switcher button').forEach(btn => {
+  document.querySelectorAll('.lang-switcher button[data-lang]').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
   });
 }

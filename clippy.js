@@ -12,11 +12,18 @@ function clippyLang() {
 // ─── ÜBERSETZUNGEN ──────────────────────────────────────────────────────────
 const T = {
   greeting: {
-    de: 'Hallo! 👋 Ich bin Clippy, dein PitA-Assistent.<br>Frag mich was über 3D-Druck, Laser oder lade eine <strong>STL/SVG-Datei</strong> hoch für eine Preisschätzung!',
-    en: 'Hello! 👋 I\'m Clippy, your PitA assistant.<br>Ask me anything about 3D printing, laser or upload an <strong>STL/SVG file</strong> for a price estimate!',
-    fr: 'Bonjour ! 👋 Je suis Clippy, votre assistant PitA.<br>Posez-moi des questions sur l\'impression 3D, le laser ou déposez un <strong>fichier STL/SVG</strong> pour une estimation !',
-    es: '¡Hola! 👋 Soy Clippy, tu asistente PitA.<br>Pregúntame sobre impresión 3D, láser o sube un <strong>archivo STL/SVG</strong> para una estimación de precio.',
-    it: 'Ciao! 👋 Sono Clippy, il tuo assistente PitA.<br>Chiedimi qualcosa sulla stampa 3D, laser o carica un <strong>file STL/SVG</strong> per una stima del prezzo!',
+    de: 'Hey! 👋 Ich bin Clippy — dein persönlicher Berater bei PitA.<br><br>Wie kann ich dir helfen?',
+    en: 'Hey! 👋 I\'m Clippy — your personal advisor at PitA.<br><br>How can I help you?',
+    fr: 'Salut ! 👋 Je suis Clippy — votre conseiller personnel chez PitA.<br><br>Comment puis-je vous aider ?',
+    es: '¡Hola! 👋 Soy Clippy — tu asesor personal en PitA.<br><br>¿Cómo puedo ayudarte?',
+    it: 'Ciao! 👋 Sono Clippy — il tuo consulente personale di PitA.<br><br>Come posso aiutarti?',
+  },
+  quickStart: {
+    de: ['🖨️ Ich brauche einen 3D-Druck', '✂️ Lasercutting / Gravur', '📂 Datei hochladen & Preis schätzen', '❓ Ich habe eine Frage'],
+    en: ['🖨️ I need a 3D print', '✂️ Laser cutting / engraving', '📂 Upload file & estimate price', '❓ I have a question'],
+    fr: ['🖨️ J\'ai besoin d\'une impression 3D', '✂️ Découpe / gravure laser', '📂 Télécharger & estimer le prix', '❓ J\'ai une question'],
+    es: ['🖨️ Necesito una impresión 3D', '✂️ Corte / grabado láser', '📂 Subir archivo y estimar precio', '❓ Tengo una pregunta'],
+    it: ['🖨️ Ho bisogno di una stampa 3D', '✂️ Taglio / incisione laser', '📂 Carica file e stima prezzo', '❓ Ho una domanda'],
   },
   dropzone: {
     de: '📂 STL, 3MF, OBJ oder SVG hier ablegen',
@@ -226,15 +233,37 @@ function buildSystemPrompt() {
     it: 'Rispondi sempre in italiano.',
   };
   const instr = langInstr[clippyLang()] ?? langInstr.de;
-  return `Du bist Clippy, der freundliche und leicht witzige KI-Assistent von PitA (Printing in the Alps). ${instr} Sei kurz und hilfreich. Gelegentlich ein lockerer Spruch ist erlaubt.
+  return `Du bist Clippy, der warmherzige und hilfsbereite Mitarbeiter von PitA (Printing in the Alps). ${instr}
 
-Seitenstruktur: index.html, leistungen/3d-druck.html, leistungen/lasercutting.html, leistungen/lasergravur.html, leistungen/prototyping.html, leistungen/resin-druck.html, materialien.html, faq.html, katalog.html
+PERSOENLICHKEIT:
+- Du bist wie ein freundlicher Werkstatt-Kollege der Kunden an die Hand nimmt
+- Fuehre Schritt fuer Schritt: stelle EINE Frage nach der anderen, nicht alles auf einmal
+- Wenn jemand ein Projekt beschreibt, frag zuerst nach dem Ziel, dann Material, dann Groesse
+- Gib konkrete Empfehlungen statt nur Optionen aufzulisten
+- Sei enthusiastisch ueber Projekte: "Das klingt super!" / "Gute Wahl!"
+- Wenn du nicht sicher bist, sag es ehrlich und empfiehl das Kontaktformular
+- Halte Antworten auf 2-3 Saetze. Frag dann nach dem naechsten Schritt.
+- Ab und zu ein lockerer Spruch oder Emoji ist willkommen
+
+BERATUNGS-FLOW:
+1. Zuerst verstehen: Was will der Kunde? (3D-Druck / Laser / Gravur / unsicher)
+2. Dann Material klaeren (oder empfehlen basierend auf dem Zweck)
+3. Dann Groesse/Datei: "Hast du schon eine STL/SVG? Lad sie hoch — ich schaetze sofort!"
+4. Preis nennen oder auf Kontaktformular verweisen
+
+WISSEN:
 Equipment: Bambu Lab H2D (325x320x325mm, Dual Nozzle), 2x P1S (256x256x256mm), Creality Falcon Laser (400x400mm), Snapmaker A350T (320x350mm)
-FDM: PLA, PETG, ABS, ASA, TPU, PA, PC + CF/GF Varianten. Resin: Standard, Tough, Flexible, Castable.
-Laser-Schneiden: Holz bis 8mm, Acryl 6mm, Leder. Laser-Gravur: Metall, Glas, Keramik, Stein.
-Dateien: STL, 3MF, OBJ, STEP | SVG, DXF, AI, PDF. Lieferzeiten: Prototypen 24-72h, Kleinserien 3-7 Tage. Versand EU. PV-Energie.
-Preise: PLA ab 5 EUR, PETG ab 8 EUR, Carbon ab 15 EUR, Laser ab 8 EUR.
-Gib Navigationslinks als HTML: <a href="materialien.html" style="color:#E8A000">Materialien</a>`;
+FDM: PLA (Standard, ab 5 EUR), PETG (robust, ab 8 EUR), ABS, ASA, TPU (flexibel), PA/Nylon, PC, CF-Varianten (ab 15 EUR)
+Resin: Standard, Tough, Flexible, Castable — fuer hochpraezise Teile
+Laser-Schneiden: Holz bis 8mm, Acryl 6mm, Leder, Papier
+Laser-Gravur: Metall, Glas, Keramik, Stein, Holz — 0.05mm Fein bis 0.15mm Grob
+Dateien: STL, 3MF, OBJ, STEP | SVG, DXF, AI, PDF
+Lieferzeiten: Prototypen 24-72h, Kleinserien 3-7 Tage. Versand EU. PV-Energie.
+
+NAVIGATION (als HTML-Link):
+<a href="materialien.html" style="color:#E8A000">Materialien</a>
+<a href="faq.html" style="color:#E8A000">FAQ</a>
+<a href="index.html#kontakt" style="color:#E8A000">Kontaktformular</a>`;
 }
 
 // ─── FALLBACK-LOGIK ──────────────────────────────────────────────────────────
@@ -303,9 +332,30 @@ function getFallback(msg) {
 
   document.body.insertAdjacentHTML('beforeend', html);
 
-  // Texte setzen
+  // Texte setzen + Quick-Start Buttons
   const greetEl = document.getElementById('clippy-greeting');
   if (greetEl) greetEl.innerHTML = t('greeting');
+  // Quick-Start Buttons nach Begrüßung
+  const qsButtons = T.quickStart[clippyLang()] ?? T.quickStart.de;
+  const msgs0 = document.getElementById('clippy-messages');
+  if (msgs0 && qsButtons) {
+    const qr = document.createElement('div');
+    qr.className = 'clippy-quick-replies';
+    qr.id = 'clippy-quick-start';
+    qsButtons.forEach(text => {
+      const btn = document.createElement('button');
+      btn.className = 'clippy-qr-btn';
+      btn.textContent = text;
+      btn.addEventListener('click', () => {
+        qr.remove();
+        const inp2 = document.getElementById('clippy-input');
+        inp2.value = text;
+        sendClippy();
+      });
+      qr.appendChild(btn);
+    });
+    msgs0.appendChild(qr);
+  }
   const dropEl = document.getElementById('clippy-drop-text');
   if (dropEl) dropEl.textContent = t('dropzone');
   const inp = document.getElementById('clippy-input');
@@ -327,12 +377,19 @@ function getFallback(msg) {
 
   // Sprachänderung live übernehmen (Event von i18n.js)
   document.addEventListener('pita-lang-changed', () => {
-    const greetEl = document.getElementById('clippy-greeting');
-    if (greetEl) greetEl.innerHTML = t('greeting');
-    const dropEl = document.getElementById('clippy-drop-text');
-    if (dropEl) dropEl.textContent = t('dropzone');
-    const langInp = document.getElementById('clippy-input');
-    if (langInp) langInp.placeholder = t('placeholder');
+    const greetEl2 = document.getElementById('clippy-greeting');
+    if (greetEl2) greetEl2.innerHTML = t('greeting');
+    const dropEl2 = document.getElementById('clippy-drop-text');
+    if (dropEl2) dropEl2.textContent = t('dropzone');
+    const langInp2 = document.getElementById('clippy-input');
+    if (langInp2) langInp2.placeholder = t('placeholder');
+    // Quick-Start Buttons updaten
+    const qs = document.getElementById('clippy-quick-start');
+    if (qs) {
+      const newBtns = T.quickStart[clippyLang()] ?? T.quickStart.de;
+      const buttons = qs.querySelectorAll('.clippy-qr-btn');
+      buttons.forEach((btn, i) => { if (newBtns[i]) btn.textContent = newBtns[i]; });
+    }
   });
 })();
 
@@ -622,12 +679,30 @@ function appendUser(msg) {
   msgs.scrollTop = msgs.scrollHeight;
 }
 
-function appendBot(msg) {
+function appendBot(msg, quickReplies) {
   const el = document.createElement('div');
   el.className = 'clippy-msg clippy-bot';
   el.innerHTML = `<span>${msg.replace(/\n/g,'<br>')}</span>`;
   const msgs = document.getElementById('clippy-messages');
   msgs.appendChild(el);
+  // Quick-Reply Buttons
+  if (quickReplies && quickReplies.length > 0) {
+    const qr = document.createElement('div');
+    qr.className = 'clippy-quick-replies';
+    quickReplies.forEach(text => {
+      const btn = document.createElement('button');
+      btn.className = 'clippy-qr-btn';
+      btn.textContent = text;
+      btn.addEventListener('click', () => {
+        qr.remove(); // Remove buttons after click
+        const inp = document.getElementById('clippy-input');
+        inp.value = text;
+        sendClippy();
+      });
+      qr.appendChild(btn);
+    });
+    msgs.appendChild(qr);
+  }
   msgs.scrollTop = msgs.scrollHeight;
   return el;
 }

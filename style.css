@@ -1245,3 +1245,37 @@ select { cursor: pointer; appearance: none;
     background-position: center center;
   }
 }
+/* ===== CLIPPY QUICK REPLIES ===== */
+.clippy-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 16px 8px;
+}
+.clippy-qr-btn {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 980px;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: var(--font);
+  white-space: nowrap;
+}
+.clippy-qr-btn:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.3);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+.clippy-qr-btn:active {
+  transform: scale(0.96);
+}
+@media (max-width: 480px) {
+  .clippy-qr-btn { font-size: 0.72rem; padding: 5px 10px; }
+  .clippy-quick-replies { padding: 4px 10px 6px; }
+}

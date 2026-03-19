@@ -56,15 +56,22 @@
     <div class="container header-inner">
       <a href="#" class="logo"><img src="logo.jpg" alt="PitA Logo" style="height:40px;vertical-align:middle;margin-right:8px;">Pit<span class="accent">A</span></a>
       <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
-        <a href="#leistungen">Leistungen</a>
-        <a href="materialien.html">Materialien</a>
-        <a href="katalog.html">Katalog</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#ablauf">Ablauf</a>
-        <a href="#kontakt">Kontakt</a>
-        <a href="blog.html">Blog</a>
-        <a href="faq.html">FAQ</a>
+        <a href="#leistungen" data-i18n="nav.leistungen">Leistungen</a>
+        <a href="materialien.html" data-i18n="nav.materialien">Materialien</a>
+        <a href="katalog.html" data-i18n="nav.katalog">Katalog</a>
+        <a href="#galerie" data-i18n="nav.galerie">Galerie</a>
+        <a href="#ablauf" data-i18n="nav.ablauf">Ablauf</a>
+        <a href="#kontakt" data-i18n="nav.kontakt">Kontakt</a>
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
       </nav>
+      <div class="lang-switcher">
+        <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪</button>
+        <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧</button>
+        <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷</button>
+        <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸</button>
+        <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹</button>
+      </div>
       <a href="#kontakt" class="cart-icon" aria-label="Warenkorb / Anfrage" title="Anfrage">🛒</a>
       <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
     </div>
@@ -79,50 +86,50 @@
   <section class="hero">
     <div class="container">
       <h1>Printing in the <span class="accent">Alps</span></h1>
-      <p class="hero-tagline">Wo pittoreske Landschaft auf Innovation trifft</p>
-      <p class="hero-sub">3D-Druck · Lasercutting · Lasergravur · Prototyping</p>
-      <p class="hero-eco">☀️ Überwiegend mit PV-Energie produziert</p>
+      <p class="hero-tagline"><span data-i18n="hero.tagline">Wo pittoreske Landschaft auf Innovation trifft</span></p>
+      <p class="hero-sub"><span data-i18n="hero.sub">3D-Druck · Lasercutting · Lasergravur · Prototyping</span></p>
+      <p class="hero-eco"><span data-i18n="hero.eco">☀️ Überwiegend mit PV-Energie produziert</span></p>
     </div>
   </section>
 
   <!-- CTA BETWEEN HERO & LEISTUNGEN -->
   <div class="cta-divider">
-    <a href="#kontakt" class="btn btn-primary">Angebot anfragen</a>
+    <a href="#kontakt" class="btn btn-primary"><span data-i18n="hero.cta">Angebot anfragen</span></a>
   </div>
 
   <!-- LEISTUNGEN -->
   <section id="leistungen" class="section">
     <div class="container">
-      <h2>Unsere <span class="accent">Leistungen</span></h2>
+      <h2><span data-i18n="section.leistungen">Unsere Leistungen</span></h2>
       <div class="grid-4">
 
         <a href="leistungen/3d-druck.html" class="card">
           <div class="card-icon">🖨️</div>
-          <h3>3D-Druck</h3>
+          <h3 data-i18n="card.3ddruck">3D-Druck</h3>
           <p>FDM mit Bambu Lab H2D & P1S — vom Prototyp bis zur Serie. Multi-Material, skalierbar, zuverlässig.</p>
         </a>
 
         <a href="leistungen/lasercutting.html" class="card">
           <div class="card-icon">⚡</div>
-          <h3>Lasercutting</h3>
+          <h3 data-i18n="card.laser">Lasercutting</h3>
           <p>Millimetergenaue Schnitte in Holz, Acryl und mehr — mit Creality & Snapmaker.</p>
         </a>
 
         <a href="leistungen/lasergravur.html" class="card">
           <div class="card-icon">🔄</div>
-          <h3>Lasergravur</h3>
+          <h3 data-i18n="card.gravur">Lasergravur</h3>
           <p>Präzise Gravuren auf Holz, Metall, Glas und Leder — Branding und Personalisierung.</p>
         </a>
 
         <a href="leistungen/prototyping.html" class="card">
           <div class="card-icon">📐</div>
-          <h3>Prototyping</h3>
+          <h3 data-i18n="card.proto">Prototyping</h3>
           <p>Von der Idee zum Anfassen — schnelle Iterationen für Entwickler, Maker und Startups.</p>
         </a>
 
         <a href="leistungen/resin-druck.html" class="card card-glassy">
           <div class="card-icon">💧</div>
-          <h3>Resin Druck</h3>
+          <h3 data-i18n="card.resin">Resin Druck</h3>
           <p>Hochpräzise Harz-Drucke für Detailarbeiten und Oberflächenqualität.</p>
         </a>
 
@@ -135,7 +142,7 @@
   <!-- GALERIE -->
   <section id="galerie" class="section section-alt">
     <div class="container">
-      <h2>Unsere <span class="accent">Projekte</span></h2>
+      <h2><span data-i18n="section.projekte">Unsere Projekte</span></h2>
       <div class="grid-3">
         <div class="gallery-item" onclick="openLightbox(this)">
           <img src="images/gallery-1.webp" alt="3D-gedruckter Prototyp aus PLA in Nahaufnahme" loading="lazy">
@@ -173,16 +180,16 @@
   <!-- ABLAUF -->
   <section id="ablauf" class="section">
     <div class="container">
-      <h2>So <span class="accent">funktioniert's</span></h2>
+      <h2><span data-i18n="section.ablauf">So funktioniert's</span></h2>
       <div class="steps">
         <div class="step">
           <div class="step-number">01</div>
-          <h3>Anfrage senden</h3>
+          <h3 data-i18n="ablauf.step1">Anfrage senden</h3>
           <p>Beschreibe dein Projekt oder lade eine Datei hoch — STL, 3MF, DXF, SVG.</p>
         </div>
         <div class="step">
           <div class="step-number">02</div>
-          <h3>Angebot erhalten</h3>
+          <h3 data-i18n="ablauf.step2">Angebot erhalten</h3>
           <p>Wir prüfen deine Datei und senden dir ein individuelles Angebot.</p>
         </div>
         <div class="step">
@@ -197,7 +204,7 @@
   <!-- KONTAKT -->
   <section id="kontakt" class="section section-alt">
     <div class="container">
-      <h2>Kontakt & <span class="accent">Angebot</span></h2>
+      <h2><span data-i18n="section.kontakt">Kontakt &amp; Angebot</span></h2>
       <form class="contact-form" id="contactForm" novalidate>
         <div class="form-row">
           <div class="form-group">
@@ -230,7 +237,7 @@
           <input type="file" name="file" id="contactFileInput" accept=".stl,.3mf,.svg,.dxf,.pdf,.jpg,.jpeg,.png" hidden>
         </div>
         <p id="contactFileName" class="file-name"></p>
-        <button type="submit" class="btn btn-primary btn-full">Angebot anfordern</button>
+        <button type="submit" class="btn btn-primary btn-full"><span data-i18n="kontakt.senden">Angebot anfordern</span></button>
       </form>
     </div>
   </section>
@@ -248,10 +255,10 @@
   <footer class="footer">
     <div class="container footer-inner">
       <span class="logo">Pit<span class="accent">A</span></span>
-      <p>Präzision aus den Alpen.</p>
+      <p><span data-i18n="footer.tagline">Präzision aus den Alpen.</span></p>
       <div class="footer-links">
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
+        <a href="impressum.html"><span data-i18n="footer.impressum">Impressum</span></a>
+        <a href="datenschutz.html"><span data-i18n="footer.datenschutz">Datenschutz</span></a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -261,5 +268,6 @@
 
   <script src="script.js"></script>
   <script src="clippy.js"></script>
+<script src="i18n.js"></script>
 </body>
 </html>

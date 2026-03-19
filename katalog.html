@@ -20,6 +20,13 @@
   <header class="header">
     <div class="container header-inner">
       <a href="index.html" class="logo">← Pit<span class="accent">A</span></a>
+      <div class="lang-switcher">
+        <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪</button>
+        <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧</button>
+        <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷</button>
+        <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸</button>
+        <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹</button>
+      </div>
     </div>
   </header>
   <div class="sub-page-wrapper">
@@ -27,7 +34,7 @@
   <section class="sub-hero">
     <div class="container">
       <h1>📦 <span class="accent">Katalog</span></h1>
-      <p>Unser Komplettangebot — alle Sparten, eine Werkstatt.</p>
+      <p><span data-i18n="katalog.sub">Unser Komplettangebot — alle Sparten, eine Werkstatt.</span></p>
     </div>
   </section>
 
@@ -165,10 +172,10 @@
   <footer class="footer">
     <div class="container footer-inner">
       <span class="logo">Pit<span class="accent">A</span></span>
-      <p>Präzision aus den Alpen.</p>
+      <p><span data-i18n="footer.tagline">Präzision aus den Alpen.</span></p>
       <div class="footer-links">
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
+        <a href="impressum.html"><span data-i18n="footer.impressum">Impressum</span></a>
+        <a href="datenschutz.html"><span data-i18n="footer.datenschutz">Datenschutz</span></a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -177,5 +184,6 @@
   </footer>
 
   <script src="clippy.js"></script>
+<script src="i18n.js"></script>
 </body>
 </html>

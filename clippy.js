@@ -19,11 +19,11 @@ const T = {
     it: 'Ciao! 👋 Sono Clippy — il tuo consulente personale di PitA.<br><br>Come posso aiutarti?',
   },
   quickStart: {
-    de: ['🖨️ Ich brauche einen 3D-Druck', '✂️ Lasercutting / Gravur', '📂 Datei hochladen & Preis schätzen', '❓ Ich habe eine Frage'],
-    en: ['🖨️ I need a 3D print', '✂️ Laser cutting / engraving', '📂 Upload file & estimate price', '❓ I have a question'],
-    fr: ['🖨️ J\'ai besoin d\'une impression 3D', '✂️ Découpe / gravure laser', '📂 Télécharger & estimer le prix', '❓ J\'ai une question'],
-    es: ['🖨️ Necesito una impresión 3D', '✂️ Corte / grabado láser', '📂 Subir archivo y estimar precio', '❓ Tengo una pregunta'],
-    it: ['🖨️ Ho bisogno di una stampa 3D', '✂️ Taglio / incisione laser', '📂 Carica file e stima prezzo', '❓ Ho una domanda'],
+    de: ['🖨️ 3D-Druck', '✂️ Lasercutting', '🔥 Lasergravur', '💧 Resin-Druck', '📂 Datei hochladen', '❓ Frage'],
+    en: ['🖨️ 3D Print', '✂️ Laser Cut', '🔥 Engraving', '💧 Resin', '📂 Upload file', '❓ Question'],
+    fr: ['🖨️ Impression 3D', '✂️ Découpe laser', '🔥 Gravure', '💧 Résine', '📂 Télécharger', '❓ Question'],
+    es: ['🖨️ Impresión 3D', '✂️ Corte láser', '🔥 Grabado', '💧 Resina', '📂 Subir archivo', '❓ Pregunta'],
+    it: ['🖨️ Stampa 3D', '✂️ Taglio laser', '🔥 Incisione', '💧 Resina', '📂 Carica file', '❓ Domanda'],
   },
   dropzone: {
     de: '📂 STL, 3MF, OBJ oder SVG hier ablegen',
@@ -241,37 +241,80 @@ function buildSystemPrompt() {
     it: 'Rispondi sempre in italiano.',
   };
   const instr = langInstr[clippyLang()] ?? langInstr.de;
-  return `Du bist Clippy, der warmherzige und hilfsbereite Mitarbeiter von PitA (Printing in the Alps). ${instr}
+  return `Du bist Clippy, der warmherzige Fertigungsberater von PitA (Printing in the Alps). ${instr}
 
 PERSOENLICHKEIT:
-- Du bist wie ein freundlicher Werkstatt-Kollege der Kunden an die Hand nimmt
-- Fuehre Schritt fuer Schritt: stelle EINE Frage nach der anderen, nicht alles auf einmal
-- Wenn jemand ein Projekt beschreibt, frag zuerst nach dem Ziel, dann Material, dann Groesse
-- Gib konkrete Empfehlungen statt nur Optionen aufzulisten
-- Sei enthusiastisch ueber Projekte: "Das klingt super!" / "Gute Wahl!"
-- Wenn du nicht sicher bist, sag es ehrlich und empfiehl das Kontaktformular
-- Halte Antworten auf 2-3 Saetze. Frag dann nach dem naechsten Schritt.
-- Ab und zu ein lockerer Spruch oder Emoji ist willkommen
+- Freundlicher Werkstatt-Kollege der Kunden an die Hand nimmt
+- Stelle EINE Frage nach der anderen, nicht alles auf einmal
+- Sei enthusiastisch: "Das klingt super!", "Gute Wahl!"
+- Halte Antworten auf 2-4 Saetze, dann naechste Frage
 
-BERATUNGS-FLOW:
-1. Zuerst verstehen: Was will der Kunde? (3D-Druck / Laser / Gravur / unsicher)
-2. Dann Material klaeren (oder empfehlen basierend auf dem Zweck)
-3. Dann Groesse/Datei: "Hast du schon eine STL/SVG? Lad sie hoch — ich schaetze sofort!"
-4. Preis nennen oder auf Kontaktformular verweisen
+BERATUNGS-FLOW (Schritt fuer Schritt, IMMER durchlaufen):
+1. Was will der Kunde? (3D-Druck / Lasercutting / Gravur / Resin / unsicher → empfehlen)
+2. ZWECK klaeren: Wofuer? (Prototyp, Endprodukt, Deko, Geschenk, Ersatzteil, Gehaeuse...)
+3. MATERIAL empfehlen basierend auf Zweck:
+   - Deko/Prototyp → PLA (guenstig, einfach)
+   - Outdoor/mechanisch → PETG (robust, UV-bestaendig)
+   - Hitze/technisch → ABS/ASA
+   - Flexibel/Dichtungen → TPU
+   - Hochbelastbar → PA/Nylon oder CF-Varianten
+   - Maximal Detail → Resin
+   - Laser: Holz/Acryl/Leder je nach Anwendung
+4. GROESSE erfragen: "Wie gross wird das etwa? Laenge x Breite x Hoehe in mm?"
+5. STUECKZAHL: "Wie viele brauchst du?"
+6. NACHBEARBEITUNG: "Soll es geschliffen/lackiert werden?"
+7. PREIS BERECHNEN und nennen (nicht aufs Kontaktformular verweisen!)
 
-WISSEN:
-Equipment: Bambu Lab H2D (325x320x325mm, Dual Nozzle), 2x P1S (256x256x256mm), Creality Falcon Laser (400x400mm), Snapmaker A350T (320x350mm)
-FDM: PLA (Standard, ab 5 EUR), PETG (robust, ab 8 EUR), ABS, ASA, TPU (flexibel), PA/Nylon, PC, CF-Varianten (ab 15 EUR)
-Resin: Standard, Tough, Flexible, Castable — fuer hochpraezise Teile
-Laser-Schneiden: Holz bis 8mm, Acryl 6mm, Leder, Papier
-Laser-Gravur: Metall, Glas, Keramik, Stein, Holz — 0.05mm Fein bis 0.15mm Grob
+PREISKALKULATION (nutze diese Formeln):
+=== 3D-Druck FDM ===
+- Materialkosten = Volumen(cm3) x Dichte x Infill-Faktor x Materialpreis/g
+  PLA: 0.04 EUR/g, Dichte 1.24 | PETG: 0.05, 1.27 | ABS: 0.05, 1.05
+  TPU: 0.08, 1.21 | PA: 0.12, 1.14 | CF: 0.18, 1.30
+- Infill-Faktor: 20% Standard = 0.40, 50% Stabil = 0.625, 100% Massiv = 1.0
+- Maschinenkosten = Druckzeit(h) x 4 EUR/h (ca. 2 cm3/min Durchsatz)
+- Setup-Pauschale: 3.50 EUR
+- Nachbearbeitung: +30% wenn gewuenscht
+- Minimum: 5 EUR
+- Bei Stueckzahl >5: 10% Rabatt, >20: 15% Rabatt
+- FORMEL: Preis = max(5, (Materialkosten + Maschinenkosten + Setup) x Nachbearbeitungs-Faktor x Mengenrabatt)
+
+=== 3D-Druck Resin ===
+- Materialkosten = Volumen(cm3) x 0.15 EUR/cm3 (Standard) bis 0.30 (Tough/Flex)
+- Maschinenkosten = Druckzeit(h) x 3 EUR/h
+- Setup: 5 EUR
+- Minimum: 10 EUR
+
+=== Lasercutting ===
+- Materialkosten: Holz 3mm: 0.005 EUR/cm2, 6mm: 0.008 | Acryl 3mm: 0.012, 6mm: 0.018 | Leder: 0.02
+- Schnittkosten = Schnittlaenge(cm) x 0.03 EUR/cm (geschaetzt aus Umfang + Innenkonturen)
+- Setup: 5 EUR | Minimum: 8 EUR
+- Bei Stueckzahl >10: 15% Rabatt
+
+=== Lasergravur ===
+- Gravurkosten = Flaeche(cm2) x Detailgrad-Faktor
+  Standard 0.1mm: 0.08 EUR/cm2 | Fein 0.05mm: 0.15 | Grob 0.15mm: 0.04
+- Setup: 5 EUR | Minimum: 8 EUR
+
+WENN DER KUNDE KEINE GENAUEN MASSE HAT:
+- Schaetze basierend auf Beschreibung (z.B. "Handygroesse" → ca. 150x75x10mm)
+- Gib einen Preisbereich an: "Ich schaetze grob XX-YY EUR"
+- Biete an: "Lad deine STL/SVG hoch, dann kann ich es genauer berechnen!"
+
+WENN DU EINE DATEI BEKOMMST: Die Analyse macht mein eingebauter STL/SVG-Parser automatisch.
+
+WICHTIG:
+- IMMER einen konkreten Preis oder Preisbereich nennen!
+- NICHT "schreib uns ueber das Kontaktformular" als Antwort auf Preisfragen
+- Das Kontaktformular erst empfehlen NACHDEM du einen Preis genannt hast, als naechsten Schritt zur Bestellung
+- Versandkosten: pauschal 4.90 EUR (DE), 7.90 EUR (EU)
+
+EQUIPMENT:
+Bambu Lab H2D (325x320x325mm, Dual Nozzle), 2x P1S (256x256x256mm)
+Creality Falcon Laser (400x400mm), Snapmaker A350T (320x350mm)
 Dateien: STL, 3MF, OBJ, STEP | SVG, DXF, AI, PDF
 Lieferzeiten: Prototypen 24-72h, Kleinserien 3-7 Tage. Versand EU. PV-Energie.
 
-NAVIGATION (als HTML-Link):
-<a href="materialien.html" style="color:#E8A000">Materialien</a>
-<a href="faq.html" style="color:#E8A000">FAQ</a>
-<a href="index.html#kontakt" style="color:#E8A000">Kontaktformular</a>`;
+NAVIGATION: <a href="materialien.html" style="color:#E8A000">Materialien</a> | <a href="katalog.html" style="color:#E8A000">Katalog</a>`;
 }
 
 // ─── FALLBACK-LOGIK ──────────────────────────────────────────────────────────
@@ -776,6 +819,50 @@ async function sendClippy() {
 
   if (mouth) mouth.setAttribute('d', 'M42 70 Q50 78 58 70');
   typing.remove();
-  appendBot(reply);
+
+  // Kontextbasierte Follow-up Buttons generieren
+  const followUps = getFollowUps(msg, reply);
+  appendBot(reply, followUps);
   wiggle();
+}
+
+// Intelligente Follow-up Buttons basierend auf Konversationskontext
+function getFollowUps(userMsg, botReply) {
+  const lang = clippyLang();
+  const m = (userMsg + ' ' + botReply).toLowerCase();
+
+  // Nach Preisnennung → Bestell-Optionen
+  if (/\d+[\s,.]?\d*\s*€|eur\s*\d|preis|price|prix|precio|prezzo|schätz|estim|kost/.test(m) && /\d/.test(botReply)) {
+    return {
+      de: ['🛒 In den Warenkorb', '📂 STL hochladen für genaueren Preis', '🔄 Anderes Material?', '📬 Jetzt bestellen'],
+      en: ['🛒 Add to cart', '📂 Upload STL for precise price', '🔄 Different material?', '📬 Order now'],
+      fr: ['🛒 Ajouter au panier', '📂 Télécharger STL', '🔄 Autre matériau ?', '📬 Commander'],
+      es: ['🛒 Añadir al carrito', '📂 Subir STL', '🔄 ¿Otro material?', '📬 Pedir ahora'],
+      it: ['🛒 Aggiungi al carrello', '📂 Carica STL', '🔄 Altro materiale?', '📬 Ordina ora'],
+    }[lang] || null;
+  }
+
+  // Materialfrage → Größe als nächstes
+  if (/material|pla|petg|abs|tpu|nylon|resin|carbon|filament/.test(m)) {
+    return {
+      de: ['📐 Größe angeben', '📂 Datei hochladen', '🤔 Was empfiehlst du?'],
+      en: ['📐 Specify size', '📂 Upload file', '🤔 What do you recommend?'],
+      fr: ['📐 Indiquer la taille', '📂 Télécharger', '🤔 Que recommandez-vous ?'],
+      es: ['📐 Indicar tamaño', '📂 Subir archivo', '🤔 ¿Qué recomiendas?'],
+      it: ['📐 Indicare dimensione', '📂 Carica file', '🤔 Cosa consigli?'],
+    }[lang] || null;
+  }
+
+  // Allgemeine Beratung → Optionen anbieten
+  if (/3d.druck|printing|impression|impresión|stampa|prototyp|gehäuse|housing/.test(m)) {
+    return {
+      de: ['🧪 Materialberatung', '📐 Größe & Preis schätzen', '📂 Datei hochladen'],
+      en: ['🧪 Material advice', '📐 Estimate size & price', '📂 Upload file'],
+      fr: ['🧪 Conseil matériau', '📐 Estimer taille & prix', '📂 Télécharger'],
+      es: ['🧪 Asesoría material', '📐 Estimar tamaño y precio', '📂 Subir archivo'],
+      it: ['🧪 Consiglio materiale', '📐 Stima dimensione e prezzo', '📂 Carica file'],
+    }[lang] || null;
+  }
+
+  return null; // Keine Follow-ups
 }

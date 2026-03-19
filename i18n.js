@@ -293,6 +293,20 @@ const TRANSLATIONS = {
   'kat.maker.viewall': { de:'Alles anzeigen →', en:'View all →', fr:'Voir tout →', es:'Ver todo →', it:'Vedi tutto →' },
   'kat.detail.cta':    { de:'Jetzt anfragen', en:'Request now', fr:'Demander maintenant', es:'Solicitar ahora', it:'Richiedi ora' },
 
+  // === Warenkorb ===
+  'cart.title':        { de:"Warenkorb",          en:"Shopping Cart",     fr:"Panier",              es:"Carrito",              it:"Carrello"            },
+  'cart.empty':        { de:"Dein Warenkorb ist leer.", en:"Your cart is empty.", fr:"Votre panier est vide.", es:"Tu carrito est\u00e1 vac\u00edo.", it:"Il tuo carrello \u00e8 vuoto." },
+  'cart.total':        { de:"Gesamtsumme",        en:"Total",             fr:"Total",               es:"Total",                it:"Totale"              },
+  'cart.checkout':     { de:"Jetzt bestellen",    en:"Order now",         fr:"Commander",           es:"Pedir ahora",          it:"Ordina ora"          },
+  'cart.clear':        { de:"Warenkorb leeren",   en:"Clear cart",        fr:"Vider le panier",     es:"Vaciar carrito",       it:"Svuota carrello"     },
+  'cart.add':          { de:"In den Warenkorb",   en:"Add to cart",       fr:"Ajouter au panier",   es:"A\u00f1adir al carrito", it:"Aggiungi al carrello" },
+  'cart.remove':       { de:"\u2715",             en:"\u2715",            fr:"\u2715",              es:"\u2715",               it:"\u2715"              },
+  'cart.tocatalog':    { de:"Zum Katalog",        en:"To catalogue",      fr:"Vers le catalogue",   es:"Al cat\u00e1logo",     it:"Al catalogo"         },
+  'cart.col.product':  { de:"Produkt",            en:"Product",           fr:"Produit",             es:"Producto",             it:"Prodotto"            },
+  'cart.col.price':    { de:"Preis",              en:"Price",             fr:"Prix",                es:"Precio",               it:"Prezzo"              },
+  'cart.col.qty':      { de:"Menge",              en:"Qty",               fr:"Qt\u00e9",            es:"Cantidad",             it:"Qt\u00e0"            },
+  'cart.col.subtotal': { de:"Summe",              en:"Subtotal",          fr:"Sous-total",          es:"Subtotal",             it:"Subtotale"           },
+
 };
 
 // ===== ENGINE =====

@@ -513,6 +513,42 @@ function toggleClippy() {
     if (!greeted) { greeted = true; showContextHint(); }
   } else {
     chat.classList.add('clippy-hidden');
+    // Reset: Konversation zurücksetzen beim Schließen
+    resetClippy();
+  }
+}
+
+function resetClippy() {
+  // Chat-History leeren
+  chatHistory = [];
+  lastSTLData = null;
+  greeted = false;
+
+  // Nachrichten-Container leeren und Begrüßung neu setzen
+  const msgs = document.getElementById('clippy-messages');
+  if (msgs) {
+    msgs.innerHTML = '<div class="clippy-msg clippy-bot"><span id="clippy-greeting"></span></div>';
+    const greetEl = document.getElementById('clippy-greeting');
+    if (greetEl) greetEl.innerHTML = t('greeting');
+
+    // Quick-Start Buttons neu einfügen
+    const qsButtons = T.quickStart[clippyLang()] ?? T.quickStart.de;
+    const qr = document.createElement('div');
+    qr.className = 'clippy-quick-replies';
+    qr.id = 'clippy-quick-start';
+    qsButtons.forEach(text => {
+      const btn = document.createElement('button');
+      btn.className = 'clippy-qr-btn';
+      btn.textContent = text;
+      btn.addEventListener('click', () => {
+        qr.remove();
+        const inp = document.getElementById('clippy-input');
+        inp.value = text;
+        sendClippy();
+      });
+      qr.appendChild(btn);
+    });
+    msgs.appendChild(qr);
   }
 }
 

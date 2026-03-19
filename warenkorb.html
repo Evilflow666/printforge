@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Warenkorb – PitA</title>
+  <meta name="description" content="Dein Warenkorb bei PitA.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js?v=1773954349"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">← Pit<span class="accent">A</span></a>
+      <div class="lang-switcher">
+        <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪</button>
+        <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧</button>
+        <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷</button>
+        <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸</button>
+        <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹</button>
+      </div>
+      <a href="warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
+    </div>
+  </header>
+
+  <div class="sub-page-wrapper">
+    <section class="sub-hero">
+      <div class="container">
+        <h1>🛒 <span class="accent" data-i18n="cart.title">Warenkorb</span></h1>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div id="cart-content"></div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo">Pit<span class="accent">A</span></span>
+      <p><span data-i18n="footer.tagline">Präzision aus den Alpen.</span></p>
+      <div class="footer-links">
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="impressum.html"><span data-i18n="footer.impressum">Impressum</span></a>
+        <a href="datenschutz.html"><span data-i18n="footer.datenschutz">Datenschutz</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copy">&copy; 2026 PitA. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script src="cart.js"></script>
+  <script>
+  function renderCart() {
+    var container = document.getElementById("cart-content");
+    var cart = getCart();
+    if (!cart.length) {
+      container.innerHTML =
+        '<div class="cart-empty-msg">' +
+        '<p style="font-size:1.2rem;color:var(--text-secondary);margin-bottom:20px;" data-i18n="cart.empty">Dein Warenkorb ist leer.</p>' +
+        '<a href="katalog.html" class="btn btn-primary" data-i18n="cart.tocatalog">Zum Katalog</a>' +
+        '</div>';
+      if (typeof setLang === "function") setLang(getLang());
+      return;
+    }
+    var html = '<div class="cart-table-wrap">';
+    html += '<table class="cart-table"><thead><tr>';
+    html += '<th data-i18n="cart.col.product">Produkt</th>';
+    html += '<th data-i18n="cart.col.price">Preis</th>';
+    html += '<th data-i18n="cart.col.qty">Menge</th>';
+    html += '<th data-i18n="cart.col.subtotal">Summe</th>';
+    html += '<th></th></tr></thead><tbody>';
+    cart.forEach(function(item) {
+      html += '<tr>';
+      html += '<td class="cart-cell-name">' + item.name + '</td>';
+      html += '<td>' + item.price.toFixed(2) + ' &euro;</td>';
+      html += '<td class="cart-cell-qty">';
+      html += '<button class="cart-qty-btn" onclick="updateQty(\'' + item.id + '\',' + (item.qty - 1) + ');renderCart()">−</button>';
+      html += '<span class="cart-qty-val">' + item.qty + '</span>';
+      html += '<button class="cart-qty-btn" onclick="updateQty(\'' + item.id + '\',' + (item.qty + 1) + ');renderCart()">+</button>';
+      html += '</td>';
+      html += '<td>' + (item.price * item.qty).toFixed(2) + ' &euro;</td>';
+      html += '<td><button class="cart-remove-btn" onclick="removeFromCart(\'' + item.id + '\');renderCart()" data-i18n="cart.remove">✕</button></td>';
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    html += '<div class="cart-footer">';
+    html += '<div class="cart-total"><span data-i18n="cart.total">Gesamtsumme</span>: <strong>' + getCartTotal().toFixed(2) + ' &euro;</strong></div>';
+    html += '<div class="cart-actions">';
+    html += '<button class="btn btn-secondary" onclick="clearCart();renderCart()" data-i18n="cart.clear">Warenkorb leeren</button>';
+    html += '<button class="btn btn-primary" onclick="cartCheckout()" data-i18n="cart.checkout">Jetzt bestellen</button>';
+    html += '</div></div>';
+    container.innerHTML = html;
+    if (typeof setLang === "function") setLang(getLang());
+  }
+  function cartCheckout() {
+    var cart = getCart();
+    var msg = cart.map(function(i) { return i.qty + "x " + i.name + " (" + i.price.toFixed(2) + " EUR)"; }).join("\n");
+    msg += "\n\nGesamt: " + getCartTotal().toFixed(2) + " EUR";
+    var url = "index.html#kontakt?cart=" + encodeURIComponent(msg);
+    window.location.href = url;
+  }
+  document.addEventListener("DOMContentLoaded", renderCart);
+  document.addEventListener("pita-cart-changed", renderCart);
+  </script>
+</body>
+</html>

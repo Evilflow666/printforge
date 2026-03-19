@@ -82,7 +82,7 @@ if (contactForm) {
 const mobileToggle = document.querySelector('.mobile-toggle');
 const nav = document.querySelector('.nav');
 
-mobileToggle.addEventListener('click', () => {
+if (mobileToggle) mobileToggle.addEventListener('click', () => {
   nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
   nav.style.flexDirection = 'column';
   nav.style.position = 'absolute';
@@ -99,7 +99,7 @@ mobileToggle.addEventListener('click', () => {
 
 // Header scroll effect
 const header = document.querySelector('.header');
-window.addEventListener('scroll', () => {
+if (header) window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 50);
 });
 

@@ -434,6 +434,12 @@ select { cursor: pointer; appearance: none;
   height: auto;
   display: block;
 }
+.mountain-sunny svg {
+  height: 180px;
+}
+@media (max-width: 768px) {
+  .mountain-sunny svg { height: 100px; }
+}
 
 /* ===== FOOTER ===== */
 .footer { padding: 48px 0 0; border-top: none; }

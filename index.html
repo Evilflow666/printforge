@@ -244,9 +244,31 @@
   </main>
 
   <!-- MOUNTAIN DIVIDER -->
-  <div class="mountain-divider">
-    <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,180 L0,120 L80,95 L160,110 L240,70 L320,90 L400,50 L480,75 L540,30 L600,60 L680,40 L720,15 L780,45 L840,25 L900,55 L960,35 L1020,65 L1080,45 L1140,70 L1200,50 L1280,80 L1360,60 L1440,90 L1440,180Z" fill="var(--bg)"/>
+  <div class="mountain-divider mountain-sunny">
+    <svg viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sunGlow" x1="50%" y1="0%" x2="50%" y2="100%">
+          <stop offset="0%" stop-color="rgba(232,160,0,0.15)"/>
+          <stop offset="40%" stop-color="rgba(198,125,74,0.08)"/>
+          <stop offset="100%" stop-color="var(--bg-primary)"/>
+        </linearGradient>
+        <radialGradient id="sunDisc" cx="50%" cy="0%" r="60%">
+          <stop offset="0%" stop-color="rgba(255,200,50,0.12)"/>
+          <stop offset="100%" stop-color="rgba(255,200,50,0)"/>
+        </radialGradient>
+        <linearGradient id="mountainFill" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="rgba(40,50,70,0.9)"/>
+          <stop offset="100%" stop-color="var(--bg-primary)"/>
+        </linearGradient>
+      </defs>
+      <!-- Sonnenschein Glow -->
+      <rect x="0" y="0" width="1440" height="220" fill="url(#sunDisc)" opacity="0.6"/>
+      <!-- Hintere Bergkette (heller, weiter weg) -->
+      <path d="M0,220 L0,140 L60,125 L120,135 L200,100 L280,115 L360,80 L440,95 L500,65 L560,85 L640,55 L700,70 L760,40 L820,60 L880,35 L940,55 L1000,45 L1060,65 L1120,50 L1180,70 L1240,55 L1320,75 L1400,65 L1440,80 L1440,220Z" fill="rgba(40,50,70,0.5)"/>
+      <!-- Vordere Bergkette (dunkler, näher) -->
+      <path d="M0,220 L0,160 L100,145 L180,155 L260,120 L340,140 L420,105 L500,125 L580,90 L660,110 L720,75 L780,95 L860,70 L920,88 L1000,72 L1080,90 L1140,78 L1220,100 L1300,85 L1380,95 L1440,108 L1440,220Z" fill="url(#mountainFill)"/>
+      <!-- Warmer Glow am Horizont -->
+      <rect x="0" y="0" width="1440" height="220" fill="url(#sunGlow)"/>
     </svg>
   </div>
 

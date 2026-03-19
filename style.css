@@ -1212,6 +1212,223 @@ select { cursor: pointer; appearance: none;
 .material-tag[data-type="cutting"] { color: #FFCA28; background: rgba(255,202,40,0.1); border-color: rgba(255,202,40,0.25); }
 .material-tag[data-type="gravur"] { color: #8D6E63; background: rgba(141,110,99,0.1); border-color: rgba(141,110,99,0.25); }
 
+/* ===== FLIP CARD GRID ===== */
+.mat-flip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin: 24px 0 40px;
+}
+@media (max-width: 960px) {
+  .mat-flip-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .mat-flip-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== FLIP CARD CONTAINER ===== */
+.mat-flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+  height: 420px;
+}
+.mat-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.mat-flip-card.flipped .mat-flip-inner {
+  transform: rotateY(180deg);
+}
+.mat-flip-card:hover:not(.flipped) .mat-flip-inner {
+  transform: rotateY(8deg);
+}
+
+/* ===== FLIP CARD FACES ===== */
+.mat-flip-front, .mat-flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 24px;
+  padding: 28px 24px;
+  background: rgba(255,255,255,0.025);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.mat-flip-front {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  gap: 10px;
+}
+.mat-flip-back {
+  transform: rotateY(180deg);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+}
+.mat-flip-back::-webkit-scrollbar { width: 4px; }
+.mat-flip-back::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+/* ===== FRONT CARD ELEMENTS ===== */
+.mat-photo-placeholder {
+  font-size: 3rem;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+.mat-flip-front h3 {
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  margin: 0;
+}
+.mat-flip-front p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+.mat-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  background: rgba(198, 125, 74, 0.1);
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(198, 125, 74, 0.2);
+}
+.mat-badge[data-type="bio"] { color: #66BB6A; background: rgba(102,187,106,0.1); border-color: rgba(102,187,106,0.25); }
+.mat-badge[data-type="allrounder"] { color: #42A5F5; background: rgba(66,165,245,0.1); border-color: rgba(66,165,245,0.25); }
+.mat-badge[data-type="tech"] { color: #AB47BC; background: rgba(171,71,188,0.1); border-color: rgba(171,71,188,0.25); }
+.mat-badge[data-type="outdoor"] { color: #26A69A; background: rgba(38,166,154,0.1); border-color: rgba(38,166,154,0.25); }
+.mat-badge[data-type="flex"] { color: #FFA726; background: rgba(255,167,38,0.1); border-color: rgba(255,167,38,0.25); }
+.mat-badge[data-type="hp"] { color: #EF5350; background: rgba(239,83,80,0.1); border-color: rgba(239,83,80,0.25); }
+.mat-badge[data-type="carbon"] { color: #78909C; background: rgba(120,144,156,0.1); border-color: rgba(120,144,156,0.25); }
+.mat-badge[data-type="precision"] { color: #7E57C2; background: rgba(126,87,194,0.1); border-color: rgba(126,87,194,0.25); }
+.mat-badge[data-type="cutting"] { color: #FFCA28; background: rgba(255,202,40,0.1); border-color: rgba(255,202,40,0.25); }
+.mat-badge[data-type="gravur"] { color: #8D6E63; background: rgba(141,110,99,0.1); border-color: rgba(141,110,99,0.25); }
+
+.mat-flip-hint {
+  color: rgba(255,255,255,0.35);
+  font-size: 0.75rem;
+  margin-top: auto;
+  transition: color 0.3s;
+}
+.mat-flip-card:hover .mat-flip-hint {
+  color: var(--accent);
+}
+
+/* ===== BACK CARD ELEMENTS ===== */
+.mat-flip-back h3 {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.mat-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.mat-spec-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.mat-spec-row > span:first-child {
+  min-width: 130px;
+  white-space: nowrap;
+}
+
+/* ===== BAR VISUALIZATION ===== */
+.mat-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.mat-bar div {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #FFD700);
+  border-radius: 4px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== USAGE SECTION ===== */
+.mat-usage {
+  flex: 1;
+  margin-bottom: 10px;
+}
+.mat-usage h4 {
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  margin: 8px 0 4px 0;
+}
+.mat-usage ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+.mat-usage li {
+  margin-bottom: 2px;
+}
+
+/* ===== PRICE & CLOSE ===== */
+.mat-price-hint {
+  display: block;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 6px 0 10px;
+}
+.mat-flip-close {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: var(--font);
+  transition: all 0.25s ease;
+  margin-top: auto;
+  align-self: center;
+}
+.mat-flip-close:hover {
+  background: rgba(255,255,255,0.12);
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+/* ===== HERO HINT ===== */
+.mat-hero-hint {
+  color: var(--accent);
+  font-size: 0.95rem;
+  margin-top: 8px;
+  animation: mat-pulse 2s ease-in-out infinite;
+}
+@keyframes mat-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
 .analysis-results { margin-top: 24px; }
 .analysis-card {
   padding: 24px;

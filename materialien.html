@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Materialien – PitA | Filamente, Harze & Laserwerkstoffe</title>
-  <meta name="description" content="Alle verfügbaren Materialien bei PitA: FDM-Filamente (PLA, PETG, ABS, TPU, PA, PC, CF/GF), Resin-Harze und Laser-Werkstoffe.">
+  <meta name="description" content="Alle verfügbaren Materialien bei PitA: FDM-Filamente (PLA, PETG, ABS, TPU, PA, PC, CF/GF), Resin-Harze und Laser-Werkstoffe. Interaktive Detailkarten mit Specs.">
   <link rel="canonical" href="https://evilflow666.github.io/printforge/materialien.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Materialien – PitA | Unsere Werkstoffe">
-  <meta property="og:description" content="FDM-Filamente, Resin-Harze und Laser-Werkstoffe — die volle Materialvielfalt bei PitA.">
+  <meta property="og:description" content="FDM-Filamente, Resin-Harze und Laser-Werkstoffe — die volle Materialvielfalt bei PitA. Klick auf eine Karte für Details!">
   <meta property="og:url" content="https://evilflow666.github.io/printforge/materialien.html">
   <meta property="og:image" content="https://evilflow666.github.io/printforge/images/gallery-1.jpg">
   <meta property="og:locale" content="de_DE">
@@ -23,229 +23,597 @@
 <body>
   <header class="header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">← Pit<span class="accent">A</span></a>
+      <a href="index.html" class="logo">&larr; Pit<span class="accent">A</span></a>
       <div class="lang-switcher">
-        <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪</button>
-        <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧</button>
-        <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷</button>
-        <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸</button>
-        <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹</button>
+        <button onclick="setLang('de')" data-lang="de" title="Deutsch">&#x1F1E9;&#x1F1EA;</button>
+        <button onclick="setLang('en')" data-lang="en" title="English">&#x1F1EC;&#x1F1E7;</button>
+        <button onclick="setLang('fr')" data-lang="fr" title="Fran&ccedil;ais">&#x1F1EB;&#x1F1F7;</button>
+        <button onclick="setLang('es')" data-lang="es" title="Espa&ntilde;ol">&#x1F1EA;&#x1F1F8;</button>
+        <button onclick="setLang('it')" data-lang="it" title="Italiano">&#x1F1EE;&#x1F1F9;</button>
       </div>
-      <a href="warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
+      <a href="warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">&#x1F6D2;<span id="cart-badge" class="cart-badge"></span></a>
     </div>
   </header>
   <div class="sub-page-wrapper">
 
   <section class="sub-hero">
     <div class="container">
-      <h1>🧪 <span data-i18n="sub.materialien.title">Materialien</span></h1>
-      <p data-i18n="mat.hero.sub">Von Standard-Filamenten bis High-Performance — wir drucken, schneiden und gravieren was du brauchst.</p>
+      <h1>&#x1F9EA; <span data-i18n="sub.materialien.title">Materialien</span></h1>
+      <p data-i18n="mat.hero.sub">Von Standard-Filamenten bis High-Performance &mdash; wir drucken, schneiden und gravieren was du brauchst.</p>
+      <p class="mat-hero-hint" data-i18n="mat.hero.hint">&#x1F449; Klick auf eine Karte f&uuml;r Details!</p>
     </div>
   </section>
 
-  <!-- FDM FILAMENTE -->
+  <!-- ═══════════════════════════════════════ FDM FILAMENTE ═══════════════════════════════════════ -->
   <section class="section">
     <div class="container">
-      <h2 data-i18n="mat.fdm.title">🖨️ FDM-Filamente <small style="color:var(--text-secondary); font-size:0.6em;">(Bambu Lab H2D & P1S)</small></h2>
-      <img src="images/mat-fdm-standard.webp" alt="FDM-Filamentspulen in verschiedenen Farben" class="section-img" loading="lazy">
+      <h2 data-i18n="mat.fdm.title">&#x1F5A8;&#xFE0F; FDM-Filamente <small style="color:var(--text-secondary); font-size:0.6em;">(Bambu Lab H2D &amp; P1S)</small></h2>
 
-      <h3 data-i18n="mat.fdm.standard">Standard</h3>
-      <div class="material-grid">
-        <div class="material-card">
-          <h4>PLA</h4>
-          <p data-i18n="mat.pla.desc">Universell, einfach zu drucken. Ideal für Prototypen, Deko und Gehäuse.</p>
-          <span class="material-tag" data-type="bio" data-i18n="mat.tag.bio">Biobasiert</span>
-        </div>
-        <div class="material-card">
-          <h4>PETG</h4>
-          <p data-i18n="mat.petg.desc">Robust, lebensmittelecht, UV-beständig. Gut für Outdoor und mechanische Teile.</p>
-          <span class="material-tag" data-type="allrounder" data-i18n="mat.tag.allrounder">Allrounder</span>
-        </div>
-        <div class="material-card">
-          <h4>ABS</h4>
-          <p data-i18n="mat.abs.desc">Hitzebeständig, schlagfest. Klassiker für technische Anwendungen.</p>
-          <span class="material-tag" data-type="tech" data-i18n="mat.tag.tech">Technisch</span>
-        </div>
-        <div class="material-card">
-          <h4>ASA</h4>
-          <p data-i18n="mat.asa.desc">Wie ABS, aber UV-stabil. Perfekt für Außenanwendungen.</p>
-          <span class="material-tag" data-type="outdoor" data-i18n="mat.tag.outdoor">Outdoor</span>
-        </div>
-        <div class="material-card">
-          <h4>TPU</h4>
-          <p data-i18n="mat.tpu.desc">Flexibel, gummiartig. Für Dichtungen, Hüllen, Stoßdämpfer.</p>
-          <span class="material-tag" data-type="flex" data-i18n="mat.tag.flex">Flexibel</span>
-        </div>
-      </div>
+      <div class="mat-flip-grid">
 
-      <h3 data-i18n="mat.fdm.engineering">Engineering</h3>
-      <div class="material-grid">
-        <div class="material-card">
-          <h4>PA (Nylon)</h4>
-          <p data-i18n="mat.pa.desc">Extrem belastbar, verschleißfest. Zahnräder, Scharniere, Funktionsteile.</p>
-          <span class="material-tag" data-type="hp" data-i18n="mat.tag.hp">High-Performance</span>
+        <!-- PLA -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F7E2;</div>
+              <h3>PLA</h3>
+              <span class="mat-badge" data-type="bio" data-i18n="mat.tag.bio">Biobasiert</span>
+              <p data-i18n="mat.pla.desc">Universell, einfach zu drucken. Ideal f&uuml;r Prototypen, Deko und Geh&auml;use.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3>PLA &mdash; Details</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F321;&#xFE0F; <span data-i18n="mat.spec.temp">Drucktemp</span></span><span>190&ndash;220&deg;C</span></div>
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:60%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F525; <span data-i18n="mat.spec.heat">Hitzebest&auml;ndig</span></span><div class="mat-bar"><div style="width:25%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4A7; <span data-i18n="mat.spec.chemical">Chemieresistenz</span></span><div class="mat-bar"><div style="width:30%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F3A8; <span data-i18n="mat.spec.colors">Farbvielfalt</span></span><div class="mat-bar"><div style="width:95%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.pla.good1">Prototypen</li>
+                  <li data-i18n="mat.pla.good2">Deko &amp; Figuren</li>
+                  <li data-i18n="mat.pla.good3">Geh&auml;use (Innenbereich)</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.pla.bad1">Outdoor (UV-empfindlich)</li>
+                  <li data-i18n="mat.pla.bad2">Hei&szlig;es Wasser / Sp&uuml;lmaschine</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.04 &euro;/g</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-        <div class="material-card">
-          <h4>PC (Polycarbonat)</h4>
-          <p data-i18n="mat.pc.desc">Transparent möglich, schlagfest, hitzebeständig bis 130°C.</p>
-          <span class="material-tag" data-type="hp" data-i18n="mat.tag.hp">High-Performance</span>
-        </div>
-        <div class="material-card">
-          <h4>PET</h4>
-          <p data-i18n="mat.pet.desc">Dimensionsstabil, chemisch beständig. Industrielle Anwendungen.</p>
-          <span class="material-tag" data-type="tech" data-i18n="mat.tag.tech">Technisch</span>
-        </div>
-      </div>
 
-      <h3 data-i18n="mat.fdm.cf">Faserverstärkt (CF/GF)</h3>
-      <img src="images/mat-fdm-carbon.webp" alt="Carbon-faserverstärkte Filamentspulen" class="section-img" loading="lazy">
-      <div class="material-grid">
-        <div class="material-card">
-          <h4>PLA-CF / PLA-GF</h4>
-          <p data-i18n="mat.placf.desc">PLA mit Carbon- oder Glasfaser. Steifer, leichter, maßhaltig.</p>
-          <span class="material-tag" data-type="carbon">Carbon</span>
+        <!-- PETG -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F535;</div>
+              <h3>PETG</h3>
+              <span class="mat-badge" data-type="allrounder" data-i18n="mat.tag.allrounder">Allrounder</span>
+              <p data-i18n="mat.petg.desc">Robust, lebensmittelecht, UV-best&auml;ndig. Gut f&uuml;r Outdoor und mechanische Teile.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3>PETG &mdash; Details</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F321;&#xFE0F; <span data-i18n="mat.spec.temp">Drucktemp</span></span><span>220&ndash;250&deg;C</span></div>
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:75%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F525; <span data-i18n="mat.spec.heat">Hitzebest&auml;ndig</span></span><div class="mat-bar"><div style="width:55%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4A7; <span data-i18n="mat.spec.chemical">Chemieresistenz</span></span><div class="mat-bar"><div style="width:70%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F3A8; <span data-i18n="mat.spec.colors">Farbvielfalt</span></span><div class="mat-bar"><div style="width:70%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.petg.good1">Outdoor-Einsatz</li>
+                  <li data-i18n="mat.petg.good2">Mechanische Teile</li>
+                  <li data-i18n="mat.petg.good3">Lebensmittelkontakt (bedingt)</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.petg.bad1">Hohe Hitze &gt;80&deg;C</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.05 &euro;/g</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-        <div class="material-card">
-          <h4>PETG-CF / PETG-GF</h4>
-          <p data-i18n="mat.petgcf.desc">Verstärktes PETG. Ideal für Funktionsteile mit höherer Steifigkeit.</p>
-          <span class="material-tag" data-type="carbon">Carbon</span>
-        </div>
-        <div class="material-card">
-          <h4>PA-CF / PA-GF</h4>
-          <p data-i18n="mat.pacf.desc">Nylon mit Faser. Höchste Belastbarkeit für Ingenieur-Anwendungen.</p>
-          <span class="material-tag" data-type="industrial" data-i18n="mat.tag.industrial">Industrial</span>
-        </div>
-        <div class="material-card">
-          <h4>PC-CF / PC-GF</h4>
-          <p data-i18n="mat.pccf.desc">Polycarbonat mit Faser. Extrem hitze- und schlagfest.</p>
-          <span class="material-tag" data-type="industrial" data-i18n="mat.tag.industrial">Industrial</span>
-        </div>
-        <div class="material-card">
-          <h4>ABS-CF / ASA-CF</h4>
-          <p data-i18n="mat.abscf.desc">Faserverstärktes ABS/ASA für technische Outdoor-Teile.</p>
-          <span class="material-tag" data-type="carbon">Carbon</span>
-        </div>
-      </div>
 
-      <h3 data-i18n="mat.fdm.hp">High-Performance</h3>
-      <div class="material-grid">
-        <div class="material-card">
-          <h4>PPA-CF / PPA-GF</h4>
-          <p data-i18n="mat.ppacf.desc">Polyphthalamid mit Faser. Extreme Hitzebeständigkeit (HDT >200°C).</p>
-          <span class="material-tag" data-type="hp" data-i18n="mat.tag.extreme">Extrem</span>
+        <!-- ABS -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F7E1;</div>
+              <h3>ABS</h3>
+              <span class="mat-badge" data-type="tech" data-i18n="mat.tag.tech">Technisch</span>
+              <p data-i18n="mat.abs.desc">Hitzebest&auml;ndig, schlagfest. Klassiker f&uuml;r technische Anwendungen.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3>ABS &mdash; Details</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F321;&#xFE0F; <span data-i18n="mat.spec.temp">Drucktemp</span></span><span>230&ndash;260&deg;C</span></div>
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:70%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F525; <span data-i18n="mat.spec.heat">Hitzebest&auml;ndig</span></span><div class="mat-bar"><div style="width:75%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4A7; <span data-i18n="mat.spec.chemical">Chemieresistenz</span></span><div class="mat-bar"><div style="width:60%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F3A8; <span data-i18n="mat.spec.colors">Farbvielfalt</span></span><div class="mat-bar"><div style="width:60%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.abs.good1">Technische Teile</li>
+                  <li data-i18n="mat.abs.good2">Hitzebereich</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.abs.bad1">Ohne Einhausung drucken</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.05 &euro;/g</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-        <div class="material-card">
-          <h4>PPS / PPS-CF</h4>
-          <p data-i18n="mat.pps.desc">Chemisch resistent, hitzebeständig bis 260°C. Aerospace-Grade.</p>
-          <span class="material-tag" data-type="hp" data-i18n="mat.tag.extreme">Extrem</span>
-        </div>
-      </div>
 
-      <h3 data-i18n="mat.fdm.support">Support-Materialien</h3>
-      <div class="material-grid">
-        <div class="material-card">
-          <h4>PVA</h4>
-          <p data-i18n="mat.pva.desc">Wasserlöslich. Perfekter Support für PLA und PETG.</p>
-          <span class="material-tag" data-type="support">Support</span>
+        <!-- ASA -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F7E0;</div>
+              <h3>ASA</h3>
+              <span class="mat-badge" data-type="outdoor" data-i18n="mat.tag.outdoor">Outdoor</span>
+              <p data-i18n="mat.asa.desc">Wie ABS, aber UV-stabil. Perfekt f&uuml;r Au&szlig;enanwendungen.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3>ASA &mdash; Details</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F321;&#xFE0F; <span data-i18n="mat.spec.temp">Drucktemp</span></span><span>240&ndash;260&deg;C</span></div>
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:70%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F525; <span data-i18n="mat.spec.heat">Hitzebest&auml;ndig</span></span><div class="mat-bar"><div style="width:75%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4A7; <span data-i18n="mat.spec.chemical">Chemieresistenz</span></span><div class="mat-bar"><div style="width:65%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F3A8; <span data-i18n="mat.spec.colors">Farbvielfalt</span></span><div class="mat-bar"><div style="width:50%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.asa.good1">Outdoor-Einsatz</li>
+                  <li data-i18n="mat.asa.good2">UV-Best&auml;ndigkeit</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.asa.bad1">Bel&uuml;ftung n&ouml;tig</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.06 &euro;/g</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-        <div class="material-card">
-          <h4>BVOH</h4>
-          <p data-i18n="mat.bvoh.desc">Wasserlöslich, bessere Auflösung als PVA. Premium-Support.</p>
-          <span class="material-tag" data-type="support">Support</span>
+
+        <!-- TPU -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F7E3;</div>
+              <h3>TPU</h3>
+              <span class="mat-badge" data-type="flex" data-i18n="mat.tag.flex">Flexibel</span>
+              <p data-i18n="mat.tpu.desc">Flexibel, gummiartig. F&uuml;r Dichtungen, H&uuml;llen, Sto&szlig;d&auml;mpfer.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3>TPU &mdash; Details</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F321;&#xFE0F; <span data-i18n="mat.spec.temp">Drucktemp</span></span><span>220&ndash;240&deg;C</span></div>
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:40%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F525; <span data-i18n="mat.spec.heat">Hitzebest&auml;ndig</span></span><div class="mat-bar"><div style="width:45%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4A7; <span data-i18n="mat.spec.chemical">Chemieresistenz</span></span><div class="mat-bar"><div style="width:50%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F3A8; <span data-i18n="mat.spec.colors">Farbvielfalt</span></span><div class="mat-bar"><div style="width:40%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.tpu.good1">Dichtungen</li>
+                  <li data-i18n="mat.tpu.good2">H&uuml;llen &amp; Cases</li>
+                  <li data-i18n="mat.tpu.good3">Sto&szlig;d&auml;mpfer</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.tpu.bad1">Feine Details</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.08 &euro;/g</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <!-- PA (Nylon) -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F534;</div>
+              <h3>PA (Nylon)</h3>
+              <span class="mat-badge" data-type="hp" data-i18n="mat.tag.hp">High-Performance</span>
+              <p data-i18n="mat.pa.desc">Extrem belastbar, verschlei&szlig;fest. Zahnr&auml;der, Scharniere, Funktionsteile.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3>PA (Nylon) &mdash; Details</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F321;&#xFE0F; <span data-i18n="mat.spec.temp">Drucktemp</span></span><span>250&ndash;270&deg;C</span></div>
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:90%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F525; <span data-i18n="mat.spec.heat">Hitzebest&auml;ndig</span></span><div class="mat-bar"><div style="width:80%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4A7; <span data-i18n="mat.spec.chemical">Chemieresistenz</span></span><div class="mat-bar"><div style="width:60%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F3A8; <span data-i18n="mat.spec.colors">Farbvielfalt</span></span><div class="mat-bar"><div style="width:30%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.pa.good1">Zahnr&auml;der &amp; Scharniere</li>
+                  <li data-i18n="mat.pa.good2">Hochlastteile</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.pa.bad1">Feuchtigkeit (trocknen!)</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.12 &euro;/g</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PC -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x26AA;</div>
+              <h3>PC</h3>
+              <span class="mat-badge" data-type="hp" data-i18n="mat.tag.hp">High-Performance</span>
+              <p data-i18n="mat.pc.desc">Transparent m&ouml;glich, schlagfest, hitzebest&auml;ndig bis 130&deg;C.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3>PC &mdash; Details</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F321;&#xFE0F; <span data-i18n="mat.spec.temp">Drucktemp</span></span><span>260&ndash;280&deg;C</span></div>
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:85%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F525; <span data-i18n="mat.spec.heat">Hitzebest&auml;ndig</span></span><div class="mat-bar"><div style="width:90%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4A7; <span data-i18n="mat.spec.chemical">Chemieresistenz</span></span><div class="mat-bar"><div style="width:55%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F3A8; <span data-i18n="mat.spec.colors">Farbvielfalt</span></span><div class="mat-bar"><div style="width:20%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.pc.good1">Transparente Teile</li>
+                  <li data-i18n="mat.pc.good2">Hitze &gt;130&deg;C</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.pc.bad1">Einfacher Druck</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.10 &euro;/g</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carbon (CF) -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x2B1B;</div>
+              <h3>Carbon (CF)</h3>
+              <span class="mat-badge" data-type="carbon">Carbon</span>
+              <p data-i18n="mat.cf.desc">Maximale Steifigkeit, federleicht. F&uuml;r Leichtbau und Ingenieurteile.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3>Carbon (CF) &mdash; Details</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F321;&#xFE0F; <span data-i18n="mat.spec.temp">Drucktemp</span></span><span>240&ndash;270&deg;C</span></div>
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:95%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F525; <span data-i18n="mat.spec.heat">Hitzebest&auml;ndig</span></span><div class="mat-bar"><div style="width:80%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4A7; <span data-i18n="mat.spec.chemical">Chemieresistenz</span></span><div class="mat-bar"><div style="width:65%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F3A8; <span data-i18n="mat.spec.colors">Farbvielfalt</span></span><div class="mat-bar"><div style="width:10%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.cf.good1">Max. Steifigkeit</li>
+                  <li data-i18n="mat.cf.good2">Leichtbau</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.cf.bad1">Flexibilit&auml;t</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.18 &euro;/g</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /mat-flip-grid FDM -->
     </div>
   </section>
 
-  <!-- RESIN -->
+  <!-- ═══════════════════════════════════════ RESIN ═══════════════════════════════════════ -->
   <section class="section section-alt">
     <div class="container">
-      <h2 data-i18n="mat.resin.title">💧 Resin-Harze <small style="color:var(--text-secondary); font-size:0.6em;">(SLA/DLP)</small></h2>
-      <img src="images/mat-resin.webp" alt="UV-Resin Flaschen für SLA-Druck" class="section-img" loading="lazy">
-      <div class="material-grid">
-        <div class="material-card">
-          <h4 data-i18n="mat.resin.standard">Standard-Resin</h4>
-          <p data-i18n="mat.resin.standard.desc">Hohe Detailtreue, glatte Oberfläche. Miniaturen, Schmuck, Modelle.</p>
-          <span class="material-tag" data-type="precision" data-i18n="mat.tag.precision">Präzision</span>
+      <h2 data-i18n="mat.resin.title">&#x1F4A7; Resin-Harze <small style="color:var(--text-secondary); font-size:0.6em;">(SLA/DLP)</small></h2>
+
+      <div class="mat-flip-grid">
+
+        <!-- Standard Resin -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F48E;</div>
+              <h3 data-i18n="mat.resin.standard">Standard-Resin</h3>
+              <span class="mat-badge" data-type="precision" data-i18n="mat.tag.precision">Pr&auml;zision</span>
+              <p data-i18n="mat.resin.standard.desc">Hohe Detailtreue, glatte Oberfl&auml;che. Miniaturen, Schmuck, Modelle.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3 data-i18n="mat.resin.standard">Standard-Resin</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:50%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F50D; <span data-i18n="mat.spec.detail">Detailtreue</span></span><div class="mat-bar"><div style="width:98%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4CF; <span data-i18n="mat.spec.flexible">Flexibilit&auml;t</span></span><div class="mat-bar"><div style="width:10%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.resin.std.good1">Miniaturen &amp; Figuren</li>
+                  <li data-i18n="mat.resin.std.good2">Schmuck-Master</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.resin.std.bad1">Mechanische Last</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.15 &euro;/cm&sup3;</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-        <div class="material-card">
-          <h4 data-i18n="mat.resin.tough">Tough Resin</h4>
-          <p data-i18n="mat.resin.tough.desc">Mechanisch belastbar, ABS-ähnlich. Funktionsteile und Gehäuse.</p>
-          <span class="material-tag" data-type="tech" data-i18n="mat.tag.durable">Belastbar</span>
+
+        <!-- Tough Resin -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F6E1;&#xFE0F;</div>
+              <h3 data-i18n="mat.resin.tough">Tough Resin</h3>
+              <span class="mat-badge" data-type="tech" data-i18n="mat.tag.durable">Belastbar</span>
+              <p data-i18n="mat.resin.tough.desc">Mechanisch belastbar, ABS-&auml;hnlich. Funktionsteile und Geh&auml;use.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3 data-i18n="mat.resin.tough">Tough Resin</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:80%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F50D; <span data-i18n="mat.spec.detail">Detailtreue</span></span><div class="mat-bar"><div style="width:85%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4CF; <span data-i18n="mat.spec.flexible">Flexibilit&auml;t</span></span><div class="mat-bar"><div style="width:20%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.resin.tough.good1">Funktionsteile</li>
+                  <li data-i18n="mat.resin.tough.good2">Geh&auml;use &amp; Tests</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.resin.tough.bad1">Extreme Details</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.22 &euro;/cm&sup3;</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-        <div class="material-card">
-          <h4 data-i18n="mat.resin.flex">Flexible Resin</h4>
-          <p data-i18n="mat.resin.flex.desc">Biegsam, gummiartig. Dichtungen und flexible Prototypen.</p>
-          <span class="material-tag" data-type="flex" data-i18n="mat.tag.flex">Flexibel</span>
+
+        <!-- Flexible Resin -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F30A;</div>
+              <h3 data-i18n="mat.resin.flex">Flexible Resin</h3>
+              <span class="mat-badge" data-type="flex" data-i18n="mat.tag.flex">Flexibel</span>
+              <p data-i18n="mat.resin.flex.desc">Biegsam, gummiartig. Dichtungen und flexible Prototypen.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3 data-i18n="mat.resin.flex">Flexible Resin</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:30%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F50D; <span data-i18n="mat.spec.detail">Detailtreue</span></span><div class="mat-bar"><div style="width:70%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4CF; <span data-i18n="mat.spec.flexible">Flexibilit&auml;t</span></span><div class="mat-bar"><div style="width:95%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.resin.flex.good1">Dichtungen &amp; Griffe</li>
+                  <li data-i18n="mat.resin.flex.good2">Weiche Teile</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.resin.flex.bad1">Steife Konstruktionen</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.25 &euro;/cm&sup3;</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-        <div class="material-card">
-          <h4 data-i18n="mat.resin.castable">Castable Resin</h4>
-          <p data-i18n="mat.resin.castable.desc">Rückstandsfrei ausbrennbar. Für Schmuck-Gussformen.</p>
-          <span class="material-tag" data-type="precision" data-i18n="mat.tag.jewelry">Schmuck</span>
+
+        <!-- Castable Resin -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F48D;</div>
+              <h3 data-i18n="mat.resin.castable">Castable Resin</h3>
+              <span class="mat-badge" data-type="precision" data-i18n="mat.tag.jewelry">Schmuck</span>
+              <p data-i18n="mat.resin.castable.desc">R&uuml;ckstandsfrei ausbrennbar. F&uuml;r Schmuck-Gussformen.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3 data-i18n="mat.resin.castable">Castable Resin</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x1F4AA; <span data-i18n="mat.spec.strength">Festigkeit</span></span><div class="mat-bar"><div style="width:40%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F50D; <span data-i18n="mat.spec.detail">Detailtreue</span></span><div class="mat-bar"><div style="width:95%"></div></div></div>
+                <div class="mat-spec-row"><span>&#x1F4CF; <span data-i18n="mat.spec.flexible">Flexibilit&auml;t</span></span><div class="mat-bar"><div style="width:5%"></div></div></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.resin.cast.good1">Gussformen</li>
+                  <li data-i18n="mat.resin.cast.good2">Schmuckherstellung</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.resin.cast.bad1">Endprodukte</li>
+                </ul>
+              </div>
+              <span class="mat-price-hint">ab 0.30 &euro;/cm&sup3;</span>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-      </div>
+
+      </div><!-- /mat-flip-grid Resin -->
     </div>
   </section>
 
-  <!-- LASER -->
+  <!-- ═══════════════════════════════════════ LASER ═══════════════════════════════════════ -->
   <section class="section">
     <div class="container">
-      <h2 data-i18n="mat.laser.title">⚡ Laser-Werkstoffe <small style="color:var(--text-secondary); font-size:0.6em;">(Cutting & Gravur)</small></h2>
-      <img src="images/mat-laser.webp" alt="Laser-Werkstoffe: Holz, Acryl, Leder" class="section-img" loading="lazy">
+      <h2 data-i18n="mat.laser.title">&#x26A1; Laser-Werkstoffe <small style="color:var(--text-secondary); font-size:0.6em;">(Cutting &amp; Gravur)</small></h2>
 
-      <h3 data-i18n="mat.laser.cutting">Schneidbar</h3>
-      <div class="material-grid">
-        <div class="material-card">
-          <h4 data-i18n="mat.laser.wood">Holz</h4>
-          <p data-i18n="mat.laser.wood.desc">Sperrholz, MDF, Massivholz bis 8mm. Schilder, Deko, Prototypen.</p>
-          <span class="material-tag" data-type="cutting">Cutting</span>
-        </div>
-        <div class="material-card">
-          <h4 data-i18n="mat.laser.acrylic">Acryl</h4>
-          <p data-i18n="mat.laser.acrylic.desc">Transparent, farbig, bis 6mm. Displays, Gehäuse, Beschilderung.</p>
-          <span class="material-tag" data-type="cutting">Cutting</span>
-        </div>
-        <div class="material-card">
-          <h4 data-i18n="mat.laser.leather">Leder & Stoff</h4>
-          <p data-i18n="mat.laser.leather.desc">Feinschnitte für Mode, Accessoires, Patches.</p>
-          <span class="material-tag" data-type="cutting">Cutting</span>
-        </div>
-        <div class="material-card">
-          <h4 data-i18n="mat.laser.paper">Papier & Karton</h4>
-          <p data-i18n="mat.laser.paper.desc">Verpackungen, Einladungen, Modelle.</p>
-          <span class="material-tag" data-type="cutting">Cutting</span>
-        </div>
-      </div>
+      <div class="mat-flip-grid">
 
-      <h3 data-i18n="mat.laser.engraving">Gravierbar</h3>
-      <div class="material-grid">
-        <div class="material-card">
-          <h4 data-i18n="mat.laser.metal">Metall</h4>
-          <p data-i18n="mat.laser.metal.desc">Beschichtet oder eloxiert. Logos, Seriennummern, Branding.</p>
-          <span class="material-tag" data-type="gravur" data-i18n="mat.tag.gravur">Gravur</span>
+        <!-- Holz -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1FAB5;</div>
+              <h3 data-i18n="mat.laser.wood">Holz</h3>
+              <span class="mat-badge" data-type="cutting">Cutting</span>
+              <p data-i18n="mat.laser.wood.desc">Sperrholz, MDF, Massivholz bis 8mm. Schilder, Deko, Prototypen.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3 data-i18n="mat.laser.wood">Holz</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x2702;&#xFE0F; <span data-i18n="mat.spec.cutting">Schneiden</span></span><span>&#x2705; bis 8mm</span></div>
+                <div class="mat-spec-row"><span>&#x1F58A;&#xFE0F; <span data-i18n="mat.spec.engraving">Gravur</span></span><span>&#x2705;</span></div>
+                <div class="mat-spec-row"><span>&#x1F4D0; <span data-i18n="mat.spec.thickness">Dicke</span></span><span>3&ndash;8mm</span></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.laser.wood.good1">Schilder &amp; Deko</li>
+                  <li data-i18n="mat.laser.wood.good2">Verpackungen</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.laser.wood.bad1">Feuchtigkeit</li>
+                </ul>
+              </div>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-        <div class="material-card">
-          <h4 data-i18n="mat.laser.glass">Glas & Keramik</h4>
-          <p data-i18n="mat.laser.glass.desc">Dekorative Gravuren, Geschenke, Schilder.</p>
-          <span class="material-tag" data-type="gravur" data-i18n="mat.tag.gravur">Gravur</span>
+
+        <!-- Acryl -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x1F4A0;</div>
+              <h3 data-i18n="mat.laser.acrylic">Acryl</h3>
+              <span class="mat-badge" data-type="cutting">Cutting</span>
+              <p data-i18n="mat.laser.acrylic.desc">Transparent, farbig, bis 6mm. Displays, Geh&auml;use, Beschilderung.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3 data-i18n="mat.laser.acrylic">Acryl</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x2702;&#xFE0F; <span data-i18n="mat.spec.cutting">Schneiden</span></span><span>&#x2705; bis 6mm</span></div>
+                <div class="mat-spec-row"><span>&#x1F58A;&#xFE0F; <span data-i18n="mat.spec.engraving">Gravur</span></span><span>&#x2705;</span></div>
+                <div class="mat-spec-row"><span>&#x1F4D0; <span data-i18n="mat.spec.thickness">Dicke</span></span><span>3&ndash;6mm</span></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.laser.acrylic.good1">Edel-Schilder</li>
+                  <li data-i18n="mat.laser.acrylic.good2">LED-Displays</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.laser.acrylic.bad1">Hitze</li>
+                </ul>
+              </div>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-        <div class="material-card">
-          <h4 data-i18n="mat.laser.stone">Stein</h4>
-          <p data-i18n="mat.laser.stone.desc">Granit, Schiefer, Marmor. Gedenktafeln, Deko-Objekte.</p>
-          <span class="material-tag" data-type="gravur" data-i18n="mat.tag.gravur">Gravur</span>
+
+        <!-- Metall/Glas -->
+        <div class="mat-flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="mat-flip-inner">
+            <div class="mat-flip-front">
+              <div class="mat-photo-placeholder">&#x2699;&#xFE0F;</div>
+              <h3 data-i18n="mat.laser.metalglass">Metall / Glas</h3>
+              <span class="mat-badge" data-type="gravur" data-i18n="mat.tag.gravur">Gravur</span>
+              <p data-i18n="mat.laser.metalglass.desc">Branding, QR-Codes, Geschenke &mdash; Gravur auf Metall und Glas.</p>
+              <span class="mat-flip-hint" data-i18n="mat.flip.hint">&#x21A9; Klick f&uuml;r Details</span>
+            </div>
+            <div class="mat-flip-back">
+              <h3 data-i18n="mat.laser.metalglass">Metall / Glas</h3>
+              <div class="mat-specs">
+                <div class="mat-spec-row"><span>&#x2702;&#xFE0F; <span data-i18n="mat.spec.cutting">Schneiden</span></span><span>&#x274C;</span></div>
+                <div class="mat-spec-row"><span>&#x1F58A;&#xFE0F; <span data-i18n="mat.spec.engraving">Gravur</span></span><span>&#x2705;</span></div>
+                <div class="mat-spec-row"><span>&#x1F4D0; <span data-i18n="mat.spec.thickness">Dicke</span></span><span>&mdash;</span></div>
+              </div>
+              <div class="mat-usage">
+                <h4>&#x2705; <span data-i18n="mat.usage.good">Perfekt f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.laser.mg.good1">Branding &amp; QR-Codes</li>
+                  <li data-i18n="mat.laser.mg.good2">Geschenke</li>
+                </ul>
+                <h4>&#x26A0;&#xFE0F; <span data-i18n="mat.usage.bad">Nicht ideal f&uuml;r</span></h4>
+                <ul>
+                  <li data-i18n="mat.laser.mg.bad1">Schneiden</li>
+                </ul>
+              </div>
+              <button class="mat-flip-close" data-i18n="mat.flip.back" onclick="event.stopPropagation()">&#x21A9; Zur&uuml;ck</button>
+            </div>
+          </div>
         </div>
-      </div>
+
+      </div><!-- /mat-flip-grid Laser -->
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="section section-alt" style="text-align:center;">
     <div class="container">
-      <p style="color:var(--text-secondary); margin-bottom:16px;" data-i18n="mat.cta.text">Material nicht dabei? Frag uns — wir finden eine Lösung.</p>
-      <a href="index.html#kontakt" class="btn btn-primary" data-i18n="mat.cta.btn">📬 Angebot anfragen</a>
+      <p style="color:var(--text-secondary); margin-bottom:16px;" data-i18n="mat.cta.text">Material nicht dabei? Frag uns &mdash; wir finden eine L&ouml;sung.</p>
+      <a href="index.html#kontakt" class="btn btn-primary" data-i18n="mat.cta.btn">&#x1F4EC; Angebot anfragen</a>
     </div>
   </section>
 
   </div><!-- /sub-page-wrapper -->
+
   <!-- MOUNTAIN DIVIDER -->
   <div class="mountain-divider">
     <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -256,8 +624,8 @@
   <footer class="footer">
     <div class="container footer-inner">
       <span class="logo">Pit<span class="accent">A</span></span>
-      <p><span data-i18n="footer.tagline">Präzision aus den Alpen.</span></p>
-            <div class="footer-links">
+      <p><span data-i18n="footer.tagline">Pr&auml;zision aus den Alpen.</span></p>
+      <div class="footer-links">
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
         <a href="faq.html" data-i18n="nav.faq">FAQ</a>
         <a href="impressum.html"><span data-i18n="footer.impressum">Impressum</span></a>
@@ -271,5 +639,14 @@
 
   <script src="clippy.js"></script>
   <script src="cart.js"></script>
+  <script>
+    // Close button handler for flip cards
+    document.querySelectorAll('.mat-flip-close').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.closest('.mat-flip-card').classList.remove('flipped');
+      });
+    });
+  </script>
 </body>
 </html>

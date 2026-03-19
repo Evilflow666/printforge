@@ -134,53 +134,15 @@ function contextGreeting() {
 // ===== IDLE ANIMATIONEN =====
 function getIdleTips() {
   const tips = {
-    de: ["Wusstest du? Wir drucken mit PV-Energie! ☀️", "Tipp: STL hochladen → ich schätze den Preis sofort!", "Carbon-Filament ist 5x steifer als PLA 💪", "Schau mal in unsere Materialien-Seite!", "Du brauchst Hilfe? Klick mich an! 📎", "Fun Fact: Unser H2D hat Dual Nozzle!", "Lasergravur auf Glas? Kein Problem!", "Wir fertigen auch Kleinserien bis 50 Stück.", "Resin-Druck = Spritzguss-Qualität 🔬", "Eilauftrag? Prototypen in 24 Stunden!", "Ich bin seit 1997 im Einsatz. Gut gealtert, oder? 😏", "PLA schmilzt bei 60°C. Nicht im Auto liegen lassen.", "PETG + Spülmaschine = echte Liebe ❤️"],
-    en: ["Did you know? We print with solar energy! ☀️", "Tip: Upload STL → I'll estimate the price instantly!", "Carbon filament is 5x stiffer than PLA 💪", "Check out our Materials page!", "Need help? Click me! 📎", "Fun fact: Our H2D has dual nozzle!", "Laser engraving on glass? No problem!", "We also make small series up to 50 pieces.", "Resin printing = injection moulding quality 🔬", "Rush order? Prototypes in 24 hours!", "I've been around since 1997. Aged well, right? 😏", "PLA melts at 60°C. Don't leave it in the car.", "PETG + dishwasher = true love ❤️"],
-    fr: ["Le saviez-vous ? Nous imprimons avec de l\'énergie solaire ! ☀️", "Conseil : téléchargez un STL → j\'estime le prix immédiatement !", "Le filament carbon est 5× plus rigide que le PLA 💪", "Consultez notre page Matériaux !", "Besoin d\'aide ? Cliquez sur moi ! 📎", "Fun fact : Notre H2D a une double buse !", "Gravure laser sur verre ? Pas de problème !", "Nous fabriquons aussi de petites séries jusqu\'à 50 pièces.", "Impression résine = qualité moulage par injection 🔬", "Commande urgente ? Prototypes en 24 heures !", "Je suis là depuis 1997. Bien vieilli, non ? 😏"],
-    es: ["¿Sabías que imprimimos con energía solar? ☀️", "Consejo: sube un STL → ¡estimo el precio al instante!", "El filamento de carbono es 5 veces más rígido que el PLA 💪", "¡Echa un vistazo a nuestra página de materiales!", "¿Necesitas ayuda? ¡Haz clic en mí! 📎", "Dato curioso: ¡nuestro H2D tiene doble boquilla!", "¿Grabado láser en vidrio? ¡Sin problema!", "También fabricamos series cortas de hasta 50 piezas.", "Impresión en resina = calidad de moldeo por inyección 🔬", "¿Pedido urgente? ¡Prototipos en 24 horas!", "Llevo aquí desde 1997. He envejecido bien, ¿verdad? 😏"],
-    it: ["Lo sapevi? Stampiamo con energia solare! ☀️", "Consiglio: carica un STL → stimo il prezzo subito!", "Il filamento in carbonio è 5× più rigido del PLA 💪", "Dai un'occhiata alla nostra pagina Materiali!", "Hai bisogno di aiuto? Cliccami! 📎", "Fun fact: il nostro H2D ha doppio ugello!", "Incisione laser su vetro? Nessun problema!", "Produciamo anche piccole serie fino a 50 pezzi.", "Stampa in resina = qualità stampaggio a iniezione 🔬", "Ordine urgente? Prototipi in 24 ore!", "Sono qui dal 1997. Invecchiato bene, no? 😏"],
+    de: ["Wusstest du? Wir drucken mit PV-Energie! ☀️","Tipp: STL hochladen → sofortige Preisschätzung!","Carbon ist 5x steifer als PLA 💪","Schau mal in unsere Materialien-Seite!","Eilauftrag? Prototypen in 24 Stunden!","Resin-Druck = Spritzguss-Qualität 🔬","Ich bin seit 1997 im Einsatz. Gut gealtert, oder? 😏","PLA schmilzt bei 60°C. Nicht im Auto liegen lassen.","PETG + Spülmaschine = echte Liebe ❤️","Fun Fact: Unser H2D hat Dual Nozzle!"],
+    en: ["Did you know? We print with solar energy! ☀️","Tip: Upload STL for an instant price estimate!","Carbon is 5x stiffer than PLA 💪","Check out our Materials page!","Rush order? Prototypes in 24 hours!","Resin printing = injection moulding quality 🔬","I've been around since 1997. Aged well, right? 😏","PLA melts at 60 degrees. Do not leave in the car.","PETG + dishwasher = true love ❤️","Fun fact: Our H2D has dual nozzle!"],
+    fr: ["Nous imprimons avec de l'energie solaire ! ☀️","Conseil : telechargez un STL pour une estimation !","Le carbon est 5x plus rigide que le PLA 💪","Consultez notre page Materiaux !","Commande urgente ? Prototypes en 24 heures !","Impression resine = qualite moulage 🔬","Je suis la depuis 1997. Bien vieilli, non ? 😏","Petites series jusqu'a 50 pieces !","Fun fait : Notre H2D a double buse !"],
+    es: ["Imprimimos con energia solar! ☀️","Consejo: sube un STL para una estimacion!","El carbon es 5x mas rigido que el PLA 💪","Mira nuestra pagina de materiales!","Pedido urgente? Prototipos en 24 horas!","Impresion en resina = calidad de moldeo 🔬","Llevo aqui desde 1997. He envejecido bien, verdad? 😏","Series cortas hasta 50 piezas!","Fun hecho: Nuestro H2D tiene doble boquilla!"],
+    it: ["Stampiamo con energia solare! ☀️","Consiglio: carica un STL per una stima immediata!","Il carbon e 5x piu rigido del PLA 💪","Dai un'occhiata alla nostra pagina Materiali!","Ordine urgente? Prototipi in 24 ore!","Stampa in resina = qualita stampaggio 🔬","Sono qui dal 1997. Invecchiato bene, no? 😏","Piccole serie fino a 50 pezzi!","Fun fact: il nostro H2D ha doppio ugello!"],
   };
   return tips[getClippyLang()] || tips.de;
 }
-const idleTips = ["placeholder"];  // legacy, wird überschrieben
-
-// Override showTip um mehrsprachige Tips zu nutzen
-const _origShowTip = showTip;
-
-function showTip() {
-  const tips = getIdleTips();
-  const chat = document.getElementById('clippy-chat');
-  if (!chat || !chat.classList.contains('clippy-hidden')) return;
-  const bubble = document.getElementById('clippy-bubble');
-  const text   = document.getElementById('clippy-bubble-text');
-  if (!bubble || !text) return;
-  let idx;
-  do { idx = Math.floor(Math.random() * tips.length); } while (idx === lastTipIndex && tips.length > 1);
-  lastTipIndex = idx;
-  text.textContent = tips[idx];
-  bubble.classList.remove('clippy-hidden');
-  wiggle();
-  setTimeout(() => bubble.classList.add('clippy-hidden'), 5000);
-}
-
-const _unusedTips = [
-  "Wusstest du? Wir drucken mit PV-Energie! ☀️",
-  "Tipp: STL hochladen → ich schätze den Preis sofort!",
-  "Carbon-Filament ist 5x steifer als PLA 💪",
-  "Schau mal in unsere Materialien-Seite!",
-  "Du brauchst Hilfe? Klick mich an! 📎",
-  "Fun Fact: Unser H2D hat Dual Nozzle!",
-  "Lasergravur auf Glas? Kein Problem!",
-  "Wir fertigen auch Kleinserien bis 50 Stück.",
-  "Resin-Druck = Spritzguss-Qualität 🔬",
-  "Eilauftrag? Prototypen in 24 Stunden!",
-  "Ich bin seit 1997 im Einsatz. Gut gealtert, oder? 😏",
-  "Sieht aus als würdest du gerade etwas drucken wollen... 🤔",
-  "PLA schmilzt bei 60°C. Nicht im Auto liegen lassen. Vertrau mir.",
-  "Ich habe dir geholfen, bevor KI cool war. 📎",
-  "PETG + Spülmaschine = echte Liebe ❤️",
-  "3D-Druck löst keine Probleme. Außer wenn er es tut."
-];  // end _unusedTips
+const idleTips = getIdleTips(); // legacy compat
 
 let lastTipIndex = -1;
 
@@ -442,8 +404,7 @@ function handleFile(file) {
         wiggle();
       } catch(err) {
         typing.remove();
-        const errMsgs1 = {"de":"Hmm, die Datei konnte ich nicht lesen 🤔 Bitte STL im Binary-Format exportieren!", "en":"Hmm, could not read the file 🤔 Please export STL in binary format!", "fr":"Hmm, impossible de lire le fichier 🤔 Exportez le STL en format binaire !", "es":"Hmm, no pude leer el archivo 🤔 Exporta el STL en formato binario!", "it":"Hmm, impossibile leggere il file 🤔 Esporta lo STL in formato binario!"};
-        appendBot(errMsgs1[getClippyLang()] || errMsgs1.de);
+        appendBot('Hmm, die Datei konnte ich nicht lesen 🤔 Bitte STL im Binary-Format exportieren!');
       }
     };
     reader.readAsArrayBuffer(file);
@@ -472,16 +433,14 @@ function handleFile(file) {
         wiggle();
       } catch(err) {
         typing.remove();
-        const errMsgs2 = {"de":"SVG-Analyse fehlgeschlagen 🤔 Versuch es mit einer Standard-SVG-Datei!", "en":"SVG analysis failed 🤔 Try with a standard SVG file!", "fr":"Analyse SVG échouée 🤔 Essayez avec un fichier SVG standard !", "es":"Análisis SVG fallido 🤔 Prueba con un archivo SVG estándar!", "it":"Analisi SVG fallita 🤔 Prova con un file SVG standard!"};
-    appendBot(errMsgs2[getClippyLang()] || errMsgs2.de);
+        appendBot('SVG-Analyse fehlgeschlagen 🤔 Versuch es mit einer Standard-SVG-Datei!');
       }
     };
     reader.readAsText(file);
 
   } else {
     typing.remove();
-    const fmtErr = {"de":`📎 Format <strong>.${name.split(".").pop()}</strong> nicht unterstützt. Bitte STL, OBJ, SVG oder DXF senden!`, "en":`📎 Format <strong>.${name.split(".").pop()}</strong> not supported. Please send STL, OBJ, SVG or DXF!`, "fr":`📎 Format <strong>.${name.split(".").pop()}</strong> non supporté. Envoyez STL, OBJ, SVG ou DXF !`, "es":`📎 Formato <strong>.${name.split(".").pop()}</strong> no compatible. Envía STL, OBJ, SVG o DXF!`, "it":`📎 Formato <strong>.${name.split(".").pop()}</strong> non supportato. Invia STL, OBJ, SVG o DXF!`}[getClippyLang()];
-    appendBot(fmtErr || `📎 Format nicht unterstützt.`);
+    appendBot(`📎 Format <strong>.${name.split('.').pop()}</strong> kenne ich noch nicht. Schick mir STL, OBJ, SVG oder DXF!`);
   }
 }
 
@@ -510,8 +469,8 @@ function appendTyping() {
   const messages = document.getElementById('clippy-messages');
   const div = document.createElement('div');
   div.className = 'clippy-msg clippy-bot clippy-typing';
-  const typingText = {de:'tippt',en:'typing',fr:'tape',es:'escribiendo',it:'scrive'}[getClippyLang()] || 'tippt';
-  div.innerHTML = `<span>📎 ${typingText}...</span>`;
+  const tText = {de:'tippt',en:'typing',fr:'ecrit',es:'escribiendo',it:'scrive'}[getClippyLang()] || 'tippt';
+  div.innerHTML = `<span>📎 ${tText}...</span>`;
   messages.appendChild(div);
   messages.scrollTop = messages.scrollHeight;
   return div;
@@ -521,101 +480,47 @@ function appendTyping() {
 // ===== CHATBOT LOGIK =====
 const OLLAMA_URL = 'http://69.62.105.159:32768/api/chat';
 
-// Aktive Sprache aus localStorage (sync mit i18n.js)
+// Sprache sync mit i18n.js
 function getClippyLang() {
   return localStorage.getItem('pita-lang') || 'de';
 }
 
-const LANG_INSTRUCTION = {
-  de: 'Antworte immer auf Deutsch.',
-  en: 'Always respond in English.',
-  fr: 'Réponds toujours en français.',
-  es: 'Responde siempre en español.',
-  it: 'Rispondi sempre in italiano.',
-};
-
 function buildSystemPrompt() {
   const lang = getClippyLang();
-  const instr = LANG_INSTRUCTION[lang] || LANG_INSTRUCTION.de;
+  const langInstr = {de:'Antworte immer auf Deutsch.', en:'Always respond in English.', fr:'Réponds toujours en français.', es:'Responde siempre en español.', it:'Rispondi sempre in italiano.'};
+  const instr = langInstr[lang] || langInstr.de;
   return `Du bist Clippy, der freundliche und leicht witzige KI-Assistent von PitA (Printing in the Alps). Du beantwortest Fragen zu 3D-Druck, Lasercutting, Lasergravur, Prototyping und Materialien. Sei kurz, hilfreich und freundlich. ${instr} Gelegentlich ein lockerer Spruch ist erlaubt, aber bleib professionell.
 
-Seitenstruktur: index.html, leistungen/3d-druck.html, leistungen/lasercutting.html, leistungen/lasergravur.html, leistungen/prototyping.html, leistungen/resin-druck.html, materialien.html, faq.html, katalog.html, blog.html
-Equipment: Bambu Lab H2D (325×320×325mm, Dual Nozzle), 2× P1S (256×256×256mm), Creality Falcon Laser (400×400mm), Snapmaker A350T (320×350mm)
-FDM: PLA, PETG, ABS, ASA, TPU, PA, PC + CF/GF Varianten, PPA-CF, PPS. Support: PVA, BVOH
-Resin: Standard, Tough, Flexible, Castable
-Laser-Schneiden: Holz bis 8mm, Acryl 6mm, Leder, Papier. Laser-Gravur: Metall, Glas, Keramik, Stein
-Dateien: STL, 3MF, OBJ, STEP | SVG, DXF, AI, PDF
-Lieferzeiten: Prototypen 24-72h, Kleinserien 3-7 Tage. Versand EU. PV-Energie.
-Preise: PLA ab ~5€, PETG ab ~8€, Carbon ab ~15€, Laser ab ~8€.
-Für Navigation gib HTML-Links: <a href="materialien.html" style="color:#E8A000">Materialien →</a>`;
-}
-const FALLBACK_LANG = {
-  de: {
-    material: "Über 20 Materialien! PLA, PETG, ABS, TPU, Nylon, Carbon und mehr. → <a href='materialien.html' style='color:var(--accent)'>Materialien</a>",
-    kosten:   "Preise ab ~€5 (PLA). Lad deine STL hoch — ich schätze sofort! 📎",
-    dauer:    "Prototypen: 24-72h · Kleinserien: 3-7 Tage · Laser: 1-3 Tage ⚡",
-    format:   "3D: STL, 3MF, OBJ, STEP · Laser: SVG, DXF, AI, PDF — per 📂 hochladen!",
-    groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Laser: 400×400mm",
-    nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Leistungen</a> | <a href='materialien.html' style='color:var(--accent)'>Materialien</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Kontakt</a>",
-    witzig:   ["Ich bin eine Büroklammer-KI. 1997 war ich schon da. 📎", "Gute Frage! Wahrscheinlich die beste heute. 😄", "Falls das schiefgeht — einfach nochmal fragen. Ich vergesse eh alles. 😅"],
-    default:  "Gute Frage! → <a href='index.html#kontakt' style='color:var(--accent)'>Kontaktformular</a>",
-  },
-  en: {
-    material: "Over 20 materials! PLA, PETG, ABS, TPU, Nylon, Carbon and more. → <a href='materialien.html' style='color:var(--accent)'>Materials</a>",
-    kosten:   "Prices from ~€5 (PLA). Upload your STL — instant estimate! 📎",
-    dauer:    "Prototypes: 24-72h · Small series: 3-7 days · Laser: 1-3 days ⚡",
-    format:   "3D: STL, 3MF, OBJ, STEP · Laser: SVG, DXF, AI, PDF — upload via 📂!",
-    groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Laser: 400×400mm",
-    nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Materials</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>",
-    witzig:   ["I am a paperclip AI. Been here since 1997. 📎", "Great question! Probably the best one today. 😄", "If this goes wrong — just ask again. I forget everything anyway. 😅"],
-    default:  "Good question! → <a href='index.html#kontakt' style='color:var(--accent)'>Contact form</a>",
-  },
-  fr: {
-    material: "Plus de 20 matériaux ! PLA, PETG, ABS, TPU, Nylon, Carbon et plus. → <a href='materialien.html' style='color:var(--accent)'>Matériaux</a>",
-    kosten:   "Prix à partir de ~€5 (PLA). Téléchargez votre STL — estimation immédiate ! 📎",
-    dauer:    "Prototypes : 24-72h · Petites séries : 3-7 jours · Laser : 1-3 jours ⚡",
-    format:   "3D : STL, 3MF, OBJ, STEP · Laser : SVG, DXF, AI, PDF — via 📂 !",
-    groesse:  "H2D : 325×320×325mm · P1S : 256×256×256mm · Laser : 400×400mm",
-    nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Matériaux</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>",
-    witzig:   ["Je suis une IA trombone. Depuis 1997. 📎", "Bonne question ! Probablement la meilleure du jour. 😄", "Si ca rate — redemandez. Je tout oublie de toute facon. 😅"],
-    default:  "Bonne question ! → <a href='index.html#kontakt' style='color:var(--accent)'>Formulaire de contact</a>",
-  },
-  es: {
-    material: "¡Más de 20 materiales! PLA, PETG, ABS, TPU, Nylon, Carbon y más. → <a href='materialien.html' style='color:var(--accent)'>Materiales</a>",
-    kosten:   "Precios desde ~€5 (PLA). Sube tu STL — estimación al instante! 📎",
-    dauer:    "Prototipos: 24-72h · Series cortas: 3-7 días · Láser: 1-3 días ⚡",
-    format:   "3D: STL, 3MF, OBJ, STEP · Láser: SVG, DXF, AI, PDF — via 📂!",
-    groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Láser: 400×400mm",
-    nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Servicios</a> | <a href='materialien.html' style='color:var(--accent)'>Materiales</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contacto</a>",
-    witzig:   ["Soy un clip IA. Desde 1997. 📎", "Buena pregunta! Probablemente la mejor de hoy. 😄", "Si algo falla — vuelve a preguntar. De todas formas lo olvido todo. 😅"],
-    default:  "Buena pregunta! → <a href='index.html#kontakt' style='color:var(--accent)'>Formulario de contacto</a>",
-  },
-  it: {
-    material: "Oltre 20 materiali! PLA, PETG, ABS, TPU, Nylon, Carbon e altro. → <a href='materialien.html' style='color:var(--accent)'>Materiali</a>",
-    kosten:   "Prezzi da ~€5 (PLA). Carica il tuo STL — stima subito! 📎",
-    dauer:    "Prototipi: 24-72h · Piccole serie: 3-7 giorni · Laser: 1-3 giorni ⚡",
-    format:   "3D: STL, 3MF, OBJ, STEP · Laser: SVG, DXF, AI, PDF — tramite 📂!",
-    groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Laser: 400×400mm",
-    nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Servizi</a> | <a href='materialien.html' style='color:var(--accent)'>Materiali</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contatto</a>",
-    witzig:   ["Sono una graffetta IA. Dal 1997. 📎", "Ottima domanda! Probabilmente la migliore di oggi. 😄", "Se va storto — chiedi di nuovo. Tanto dimentico tutto. 😅"],
-    default:  "Ottima domanda! → <a href='index.html#kontakt' style='color:var(--accent)'>Modulo di contatto</a>",
-  },
-};
-function getFallbacks() {
-  return FALLBACK_LANG[getClippyLang()] || FALLBACK_LANG.de;
+Seitenstruktur: index.html, leistungen/3d-druck.html, leistungen/lasercutting.html, leistungen/lasergravur.html, leistungen/prototyping.html, leistungen/resin-druck.html, materialien.html, faq.html, katalog.html
+Equipment: Bambu Lab H2D (325x320x325mm, Dual Nozzle), 2x P1S (256x256x256mm), Creality Falcon Laser (400x400mm), Snapmaker A350T (320x350mm)
+FDM: PLA, PETG, ABS, ASA, TPU, PA, PC + CF/GF Varianten. Resin: Standard, Tough, Flexible, Castable
+Laser-Schneiden: Holz bis 8mm, Acryl 6mm, Leder. Laser-Gravur: Metall, Glas, Keramik, Stein
+Dateien: STL, 3MF, OBJ, STEP | SVG, DXF, AI, PDF. Lieferzeiten: Prototypen 24-72h, Kleinserien 3-7 Tage. Versand EU. PV-Energie.
+Preise: PLA ab 5 EUR, PETG ab 8 EUR, Carbon ab 15 EUR, Laser ab 8 EUR.
+Navigationshilfe: Gib Links als HTML: <a href="materialien.html" style="color:#E8A000">Materialien</a>`;
 }
 
+const FALLBACKS = {
+  de: { material:"Über 20 Materialien! → <a href='materialien.html' style='color:var(--accent)'>Materialien</a>", kosten:"Preise ab 5 EUR (PLA). STL hochladen → sofortige Schätzung! 📎", dauer:"Prototypen: 24-72h · Kleinserien: 3-7 Tage · Laser: 1-3 Tage ⚡", format:"3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — per 📂 hochladen!", groesse:"H2D: 325x320x325mm · P1S: 256x256x256mm · Laser: 400x400mm", nav:"<a href='index.html#leistungen' style='color:var(--accent)'>Leistungen</a> | <a href='materialien.html' style='color:var(--accent)'>Materialien</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Kontakt</a>", witzig:["Ich bin eine Buroklammer-KI. Seit 1997. 📎","Gute Frage! Wahrscheinlich die beste heute. 😄","Falls das schiefgeht — nochmal fragen. Ich vergesse eh alles. 😅"], default:"Gute Frage! → <a href='index.html#kontakt' style='color:var(--accent)'>Kontaktformular</a>" },
+  en: { material:"Over 20 materials! → <a href='materialien.html' style='color:var(--accent)'>Materials</a>", kosten:"Prices from 5 EUR (PLA). Upload STL for instant estimate! 📎", dauer:"Prototypes: 24-72h · Small series: 3-7 days · Laser: 1-3 days ⚡", format:"3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — upload via 📂!", groesse:"H2D: 325x320x325mm · P1S: 256x256x256mm · Laser: 400x400mm", nav:"<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Materials</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>", witzig:["I am a paperclip AI. Since 1997. 📎","Great question! Probably the best today. 😄","If this goes wrong — just ask again. I forget everything anyway. 😅"], default:"Good question! → <a href='index.html#kontakt' style='color:var(--accent)'>Contact form</a>" },
+  fr: { material:"Plus de 20 materiaux ! → <a href='materialien.html' style='color:var(--accent)'>Materiaux</a>", kosten:"Prix a partir de 5 EUR (PLA). Telechargez STL pour une estimation ! 📎", dauer:"Prototypes : 24-72h · Petites series : 3-7 jours · Laser : 1-3 jours ⚡", format:"3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — via 📂 !", groesse:"H2D : 325x320x325mm · P1S : 256x256x256mm · Laser : 400x400mm", nav:"<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Materiaux</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>", witzig:["Je suis une IA trombone. Depuis 1997. 📎","Bonne question ! Probablement la meilleure du jour. 😄","Si ca rate — redemandez. Je tout oublie. 😅"], default:"Bonne question ! → <a href='index.html#kontakt' style='color:var(--accent)'>Formulaire</a>" },
+  es: { material:"Mas de 20 materiales! → <a href='materialien.html' style='color:var(--accent)'>Materiales</a>", kosten:"Precios desde 5 EUR (PLA). Sube STL para estimacion! 📎", dauer:"Prototipos: 24-72h · Series: 3-7 dias · Laser: 1-3 dias ⚡", format:"3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — via 📂!", groesse:"H2D: 325x320x325mm · P1S: 256x256x256mm · Laser: 400x400mm", nav:"<a href='index.html#leistungen' style='color:var(--accent)'>Servicios</a> | <a href='materialien.html' style='color:var(--accent)'>Materiales</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contacto</a>", witzig:["Soy un clip IA. Desde 1997. 📎","Buena pregunta! Probablemente la mejor hoy. 😄","Si algo falla — vuelve a preguntar. Olvido todo. 😅"], default:"Buena pregunta! → <a href='index.html#kontakt' style='color:var(--accent)'>Contacto</a>" },
+  it: { material:"Oltre 20 materiali! → <a href='materialien.html' style='color:var(--accent)'>Materiali</a>", kosten:"Prezzi da 5 EUR (PLA). Carica STL per stima immediata! 📎", dauer:"Prototipi: 24-72h · Piccole serie: 3-7 giorni · Laser: 1-3 giorni ⚡", format:"3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — tramite 📂!", groesse:"H2D: 325x320x325mm · P1S: 256x256x256mm · Laser: 400x400mm", nav:"<a href='index.html#leistungen' style='color:var(--accent)'>Servizi</a> | <a href='materialien.html' style='color:var(--accent)'>Materiali</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contatto</a>", witzig:["Sono una graffetta IA. Dal 1997. 📎","Ottima domanda! Probabilmente la migliore oggi. 😄","Se va storto — chiedi di nuovo. Dimentico tutto. 😅"], default:"Ottima domanda! → <a href='index.html#kontakt' style='color:var(--accent)'>Contatto</a>" },
+};
+function getFB() { return FALLBACKS[getClippyLang()] || FALLBACKS.de; }
+// legacy
+const FALLBACK = FALLBACKS.de;
+
 function getFallback(msg) {
-  const f = getFallbacks();
   const m = msg.toLowerCase();
-  if (m.includes('material') || m.includes('filament') || m.includes('pla') || m.includes('resin') || m.includes('matér') || m.includes('materi')) return f.material;
-  if (m.includes('kost') || m.includes('preis') || m.includes('€') || m.includes('euro') || m.includes('price') || m.includes('prix') || m.includes('precio') || m.includes('prezzo') || m.includes('schätz') || m.includes('estim')) return f.kosten;
-  if (m.includes('dauer') || m.includes('lang') || m.includes('zeit') || m.includes('time') || m.includes('long') || m.includes('durée') || m.includes('tiempo') || m.includes('tempo') || m.includes('lief') || m.includes('deliv')) return f.dauer;
-  if (m.includes('format') || m.includes('datei') || m.includes('file') || m.includes('stl') || m.includes('svg') || m.includes('upload') || m.includes('hochlad')) return f.format;
-  if (m.includes('groß') || m.includes('size') || m.includes('taille') || m.includes('tamaño') || m.includes('dimens') || m.includes('maxim') || m.includes('maß')) return f.groesse;
-  if (m.includes('wo ') || m.includes('where') || m.includes('find') || m.includes('seite') || m.includes('page') || m.includes('navig') || m.includes('menu') || m.includes('menü')) return f.nav;
-  if (m.includes('witz') || m.includes('joke') || m.includes('funny') || m.includes('drôle') || m.includes('humor') || m.includes('chiste') || m.includes('barzelletta')) return f.witzig[Math.floor(Math.random()*f.witzig.length)];
-  return f.default;
+  if (m.includes('material') || m.includes('filament') || m.includes('pla') || m.includes('resin')) return FALLBACK.material;
+  if (m.includes('kost') || m.includes('preis') || m.includes('€') || m.includes('euro') || m.includes('teuer') || m.includes('günstig') || m.includes('schätz')) return FALLBACK.kosten;
+  if (m.includes('dauer') || m.includes('lang') || m.includes('zeit') || m.includes('schnell') || m.includes('lief')) return FALLBACK.dauer;
+  if (m.includes('format') || m.includes('datei') || m.includes('stl') || m.includes('svg') || m.includes('hochlad')) return FALLBACK.format;
+  if (m.includes('groß') || m.includes('maß') || m.includes('dimension') || m.includes('maxim')) return FALLBACK.groesse;
+  if (m.includes('wo ') || m.includes('find') || m.includes('seite') || m.includes('navig') || m.includes('menü')) return FALLBACK.nav;
+  if (m.includes('witz') || m.includes('joke') || m.includes('lustig') || m.includes('humor')) return FALLBACK.witzig[Math.floor(Math.random()*FALLBACK.witzig.length)];
+  return FALLBACK.default;
 }
 
 // Material-Wechsel nach STL-Analyse erkennen

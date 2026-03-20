@@ -85,7 +85,7 @@ const T = {
       'Tipp: STL hochladen → sofortige Preisschätzung!',
       'Carbon ist 5× steifer als PLA 💪',
       '📦 <a href="katalog.html" style="color:#E8A000">Unser Katalog</a> — fertige Produkte zum Bestellen!',
-      'Eilauftrag? Prototypen in 24 Stunden! ⚡',
+      'Eilauftrag? Sprich uns an, wir finden eine schnelle Lösung! ⚡',
       '🧪 Über 20 <a href="materialien.html" style="color:#E8A000">Materialien</a> zur Auswahl!',
       'Ich bin seit 1997 im Einsatz. Gut gealtert, oder? 😏',
       '🖨️ <a href="leistungen/3d-druck.html" style="color:#E8A000">3D-Druck</a> ab 5 € — schau mal rein!',
@@ -99,7 +99,7 @@ const T = {
       'Tip: Upload STL for an instant price estimate!',
       'Carbon is 5× stiffer than PLA 💪',
       '📦 <a href="katalog.html" style="color:#E8A000">Our catalogue</a> — ready-made products to order!',
-      'Rush order? Prototypes in 24 hours! ⚡',
+      'Rush order? Talk to us, we\'ll find a fast solution! ⚡',
       '🧪 Over 20 <a href="materialien.html" style="color:#E8A000">materials</a> to choose from!',
       'I\'ve been around since 1997. Aged well, right? 😏',
       '🖨️ <a href="leistungen/3d-druck.html" style="color:#E8A000">3D printing</a> from 5 € — check it out!',
@@ -335,7 +335,7 @@ BERATUNGS-FLOWS (je nach Fertigungsart, IMMER Schritt fuer Schritt)
    - Funktionaler Prototyp → FDM (schnell, guenstig, iterierbar)
    - Praesentation/Pitch → Resin oder FDM+Nachbearbeitung
 3. ITERATIONEN: "Brauchst du mehrere Versionen?"
-   - Ja → FDM (guenstig, 24h Turnaround)
+   - Ja → FDM (guenstig, schnelle Iterationen)
    - Nein → passendes Material
 4. KOMBINATIONEN vorschlagen:
    - Gehaeuse: FDM + lasergeschnittene Frontplatte
@@ -364,7 +364,7 @@ Schnitt = Umfang(cm)x0.03 + Innenkonturen x0.02. Setup:5. Min:8. Menge>10:-15%
 Flaeche(cm2) x Detail: Standard:0.08|Fein:0.15|Grob:0.04
 Zuschlag: Metall+50%, Glas+80%. Setup:5. Min:8
 
-Versand: 4.90 DE, 7.90 EU. Eilauftrag(<24h): +50%
+Versand: 4.90 DE, 7.90 EU. Eilauftrag (nach Absprache): +50%
 
 SCHAETZ-HILFEN: Smartphone:150x75x8mm | Kreditkarte:85x54mm | DIN A4:297x210mm
 Faust:80x80x80mm | Schuhkarton:340x210x120mm | Tuerschild:200x80mm | Bierdeckel:100mm

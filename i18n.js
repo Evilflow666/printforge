@@ -399,6 +399,12 @@ const TRANSLATIONS = {
   'kat.maker.viewall': { de:'Alles anzeigen →', en:'View all →', fr:'Voir tout →', es:'Ver todo →', it:'Vedi tutto →' },
   'kat.detail.cta':    { de:'Jetzt anfragen', en:'Request now', fr:'Demander maintenant', es:'Solicitar ahora', it:'Richiedi ora' },
 
+  // === Katalog Subnav Titles ===
+  'kat.funktionsteile.title': { de:'⚙️ Funktionsteile', en:'⚙️ Functional Parts', fr:'⚙️ Pièces fonctionnelles', es:'⚙️ Piezas funcionales', it:'⚙️ Parti funzionali' },
+  'kat.deko.title':    { de:'🎨 Deko & Geschenke', en:'🎨 Deco & Gifts', fr:'🎨 Déco & Cadeaux', es:'🎨 Decoración & Regalos', it:'🎨 Deco & Regali' },
+  'kat.business.title': { de:'💼 Business', en:'💼 Business', fr:'💼 Business', es:'💼 Business', it:'💼 Business' },
+  'kat.maker.title':   { de:'🛠️ Maker & DIY', en:'🛠️ Maker & DIY', fr:'🛠️ Maker & DIY', es:'🛠️ Maker & DIY', it:'🛠️ Maker & DIY' },
+
   // === Warenkorb ===
   'cart.title':        { de:"Warenkorb",          en:"Shopping Cart",     fr:"Panier",              es:"Carrito",              it:"Carrello"            },
   'cart.empty':        { de:"Dein Warenkorb ist leer.", en:"Your cart is empty.", fr:"Votre panier est vide.", es:"Tu carrito est\u00e1 vac\u00edo.", it:"Il tuo carrello \u00e8 vuoto." },

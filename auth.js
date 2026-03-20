@@ -304,6 +304,7 @@ function closeAuthModal() {
   const overlay = document.getElementById('auth-modal-overlay');
   if (overlay) overlay.style.display = 'none';
   document.body.style.overflow = '';
+  document.body.style.overflow = '';
   // Clear errors
   document.querySelectorAll('.auth-error').forEach(el => el.textContent = '');
 }

@@ -35,9 +35,6 @@
         <a href="../index.html#galerie" data-i18n="nav.galerie">Galerie</a>
         <a href="../index.html#kontakt" data-i18n="nav.kontakt">Kontakt</a>
       
-        <button onclick="openAuthModal('login')" class="nav-auth-btn" id="nav-login-btn" data-i18n="nav.login">Anmelden</button>
-        <button onclick="openAuthModal('register')" class="nav-auth-btn nav-auth-register" id="nav-register-btn" data-i18n="nav.register">Registrieren</button>
-        <a href="../profil.html" class="nav-auth-btn" id="nav-user-btn" style="display:none" data-i18n="nav.myaccount">Mein Konto</a>
       </nav>
       <div class="lang-switcher">
         <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪</button>
@@ -47,6 +44,11 @@
         <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹</button>
       </div>
       <a href="../warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
+      <div class="header-auth" id="header-auth">
+        <button onclick="openAuthModal('login')" class="auth-btn-login" id="nav-login-btn" data-i18n="nav.login">Anmelden</button>
+        <button onclick="openAuthModal('register')" class="auth-btn-register" id="nav-register-btn" data-i18n="nav.register">Registrieren</button>
+        <a href="../profil.html" class="auth-btn-user" id="nav-user-btn" style="display:none">👤 <span id="nav-user-name" data-i18n="nav.myaccount">Mein Konto</span></a>
+      </div>
       <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
     </div>
   </header>

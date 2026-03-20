@@ -157,7 +157,7 @@ const T = {
       kosten:   "Preise ab ~5 EUR (PLA). STL hochladen → sofortige Schätzung! 📎",
       dauer:    "Prototypen: 24–72h · Kleinserien: 3–7 Tage · Laser: 1–3 Tage ⚡",
       format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — per 📂 hochladen!",
-      groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Laser: 400×400mm",
+      groesse:  "Printfarm: 7× H2D (325×320×325mm) · 9× P1S (256×256×256mm) · 3× Falcon Laser (400×400mm) · CO2 Laser",
       nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Leistungen</a> | <a href='materialien.html' style='color:var(--accent)'>Materialien</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Kontakt</a>",
       witzig:   ["Ich bin eine Büroklammer-KI. Seit 1997. 📎", "Gute Frage! Wahrscheinlich die beste heute. 😄", "Falls das schiefgeht — nochmal fragen. Ich vergesse eh alles. 😅"],
       default:  "Gute Frage! → <a href='index.html#kontakt' style='color:var(--accent)'>Kontaktformular</a>",
@@ -167,7 +167,7 @@ const T = {
       kosten:   "Prices from ~5 EUR (PLA). Upload STL for instant estimate! 📎",
       dauer:    "Prototypes: 24–72h · Small series: 3–7 days · Laser: 1–3 days ⚡",
       format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — upload via 📂!",
-      groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Laser: 400×400mm",
+      groesse:  "Printfarm: 7× H2D (325×320×325mm) · 9× P1S (256×256×256mm) · 3× Falcon Laser (400×400mm) · CO2 Laser",
       nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Materials</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>",
       witzig:   ["I am a paperclip AI. Since 1997. 📎", "Great question! Probably the best today. 😄", "If this goes wrong — just ask again. I forget everything anyway. 😅"],
       default:  "Good question! → <a href='index.html#kontakt' style='color:var(--accent)'>Contact form</a>",
@@ -177,7 +177,7 @@ const T = {
       kosten:   "Prix à partir de ~5 EUR (PLA). Téléchargez STL pour une estimation ! 📎",
       dauer:    "Prototypes : 24–72h · Petites séries : 3–7 jours · Laser : 1–3 jours ⚡",
       format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — via 📂 !",
-      groesse:  "H2D : 325×320×325mm · P1S : 256×256×256mm · Laser : 400×400mm",
+      groesse:  "Printfarm : 7× H2D (325×320×325mm) · 9× P1S (256×256×256mm) · 3× Falcon Laser (400×400mm) · CO2 Laser",
       nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Matériaux</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>",
       witzig:   ["Je suis une IA trombone. Depuis 1997. 📎", "Bonne question ! Probablement la meilleure du jour. 😄", "Si ça rate — redemandez. J'oublie tout de toute façon. 😅"],
       default:  "Bonne question ! → <a href='index.html#kontakt' style='color:var(--accent)'>Formulaire</a>",
@@ -187,7 +187,7 @@ const T = {
       kosten:   "Precios desde ~5 EUR (PLA). ¡Sube STL para estimación instantánea! 📎",
       dauer:    "Prototipos: 24–72h · Series: 3–7 días · Láser: 1–3 días ⚡",
       format:   "3D: STL/3MF/OBJ/STEP · Láser: SVG/DXF/AI/PDF — ¡vía 📂!",
-      groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Láser: 400×400mm",
+      groesse:  "Printfarm: 7× H2D (325×320×325mm) · 9× P1S (256×256×256mm) · 3× Falcon Láser (400×400mm) · CO2 Láser",
       nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Servicios</a> | <a href='materialien.html' style='color:var(--accent)'>Materiales</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contacto</a>",
       witzig:   ["Soy un clip IA. Desde 1997. 📎", "¡Buena pregunta! Probablemente la mejor hoy. 😄", "Si algo falla — vuelve a preguntar. De todas formas lo olvido todo. 😅"],
       default:  "¡Buena pregunta! → <a href='index.html#kontakt' style='color:var(--accent)'>Contacto</a>",
@@ -197,7 +197,7 @@ const T = {
       kosten:   "Prezzi da ~5 EUR (PLA). Carica STL per stima immediata! 📎",
       dauer:    "Prototipi: 24–72h · Piccole serie: 3–7 giorni · Laser: 1–3 giorni ⚡",
       format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — tramite 📂!",
-      groesse:  "H2D: 325×320×325mm · P1S: 256×256×256mm · Laser: 400×400mm",
+      groesse:  "Printfarm: 7× H2D (325×320×325mm) · 9× P1S (256×256×256mm) · 3× Falcon Laser (400×400mm) · CO2 Laser",
       nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Servizi</a> | <a href='materialien.html' style='color:var(--accent)'>Materiali</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contatto</a>",
       witzig:   ["Sono una graffetta IA. Dal 1997. 📎", "Ottima domanda! Probabilmente la migliore oggi. 😄", "Se va storto — chiedi di nuovo. Tanto dimentico tutto. 😅"],
       default:  "Ottima domanda! → <a href='index.html#kontakt' style='color:var(--accent)'>Contatto</a>",
@@ -270,7 +270,7 @@ BERATUNGS-FLOWS (je nach Fertigungsart, IMMER Schritt fuer Schritt)
    - Normal belastet → 30-50%
    - Hochbelastet → 80-100% (maximal stabil)
 4. GROESSE: Hilf mit Vergleichen: "Etwa wie ein Smartphone? Eine Faust? Ein Schuhkarton?"
-   - H2D: max 325x320x325mm, P1S: max 256x256x256mm
+   - Printfarm: 7x H2D (325x320x325mm), 9x P1S (256x256x256mm), 3x Creality Falcon Laser (400x400mm), 1x CO2 Laser, 1x Snapmaker A350T (Prototyping)
    - Zu gross? "Wir teilen es auf und kleben zusammen!"
 5. STUECKZAHL + NACHBEARBEITUNG → PREIS
 
@@ -301,7 +301,7 @@ BERATUNGS-FLOWS (je nach Fertigungsart, IMMER Schritt fuer Schritt)
    - Leder: 0.5-1.5mm (kein Kunstleder!)
    - Papier/Karton: filigrane Arbeiten, Einladungen
    - Stoff/Filz: bis 3mm
-3. GROESSE: "Unser Laser-Bett ist 400x400mm. Wie gross soll es werden?"
+3. GROESSE: "Unsere Laser-Betten sind 400x400mm (Creality Falcon) / CO2 Laser fuer groessere Teile. Wie gross soll es werden?"
    - Vergleiche: Tuerschild ~200x80mm, DIN A4, Bierdeckel ~100mm
 4. KOMPLEXITAET: Einfach (Aussen+Text) = guenstig. Viele Innenkonturen/filigran = teurer.
 5. STUECKZAHL: Ab 10 Stueck -15% Rabatt → PREIS
@@ -727,8 +727,8 @@ function estimatePrice(stl, matKey='PLA', infill=20) {
 
 function checkFitsInPrinter(bbox) {
   return [
-    {name:'Bambu H2D', x:325, y:320, z:325},
-    {name:'Bambu P1S', x:256, y:256, z:256},
+    {name:'Bambu H2D (7×)', x:325, y:320, z:325},
+    {name:'Bambu P1S (9×)', x:256, y:256, z:256},
   ].filter(p => bbox.x<=p.x && bbox.y<=p.y && bbox.z<=p.z);
 }
 

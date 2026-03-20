@@ -9,19 +9,19 @@
 // Drucker-Datenbank
 const PRINTERS = {
   'h2d-single': {
-    name: 'Bambu Lab H2D (Single)',
+    name: 'Bambu Lab H2D (7× in Printfarm)',
     volume: { x: 325, y: 320, z: 325 },
     speed: '600 mm/s',
     features: 'Dual-Extruder, High-Flow, Multi-Material'
   },
   'h2d-dual': {
-    name: 'Bambu Lab H2D (Dual)',
+    name: 'Bambu Lab H2D Dual (7× in Printfarm)',
     volume: { x: 300, y: 320, z: 325 },
     speed: '600 mm/s',
     features: 'Dual-Extruder, High-Flow, Multi-Material'
   },
   'p1s': {
-    name: 'Bambu Lab P1S',
+    name: 'Bambu Lab P1S (9× in Printfarm)',
     volume: { x: 256, y: 256, z: 256 },
     speed: '500 mm/s',
     features: 'Enclosed, AMS-kompatibel, ABS/ASA/PLA/PETG'

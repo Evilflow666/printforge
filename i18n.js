@@ -617,3 +617,45 @@ function getLang() {
 }
 
 document.addEventListener('DOMContentLoaded', () => setLang(getLang()));
+
+// ─── COMPACT LANG SWITCHER ──────────
+function toggleLangDropdown() {
+  const dd = document.getElementById('lang-dropdown');
+  if (dd) dd.classList.toggle('open');
+}
+// Schließen bei Klick außerhalb
+document.addEventListener('click', (e) => {
+  const dd = document.getElementById('lang-dropdown');
+  const btn = document.getElementById('lang-current-btn');
+  if (dd && btn && !dd.contains(e.target) && e.target !== btn) {
+    dd.classList.remove('open');
+  }
+});
+// Flag aktualisieren nach Sprachwechsel
+const _origSetLang = typeof setLang === 'function' ? setLang : null;
+(function() {
+  const flagMap = { de:'🇩🇪', en:'🇬🇧', fr:'🇫🇷', es:'🇪🇸', it:'🇮🇹' };
+  const origSet = window.setLang;
+  window.setLang = function(lang) {
+    origSet(lang);
+    const btn = document.getElementById('lang-current-btn');
+    if (btn) btn.textContent = flagMap[lang] || '🌐';
+    // Active state
+    document.querySelectorAll('.lang-dropdown button').forEach(b => {
+      b.classList.toggle('lang-active', b.getAttribute('data-lang') === lang);
+    });
+    // Dropdown schließen
+    const dd = document.getElementById('lang-dropdown');
+    if (dd) dd.classList.remove('open');
+  };
+})();
+// Initiale Flag setzen
+document.addEventListener('DOMContentLoaded', () => {
+  const flagMap = { de:'🇩🇪', en:'🇬🇧', fr:'🇫🇷', es:'🇪🇸', it:'🇮🇹' };
+  const lang = localStorage.getItem('pita-lang') || 'de';
+  const btn = document.getElementById('lang-current-btn');
+  if (btn) btn.textContent = flagMap[lang] || '🌐';
+  document.querySelectorAll('.lang-dropdown button').forEach(b => {
+    b.classList.toggle('lang-active', b.getAttribute('data-lang') === lang);
+  });
+});

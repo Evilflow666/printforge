@@ -16,27 +16,28 @@
 <body>
   <header class="header">
     <div class="container header-inner">
-      <a href="index.html" class="logo"><img src="logo.jpg" alt="PitA Logo" class="logo-img">Pit<span class="accent">A</span></a>
+      <a href="index.html" class="logo"><img src="logo.svg" alt="PitA" class="logo-svg"></a>
       <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
         <a href="index.html#leistungen" data-i18n="nav.leistungen">Leistungen</a>
         <a href="materialien.html" data-i18n="nav.materialien">Materialien</a>
         <a href="katalog.html" data-i18n="nav.katalog">Katalog</a>
-        <a href="index.html#galerie" data-i18n="nav.galerie">Galerie</a>
         <a href="index.html#kontakt" data-i18n="nav.kontakt">Kontakt</a>
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
       </nav>
-      <div class="lang-switcher">
-        <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪</button>
-        <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧</button>
-        <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷</button>
-        <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸</button>
-        <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹</button>
+      <div class="lang-switcher-compact">
+        <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪 DE</button>
+          <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧 EN</button>
+          <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷 FR</button>
+          <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸 ES</button>
+          <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹 IT</button>
+        </div>
       </div>
       <a href="warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
       <div class="header-auth" id="header-auth">
-        <button onclick="openAuthModal('login')" class="auth-btn-login" id="nav-login-btn" data-i18n="nav.login">Anmelden</button>
-        <button onclick="openAuthModal('register')" class="auth-btn-register" id="nav-register-btn" data-i18n="nav.register">Registrieren</button>
-        <a href="profil.html" class="auth-btn-user" id="nav-user-btn" style="display:none">👤 <span id="nav-user-name" data-i18n="nav.myaccount">Mein Konto</span></a>
+        <button onclick="openAuthModal('login')" class="auth-icon-btn" id="nav-login-btn" title="Anmelden / Registrieren">👤</button>
+        <a href="profil.html" class="auth-icon-btn auth-icon-active" id="nav-user-btn" style="display:none" title="Mein Konto">👤</a>
       </div>
       <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
     </div>

@@ -111,21 +111,14 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--text-primary);
   text-decoration: none;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  transition: color var(--transition);
+  transition: opacity 0.2s;
+  flex-shrink: 0;
 }
-.logo:hover { color: var(--accent); }
-.logo-img {
-  height: 36px;
-  width: 36px;
-  object-fit: contain;
-  border-radius: 8px;
+.logo:hover { opacity: 0.85; }
+.logo-svg {
+  height: 34px;
+  width: auto;
   display: block;
 }
 .cart-icon {
@@ -2288,4 +2281,93 @@ select { cursor: pointer; appearance: none;
 @media (max-width: 480px) {
   .auth-btn-login { display: none; }
   .auth-btn-register { padding: 6px 10px; font-size: 0.76rem; }
+}
+
+/* ===== COMPACT LANGUAGE SWITCHER ===== */
+.lang-switcher-compact {
+  position: relative;
+}
+.lang-current {
+  background: none;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 5px 10px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1;
+}
+.lang-current:hover {
+  border-color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.06);
+}
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: rgba(20,25,40,0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 8px;
+  min-width: 100px;
+  z-index: 200;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  animation: authSlideUp 0.2s ease;
+}
+.lang-dropdown.open { display: flex; flex-direction: column; gap: 2px; }
+.lang-dropdown button {
+  background: none;
+  border: none;
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  text-align: left;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.lang-dropdown button:hover {
+  background: rgba(255,255,255,0.08);
+}
+.lang-dropdown button.lang-active {
+  background: rgba(232,160,0,0.15);
+  color: var(--accent);
+}
+
+/* ===== AUTH ICON BUTTON ===== */
+.auth-icon-btn {
+  background: none;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: var(--text);
+  padding: 0;
+}
+.auth-icon-btn:hover {
+  border-color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.06);
+}
+.auth-icon-active {
+  border-color: rgba(232,160,0,0.4);
+  background: rgba(232,160,0,0.1);
+}
+.auth-icon-active:hover {
+  border-color: var(--accent);
+  background: rgba(232,160,0,0.2);
+}
+@media (max-width: 768px) {
+  .logo-svg { height: 28px; }
+  .auth-icon-btn { width: 32px; height: 32px; font-size: 0.9rem; }
 }

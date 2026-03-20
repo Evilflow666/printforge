@@ -386,20 +386,15 @@ function updateAuthNav() {
   const loginBtn = document.getElementById('nav-login-btn');
   const registerBtn = document.getElementById('nav-register-btn');
   const userBtn = document.getElementById('nav-user-btn');
-  if (!loginBtn || !registerBtn || !userBtn) return;
 
   if (Auth.isLoggedIn()) {
-    const user = Auth.getCurrentUser();
-    const nameParts = user.name.split(' ');
-    const shortName = nameParts[0] + (nameParts.length > 1 ? ' ' + nameParts[nameParts.length-1].charAt(0) + '.' : '');
-    loginBtn.style.display = 'none';
-    registerBtn.style.display = 'none';
-    userBtn.style.display = '';
-    userBtn.textContent = '👤 ' + shortName;
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (registerBtn) registerBtn.style.display = 'none';
+    if (userBtn) userBtn.style.display = '';
   } else {
-    loginBtn.style.display = '';
-    registerBtn.style.display = '';
-    userBtn.style.display = 'none';
+    if (loginBtn) loginBtn.style.display = '';
+    if (registerBtn) registerBtn.style.display = '';
+    if (userBtn) userBtn.style.display = 'none';
   }
 }
 

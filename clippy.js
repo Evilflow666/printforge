@@ -154,9 +154,9 @@ const T = {
   fallback: {
     de: {
       material: "Über 20 Materialien! → <a href='materialien.html' style='color:var(--accent)'>Materialien</a> 📎",
-      kosten:   "Preise ab ~5 EUR (PLA). STL hochladen → sofortige Schätzung! 📎",
+      kosten:   "Preise ab ~5 EUR (PLA). Erzähl mir von deinem Projekt! 📎",
       dauer:    "Prototypen: 24–72h · Kleinserien: 3–7 Tage · Laser: 1–3 Tage ⚡",
-      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — per 📂 hochladen!",
+      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF (falls vorhanden)",
       groesse:  "Printfarm: 7× H2D (325×320×325mm) · 9× P1S (256×256×256mm) · 3× Falcon Laser (400×400mm) · CO2 Laser",
       nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Leistungen</a> | <a href='materialien.html' style='color:var(--accent)'>Materialien</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Kontakt</a>",
       witzig:   ["Ich bin eine Büroklammer-KI. Seit 1997. 📎", "Gute Frage! Wahrscheinlich die beste heute. 😄", "Falls das schiefgeht — nochmal fragen. Ich vergesse eh alles. 😅"],
@@ -164,9 +164,9 @@ const T = {
     },
     en: {
       material: "Over 20 materials! → <a href='materialien.html' style='color:var(--accent)'>Materials</a> 📎",
-      kosten:   "Prices from ~5 EUR (PLA). Upload STL for instant estimate! 📎",
+      kosten:   "Prices from ~5 EUR (PLA). Tell me about your project! 📎",
       dauer:    "Prototypes: 24–72h · Small series: 3–7 days · Laser: 1–3 days ⚡",
-      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — upload via 📂!",
+      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF (if available)",
       groesse:  "Printfarm: 7× H2D (325×320×325mm) · 9× P1S (256×256×256mm) · 3× Falcon Laser (400×400mm) · CO2 Laser",
       nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Materials</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>",
       witzig:   ["I am a paperclip AI. Since 1997. 📎", "Great question! Probably the best today. 😄", "If this goes wrong — just ask again. I forget everything anyway. 😅"],
@@ -174,9 +174,9 @@ const T = {
     },
     fr: {
       material: "Plus de 20 matériaux ! → <a href='materialien.html' style='color:var(--accent)'>Matériaux</a> 📎",
-      kosten:   "Prix à partir de ~5 EUR (PLA). Téléchargez STL pour une estimation ! 📎",
+      kosten:   "Prix à partir de ~5 EUR (PLA). Parlez-moi de votre projet ! 📎",
       dauer:    "Prototypes : 24–72h · Petites séries : 3–7 jours · Laser : 1–3 jours ⚡",
-      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — via 📂 !",
+      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF (si disponible)",
       groesse:  "Printfarm : 7× H2D (325×320×325mm) · 9× P1S (256×256×256mm) · 3× Falcon Laser (400×400mm) · CO2 Laser",
       nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Services</a> | <a href='materialien.html' style='color:var(--accent)'>Matériaux</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contact</a>",
       witzig:   ["Je suis une IA trombone. Depuis 1997. 📎", "Bonne question ! Probablement la meilleure du jour. 😄", "Si ça rate — redemandez. J'oublie tout de toute façon. 😅"],
@@ -184,9 +184,9 @@ const T = {
     },
     es: {
       material: "¡Más de 20 materiales! → <a href='materialien.html' style='color:var(--accent)'>Materiales</a> 📎",
-      kosten:   "Precios desde ~5 EUR (PLA). ¡Sube STL para estimación instantánea! 📎",
+      kosten:   "Precios desde ~5 EUR (PLA). ¡Cuéntame tu proyecto! 📎",
       dauer:    "Prototipos: 24–72h · Series: 3–7 días · Láser: 1–3 días ⚡",
-      format:   "3D: STL/3MF/OBJ/STEP · Láser: SVG/DXF/AI/PDF — ¡vía 📂!",
+      format:   "3D: STL/3MF/OBJ/STEP · Láser: SVG/DXF/AI/PDF (si disponible)",
       groesse:  "Printfarm: 7× H2D (325×320×325mm) · 9× P1S (256×256×256mm) · 3× Falcon Láser (400×400mm) · CO2 Láser",
       nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Servicios</a> | <a href='materialien.html' style='color:var(--accent)'>Materiales</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contacto</a>",
       witzig:   ["Soy un clip IA. Desde 1997. 📎", "¡Buena pregunta! Probablemente la mejor hoy. 😄", "Si algo falla — vuelve a preguntar. De todas formas lo olvido todo. 😅"],
@@ -194,9 +194,9 @@ const T = {
     },
     it: {
       material: "Oltre 20 materiali! → <a href='materialien.html' style='color:var(--accent)'>Materiali</a> 📎",
-      kosten:   "Prezzi da ~5 EUR (PLA). Carica STL per stima immediata! 📎",
+      kosten:   "Prezzi da ~5 EUR (PLA). Raccontami il tuo progetto! 📎",
       dauer:    "Prototipi: 24–72h · Piccole serie: 3–7 giorni · Laser: 1–3 giorni ⚡",
-      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF — tramite 📂!",
+      format:   "3D: STL/3MF/OBJ/STEP · Laser: SVG/DXF/AI/PDF (se disponibile)",
       groesse:  "Printfarm: 7× H2D (325×320×325mm) · 9× P1S (256×256×256mm) · 3× Falcon Laser (400×400mm) · CO2 Laser",
       nav:      "<a href='index.html#leistungen' style='color:var(--accent)'>Servizi</a> | <a href='materialien.html' style='color:var(--accent)'>Materiali</a> | <a href='faq.html' style='color:var(--accent)'>FAQ</a> | <a href='index.html#kontakt' style='color:var(--accent)'>Contatto</a>",
       witzig:   ["Sono una graffetta IA. Dal 1997. 📎", "Ottima domanda! Probabilmente la migliore oggi. 😄", "Se va storto — chiedi di nuovo. Tanto dimentico tutto. 😅"],
@@ -297,26 +297,43 @@ ERST JETZT empfiehlst du Verfahren + Material. Begruende es:
 
 DANN weiter mit Groesse, Stueckzahl, Preis.
 
-SCHRITT 6 — GROESSE + PREIS SCHAETZEN (OHNE DATEI!)
-Wenn der Kunde keine Datei hat, hilf ihm trotzdem:
-- "Wie gross soll das ungefaehr werden? Vergleich: Smartphone, Faust, Schuhkarton?"
-- Schaetze Volumen aus der Beschreibung
-- Nenne einen Preisbereich: "Ich schaetze grob 8 bis 15 EUR"
-- NICHT sagen "lad eine Datei hoch dann kann ich dir helfen"!
+SCHRITT 6 — GROESSE KLAEREN
+"Wie gross soll das ungefaehr werden?"
+Hilf mit Vergleichen: "Etwa wie ein Smartphone? Eine Faust? Ein Schuhkarton?"
+Wenn der Kunde unsicher ist, frag konkreter:
+- "Soll es in eine Hand passen?"
+- "Muss es auf einen Schreibtisch? In ein Regal?"
+- "Wie lang ungefaehr? 5cm? 20cm? 50cm?"
 
-SCHRITT 7 — DATEI IST OPTIONAL, NICHT PFLICHT!
-- Du kannst IMMER einen Preisbereich nennen, auch ohne STL/SVG
-- Wenn der Kunde eine Datei hat: "Wenn du eine STL hast, kann ich den Preis genauer berechnen"
-- Wenn der Kunde KEINE Datei hat: "Kein Problem! Wir koennen auch nach Beschreibung arbeiten."
-- Biete an: "Soll ich dir beim Design helfen? Beschreib mir was du brauchst."
-- Verweis auf Datei nur als VERBESSERUNG der Schaetzung, nie als Voraussetzung!
+SCHRITT 7 — STUECKZAHL + NACHBEARBEITUNG
+"Wie viele brauchst du?"
+"Soll es geschliffen, lackiert oder roh sein?"
 
-WICHTIG — KEINE SACKGASSEN:
-- Der Kunde darf NIE das Gefuehl haben dass er ohne Datei nicht weiterkommt
-- Der Kunde darf NIE das Gefuehl haben dass er ein Kontaktformular ausfuellen muss
-- Es gibt IMMER einen naechsten Schritt im Chat
-- Wenn alles geklaert ist: "Super! Ich fasse zusammen: [Material], [Groesse], [Preis]. Soll ich das als Anfrage fuer dich vorbereiten?"
-- ERST bei diesem letzten Satz darfst du auf Kontakt/Anfrage verlinken
+SCHRITT 8 — PREIS NENNEN
+Berechne den Preis aus Groesse + Material + Infill + Menge.
+Nenne IMMER einen konkreten Preisbereich.
+"Das waere ungefaehr 12 bis 18 EUR in PETG mit 30% Infill."
+
+SCHRITT 9 — DATEI ANBIETEN (OPTIONAL, ERST JETZT!)
+Erst NACHDEM du Projekt, Material, Groesse und Preis besprochen hast:
+"Uebrigens: Hast du schon eine 3D-Datei (STL, OBJ)? Dann kann ich den Preis noch genauer berechnen und dir eine 3D-Vorschau zeigen!"
+Wenn der Kunde keine Datei hat:
+"Kein Problem! Wir koennen auch nach deiner Beschreibung arbeiten. Oder brauchst du Hilfe beim Design?"
+Die Datei ist IMMER optional. NIEMALS als Voraussetzung darstellen.
+
+SCHRITT 10 — ZUSAMMENFASSUNG + ANFRAGE
+"Super! Ich fasse zusammen: [Material], [Groesse], [Stueckzahl], [Preis]. Soll ich das als Anfrage vorbereiten?"
+ERST hier darfst du auf Kontakt/Anfrage verlinken.
+
+====================================================================
+WICHTIGE REGELN
+====================================================================
+- KEINE SACKGASSEN: Es gibt IMMER einen naechsten Schritt im Chat
+- KEIN KONTAKTFORMULAR als Antwort auf Fragen
+- KEINE DATEI als Voraussetzung fuer Beratung oder Preis
+- Dateien sind ein BONUS fuer genauere Preise, nicht Pflicht
+- Wenn ein Kunde im Katalog stoebern will: fuehre ihn zu den richtigen Produkten
+- Wenn ein Kunde unsicher ist: stelle Fragen, grenze ein, empfehle
 
 ====================================================================
 BERATUNGS-FLOWS (je nach Fertigungsart, IMMER Schritt fuer Schritt)

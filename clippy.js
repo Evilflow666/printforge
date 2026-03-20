@@ -403,6 +403,7 @@ function getFallback(msg) {
       </div>
       <div id="clippy-drop-zone" class="clippy-drop-zone clippy-hidden">
         <span id="clippy-drop-text"></span>
+        <br><small style="opacity:0.7;font-size:0.78rem;">STL · OBJ · SVG · DXF</small>
       </div>
       <div class="clippy-input-row">
         <label class="clippy-file-btn" title="Datei hochladen">
@@ -478,9 +479,23 @@ function getFallback(msg) {
   // Drag & Drop
   const chat = document.getElementById('clippy-chat');
   const dropZone = document.getElementById('clippy-drop-zone');
-  chat.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.remove('clippy-hidden'); });
-  chat.addEventListener('dragleave', () => dropZone.classList.add('clippy-hidden'));
-  chat.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.add('clippy-hidden'); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+  chat.addEventListener('dragover', e => {
+    e.preventDefault();
+    dropZone.classList.remove('clippy-hidden');
+    chat.style.boxShadow = '0 0 0 3px rgba(198,125,74,0.5)';
+  });
+  chat.addEventListener('dragleave', e => {
+    if (!chat.contains(e.relatedTarget)) {
+      dropZone.classList.add('clippy-hidden');
+      chat.style.boxShadow = '';
+    }
+  });
+  chat.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.add('clippy-hidden');
+    chat.style.boxShadow = '';
+    if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+  });
 
   // Sprachänderung live übernehmen (Event von i18n.js)
   document.addEventListener('pita-lang-changed', () => {
@@ -522,6 +537,10 @@ function resetClippy() {
   // Chat-History leeren
   chatHistory = [];
   lastSTLData = null;
+  lastSTLFile = null;
+  lastSTLBuffer = null;
+  currentMaterial = 'PLA';
+  currentInfill = 20;
   greeted = false;
 
   // Nachrichten-Container leeren und Begrüßung neu setzen
@@ -742,9 +761,325 @@ function estimateLaserPrice(svg) {
   return { priceMin:(total*0.85).toFixed(2), priceMax:(total*1.30).toFixed(2) };
 }
 
-// ─── DATEI HANDLER ───────────────────────────────────────────────────────────
-let lastSTLData = null;
+// ─── THREE.JS LAZY LOADER ────────────────────────────────────────────────────
+async function ensureThreeJS() {
+  if (window.THREE) return;
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
 
+// ─── 3D MINI PREVIEW ─────────────────────────────────────────────────────────
+let miniPreviewCounter = 0;
+
+async function createMiniPreview(stlBuffer, containerId) {
+  try {
+    await ensureThreeJS();
+  } catch(e) {
+    // Three.js load failed — preview silently skipped
+    return;
+  }
+  const container = document.getElementById(containerId);
+  if (!container || !window.THREE) return;
+
+  const THREE = window.THREE;
+  const W = 200, H = 150;
+
+  // Scene setup
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0a1628);
+
+  const camera = new THREE.PerspectiveCamera(45, W / H, 0.01, 100000);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+  renderer.setSize(W, H);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  // Lights
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const dl = new THREE.DirectionalLight(0xffffff, 0.85);
+  dl.position.set(1, 2, 1.5);
+  scene.add(dl);
+  const dl2 = new THREE.DirectionalLight(0x8ab0ff, 0.3);
+  dl2.position.set(-1, -0.5, -1);
+  scene.add(dl2);
+
+  // Parse STL binary to BufferGeometry
+  const geometry = parseSTLToGeometry(stlBuffer);
+  if (!geometry) return;
+
+  geometry.computeBoundingBox();
+  geometry.computeVertexNormals();
+
+  const bb = geometry.boundingBox;
+  const center = new THREE.Vector3();
+  bb.getCenter(center);
+  geometry.translate(-center.x, -center.y, -center.z);
+
+  const size = new THREE.Vector3();
+  bb.getSize(size);
+  const maxDim = Math.max(size.x, size.y, size.z);
+
+  const material = new THREE.MeshPhongMaterial({
+    color: 0xE8772E,
+    specular: 0x333333,
+    shininess: 25,
+    side: THREE.DoubleSide,
+  });
+
+  const meshObj = new THREE.Mesh(geometry, material);
+  scene.add(meshObj);
+
+  // Grid
+  const gridSize = maxDim * 1.4;
+  const grid = new THREE.GridHelper(gridSize, 8, 0x1a3055, 0x142540);
+  grid.position.y = -size.y / 2;
+  scene.add(grid);
+
+  // Fit camera
+  const dist = maxDim * 2.0;
+  camera.position.set(dist * 0.7, dist * 0.55, dist * 0.7);
+  camera.lookAt(0, 0, 0);
+  camera.near = dist * 0.001;
+  camera.far = dist * 50;
+  camera.updateProjectionMatrix();
+
+  // Auto-rotation
+  let rotY = 0;
+  let animId;
+  function animate() {
+    animId = requestAnimationFrame(animate);
+    rotY += 0.012;
+    meshObj.rotation.y = rotY;
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  // Cleanup when container removed
+  const obs = new MutationObserver(() => {
+    if (!document.contains(container)) {
+      cancelAnimationFrame(animId);
+      renderer.dispose();
+      obs.disconnect();
+    }
+  });
+  obs.observe(document.body, { childList: true, subtree: true });
+}
+
+// Parse binary/ascii STL → BufferGeometry (no STLLoader needed)
+function parseSTLToGeometry(buf) {
+  if (!window.THREE) return null;
+  const THREE = window.THREE;
+  try {
+    const view = new DataView(buf);
+    const nTriangles = view.getUint32(80, true);
+    const positions = new Float32Array(nTriangles * 9);
+    const normals = new Float32Array(nTriangles * 9);
+    for (let i = 0; i < nTriangles; i++) {
+      const base = 84 + i * 50;
+      const nx = view.getFloat32(base, true);
+      const ny = view.getFloat32(base + 4, true);
+      const nz = view.getFloat32(base + 8, true);
+      for (let v = 0; v < 3; v++) {
+        const vbase = base + 12 + v * 12;
+        const pi = i * 9 + v * 3;
+        positions[pi]     = view.getFloat32(vbase, true);
+        positions[pi + 1] = view.getFloat32(vbase + 4, true);
+        positions[pi + 2] = view.getFloat32(vbase + 8, true);
+        normals[pi] = nx; normals[pi + 1] = ny; normals[pi + 2] = nz;
+      }
+    }
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+    return geo;
+  } catch(e) {
+    return null;
+  }
+}
+
+// ─── MATERIAL/INFILL STATE ───────────────────────────────────────────────────
+let lastSTLData = null;
+let lastSTLFile = null;
+let lastSTLBuffer = null;
+let currentMaterial = 'PLA';
+let currentInfill = 20;
+
+// ─── MATERIAL BUTTONS ANZEIGEN ───────────────────────────────────────────────
+const MATERIAL_BTNS = [
+  { key: 'PLA',  label: 'PLA €8-12',   cls: 'clippy-material-btn' },
+  { key: 'PETG', label: 'PETG €10-15', cls: 'clippy-material-btn' },
+  { key: 'ABS',  label: 'ABS €10-15',  cls: 'clippy-material-btn' },
+  { key: 'TPU',  label: 'TPU €15-22',  cls: 'clippy-material-btn' },
+  { key: 'CF',   label: 'Resin €18-28',cls: 'clippy-material-btn' },
+];
+
+function showMaterialButtons() {
+  const msgs = document.getElementById('clippy-messages');
+  if (!msgs) return;
+
+  const qr = document.createElement('div');
+  qr.className = 'clippy-quick-replies';
+  qr.id = 'clippy-mat-btns';
+
+  MATERIAL_BTNS.forEach(m => {
+    const btn = document.createElement('button');
+    btn.className = m.cls;
+    btn.textContent = m.label;
+    btn.dataset.matKey = m.key;
+    btn.addEventListener('click', () => {
+      currentMaterial = m.key;
+      // Mark active
+      qr.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Remove after short delay & show infill
+      setTimeout(() => {
+        qr.remove();
+        appendUser('🧪 ' + m.label);
+        showInfillButtons();
+      }, 300);
+    });
+    qr.appendChild(btn);
+  });
+
+  msgs.appendChild(qr);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// ─── INFILL BUTTONS ──────────────────────────────────────────────────────────
+const INFILL_BTNS = [
+  { pct: 20,  label: '20% Leicht',   cls: 'clippy-infill-btn' },
+  { pct: 50,  label: '50% Standard', cls: 'clippy-infill-btn' },
+  { pct: 100, label: '100% Massiv',  cls: 'clippy-infill-btn' },
+];
+
+function showInfillButtons() {
+  const msgs = document.getElementById('clippy-messages');
+  if (!msgs) return;
+
+  // Small hint message
+  const el = document.createElement('div');
+  el.className = 'clippy-msg clippy-bot';
+  const matInfo = MATS[currentMaterial];
+  el.innerHTML = `<span>🧪 <strong>${matInfo ? matInfo.label : currentMaterial}</strong> gewählt!<br>Wie soll das Teil gedruckt werden?</span>`;
+  msgs.appendChild(el);
+
+  const qr = document.createElement('div');
+  qr.className = 'clippy-quick-replies';
+  qr.id = 'clippy-infill-btns';
+
+  INFILL_BTNS.forEach(inf => {
+    const btn = document.createElement('button');
+    btn.className = inf.cls;
+    btn.textContent = inf.label;
+    btn.addEventListener('click', () => {
+      currentInfill = inf.pct;
+      qr.remove();
+      appendUser('📊 ' + inf.label);
+      showSTLSummary();
+    });
+    qr.appendChild(btn);
+  });
+
+  msgs.appendChild(qr);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// ─── ZUSAMMENFASSUNGS-NACHRICHT ──────────────────────────────────────────────
+function showSTLSummary() {
+  if (!lastSTLData || !lastSTLFile) return;
+
+  const data = lastSTLData;
+  const price = estimatePrice(data, currentMaterial, currentInfill);
+  const fits = checkFitsInPrinter(data.bbox);
+  const printer = fits.length > 0 ? fits[0].name : 'Auf Anfrage';
+
+  // Druckzeit schätzen: ~2cm³/min bei 20% infill, skaliert mit infill
+  const infillFactor = 0.3 + (currentInfill / 100) * 0.7;
+  const printTimeH = (data.volumeCm3 * infillFactor / 2 / 60).toFixed(1);
+  const timeLabel = +printTimeH < 1
+    ? `~${Math.round(+printTimeH * 60)} min`
+    : `~${printTimeH}h`;
+
+  const matInfo = MATS[currentMaterial];
+  const infillLabel = INFILL_BTNS.find(i => i.pct === currentInfill)?.label || `${currentInfill}%`;
+
+  // Material-Beschreibungen
+  const matDesc = {
+    PLA:  'Standard, leicht, viele Farben',
+    PETG: 'robust, outdoor-tauglich',
+    ABS:  'hitzebeständig, technisch',
+    TPU:  'flexibel, gummiartig',
+    PA:   'Hochlast, Zahnräder',
+    CF:   'maximal steif, leicht',
+  };
+
+  const msgs = document.getElementById('clippy-messages');
+  if (!msgs) return;
+
+  // Summary card
+  const card = document.createElement('div');
+  card.className = 'clippy-msg clippy-bot';
+  card.innerHTML = `<div class="clippy-summary">
+    📦 <strong>${lastSTLFile.name}</strong><br>
+    📐 ${data.bbox.x}×${data.bbox.y}×${data.bbox.z} mm · ${data.volumeCm3.toFixed(1)} cm³<br>
+    🧪 ${matInfo ? matInfo.label : currentMaterial} (${matDesc[currentMaterial] || ''})<br>
+    📊 ${infillLabel}<br>
+    ⚖️ ~${price.weightG}g<br>
+    🖨️ ${printer}<br>
+    ⏱️ ${timeLabel} Druckzeit<br>
+    💶 <strong>~€${price.priceMin} – €${price.priceMax}</strong> <small style="opacity:0.6">(+ €4.90 Versand DE)</small>
+  </div>`;
+  msgs.appendChild(card);
+
+  // Action Buttons
+  const prefix = window.location.pathname.includes('/leistungen/') ? '../' : '';
+  const actions = document.createElement('div');
+  actions.className = 'clippy-action-btns';
+
+  const btnOrder = document.createElement('button');
+  btnOrder.className = 'clippy-action-btn-primary';
+  btnOrder.textContent = '📬 Anfrage senden';
+  btnOrder.addEventListener('click', () => {
+    window.location.href = `${prefix}index.html#kontakt`;
+  });
+
+  const btnMat = document.createElement('button');
+  btnMat.className = 'clippy-action-btn-secondary';
+  btnMat.textContent = '🔄 Anderes Material';
+  btnMat.addEventListener('click', () => {
+    actions.remove();
+    showMaterialButtons();
+  });
+
+  const btnNew = document.createElement('button');
+  btnNew.className = 'clippy-action-btn-secondary';
+  btnNew.textContent = '📂 Neue Datei';
+  btnNew.addEventListener('click', () => {
+    actions.remove();
+    lastSTLData = null;
+    lastSTLFile = null;
+    lastSTLBuffer = null;
+    currentMaterial = 'PLA';
+    currentInfill = 20;
+    const fi = document.getElementById('clippy-file-input');
+    if (fi) { fi.value = ''; fi.click(); }
+  });
+
+  actions.appendChild(btnOrder);
+  actions.appendChild(btnMat);
+  actions.appendChild(btnNew);
+  msgs.appendChild(actions);
+  msgs.scrollTop = msgs.scrollHeight;
+  wiggle();
+}
+
+// ─── DATEI HANDLER ───────────────────────────────────────────────────────────
 function handleFile(file) {
   const name = file.name.toLowerCase();
   appendUser('📂 ' + file.name);
@@ -753,24 +1088,64 @@ function handleFile(file) {
 
   if (name.endsWith('.stl') || name.endsWith('.obj')) {
     const reader = new FileReader();
-    reader.onload = e => {
+    reader.onload = async e => {
       try {
-        const data = analyzeSTL(e.target.result);
+        const buf = e.target.result;
+        const data = analyzeSTL(buf);
         lastSTLData = data;
+        lastSTLFile = file;
+        lastSTLBuffer = buf;
+        currentMaterial = 'PLA';
+        currentInfill = 20;
         typing.remove();
+
         const fits = checkFitsInPrinter(data.bbox);
         const price = estimatePrice(data, 'PLA', 20);
-        const prefix = window.location.pathname.includes('/leistungen/') ? '../' : '';
-        let msg = `📦 <strong>${file.name}</strong><br>`;
-        msg += `📐 ${data.bbox.x}×${data.bbox.y}×${data.bbox.z} mm · ${data.volumeCm3.toFixed(1)} cm³<br>`;
-        msg += `⚖️ ~${price.weightG}g (PLA, 20% Infill)<br>`;
-        msg += fits.length > 0
-          ? `✅ Passt in: ${fits.map(p=>p.name).join(', ')}<br><br>`
-          : `⚠️ Zu groß für Standard-Drucker — bitte anfragen!<br><br>`;
-        msg += `💶 <strong>~€${price.priceMin} – €${price.priceMax}</strong> (PLA, 20% Infill)<br>`;
-        msg += `<small>${t('matSuffix')}</small><br>`;
-        msg += `<a href="${prefix}index.html#kontakt" style="color:var(--accent)">Angebot anfragen →</a>`;
-        appendBot(msg);
+
+        // Build preview message
+        const previewId = `mini-3d-${++miniPreviewCounter}`;
+        const msgEl = document.createElement('div');
+        msgEl.className = 'clippy-msg clippy-bot';
+
+        const previewHtml = `
+          <div class="clippy-stl-preview">
+            <div id="${previewId}" class="clippy-mini-3d"></div>
+            <div class="clippy-stl-info">
+              📦 <strong>${file.name}</strong><br>
+              📐 ${data.bbox.x}×${data.bbox.y}×${data.bbox.z} mm · ${data.volumeCm3.toFixed(1)} cm³<br>
+              ⚖️ ~${price.weightG}g (PLA, 20% Infill)<br>
+              ${fits.length > 0
+                ? `✅ Passt in: ${fits.map(p=>p.name).join(', ')}`
+                : `⚠️ Zu groß für Standard-Drucker`
+              }<br>
+              💶 <strong>~€${price.priceMin} – €${price.priceMax}</strong>
+            </div>
+          </div>`;
+        msgEl.innerHTML = previewHtml;
+
+        const msgs = document.getElementById('clippy-messages');
+        msgs.appendChild(msgEl);
+        msgs.scrollTop = msgs.scrollHeight;
+
+        // Initiate 3D preview (async, non-blocking)
+        if (name.endsWith('.stl')) {
+          createMiniPreview(buf, previewId).catch(() => {
+            // Silently fall back — no 3D preview
+            const container = document.getElementById(previewId);
+            if (container) {
+              container.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:rgba(255,255,255,0.3);font-size:0.75rem;">3D</div>';
+            }
+          });
+        }
+
+        // Ask for material
+        const matAskEl = document.createElement('div');
+        matAskEl.className = 'clippy-msg clippy-bot';
+        matAskEl.innerHTML = '<span>🎨 Welches Material soll es sein?</span>';
+        msgs.appendChild(matAskEl);
+        msgs.scrollTop = msgs.scrollHeight;
+
+        showMaterialButtons();
         wiggle();
       } catch(err) {
         typing.remove();
@@ -876,8 +1251,9 @@ async function sendClippy() {
   if (lastSTLData) {
     const matKey = detectMaterial(msg);
     if (matKey) {
-      const price = estimatePrice(lastSTLData, matKey, 20);
-      appendBot(`💶 <strong>${price.material}</strong> (20% Infill):<br>~${price.weightG}g · <strong>€${price.priceMin} – €${price.priceMax}</strong>`);
+      currentMaterial = matKey;
+      const price = estimatePrice(lastSTLData, matKey, currentInfill);
+      appendBot(`💶 <strong>${price.material}</strong> (${currentInfill}% Infill):<br>~${price.weightG}g · <strong>€${price.priceMin} – €${price.priceMax}</strong>`);
       wiggle();
       return;
     }

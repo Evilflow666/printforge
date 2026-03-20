@@ -6,7 +6,7 @@
 (function() {
   const LAT = 48.35, LON = 8.07;
   const PV_KWP = 4.3;
-  const BATTERY_KWH = 23.5; // Anker Solix E1600 Pro (9.6) + E2700 Pro (13.9)
+  const BATTERY_KWH = 120; // 120 kWh Gesamtspeicher // Anker Solix E1600 Pro (9.6) + E2700 Pro (13.9)
 
   async function fetchSolarData() {
     try {

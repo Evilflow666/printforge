@@ -529,6 +529,48 @@ const TRANSLATIONS = {
   'kat.maker.item6.spec2': { de:'Auch mit Gravur', en:'Also with engraving', fr:'Aussi avec gravure', es:'También con grabado', it:'Anche con incisione' },
   'kat.maker.item6.spec3': { de:'Preis: ab 5 €', en:'Price: from 5 €', fr:'Prix : à partir de 5 €', es:'Precio: desde 5 €', it:'Prezzo: da 5 €' },
 
+  // ===== AUTH & PROFIL =====
+  'nav.login':           { de:'Anmelden',       en:'Sign in',        fr:'Se connecter',     es:'Iniciar sesión',   it:'Accedi'           },
+  'nav.register':        { de:'Registrieren',    en:'Register',       fr:"S'inscrire",       es:'Registrarse',      it:'Registrati'       },
+  'nav.myaccount':       { de:'Mein Konto',      en:'My Account',     fr:'Mon compte',       es:'Mi cuenta',        it:'Il mio account'   },
+
+  'auth.login.title':    { de:'Anmelden',        en:'Sign in',        fr:'Se connecter',     es:'Iniciar sesión',   it:'Accedi'           },
+  'auth.register.title': { de:'Registrieren',    en:'Register',       fr:"S'inscrire",       es:'Registrarse',      it:'Registrati'       },
+  'auth.email':          { de:'E-Mail',           en:'Email',          fr:'E-mail',           es:'Correo electrónico', it:'Email'          },
+  'auth.password':       { de:'Passwort',         en:'Password',       fr:'Mot de passe',     es:'Contraseña',       it:'Password'         },
+  'auth.name':           { de:'Vor- und Nachname', en:'Full name',     fr:'Prénom et nom',    es:'Nombre completo',  it:'Nome e cognome'   },
+  'auth.confirm':        { de:'Passwort wiederholen', en:'Confirm password', fr:'Confirmer le mot de passe', es:'Repetir contraseña', it:'Conferma password' },
+  'auth.login.btn':      { de:'Anmelden',        en:'Sign in',        fr:'Se connecter',     es:'Iniciar sesión',   it:'Accedi'           },
+  'auth.register.btn':   { de:'Konto erstellen', en:'Create account', fr:'Créer un compte',  es:'Crear cuenta',     it:'Crea account'     },
+  'auth.forgot':         { de:'Passwort vergessen?', en:'Forgot password?', fr:'Mot de passe oublié ?', es:'¿Olvidaste tu contraseña?', it:'Password dimenticata?' },
+  'auth.forgot.hint':    { de:'Diese Funktion kommt mit dem Hostinger-Backend.', en:'This feature will come with the Hostinger backend.', fr:'Cette fonction arrivera avec le backend Hostinger.', es:'Esta función llegará con el backend de Hostinger.', it:'Questa funzione arriverà con il backend Hostinger.' },
+
+  'auth.error.email':    { de:'Bitte gib eine gültige E-Mail ein.', en:'Please enter a valid email.', fr:'Veuillez entrer un email valide.', es:'Introduce un correo válido.', it:'Inserisci un\'email valida.' },
+  'auth.error.password': { de:'Mindestens 8 Zeichen.', en:'At least 8 characters.', fr:'Au moins 8 caractères.', es:'Al menos 8 caracteres.', it:'Almeno 8 caratteri.' },
+  'auth.error.name':     { de:'Mindestens 2 Zeichen.', en:'At least 2 characters.', fr:'Au moins 2 caractères.', es:'Al menos 2 caracteres.', it:'Almeno 2 caratteri.' },
+  'auth.error.exists':   { de:'Diese E-Mail ist bereits registriert.', en:'This email is already registered.', fr:'Cet email est déjà enregistré.', es:'Este correo ya está registrado.', it:'Questa email è già registrata.' },
+  'auth.error.nomatch':  { de:'Passwörter stimmen nicht überein.', en:'Passwords do not match.', fr:'Les mots de passe ne correspondent pas.', es:'Las contraseñas no coinciden.', it:'Le password non corrispondono.' },
+  'auth.error.wrong':    { de:'E-Mail oder Passwort falsch.', en:'Incorrect email or password.', fr:'Email ou mot de passe incorrect.', es:'Correo o contraseña incorrectos.', it:'Email o password errati.' },
+
+  'profil.title':        { de:'Mein Profil',     en:'My Profile',     fr:'Mon profil',       es:'Mi perfil',        it:'Il mio profilo'   },
+  'profil.since':        { de:'Mitglied seit',    en:'Member since',   fr:'Membre depuis',    es:'Miembro desde',    it:'Membro dal'       },
+  'profil.address':      { de:'Adresse',          en:'Address',        fr:'Adresse',          es:'Dirección',        it:'Indirizzo'        },
+  'profil.street':       { de:'Straße & Nr.',     en:'Street & No.',   fr:'Rue et n°',        es:'Calle y n.º',     it:'Via e n.'         },
+  'profil.zip':          { de:'PLZ',              en:'ZIP',            fr:'Code postal',      es:'Código postal',    it:'CAP'              },
+  'profil.city':         { de:'Stadt',            en:'City',           fr:'Ville',            es:'Ciudad',           it:'Città'            },
+  'profil.country':      { de:'Land',             en:'Country',        fr:'Pays',             es:'País',             it:'Paese'            },
+  'profil.orders':       { de:'Meine Bestellungen', en:'My Orders',   fr:'Mes commandes',    es:'Mis pedidos',      it:'I miei ordini'    },
+  'profil.orders.date':  { de:'Datum',            en:'Date',           fr:'Date',             es:'Fecha',            it:'Data'             },
+  'profil.orders.item':  { de:'Artikel',          en:'Item',           fr:'Article',          es:'Artículo',         it:'Articolo'         },
+  'profil.orders.price': { de:'Preis',            en:'Price',          fr:'Prix',             es:'Precio',           it:'Prezzo'           },
+  'profil.orders.status':{ de:'Status',           en:'Status',         fr:'Statut',           es:'Estado',           it:'Stato'            },
+  'profil.orders.empty': { de:'Noch keine Bestellungen.', en:'No orders yet.', fr:'Pas encore de commandes.', es:'Aún no hay pedidos.', it:'Nessun ordine ancora.' },
+  'profil.save':         { de:'Speichern',        en:'Save',           fr:'Enregistrer',      es:'Guardar',          it:'Salva'            },
+  'profil.saved':        { de:'Gespeichert!',     en:'Saved!',         fr:'Enregistré !',     es:'¡Guardado!',       it:'Salvato!'         },
+  'profil.logout':       { de:'Abmelden',         en:'Sign out',       fr:'Se déconnecter',   es:'Cerrar sesión',    it:'Esci'             },
+  'profil.delete':       { de:'Konto löschen',    en:'Delete account', fr:'Supprimer le compte', es:'Eliminar cuenta', it:'Elimina account' },
+  'profil.delete.confirm': { de:'Bist du sicher? Alle Daten werden gelöscht.', en:'Are you sure? All data will be deleted.', fr:'Es-tu sûr ? Toutes les données seront supprimées.', es:'¿Estás seguro? Todos los datos se eliminarán.', it:'Sei sicuro? Tutti i dati verranno eliminati.' },
+
 };
 
 

@@ -142,3 +142,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// Scroll to top on page load (unless hash anchor is intentional)
+if (window.location.hash === '' || window.location.hash === '#') {
+  window.scrollTo(0, 0);
+}

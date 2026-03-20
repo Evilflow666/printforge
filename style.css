@@ -2449,3 +2449,118 @@ body.page-sub {
   .lang-switcher-compact { order: 10; }
   .header-auth { order: 11; }
 }
+
+/* ===== VALUE CARDS ===== */
+.values-grid { gap: 24px; }
+.value-card {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.value-card:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(232,160,0,0.3);
+  transform: translateY(-4px);
+}
+.value-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 16px;
+}
+.value-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.value-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ===== FEATURED PRODUCT SPOTLIGHT ===== */
+.featured-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.featured-image {
+  background: rgba(255,255,255,0.03);
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.photo-placeholder {
+  font-size: 3rem;
+  text-align: center;
+  color: var(--text-secondary);
+  opacity: 0.4;
+}
+.photo-placeholder small { font-size: 0.9rem; }
+.featured-badge {
+  display: inline-block;
+  background: rgba(232,160,0,0.15);
+  color: var(--accent);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  border: 1px solid rgba(232,160,0,0.3);
+}
+.featured-stats {
+  display: flex;
+  gap: 32px;
+  margin: 28px 0;
+}
+.featured-stat {
+  display: flex;
+  flex-direction: column;
+}
+.featured-stat strong {
+  font-size: 1.5rem;
+  color: var(--accent);
+}
+.featured-stat span {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+@media (max-width: 768px) {
+  .featured-inner { grid-template-columns: 1fr; gap: 24px; }
+  .featured-stats { gap: 24px; }
+}
+
+/* ===== AVAILABILITY BADGES ===== */
+.avail-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.avail-stock {
+  background: rgba(52,199,89,0.15);
+  color: #34c759;
+  border: 1px solid rgba(52,199,89,0.3);
+}
+.avail-order {
+  background: rgba(255,159,10,0.15);
+  color: #ff9f0a;
+  border: 1px solid rgba(255,159,10,0.3);
+}
+.avail-out {
+  background: rgba(255,69,58,0.12);
+  color: #ff453a;
+  border: 1px solid rgba(255,69,58,0.25);
+}

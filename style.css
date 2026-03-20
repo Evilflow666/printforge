@@ -2734,3 +2734,41 @@ body.page-sub {
   background: rgba(255,255,255,0.1);
   color: var(--text-primary);
 }
+
+/* ===== SOLAR WIDGET ===== */
+.solar-widget {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  max-width: 480px;
+}
+.solar-bar-outer {
+  width: 60px;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.solar-bar-inner {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease, background 1s ease;
+}
+.solar-text {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .solar-widget { flex-direction: column; gap: 6px; text-align: center; }
+  .solar-bar-outer { width: 80px; }
+  .solar-text { white-space: normal; font-size: 0.78rem; }
+}

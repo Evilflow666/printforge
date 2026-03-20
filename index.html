@@ -40,7 +40,7 @@
   }
   </script>
   <!-- Content Security Policy (basic) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://plausible.io http://69.62.105.159:32768;"> 
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://plausible.io http://69.62.105.159:32768 https://api.open-meteo.com;"> 
   <!-- Theme color -->
   <meta name="theme-color" content="#0B0F19">
   <!-- Plausible Analytics (privacy-friendly) -->
@@ -95,7 +95,7 @@
       <h1>Printing in the <span class="accent">Alps</span></h1>
       <p class="hero-tagline"><span data-i18n="hero.tagline">Wo pittoreske Landschaft auf Innovation trifft</span></p>
       <p class="hero-sub"><span data-i18n="hero.sub">3D-Druck · Lasercutting · Lasergravur · Prototyping</span></p>
-      <p class="hero-eco"><span data-i18n="hero.eco">☀️ Überwiegend mit PV-Energie produziert</span></p>
+      <div id="solar-widget"></div>
     </div>
   </section>
 
@@ -366,5 +366,6 @@
   <script src="auth.js"></script>
   <script src="script.js"></script>
   <script src="clippy.js"></script>
+  <script src="solar-widget.js"></script>
 </body>
 </html>

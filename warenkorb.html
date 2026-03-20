@@ -23,7 +23,8 @@
         <a href="katalog.html" data-i18n="nav.katalog">Katalog</a>
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
       </nav>
-      <div class="lang-switcher-compact">
+      <div class="header-actions">
+        <div class="lang-switcher-compact">
         <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
         <div class="lang-dropdown" id="lang-dropdown">
           <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪 DE</button>
@@ -33,10 +34,11 @@
           <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹 IT</button>
         </div>
       </div>
-      <a href="warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
-      <div class="header-auth" id="header-auth">
+        <a href="warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
+        <div class="header-auth" id="header-auth">
         <button onclick="openAuthModal('login')" class="auth-icon-btn" id="nav-login-btn" title="Anmelden / Registrieren">👤</button>
         <a href="profil.html" class="auth-icon-btn auth-icon-active" id="nav-user-btn" style="display:none" title="Mein Konto">👤</a>
+      </div>
       </div>
       <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
     </div>

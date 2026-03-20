@@ -83,16 +83,9 @@ const mobileToggle = document.querySelector('.mobile-toggle');
 const nav = document.querySelector('.nav');
 
 if (mobileToggle) mobileToggle.addEventListener('click', () => {
-  nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-  nav.style.flexDirection = 'column';
-  nav.style.position = 'absolute';
-  nav.style.top = '64px';
-  nav.style.left = '0';
-  nav.style.right = '0';
-  nav.style.background = 'rgba(10, 22, 40, 0.98)';
-  nav.style.padding = '16px 24px';
-  nav.style.gap = '16px';
-  nav.style.borderBottom = '1px solid #2A4468';
+  const isOpen = nav.classList.toggle('mobile-open');
+  mobileToggle.setAttribute('aria-expanded', isOpen);
+  mobileToggle.textContent = isOpen ? '✕' : '☰';
 });
 
 // Karten-Links funktionieren nativ als <a href="...">

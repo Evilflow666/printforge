@@ -659,3 +659,25 @@ document.addEventListener('DOMContentLoaded', () => {
     b.classList.toggle('lang-active', b.getAttribute('data-lang') === lang);
   });
 });
+
+// ─── ACTIVE NAV LINK ──────────
+document.addEventListener('DOMContentLoaded', () => {
+  const path = window.location.pathname;
+  document.querySelectorAll('.nav a').forEach(a => {
+    const href = a.getAttribute('href') || '';
+    // Exakte Matches oder Prefix-Matches
+    const isActive = 
+      (href === 'materialien.html' && path.includes('materialien')) ||
+      (href === '../materialien.html' && path.includes('materialien')) ||
+      (href === 'katalog.html' && (path.includes('katalog'))) ||
+      (href === '../katalog.html' && path.includes('katalog')) ||
+      (href === 'blog.html' && path.includes('blog')) ||
+      (href === '../blog.html' && path.includes('blog')) ||
+      (path.includes('leistungen') && href.includes('#leistungen')) ||
+      (path.includes('3d-druck') && href.includes('#leistungen')) ||
+      (path.includes('resin') && href.includes('#leistungen')) ||
+      (path.includes('laser') && href.includes('#leistungen')) ||
+      (path.includes('prototyp') && href.includes('#leistungen'));
+    if (isActive) a.classList.add('nav-active');
+  });
+});

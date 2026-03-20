@@ -1480,12 +1480,32 @@ select { cursor: pointer; appearance: none;
 .lang-switcher button:hover { opacity: 0.85; transform: scale(1.15); }
 .lang-switcher button.active { opacity: 1; transform: scale(1.15); }
 
-/* iOS fix: background-attachment:fixed funktioniert nicht auf Mobile */
+/* Unterseiten: Alpenpanorama als Background */
+body.page-sub {
+  background-image: linear-gradient(rgba(11,15,25,0.72), rgba(11,15,25,0.72)), url('alps-hero.webp');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+/* iOS/Mobile fix: background-attachment:fixed funktioniert nicht */
 @media (max-width: 768px) {
   body {
     background-attachment: scroll;
+    background-image: none !important;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(rgba(11,15,25,0.78), rgba(11,15,25,0.78)), url('images/gallery-1.webp');
     background-size: cover;
     background-position: center center;
+    background-repeat: no-repeat;
+  }
+  body.page-sub::before {
+    background-image: linear-gradient(rgba(11,15,25,0.78), rgba(11,15,25,0.78)), url('alps-hero.webp');
   }
 }
 /* ===== CLIPPY QUICK REPLIES ===== */

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="6" fill="#1a1a1a"/>
+  <path d="M4 26 L10 10 L14 18 L18 8 L22 16 L26 10 L28 26Z" fill="url(#fg)" opacity="0.9"/>
+  <text x="7" y="29" font-family="Inter, sans-serif" font-weight="700" font-size="12" letter-spacing="1" fill="white">PIT<tspan fill="#E8A000">A</tspan></text>
+  <defs>
+    <linearGradient id="fg" x1="16" y1="8" x2="16" y2="26" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E8A000"/>
+      <stop offset="100%" stop-color="#B87800"/>
+    </linearGradient>
+  </defs>
+</svg>

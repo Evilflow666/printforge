@@ -27,6 +27,10 @@
         <a href="../katalog.html" data-i18n="nav.katalog">Katalog</a>
         <a href="../index.html#galerie" data-i18n="nav.galerie">Galerie</a>
         <a href="../index.html#kontakt" data-i18n="nav.kontakt">Kontakt</a>
+      
+        <button onclick="openAuthModal('login')" class="nav-auth-btn" id="nav-login-btn" data-i18n="nav.login">Anmelden</button>
+        <button onclick="openAuthModal('register')" class="nav-auth-btn nav-auth-register" id="nav-register-btn" data-i18n="nav.register">Registrieren</button>
+        <a href="../profil.html" class="nav-auth-btn" id="nav-user-btn" style="display:none" data-i18n="nav.myaccount">Mein Konto</a>
       </nav>
       <div class="lang-switcher">
         <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪</button>
@@ -188,5 +192,6 @@
 
   <script src="../clippy.js"></script>
   <script src="../cart.js"></script>
+  <script src="../auth.js"></script>
 </body>
 </html>

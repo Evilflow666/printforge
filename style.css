@@ -109,11 +109,25 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
   height: 80px;
 }
 .logo {
-  font-size: 1.3rem; font-weight: 700; color: var(--text-primary);
-  text-decoration: none; letter-spacing: 3px; text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   transition: color var(--transition);
 }
 .logo:hover { color: var(--accent); }
+.logo-img {
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
 .cart-icon {
   position: relative;
   font-size: 1.3rem;

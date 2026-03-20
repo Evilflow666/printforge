@@ -2737,7 +2737,7 @@ body.page-sub {
 
 /* ===== SOLAR WIDGET ===== */
 .solar-widget {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
   margin-top: 16px;

@@ -188,14 +188,6 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 }
 
 /* ===== CTA DIVIDER ===== */
-.cta-divider {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 48px 0;
-  width: 100%;
-}
-
 /* ===== BUTTONS (Apple Glass Style) ===== */
 .btn {
   display: inline-block; padding: 18px 52px; border-radius: 980px;

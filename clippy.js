@@ -12,18 +12,18 @@ function clippyLang() {
 // ─── ÜBERSETZUNGEN ──────────────────────────────────────────────────────────
 const T = {
   greeting: {
-    de: 'Hey! 👋 Ich bin Clippy — dein persönlicher Berater bei PitA.<br><br>Wie kann ich dir helfen?',
-    en: 'Hey! 👋 I\'m Clippy — your personal advisor at PitA.<br><br>How can I help you?',
-    fr: 'Salut ! 👋 Je suis Clippy — votre conseiller personnel chez PitA.<br><br>Comment puis-je vous aider ?',
-    es: '¡Hola! 👋 Soy Clippy — tu asesor personal en PitA.<br><br>¿Cómo puedo ayudarte?',
-    it: 'Ciao! 👋 Sono Clippy — il tuo consulente personale di PitA.<br><br>Come posso aiutarti?',
+    de: 'Hey! 👋 Ich bin Clippy, dein Berater bei PitA.<br><br>Was hast du vor? Erzähl mir von deinem Projekt!',
+    en: "Hey! 👋 I'm Clippy, your advisor at PitA.<br><br>What are you working on? Tell me about your project!",
+    fr: 'Salut ! 👋 Je suis Clippy, votre conseiller chez PitA.<br><br>Quel est votre projet ? Racontez-moi !',
+    es: '¡Hola! 👋 Soy Clippy, tu asesor en PitA.<br><br>¿Qué tienes en mente? ¡Cuéntame sobre tu proyecto!',
+    it: 'Ciao! 👋 Sono Clippy, il tuo consulente di PitA.<br><br>Cosa hai in mente? Raccontami del tuo progetto!',
   },
   quickStart: {
-    de: ['💡 Ich habe eine Idee', '🔧 Ersatzteil gesucht', '🎁 Geschenk oder Deko', '🏢 Für mein Business', '📂 Datei hochladen', '❓ Frage stellen'],
-    en: ['💡 I have an idea', '🔧 Need a spare part', '🎁 Gift or decoration', '🏢 For my business', '📂 Upload file', '❓ Ask a question'],
-    fr: ["💡 J'ai une idée", '🔧 Pièce de rechange', '🎁 Cadeau ou déco', '🏢 Pour mon entreprise', '📂 Télécharger', '❓ Poser une question'],
-    es: ['💡 Tengo una idea', '🔧 Busco un repuesto', '🎁 Regalo o decoración', '🏢 Para mi negocio', '📂 Subir archivo', '❓ Hacer pregunta'],
-    it: ["💡 Ho un'idea", '🔧 Cerco un ricambio', '🎁 Regalo o decorazione', '🏢 Per la mia azienda', '📂 Carica file', '❓ Fare domanda'],
+    de: ['💡 Ich habe eine Idee', '🔧 Ersatzteil gesucht', '🎁 Geschenk oder Deko', '🏢 Für mein Business', '🔍 Was bietet ihr an?', '📦 Im Katalog stöbern'],
+    en: ['💡 I have an idea', '🔧 Need a spare part', '🎁 Gift or decoration', '🏢 For my business', '🔍 What do you offer?', '📦 Browse catalogue'],
+    fr: ["💡 J'ai une idée", '🔧 Pièce de rechange', '🎁 Cadeau ou déco', '🏢 Pour mon entreprise', '🔍 Que proposez-vous ?', '📦 Parcourir le catalogue'],
+    es: ['💡 Tengo una idea', '🔧 Busco un repuesto', '🎁 Regalo o decoración', '🏢 Para mi negocio', '🔍 ¿Qué ofrecéis?', '📦 Ver catálogo'],
+    it: ["💡 Ho un'idea", '🔧 Cerco un ricambio', '🎁 Regalo o decorazione', '🏢 Per la mia azienda', '🔍 Cosa offrite?', '📦 Sfoglia catalogo'],
   },
   dropzone: {
     de: '📂 STL, 3MF, OBJ oder SVG hier ablegen',

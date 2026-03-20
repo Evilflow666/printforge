@@ -163,6 +163,20 @@
     }, 30 * 60 * 1000);
   }
 
+  // Expose refresh function for language switching
+  window.refreshSolarWidget = function() {
+    const container = document.getElementById('solar-widget');
+    if (!container || !window._solarResult) return;
+    renderWidget(container, window._solarResult);
+  };
+
+  // Store result globally for refresh
+  const _origRender = renderWidget;
+  renderWidget = function(container, result) {
+    window._solarResult = result;
+    _origRender(container, result);
+  };
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initSolarWidget);
   } else {

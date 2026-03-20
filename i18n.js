@@ -681,6 +681,8 @@ const _origSetLang = typeof setLang === 'function' ? setLang : null;
     // Dropdown schließen
     const dd = document.getElementById('lang-dropdown');
     if (dd) dd.classList.remove('open');
+    // Solar-Widget Sprache aktualisieren
+    if (window.refreshSolarWidget) window.refreshSolarWidget();
   };
 })();
 // Initiale Flag setzen

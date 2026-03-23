@@ -241,6 +241,15 @@ function fb() { return T.fallback[clippyLang()] ?? T.fallback.de; }
 
 const OLLAMA_URL = 'http://69.62.105.159:32768/api/chat';
 
+// Modell vorwärmen beim Seitenaufruf
+(function warmupOllama() {
+  fetch(OLLAMA_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model: 'mistral:7b', messages: [], stream: false, keep_alive: '10m' }),
+  }).catch(function(){});
+})();
+
 function buildSystemPrompt() {
   var langInstr = {
     de: 'Antworte immer auf Deutsch.',
@@ -1120,9 +1129,10 @@ function sendClippy() {
       model: 'mistral:7b',
       messages: [{ role: 'system', content: buildSystemPrompt() }].concat(chatHistory.slice(-6)),
       stream: false,
+      keep_alive: "10m",
       options: { temperature: 0.7, num_predict: 300 },
     }),
-    signal: AbortSignal.timeout(15000),
+    signal: AbortSignal.timeout(60000),
   })
     .then(function(res) { return res.json(); })
     .then(function(data) {

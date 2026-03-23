@@ -279,7 +279,10 @@
   <section id="kontakt" class="section section-alt">
     <div class="container">
       <h2><span data-i18n="section.kontakt">Kontakt &amp; Angebot</span></h2>
-      <form class="contact-form" id="contactForm" novalidate>
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/florian@breitenau1.de" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Neue PitA Anfrage">
+        <input type="hidden" name="_next" value="https://evilflow666.github.io/printforge/?sent=true">
+        <input type="text" name="_gotcha" style="display:none">
         <div class="form-row">
           <div class="form-group">
             <label for="contact-name" data-i18n="kontakt.label.name">Name</label>

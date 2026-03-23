@@ -39,42 +39,16 @@ function showContactFile(file) {
 
 if (contactForm) {
   contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+    if (!contactForm.checkValidity()) {
+      e.preventDefault();
+      contactForm.reportValidity();
+      return;
+    }
+
     const submitBtn = contactForm.querySelector('button[type="submit"]');
+    if (!submitBtn) return;
     submitBtn.disabled = true;
     submitBtn.textContent = 'Wird gesendet...';
-
-    const formData = new FormData(contactForm);
-
-    // Backend-Endpoint (wird auf Hostinger konfiguriert)
-    const apiBase = window.location.hostname === 'evilflow666.github.io'
-      ? 'https://pita-api.example.com'  // TODO: Hostinger API URL
-      : '';
-
-    fetch(apiBase + '/api/contact', {
-      method: 'POST',
-      body: formData,
-    })
-    .then(r => r.json())
-    .then(res => {
-      if (res.success) {
-        alert('✅ ' + (res.message || 'Anfrage gesendet! Wir melden uns zeitnah.'));
-        contactForm.reset();
-        if (contactFileName) contactFileName.textContent = '';
-      } else {
-        alert('❌ ' + (res.message || 'Fehler beim Senden.'));
-      }
-    })
-    .catch(() => {
-      // Fallback: Formspree / mailto als Backup
-      alert('✅ Anfrage gesendet! Wir melden uns zeitnah.');
-      contactForm.reset();
-      if (contactFileName) contactFileName.textContent = '';
-    })
-    .finally(() => {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Angebot anfordern';
-    });
   });
 }
 

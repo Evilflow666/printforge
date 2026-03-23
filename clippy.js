@@ -9,181 +9,550 @@
 
   var OLLAMA_URL = 'http://69.62.105.159:32768/api/chat';
 
+  var VOLUME_MAP = { stamp: 5, phone: 80, shoebox: 800, bigger: 1600 };
+  var AREA_MAP = { card: 46, a5: 311, a4: 623, bigger: 1200 };
+  var PERIMETER_MAP = { card: 27.8, a5: 71.6, a4: 101.4, bigger: 160 };
+
   var UI = {
     de: {
       title: 'Clippy - PitA Assistent',
       openLabel: 'Frag mich!',
       placeholder: 'Nachricht schreiben...',
       send: 'Senden',
-      fileTitle: 'Datei hochladen (optional)',
-      intro: 'Ich stelle dir 4 kurze Fragen und gebe danach direkt eine Empfehlung mit Preisrahmen.',
+      fileTitle: 'Datei hochladen (STL/SVG)',
+      intro: 'Ich stelle dir 4 kurze Fragen und berechne sofort einen Preisrahmen.',
       typing: 'Clippy tippt...',
       warmupErr: 'Warmup fehlgeschlagen',
-      askMore: 'Wenn du willst, kannst du jetzt Details oder eine Datei schicken.',
-      fileReady: 'Datei erkannt. Ich habe erste Werte berechnet:',
+      fileReady: 'Datei erkannt. Ich habe exakte Werte berechnet:',
       fileErr: 'Datei konnte nicht gelesen werden.',
-      q: [
-        {
-          key: 'use_case',
-          text: 'Was möchtest du herstellen?',
-          options: ['3D-Druck', 'Laser schneiden', 'Laser gravieren', 'Resin/Harz', 'Prototyp', 'Noch unsicher']
+      askFirst: 'Bitte beantworte zuerst die 4 Fragen, dann kann ich den Preis direkt berechnen.',
+      enableChat: 'Alles klar. Stell deine Fragen, ich schalte jetzt den Live-Chat ein.',
+      chatLocked: 'Für den Sofortpreis nutze ich lokale Berechnung. Für freie Fragen bitte auf "💬 Ich hab noch Fragen" klicken.',
+      filePrompt: '💡 Hast du eine 3D-Datei (STL/SVG)? Dann kann ich genauer rechnen!',
+      shipping: 'Versand DE: 4.90€ | EU: 7.90€\nLieferzeit: 2-5 Werktage (Einzelteile), 5-10 (Kleinserien)',
+      contactMsg: 'Ich leite dich zum Anfragebereich weiter.',
+      stlFor3d: 'STL passt am besten für 3D-Druck. Bei Laser bitte SVG hochladen.',
+      svgForLaser: 'SVG passt am besten für Laser. Bei 3D-Druck bitte STL hochladen.',
+      foodWarn: 'Hinweis: Lebensmittelkontakt ist bei diesem Verfahren/Material nur eingeschränkt geeignet.',
+      resultTitle: '📊 Deine Schätzung:',
+      exactTitle: '📊 Exakte Berechnung:',
+      materials: {
+        pla: 'PLA (preiswert, ideal für Deko)',
+        petg: 'PETG (wetterbeständig, robust)',
+        abs: 'ABS (industrienah, temperaturstabil)',
+        resin_std: 'Standard Resin',
+        resin_tough: 'Tough Resin',
+        wood3: 'Holz 3mm',
+        acryl3: 'Acryl 3mm',
+        acryl6: 'Acryl 6mm',
+        wood: 'Holz',
+        metal_acryl: 'Metall/Acryl'
+      },
+      process: {
+        fdm: 'FDM 3D-Druck',
+        resin: 'Resin-Druck',
+        laser_cut: 'Laser schneiden',
+        laser_engrave: 'Laser gravieren',
+        prototype: 'Prototyp/Beratung'
+      },
+      sizeLabel3d: {
+        stamp: '~Briefmarke (5cm³)',
+        phone: '~Smartphone (80cm³)',
+        shoebox: '~Schuhkarton (800cm³)',
+        bigger: 'Größer (~1600cm³)'
+      },
+      sizeLabelLaser: {
+        card: '~Visitenkarte (46cm²)',
+        a5: '~DIN A5 (311cm²)',
+        a4: '~DIN A4 (623cm²)',
+        bigger: 'Größer (~1200cm²)'
+      },
+      actionButtons: {
+        upload: '📂 Datei hochladen für exakten Preis',
+        ask: '💬 Ich hab noch Fragen',
+        contact: '📧 Anfrage senden'
+      },
+      q: {
+        need: {
+          key: 'service',
+          text: 'Was brauchst du?',
+          options: [
+            { id: 'fdm', label: '🖨️ FDM 3D-Druck' },
+            { id: 'resin', label: '🧪 Resin-Druck' },
+            { id: 'laser_cut', label: '✂️ Laser schneiden' },
+            { id: 'laser_engrave', label: '🔥 Laser gravieren' },
+            { id: 'prototype', label: '🔩 Prototyp/Beratung' }
+          ]
         },
-        {
-          key: 'environment',
-          text: 'Wo wird es eingesetzt?',
-          options: ['Drinnen', 'Draussen/Wetter', 'Industrie', 'Lebensmittelkontakt', 'Wasser']
+        usage: {
+          key: 'usage',
+          text: 'Wofür wird es genutzt?',
+          options: [
+            { id: 'decor', label: '🎨 Deko/Display' },
+            { id: 'functional', label: '🔧 Funktional/Mechanisch' },
+            { id: 'industry', label: '🏭 Industrie/Werkstatt' },
+            { id: 'outdoor', label: '🌧️ Outdoor/Wetter' },
+            { id: 'food', label: '🍽️ Lebensmittelkontakt' }
+          ]
         },
-        {
-          key: 'load',
-          text: 'Wie wird es belastet?',
-          options: ['Dekorativ', 'Leicht', 'Stark', 'Hitze >60C', 'Flexibel']
+        size3d: {
+          key: 'size',
+          text: 'Wie groß ungefähr?',
+          options: [
+            { id: 'stamp', label: '📱 Briefmarke (~3×4cm)' },
+            { id: 'phone', label: '📱 Smartphone (~15×7cm)' },
+            { id: 'shoebox', label: '👟 Schuhkarton (~34×21cm)' },
+            { id: 'bigger', label: '📦 Größer' }
+          ]
         },
-        {
-          key: 'look',
-          text: 'Wie wichtig ist das Aussehen?',
-          options: ['Perfekt', 'Funktional', 'Farbe', 'Transparent']
+        sizeLaser: {
+          key: 'size',
+          text: 'Wie groß ungefähr?',
+          options: [
+            { id: 'card', label: '🏷️ Visitenkarte (85×54mm)' },
+            { id: 'a5', label: '📄 DIN A5 (210×148mm)' },
+            { id: 'a4', label: '📄 DIN A4 (297×210mm)' },
+            { id: 'bigger', label: '📐 Größer' }
+          ]
+        },
+        qty: {
+          key: 'qty_finish',
+          text: 'Wie viele + Finish?',
+          options: [
+            { id: '1_raw', label: '1 Stück roh' },
+            { id: '1_sanded', label: '1 Stück geschliffen' },
+            { id: '2_5', label: '2-5 Stück' },
+            { id: '6_20', label: '6-20 Stück' },
+            { id: '20_plus', label: '20+ Stück' }
+          ]
         }
-      ]
+      }
     },
     en: {
       title: 'Clippy - PitA Assistant',
       openLabel: 'Ask me!',
       placeholder: 'Write a message...',
       send: 'Send',
-      fileTitle: 'Upload file (optional)',
-      intro: 'I will ask 4 short questions and then give a recommendation with a price range.',
+      fileTitle: 'Upload file (STL/SVG)',
+      intro: 'I will ask 4 short questions and calculate a price instantly.',
       typing: 'Clippy is typing...',
       warmupErr: 'Warmup failed',
-      askMore: 'You can now add more details or upload a file if you want.',
-      fileReady: 'File detected. I calculated initial values:',
+      fileReady: 'File detected. I calculated exact values:',
       fileErr: 'Could not read file.',
-      q: [
-        {
-          key: 'use_case',
-          text: 'What do you want to make?',
-          options: ['3D printing', 'Laser cutting', 'Laser engraving', 'Resin', 'Prototype', 'Not sure yet']
+      askFirst: 'Please answer the 4 questions first so I can calculate instantly.',
+      enableChat: 'Done. Ask anything, live chat is now enabled.',
+      chatLocked: 'Instant pricing is local-only. For free chat, click "💬 I still have questions" first.',
+      filePrompt: '💡 Got a 3D file (STL/SVG)? I can calculate more precisely.',
+      shipping: 'Shipping DE: 4.90€ | EU: 7.90€\nLead time: 2-5 business days (single parts), 5-10 (small series)',
+      contactMsg: 'Opening the inquiry section.',
+      stlFor3d: 'STL is best for 3D print parts. For laser, please upload SVG.',
+      svgForLaser: 'SVG is best for laser jobs. For 3D print, please upload STL.',
+      foodWarn: 'Note: food contact is only limited/restricted with this process/material.',
+      resultTitle: '📊 Your estimate:',
+      exactTitle: '📊 Exact calculation:',
+      materials: {
+        pla: 'PLA (cost-effective, good for display)',
+        petg: 'PETG (weather resistant, strong)',
+        abs: 'ABS (industrial, temperature stable)',
+        resin_std: 'Standard Resin',
+        resin_tough: 'Tough Resin',
+        wood3: 'Wood 3mm',
+        acryl3: 'Acrylic 3mm',
+        acryl6: 'Acrylic 6mm',
+        wood: 'Wood',
+        metal_acryl: 'Metal/Acrylic'
+      },
+      process: {
+        fdm: 'FDM 3D Print',
+        resin: 'Resin Print',
+        laser_cut: 'Laser Cutting',
+        laser_engrave: 'Laser Engraving',
+        prototype: 'Prototype/Consulting'
+      },
+      sizeLabel3d: {
+        stamp: '~Stamp (5cm³)',
+        phone: '~Smartphone (80cm³)',
+        shoebox: '~Shoebox (800cm³)',
+        bigger: 'Larger (~1600cm³)'
+      },
+      sizeLabelLaser: {
+        card: '~Business card (46cm²)',
+        a5: '~DIN A5 (311cm²)',
+        a4: '~DIN A4 (623cm²)',
+        bigger: 'Larger (~1200cm²)'
+      },
+      actionButtons: {
+        upload: '📂 Upload file for exact price',
+        ask: '💬 I still have questions',
+        contact: '📧 Send inquiry'
+      },
+      q: {
+        need: {
+          key: 'service',
+          text: 'What do you need?',
+          options: [
+            { id: 'fdm', label: '🖨️ FDM 3D Print' },
+            { id: 'resin', label: '🧪 Resin Print' },
+            { id: 'laser_cut', label: '✂️ Laser Cutting' },
+            { id: 'laser_engrave', label: '🔥 Laser Engraving' },
+            { id: 'prototype', label: '🔩 Prototype/Consulting' }
+          ]
         },
-        {
-          key: 'environment',
-          text: 'Where will it be used?',
-          options: ['Indoors', 'Outdoor/weather', 'Industry', 'Food contact', 'Water']
+        usage: {
+          key: 'usage',
+          text: 'What is it used for?',
+          options: [
+            { id: 'decor', label: '🎨 Decor/Display' },
+            { id: 'functional', label: '🔧 Functional/Mechanical' },
+            { id: 'industry', label: '🏭 Industry/Workshop' },
+            { id: 'outdoor', label: '🌧️ Outdoor/Weather' },
+            { id: 'food', label: '🍽️ Food Contact' }
+          ]
         },
-        {
-          key: 'load',
-          text: 'How will it be loaded?',
-          options: ['Decorative', 'Light', 'Heavy', 'Heat >60C', 'Flexible']
+        size3d: {
+          key: 'size',
+          text: 'Approximate size?',
+          options: [
+            { id: 'stamp', label: '📱 Stamp (~3×4cm)' },
+            { id: 'phone', label: '📱 Smartphone (~15×7cm)' },
+            { id: 'shoebox', label: '👟 Shoebox (~34×21cm)' },
+            { id: 'bigger', label: '📦 Larger' }
+          ]
         },
-        {
-          key: 'look',
-          text: 'How important is appearance?',
-          options: ['Perfect', 'Functional', 'Color', 'Transparent']
+        sizeLaser: {
+          key: 'size',
+          text: 'Approximate size?',
+          options: [
+            { id: 'card', label: '🏷️ Business card (85×54mm)' },
+            { id: 'a5', label: '📄 DIN A5 (210×148mm)' },
+            { id: 'a4', label: '📄 DIN A4 (297×210mm)' },
+            { id: 'bigger', label: '📐 Larger' }
+          ]
+        },
+        qty: {
+          key: 'qty_finish',
+          text: 'Quantity + finish?',
+          options: [
+            { id: '1_raw', label: '1 part raw' },
+            { id: '1_sanded', label: '1 part sanded' },
+            { id: '2_5', label: '2-5 parts' },
+            { id: '6_20', label: '6-20 parts' },
+            { id: '20_plus', label: '20+ parts' }
+          ]
         }
-      ]
+      }
     },
     fr: {
       title: 'Clippy - Assistant PitA',
       openLabel: 'Demandez-moi!',
       placeholder: 'Ecrire un message...',
       send: 'Envoyer',
-      fileTitle: 'Televerser un fichier (optionnel)',
-      intro: 'Je pose 4 courtes questions, puis je donne une recommandation avec une fourchette de prix.',
+      fileTitle: 'Televerser un fichier (STL/SVG)',
+      intro: 'Je pose 4 questions et je calcule le prix instantanement.',
       typing: 'Clippy ecrit...',
       warmupErr: 'Echec du warmup',
-      askMore: 'Vous pouvez maintenant ajouter des details ou envoyer un fichier.',
-      fileReady: 'Fichier detecte. Voici les premieres valeurs:',
+      fileReady: 'Fichier detecte. Calcul exact effectue:',
       fileErr: 'Impossible de lire le fichier.',
-      q: [
-        {
-          key: 'use_case',
-          text: 'Que voulez-vous fabriquer?',
-          options: ['Impression 3D', 'Decoupe laser', 'Gravure laser', 'Resine', 'Prototype', 'Pas encore sur']
+      askFirst: 'Repondez d abord aux 4 questions pour un calcul instantane.',
+      enableChat: 'Parfait. Le chat libre est maintenant actif.',
+      chatLocked: 'Le prix instantane est calcule localement. Pour discuter, cliquez "💬 J ai encore des questions".',
+      filePrompt: '💡 Vous avez un fichier 3D (STL/SVG)? Je peux etre plus precis.',
+      shipping: 'Livraison DE: 4.90€ | UE: 7.90€\nDelai: 2-5 jours ouvres (pieces uniques), 5-10 (petites series)',
+      contactMsg: 'Ouverture de la section demande.',
+      stlFor3d: 'STL est ideal pour impression 3D. Pour laser, envoyez SVG.',
+      svgForLaser: 'SVG est ideal pour laser. Pour impression 3D, envoyez STL.',
+      foodWarn: 'Note: contact alimentaire limite avec ce procede/materiau.',
+      resultTitle: '📊 Votre estimation:',
+      exactTitle: '📊 Calcul exact:',
+      materials: {
+        pla: 'PLA (economique, ideal deco)',
+        petg: 'PETG (resistant meteo, robuste)',
+        abs: 'ABS (industriel, stable chaleur)',
+        resin_std: 'Resine standard',
+        resin_tough: 'Resine tough',
+        wood3: 'Bois 3mm',
+        acryl3: 'Acrylique 3mm',
+        acryl6: 'Acrylique 6mm',
+        wood: 'Bois',
+        metal_acryl: 'Metal/Acrylique'
+      },
+      process: {
+        fdm: 'Impression 3D FDM',
+        resin: 'Impression resine',
+        laser_cut: 'Decoupe laser',
+        laser_engrave: 'Gravure laser',
+        prototype: 'Prototype/Conseil'
+      },
+      sizeLabel3d: { stamp: '~Timbre (5cm³)', phone: '~Smartphone (80cm³)', shoebox: '~Boite a chaussures (800cm³)', bigger: 'Plus grand (~1600cm³)' },
+      sizeLabelLaser: { card: '~Carte de visite (46cm²)', a5: '~DIN A5 (311cm²)', a4: '~DIN A4 (623cm²)', bigger: 'Plus grand (~1200cm²)' },
+      actionButtons: {
+        upload: '📂 Televerser un fichier pour prix exact',
+        ask: '💬 J ai encore des questions',
+        contact: '📧 Envoyer une demande'
+      },
+      q: {
+        need: {
+          key: 'service',
+          text: 'De quoi avez-vous besoin?',
+          options: [
+            { id: 'fdm', label: '🖨️ Impression 3D FDM' },
+            { id: 'resin', label: '🧪 Impression resine' },
+            { id: 'laser_cut', label: '✂️ Decoupe laser' },
+            { id: 'laser_engrave', label: '🔥 Gravure laser' },
+            { id: 'prototype', label: '🔩 Prototype/Conseil' }
+          ]
         },
-        {
-          key: 'environment',
-          text: 'Ou sera-t-il utilise?',
-          options: ['Interieur', 'Exterieur/meteo', 'Industrie', 'Contact alimentaire', 'Eau']
+        usage: {
+          key: 'usage',
+          text: 'Usage principal?',
+          options: [
+            { id: 'decor', label: '🎨 Deco/Presentation' },
+            { id: 'functional', label: '🔧 Fonctionnel/Mecanique' },
+            { id: 'industry', label: '🏭 Industrie/Atelier' },
+            { id: 'outdoor', label: '🌧️ Exterieur/Meteo' },
+            { id: 'food', label: '🍽️ Contact alimentaire' }
+          ]
         },
-        {
-          key: 'load',
-          text: 'Quel niveau de contrainte?',
-          options: ['Decoratif', 'Leger', 'Fort', 'Chaleur >60C', 'Flexible']
+        size3d: {
+          key: 'size',
+          text: 'Quelle taille environ?',
+          options: [
+            { id: 'stamp', label: '📱 Timbre (~3×4cm)' },
+            { id: 'phone', label: '📱 Smartphone (~15×7cm)' },
+            { id: 'shoebox', label: '👟 Boite a chaussures (~34×21cm)' },
+            { id: 'bigger', label: '📦 Plus grand' }
+          ]
         },
-        {
-          key: 'look',
-          text: "Quelle importance pour l'apparence?",
-          options: ['Parfait', 'Fonctionnel', 'Couleur', 'Transparent']
+        sizeLaser: {
+          key: 'size',
+          text: 'Quelle taille environ?',
+          options: [
+            { id: 'card', label: '🏷️ Carte de visite (85×54mm)' },
+            { id: 'a5', label: '📄 DIN A5 (210×148mm)' },
+            { id: 'a4', label: '📄 DIN A4 (297×210mm)' },
+            { id: 'bigger', label: '📐 Plus grand' }
+          ]
+        },
+        qty: {
+          key: 'qty_finish',
+          text: 'Quantite + finition?',
+          options: [
+            { id: '1_raw', label: '1 piece brute' },
+            { id: '1_sanded', label: '1 piece poncee' },
+            { id: '2_5', label: '2-5 pieces' },
+            { id: '6_20', label: '6-20 pieces' },
+            { id: '20_plus', label: '20+ pieces' }
+          ]
         }
-      ]
+      }
     },
     es: {
       title: 'Clippy - Asistente PitA',
       openLabel: 'Preguntame!',
       placeholder: 'Escribe un mensaje...',
       send: 'Enviar',
-      fileTitle: 'Subir archivo (opcional)',
-      intro: 'Te hare 4 preguntas cortas y luego te dare una recomendacion con rango de precio.',
+      fileTitle: 'Subir archivo (STL/SVG)',
+      intro: 'Hare 4 preguntas y calculare el precio al instante.',
       typing: 'Clippy escribiendo...',
       warmupErr: 'Fallo de warmup',
-      askMore: 'Ahora puedes anadir detalles o subir un archivo si quieres.',
-      fileReady: 'Archivo detectado. Calcule valores iniciales:',
+      fileReady: 'Archivo detectado. Calculo exacto listo:',
       fileErr: 'No se pudo leer el archivo.',
-      q: [
-        {
-          key: 'use_case',
-          text: 'Que quieres fabricar?',
-          options: ['Impresion 3D', 'Corte laser', 'Grabado laser', 'Resina', 'Prototipo', 'Aun no estoy seguro']
+      askFirst: 'Responde primero las 4 preguntas para calcular al instante.',
+      enableChat: 'Perfecto. El chat libre esta activado.',
+      chatLocked: 'El precio instantaneo se calcula localmente. Para conversar, pulsa "💬 Tengo mas preguntas".',
+      filePrompt: '💡 Tienes archivo 3D (STL/SVG)? Puedo calcular con mas precision.',
+      shipping: 'Envio DE: 4.90€ | UE: 7.90€\nEntrega: 2-5 dias habiles (piezas sueltas), 5-10 (series pequenas)',
+      contactMsg: 'Abriendo la seccion de solicitud.',
+      stlFor3d: 'STL es mejor para impresion 3D. Para laser, sube SVG.',
+      svgForLaser: 'SVG es mejor para laser. Para impresion 3D, sube STL.',
+      foodWarn: 'Nota: contacto alimentario limitado con este proceso/material.',
+      resultTitle: '📊 Tu estimacion:',
+      exactTitle: '📊 Calculo exacto:',
+      materials: {
+        pla: 'PLA (economico, ideal para decoracion)',
+        petg: 'PETG (resistente a clima, robusto)',
+        abs: 'ABS (industrial, estable al calor)',
+        resin_std: 'Resina estandar',
+        resin_tough: 'Resina tough',
+        wood3: 'Madera 3mm',
+        acryl3: 'Acrilico 3mm',
+        acryl6: 'Acrilico 6mm',
+        wood: 'Madera',
+        metal_acryl: 'Metal/Acrilico'
+      },
+      process: {
+        fdm: 'Impresion 3D FDM',
+        resin: 'Impresion en resina',
+        laser_cut: 'Corte laser',
+        laser_engrave: 'Grabado laser',
+        prototype: 'Prototipo/Consultoria'
+      },
+      sizeLabel3d: { stamp: '~Sello (5cm³)', phone: '~Smartphone (80cm³)', shoebox: '~Caja de zapatos (800cm³)', bigger: 'Mas grande (~1600cm³)' },
+      sizeLabelLaser: { card: '~Tarjeta (46cm²)', a5: '~DIN A5 (311cm²)', a4: '~DIN A4 (623cm²)', bigger: 'Mas grande (~1200cm²)' },
+      actionButtons: {
+        upload: '📂 Subir archivo para precio exacto',
+        ask: '💬 Tengo mas preguntas',
+        contact: '📧 Enviar solicitud'
+      },
+      q: {
+        need: {
+          key: 'service',
+          text: 'Que necesitas?',
+          options: [
+            { id: 'fdm', label: '🖨️ Impresion 3D FDM' },
+            { id: 'resin', label: '🧪 Impresion en resina' },
+            { id: 'laser_cut', label: '✂️ Corte laser' },
+            { id: 'laser_engrave', label: '🔥 Grabado laser' },
+            { id: 'prototype', label: '🔩 Prototipo/Consultoria' }
+          ]
         },
-        {
-          key: 'environment',
-          text: 'Donde se usara?',
-          options: ['Interior', 'Exterior/clima', 'Industria', 'Contacto alimentario', 'Agua']
+        usage: {
+          key: 'usage',
+          text: 'Para que se usara?',
+          options: [
+            { id: 'decor', label: '🎨 Deco/Display' },
+            { id: 'functional', label: '🔧 Funcional/Mecanico' },
+            { id: 'industry', label: '🏭 Industria/Taller' },
+            { id: 'outdoor', label: '🌧️ Exterior/Clima' },
+            { id: 'food', label: '🍽️ Contacto alimentario' }
+          ]
         },
-        {
-          key: 'load',
-          text: 'Como se cargara?',
-          options: ['Decorativo', 'Ligero', 'Fuerte', 'Calor >60C', 'Flexible']
+        size3d: {
+          key: 'size',
+          text: 'Tamano aproximado?',
+          options: [
+            { id: 'stamp', label: '📱 Sello (~3×4cm)' },
+            { id: 'phone', label: '📱 Smartphone (~15×7cm)' },
+            { id: 'shoebox', label: '👟 Caja de zapatos (~34×21cm)' },
+            { id: 'bigger', label: '📦 Mas grande' }
+          ]
         },
-        {
-          key: 'look',
-          text: 'Que tan importante es la apariencia?',
-          options: ['Perfecta', 'Funcional', 'Color', 'Transparente']
+        sizeLaser: {
+          key: 'size',
+          text: 'Tamano aproximado?',
+          options: [
+            { id: 'card', label: '🏷️ Tarjeta (85×54mm)' },
+            { id: 'a5', label: '📄 DIN A5 (210×148mm)' },
+            { id: 'a4', label: '📄 DIN A4 (297×210mm)' },
+            { id: 'bigger', label: '📐 Mas grande' }
+          ]
+        },
+        qty: {
+          key: 'qty_finish',
+          text: 'Cantidad + acabado?',
+          options: [
+            { id: '1_raw', label: '1 pieza en bruto' },
+            { id: '1_sanded', label: '1 pieza lijada' },
+            { id: '2_5', label: '2-5 piezas' },
+            { id: '6_20', label: '6-20 piezas' },
+            { id: '20_plus', label: '20+ piezas' }
+          ]
         }
-      ]
+      }
     },
     it: {
       title: 'Clippy - Assistente PitA',
       openLabel: 'Chiedimi!',
       placeholder: 'Scrivi un messaggio...',
       send: 'Invia',
-      fileTitle: 'Carica file (opzionale)',
-      intro: 'Ti faccio 4 domande brevi e poi ti do una raccomandazione con fascia di prezzo.',
+      fileTitle: 'Carica file (STL/SVG)',
+      intro: 'Ti faccio 4 domande e calcolo subito il prezzo.',
       typing: 'Clippy sta scrivendo...',
       warmupErr: 'Warmup fallito',
-      askMore: 'Ora puoi aggiungere dettagli o caricare un file se vuoi.',
-      fileReady: 'File rilevato. Ho calcolato i primi valori:',
+      fileReady: 'File rilevato. Calcolo esatto pronto:',
       fileErr: 'Impossibile leggere il file.',
-      q: [
-        {
-          key: 'use_case',
-          text: 'Cosa vuoi realizzare?',
-          options: ['Stampa 3D', 'Taglio laser', 'Incisione laser', 'Resina', 'Prototipo', 'Non sono ancora sicuro']
+      askFirst: 'Rispondi prima alle 4 domande per calcolo immediato.',
+      enableChat: 'Perfetto. Chat libera ora attiva.',
+      chatLocked: 'Il prezzo istantaneo e locale. Per chat libera, clicca "💬 Ho ancora domande".',
+      filePrompt: '💡 Hai un file 3D (STL/SVG)? Posso calcolare in modo piu preciso.',
+      shipping: 'Spedizione DE: 4.90€ | UE: 7.90€\nConsegna: 2-5 giorni lavorativi (pezzi singoli), 5-10 (piccole serie)',
+      contactMsg: 'Apro la sezione richiesta.',
+      stlFor3d: 'STL e migliore per stampa 3D. Per laser, carica SVG.',
+      svgForLaser: 'SVG e migliore per laser. Per stampa 3D, carica STL.',
+      foodWarn: 'Nota: contatto alimentare limitato con questo processo/materiale.',
+      resultTitle: '📊 La tua stima:',
+      exactTitle: '📊 Calcolo esatto:',
+      materials: {
+        pla: 'PLA (economico, ideale per deco)',
+        petg: 'PETG (resistente alle intemperie, robusto)',
+        abs: 'ABS (industriale, stabile al calore)',
+        resin_std: 'Resina standard',
+        resin_tough: 'Resina tough',
+        wood3: 'Legno 3mm',
+        acryl3: 'Acrilico 3mm',
+        acryl6: 'Acrilico 6mm',
+        wood: 'Legno',
+        metal_acryl: 'Metallo/Acrilico'
+      },
+      process: {
+        fdm: 'Stampa 3D FDM',
+        resin: 'Stampa in resina',
+        laser_cut: 'Taglio laser',
+        laser_engrave: 'Incisione laser',
+        prototype: 'Prototipo/Consulenza'
+      },
+      sizeLabel3d: { stamp: '~Francobollo (5cm³)', phone: '~Smartphone (80cm³)', shoebox: '~Scatola scarpe (800cm³)', bigger: 'Piu grande (~1600cm³)' },
+      sizeLabelLaser: { card: '~Biglietto da visita (46cm²)', a5: '~DIN A5 (311cm²)', a4: '~DIN A4 (623cm²)', bigger: 'Piu grande (~1200cm²)' },
+      actionButtons: {
+        upload: '📂 Carica file per prezzo esatto',
+        ask: '💬 Ho ancora domande',
+        contact: '📧 Invia richiesta'
+      },
+      q: {
+        need: {
+          key: 'service',
+          text: 'Di cosa hai bisogno?',
+          options: [
+            { id: 'fdm', label: '🖨️ Stampa 3D FDM' },
+            { id: 'resin', label: '🧪 Stampa in resina' },
+            { id: 'laser_cut', label: '✂️ Taglio laser' },
+            { id: 'laser_engrave', label: '🔥 Incisione laser' },
+            { id: 'prototype', label: '🔩 Prototipo/Consulenza' }
+          ]
         },
-        {
-          key: 'environment',
-          text: 'Dove verra usato?',
-          options: ['Interno', 'Esterno/meteo', 'Industria', 'Contatto alimentare', 'Acqua']
+        usage: {
+          key: 'usage',
+          text: 'A cosa serve?',
+          options: [
+            { id: 'decor', label: '🎨 Deco/Display' },
+            { id: 'functional', label: '🔧 Funzionale/Meccanico' },
+            { id: 'industry', label: '🏭 Industria/Officina' },
+            { id: 'outdoor', label: '🌧️ Esterno/Meteo' },
+            { id: 'food', label: '🍽️ Contatto alimentare' }
+          ]
         },
-        {
-          key: 'load',
-          text: 'Come verra sollecitato?',
-          options: ['Decorativo', 'Leggero', 'Alto', 'Calore >60C', 'Flessibile']
+        size3d: {
+          key: 'size',
+          text: 'Dimensione approssimativa?',
+          options: [
+            { id: 'stamp', label: '📱 Francobollo (~3×4cm)' },
+            { id: 'phone', label: '📱 Smartphone (~15×7cm)' },
+            { id: 'shoebox', label: '👟 Scatola scarpe (~34×21cm)' },
+            { id: 'bigger', label: '📦 Piu grande' }
+          ]
         },
-        {
-          key: 'look',
-          text: "Quanto e importante l'estetica?",
-          options: ['Perfetta', 'Funzionale', 'Colore', 'Trasparente']
+        sizeLaser: {
+          key: 'size',
+          text: 'Dimensione approssimativa?',
+          options: [
+            { id: 'card', label: '🏷️ Biglietto da visita (85×54mm)' },
+            { id: 'a5', label: '📄 DIN A5 (210×148mm)' },
+            { id: 'a4', label: '📄 DIN A4 (297×210mm)' },
+            { id: 'bigger', label: '📐 Piu grande' }
+          ]
+        },
+        qty: {
+          key: 'qty_finish',
+          text: 'Quantita + finitura?',
+          options: [
+            { id: '1_raw', label: '1 pezzo grezzo' },
+            { id: '1_sanded', label: '1 pezzo levigato' },
+            { id: '2_5', label: '2-5 pezzi' },
+            { id: '6_20', label: '6-20 pezzi' },
+            { id: '20_plus', label: '20+ pezzi' }
+          ]
         }
-      ]
+      }
     }
   };
 
@@ -195,11 +564,11 @@
   function buildSystemPrompt() {
     var lang = clippyLang();
     var prompts = {
-      de: "Du bist Clippy, der Projektberater von PitA (Printing in the Alps). Antworte IMMER auf Deutsch.\\n\\nPERSOENLICHKEIT: Du bist ein PROJEKT-BERATER. Beginne IMMER beim Projekt des Kunden. Fuehre ein Gespraech, keine Checkliste. Stelle EINE Frage nach der anderen. Halte Antworten auf 2-4 Saetze.\\n\\nGRUNDREGELN: NIEMALS Kontaktformular als Antwort. Dateien sind IMMER optional. IMMER konkreten Preis nennen. Keine Sackgassen.\\n\\nNACH DEN 4 HAUPTFRAGEN — Empfehle Material+Verfahren mit Begruendung, frage Groesse+Stueckzahl, nenne Preisbereich, biete Datei als optionalen Bonus an.\\n\\nPREISE: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05 | TPU 0.08 | PA 0.12 | CF 0.18. Maschine 4EUR/h. Setup 3.50. Min 5EUR. Resin 0.15/cm3 min 10EUR. Laser Holz 0.005/cm2 Acryl 0.012/cm2 min 8EUR. Versand DE 4.90 EU 7.90. Lieferzeit 2-5 Werktage.\\n\\nPRINTFARM: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T.",
-      en: "You are Clippy, the project advisor at PitA (Printing in the Alps). ALWAYS respond in English.\\n\\nPERSONALITY: You are a PROJECT ADVISOR. Always start with the customer's project. Have a conversation, not a checklist. Ask ONE question at a time. Keep answers to 2-4 sentences.\\n\\nRULES: NEVER refer to the contact form as an answer. Files are ALWAYS optional. ALWAYS give a concrete price estimate. No dead ends.\\n\\nAFTER THE 4 MAIN QUESTIONS — Recommend material+process with reasoning, ask size+quantity, give price range, offer file upload as optional bonus.\\n\\nPRICING: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05 | TPU 0.08 | PA 0.12 | CF 0.18. Machine 4EUR/h. Setup 3.50. Min 5EUR. Resin 0.15/cm3 min 10EUR. Laser Wood 0.005/cm2 Acrylic 0.012/cm2 min 8EUR. Shipping DE 4.90 EU 7.90. Delivery 2-5 business days.\\n\\nPRINT FARM: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T.",
-      fr: "Tu es Clippy, le conseiller de projet de PitA (Printing in the Alps). Reponds TOUJOURS en francais.\\n\\nPERSONNALITE: Tu es un CONSEILLER DE PROJET. Commence toujours par le projet du client. Mene une conversation, pas une checklist. Pose UNE question a la fois. 2-4 phrases max.\\n\\nREGLES: Ne jamais renvoyer vers le formulaire. Fichiers toujours optionnels. Toujours donner un prix. Pas d'impasses.\\n\\nAPRES LES 4 QUESTIONS — Recommande materiau+procede, demande taille+quantite, donne fourchette de prix, propose fichier en bonus.\\n\\nTARIFS: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05 | TPU 0.08 | PA 0.12 | CF 0.18. Machine 4EUR/h. Setup 3.50. Min 5EUR. Resine 0.15/cm3 min 10EUR. Laser Bois 0.005/cm2 Acrylique 0.012/cm2 min 8EUR. Livraison DE 4.90 UE 7.90. Delai 2-5 jours.\\n\\nPARC MACHINES: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T.",
-      es: "Eres Clippy, el asesor de proyectos de PitA (Printing in the Alps). SIEMPRE responde en espanol.\\n\\nPERSONALIDAD: Eres un ASESOR DE PROYECTOS. Empieza con el proyecto del cliente. Conversacion, no checklist. UNA pregunta a la vez. 2-4 frases max.\\n\\nREGLAS: NUNCA remitir al formulario. Archivos siempre opcionales. Siempre dar precio. Sin callejones.\\n\\nDESPUES DE LAS 4 PREGUNTAS — Recomienda material+proceso, pregunta tamano+cantidad, da rango de precios, ofrece archivo como bonus.\\n\\nPRECIOS: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05 | TPU 0.08 | PA 0.12 | CF 0.18. Maquina 4EUR/h. Setup 3.50. Min 5EUR. Resina 0.15/cm3 min 10EUR. Laser Madera 0.005/cm2 Acrilico 0.012/cm2 min 8EUR. Envio DE 4.90 UE 7.90. Entrega 2-5 dias.\\n\\nGRANJA: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T.",
-      it: "Sei Clippy, il consulente di progetto di PitA (Printing in the Alps). Rispondi SEMPRE in italiano.\\n\\nPERSONALITA: Sei un CONSULENTE DI PROGETTO. Inizia sempre con il progetto del cliente. Conversazione, non checklist. UNA domanda alla volta. 2-4 frasi max.\\n\\nREGOLE: NON rimandare mai al modulo. File sempre opzionali. Dai sempre un prezzo. Niente vicoli ciechi.\\n\\nDOPO LE 4 DOMANDE — Raccomanda materiale+processo, chiedi dimensioni+quantita, dai range di prezzo, offri file come bonus.\\n\\nPREZZI: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05 | TPU 0.08 | PA 0.12 | CF 0.18. Macchina 4EUR/h. Setup 3.50. Min 5EUR. Resina 0.15/cm3 min 10EUR. Laser Legno 0.005/cm2 Acrilico 0.012/cm2 min 8EUR. Spedizione DE 4.90 UE 7.90. Consegna 2-5 giorni.\\n\\nPARCO MACCHINE: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T."
+      de: "Du bist Clippy, der Projektberater von PitA (Printing in the Alps). Antworte IMMER auf Deutsch.\\n\\nPERSOENLICHKEIT: Du bist ein PROJEKT-BERATER. Beginne IMMER beim Projekt des Kunden. Fuehre ein Gespraech, keine Checkliste. Stelle EINE Frage nach der anderen. Halte Antworten auf 2-4 Saetze.\\n\\nGRUNDREGELN: NIEMALS Kontaktformular als Antwort. Dateien sind IMMER optional. IMMER konkreten Preis nennen. Keine Sackgassen.\\n\\nPREISE: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05. Maschine 4EUR/h. Setup 3.50. Min 5EUR. Resin 0.15-0.22/cm3 min 10EUR. Laser Holz 0.005/cm2 Acryl 0.012-0.018/cm2 min 8EUR. Versand DE 4.90 EU 7.90. Lieferzeit 2-5 Werktage, Kleinserie 5-10.",
+      en: "You are Clippy, project advisor at PitA (Printing in the Alps). ALWAYS answer in English. Keep it concise, practical, and price-oriented.",
+      fr: "Tu es Clippy, conseiller projet de PitA. Reponds toujours en francais de maniere concise et pratique.",
+      es: "Eres Clippy, asesor de proyectos de PitA. Responde siempre en espanol de forma breve y practica.",
+      it: "Sei Clippy, consulente di progetto di PitA. Rispondi sempre in italiano, in modo conciso e pratico."
     };
     return prompts[lang] || prompts.de;
   }
@@ -213,12 +582,9 @@
   })();
 
   var MATS = {
-    PLA:  { density: 1.24, ppg: 0.04, label: 'PLA' },
-    PETG: { density: 1.27, ppg: 0.05, label: 'PETG' },
-    ABS:  { density: 1.05, ppg: 0.05, label: 'ABS' },
-    TPU:  { density: 1.21, ppg: 0.08, label: 'TPU' },
-    PA:   { density: 1.14, ppg: 0.12, label: 'Nylon (PA)' },
-    CF:   { density: 1.30, ppg: 0.18, label: 'Carbon-Filament' }
+    PLA: { density: 1.24, ppg: 0.04, labelKey: 'pla' },
+    PETG: { density: 1.27, ppg: 0.05, labelKey: 'petg' },
+    ABS: { density: 1.05, ppg: 0.05, labelKey: 'abs' }
   };
 
   function signedVolTri(ax, ay, az, bx, by, bz, cx, cy, cz) {
@@ -229,20 +595,33 @@
     var v = new DataView(buf);
     var n = v.getUint32(80, true);
     var vol = 0;
-    var minX = Infinity, minY = Infinity, minZ = Infinity;
-    var maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+    var minX = Infinity;
+    var minY = Infinity;
+    var minZ = Infinity;
+    var maxX = -Infinity;
+    var maxY = -Infinity;
+    var maxZ = -Infinity;
 
     for (var i = 0; i < n; i++) {
       var o = 84 + i * 50;
-      var v1x = v.getFloat32(o + 12, true), v1y = v.getFloat32(o + 16, true), v1z = v.getFloat32(o + 20, true);
-      var v2x = v.getFloat32(o + 24, true), v2y = v.getFloat32(o + 28, true), v2z = v.getFloat32(o + 32, true);
-      var v3x = v.getFloat32(o + 36, true), v3y = v.getFloat32(o + 40, true), v3z = v.getFloat32(o + 44, true);
+      var v1x = v.getFloat32(o + 12, true);
+      var v1y = v.getFloat32(o + 16, true);
+      var v1z = v.getFloat32(o + 20, true);
+      var v2x = v.getFloat32(o + 24, true);
+      var v2y = v.getFloat32(o + 28, true);
+      var v2z = v.getFloat32(o + 32, true);
+      var v3x = v.getFloat32(o + 36, true);
+      var v3y = v.getFloat32(o + 40, true);
+      var v3z = v.getFloat32(o + 44, true);
 
       vol += signedVolTri(v1x, v1y, v1z, v2x, v2y, v2z, v3x, v3y, v3z);
 
-      minX = Math.min(minX, v1x, v2x, v3x); maxX = Math.max(maxX, v1x, v2x, v3x);
-      minY = Math.min(minY, v1y, v2y, v3y); maxY = Math.max(maxY, v1y, v2y, v3y);
-      minZ = Math.min(minZ, v1z, v2z, v3z); maxZ = Math.max(maxZ, v1z, v2z, v3z);
+      minX = Math.min(minX, v1x, v2x, v3x);
+      maxX = Math.max(maxX, v1x, v2x, v3x);
+      minY = Math.min(minY, v1y, v2y, v3y);
+      maxY = Math.max(maxY, v1y, v2y, v3y);
+      minZ = Math.min(minZ, v1z, v2z, v3z);
+      maxZ = Math.max(maxZ, v1z, v2z, v3z);
     }
 
     return {
@@ -262,17 +641,31 @@
       while ((match = re.exec(txt)) !== null) verts.push(match);
 
       var vol = 0;
-      var minX = Infinity, minY = Infinity, minZ = Infinity;
-      var maxX = -Infinity, maxY = -Infinity, maxZ = -Infinity;
+      var minX = Infinity;
+      var minY = Infinity;
+      var minZ = Infinity;
+      var maxX = -Infinity;
+      var maxY = -Infinity;
+      var maxZ = -Infinity;
 
       for (var i = 0; i < verts.length - 2; i += 3) {
-        var ax = +verts[i][1], ay = +verts[i][2], az = +verts[i][3];
-        var bx = +verts[i + 1][1], by = +verts[i + 1][2], bz = +verts[i + 1][3];
-        var cx = +verts[i + 2][1], cy = +verts[i + 2][2], cz = +verts[i + 2][3];
+        var ax = +verts[i][1];
+        var ay = +verts[i][2];
+        var az = +verts[i][3];
+        var bx = +verts[i + 1][1];
+        var by = +verts[i + 1][2];
+        var bz = +verts[i + 1][3];
+        var cx = +verts[i + 2][1];
+        var cy = +verts[i + 2][2];
+        var cz = +verts[i + 2][3];
+
         vol += signedVolTri(ax, ay, az, bx, by, bz, cx, cy, cz);
-        minX = Math.min(minX, ax, bx, cx); maxX = Math.max(maxX, ax, bx, cx);
-        minY = Math.min(minY, ay, by, cy); maxY = Math.max(maxY, ay, by, cy);
-        minZ = Math.min(minZ, az, bz, cz); maxZ = Math.max(maxZ, az, bz, cz);
+        minX = Math.min(minX, ax, bx, cx);
+        maxX = Math.max(maxX, ax, bx, cx);
+        minY = Math.min(minY, ay, by, cy);
+        maxY = Math.max(maxY, ay, by, cy);
+        minZ = Math.min(minZ, az, bz, cz);
+        maxZ = Math.max(maxZ, az, bz, cz);
       }
 
       return {
@@ -295,8 +688,210 @@
     return {
       weightG: wG.toFixed(1),
       priceMin: (total * 0.85).toFixed(2),
-      priceMax: (total * 1.25).toFixed(2),
-      material: m.label
+      priceMax: (total * 1.2).toFixed(2),
+      material: m.labelKey,
+      total: total
+    };
+  }
+
+  function qtyDiscount(qtyId) {
+    if (qtyId === '2_5') return 0.95;
+    if (qtyId === '6_20') return 0.9;
+    if (qtyId === '20_plus') return 0.85;
+    return 1;
+  }
+
+  function usageToFdm(usage) {
+    if (usage === 'decor') return { mat: 'PLA', infill: 20 };
+    if (usage === 'functional') return { mat: 'PETG', infill: 40 };
+    if (usage === 'industry') return { mat: 'ABS', infill: 60 };
+    if (usage === 'outdoor') return { mat: 'PETG', infill: 40 };
+    if (usage === 'food') return { mat: 'PETG', infill: 40 };
+    return { mat: 'PLA', infill: 20 };
+  }
+
+  function usageToResinRate(usage) {
+    if (usage === 'decor') return { rate: 0.15, matKey: 'resin_std', foodWarn: false };
+    if (usage === 'food') return { rate: 0.22, matKey: 'resin_tough', foodWarn: true };
+    return { rate: 0.22, matKey: 'resin_tough', foodWarn: false };
+  }
+
+  function usageToCutRate(usage) {
+    if (usage === 'decor') return { rate: 0.005, matKey: 'wood3' };
+    if (usage === 'functional') return { rate: 0.012, matKey: 'acryl3' };
+    if (usage === 'industry') return { rate: 0.018, matKey: 'acryl6' };
+    if (usage === 'outdoor') return { rate: 0.012, matKey: 'acryl3' };
+    return { rate: 0.005, matKey: 'wood3' };
+  }
+
+  function usageToEngraveRate(usage) {
+    if (usage === 'decor') return { rate: 0.008, matKey: 'wood' };
+    return { rate: 0.015, matKey: 'metal_acryl' };
+  }
+
+  function calculatePrice(answers, exactInput) {
+    var tx = textSet();
+    var service = answers.service;
+    var usage = answers.usage;
+    var qty = answers.qty_finish;
+    var size = answers.size;
+    var discount = qtyDiscount(qty);
+    var out = {
+      processKey: service,
+      materialKey: 'pla',
+      sizeText: '',
+      volumeCm3: null,
+      areaCm2: null,
+      weightG: null,
+      total: 0,
+      priceMin: 0,
+      priceMax: 0,
+      warning: '',
+      exact: !!exactInput,
+      extra: ''
+    };
+
+    if (service === 'fdm' || service === 'prototype') {
+      var fdm = usageToFdm(usage);
+      var vol = exactInput && exactInput.volumeCm3 ? exactInput.volumeCm3 : (VOLUME_MAP[size] || VOLUME_MAP.phone);
+      var est = estimatePrice({ volumeCm3: vol }, fdm.mat, fdm.infill);
+      var total = est.total;
+      if (qty === '1_sanded') total *= 1.3;
+      total *= discount;
+      total = Math.max(5, total);
+      out.materialKey = (MATS[fdm.mat] && MATS[fdm.mat].labelKey) || 'pla';
+      out.volumeCm3 = vol;
+      out.weightG = Number(est.weightG);
+      out.total = total;
+      out.priceMin = total * 0.85;
+      out.priceMax = total * 1.2;
+      out.sizeText = tx.sizeLabel3d[size] || tx.sizeLabel3d.phone;
+      if (service === 'prototype') {
+        out.extra = 'prototype';
+      }
+    } else if (service === 'resin') {
+      var resin = usageToResinRate(usage);
+      var rVol = exactInput && exactInput.volumeCm3 ? exactInput.volumeCm3 : (VOLUME_MAP[size] || VOLUME_MAP.phone);
+      var rTotal = (rVol * resin.rate) + ((rVol / 1.5 / 60) * 3) + 5;
+      rTotal *= discount;
+      rTotal = Math.max(10, rTotal);
+      out.materialKey = resin.matKey;
+      out.volumeCm3 = rVol;
+      out.total = rTotal;
+      out.priceMin = rTotal * 0.85;
+      out.priceMax = rTotal * 1.2;
+      out.sizeText = tx.sizeLabel3d[size] || tx.sizeLabel3d.phone;
+      if (resin.foodWarn) out.warning = tx.foodWarn;
+    } else if (service === 'laser_cut') {
+      var cut = usageToCutRate(usage);
+      var area = exactInput && exactInput.areaCm2 ? exactInput.areaCm2 : (AREA_MAP[size] || AREA_MAP.a5);
+      var perimeter = exactInput && exactInput.pathCm ? exactInput.pathCm : (PERIMETER_MAP[size] || PERIMETER_MAP.a5);
+      var cTotal = (area * cut.rate) + (perimeter * 0.03) + 5;
+      cTotal *= discount;
+      cTotal = Math.max(8, cTotal);
+      out.materialKey = cut.matKey;
+      out.areaCm2 = area;
+      out.total = cTotal;
+      out.priceMin = cTotal * 0.85;
+      out.priceMax = cTotal * 1.2;
+      out.sizeText = tx.sizeLabelLaser[size] || tx.sizeLabelLaser.a5;
+      out.extra = 'path:' + perimeter.toFixed(1);
+    } else if (service === 'laser_engrave') {
+      var engr = usageToEngraveRate(usage);
+      var eArea = exactInput && exactInput.areaCm2 ? exactInput.areaCm2 : (AREA_MAP[size] || AREA_MAP.a5);
+      var eTotal = (eArea * engr.rate) + 5;
+      eTotal *= discount;
+      eTotal = Math.max(8, eTotal);
+      out.materialKey = engr.matKey;
+      out.areaCm2 = eArea;
+      out.total = eTotal;
+      out.priceMin = eTotal * 0.85;
+      out.priceMax = eTotal * 1.2;
+      out.sizeText = tx.sizeLabelLaser[size] || tx.sizeLabelLaser.a5;
+    }
+
+    return out;
+  }
+
+  function parseLengthToMm(raw) {
+    if (!raw) return null;
+    var m = String(raw).trim().match(/^([\d.]+)\s*([a-z%]*)$/i);
+    if (!m) return null;
+    var v = parseFloat(m[1]);
+    var unit = (m[2] || 'px').toLowerCase();
+    if (Number.isNaN(v)) return null;
+    if (unit === 'mm') return v;
+    if (unit === 'cm') return v * 10;
+    if (unit === 'in') return v * 25.4;
+    if (unit === 'pt') return v * 0.352777778;
+    if (unit === 'px') return v * 0.264583333;
+    return v;
+  }
+
+  function analyzeSVG(txt) {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(txt, 'image/svg+xml');
+    var svg = doc.documentElement;
+    if (!svg || svg.nodeName.toLowerCase() !== 'svg') throw new Error('invalid svg');
+
+    var tempWrap = document.createElement('div');
+    tempWrap.style.cssText = 'position:absolute;left:-99999px;top:-99999px;visibility:hidden;';
+    var liveSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    liveSvg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+
+    var vb = (svg.getAttribute('viewBox') || '').trim().split(/\s+/).map(Number);
+    var widthMm = parseLengthToMm(svg.getAttribute('width'));
+    var heightMm = parseLengthToMm(svg.getAttribute('height'));
+
+    if ((!widthMm || !heightMm) && vb.length === 4 && !Number.isNaN(vb[2]) && !Number.isNaN(vb[3])) {
+      widthMm = vb[2] * 0.264583333;
+      heightMm = vb[3] * 0.264583333;
+    }
+    if (!widthMm) widthMm = 210;
+    if (!heightMm) heightMm = 148;
+
+    liveSvg.setAttribute('width', String(widthMm) + 'mm');
+    liveSvg.setAttribute('height', String(heightMm) + 'mm');
+    if (vb.length === 4 && !Number.isNaN(vb[0])) liveSvg.setAttribute('viewBox', svg.getAttribute('viewBox'));
+
+    var sourceChildren = svg.querySelectorAll('path,rect,circle,ellipse,line,polyline,polygon');
+    sourceChildren.forEach(function (el) {
+      liveSvg.appendChild(el.cloneNode(true));
+    });
+
+    tempWrap.appendChild(liveSvg);
+    document.body.appendChild(tempWrap);
+
+    var lengthPx = 0;
+    var areaPx2 = 0;
+
+    Array.prototype.forEach.call(liveSvg.children, function (node) {
+      if (typeof node.getTotalLength === 'function') {
+        try { lengthPx += node.getTotalLength(); } catch (e) {}
+      }
+      if (typeof node.getBBox === 'function') {
+        try {
+          var b = node.getBBox();
+          areaPx2 += Math.max(0, b.width * b.height);
+        } catch (e2) {}
+      }
+    });
+
+    var svgPxW = liveSvg.clientWidth || (vb.length === 4 ? vb[2] : 800);
+    var mmPerPxX = widthMm / (svgPxW || 1);
+    var svgPxH = liveSvg.clientHeight || (vb.length === 4 ? vb[3] : 600);
+    var mmPerPxY = heightMm / (svgPxH || 1);
+
+    document.body.removeChild(tempWrap);
+
+    var pathMm = lengthPx * ((mmPerPxX + mmPerPxY) / 2);
+    var areaMm2 = areaPx2 * mmPerPxX * mmPerPxY;
+
+    return {
+      areaCm2: Math.max(1, areaMm2 / 100),
+      pathCm: Math.max(1, pathMm / 10),
+      widthMm: widthMm,
+      heightMm: heightMm
     };
   }
 
@@ -340,7 +935,7 @@
     '    <div id="clippy-input-row">',
     '      <label id="clippy-file-btn" class="clippy-hidden" title="Upload">',
     '        📎',
-    '        <input type="file" id="clippy-file-input" accept=".stl" style="display:none">',
+    '        <input type="file" id="clippy-file-input" accept=".stl,.svg" style="display:none">',
     '      </label>',
     '      <input id="clippy-input" type="text" autocomplete="off" />',
     '      <button id="clippy-send" type="button"></button>',
@@ -380,11 +975,13 @@
 
   var state = {
     asked: false,
-    questionIndex: 0,
+    step: 0,
     answers: {},
     finishedQuestions: false,
     busy: false,
-    history: []
+    history: [],
+    followupEnabled: false,
+    actionsShown: false
   };
 
   function applyLanguageTexts() {
@@ -403,7 +1000,7 @@
     if (!lL) return;
     lL.setAttribute('ry', '10');
     lR.setAttribute('ry', '10');
-    setTimeout(function() {
+    setTimeout(function () {
       lL.setAttribute('ry', '0');
       lR.setAttribute('ry', '0');
     }, 150);
@@ -415,7 +1012,7 @@
     if (!bL) return;
     bL.setAttribute('d', 'M34 40 Q42 34 50 40');
     bR.setAttribute('d', 'M50 40 Q58 34 66 40');
-    setTimeout(function() {
+    setTimeout(function () {
       bL.setAttribute('d', 'M34 44 Q42 38 50 44');
       bR.setAttribute('d', 'M50 44 Q58 38 66 44');
     }, 800);
@@ -423,7 +1020,7 @@
 
   function startIdle() {
     setInterval(blink, 3000 + Math.random() * 4000);
-    setTimeout(function() { blink(); }, 800);
+    setTimeout(function () { blink(); }, 800);
   }
 
   function scrollBottom() {
@@ -453,9 +1050,54 @@
       var btn = document.createElement('button');
       btn.className = 'clippy-option-btn';
       btn.type = 'button';
-      btn.textContent = opt;
+      btn.textContent = opt.label;
       btn.addEventListener('click', function () {
-        handleQuestionAnswer(qObj.key, opt);
+        handleQuestionAnswer(qObj.key, opt.id, opt.label);
+      });
+      options.appendChild(btn);
+    });
+
+    wrap.appendChild(options);
+    elMessages.appendChild(wrap);
+    scrollBottom();
+  }
+
+  function appendActionButtons() {
+    if (state.actionsShown) return;
+    state.actionsShown = true;
+    var tx = textSet();
+    var wrap = document.createElement('div');
+    wrap.className = 'clippy-msg clippy-question';
+
+    var text = document.createElement('div');
+    text.textContent = tx.filePrompt;
+    wrap.appendChild(text);
+
+    var options = document.createElement('div');
+    options.className = 'clippy-options';
+
+    var actions = [
+      { key: 'upload', label: tx.actionButtons.upload },
+      { key: 'ask', label: tx.actionButtons.ask },
+      { key: 'contact', label: tx.actionButtons.contact }
+    ];
+
+    actions.forEach(function (item) {
+      var btn = document.createElement('button');
+      btn.className = 'clippy-option-btn';
+      btn.type = 'button';
+      btn.textContent = item.label;
+      btn.addEventListener('click', function () {
+        if (item.key === 'upload') {
+          elFileBtn.classList.remove('clippy-hidden');
+          elFileInput.click();
+        } else if (item.key === 'ask') {
+          state.followupEnabled = true;
+          appendMessage(tx.enableChat, 'bot');
+        } else {
+          appendMessage(tx.contactMsg, 'bot');
+          window.location.href = '/index.html#kontakt';
+        }
       });
       options.appendChild(btn);
     });
@@ -476,37 +1118,160 @@
     cards.forEach(function (btn) { btn.disabled = true; });
   }
 
-  function renderNextQuestion() {
+  function nextQuestionForStep() {
     var tx = textSet();
-    if (state.questionIndex >= tx.q.length) {
-      finishQuestionsAndCallOllama();
-      return;
+    if (state.step === 0) return tx.q.need;
+    if (state.step === 1) return tx.q.usage;
+    if (state.step === 2) {
+      var service = state.answers.service;
+      if (service === 'laser_cut' || service === 'laser_engrave') return tx.q.sizeLaser;
+      return tx.q.size3d;
     }
-    appendQuestionCard(tx.q[state.questionIndex]);
+    if (state.step === 3) return tx.q.qty;
+    return null;
   }
 
-  function handleQuestionAnswer(key, value) {
+  function renderNextQuestion() {
+    var qObj = nextQuestionForStep();
+    if (!qObj) {
+      finishQuestionsWithInstantPrice();
+      return;
+    }
+    appendQuestionCard(qObj);
+  }
+
+  function handleQuestionAnswer(key, value, label) {
     if (state.finishedQuestions) return;
     removeQuestionButtons();
     state.answers[key] = value;
-    appendMessage(value, 'user');
-    state.questionIndex += 1;
+    appendMessage(label, 'user');
+    state.step += 1;
     renderNextQuestion();
   }
 
-  function questionnaireSummary() {
+  function formatCurrency(v) {
+    return Number(v).toFixed(2);
+  }
+
+  function resultLabels() {
+    var lang = clippyLang();
+    var labels = {
+      de: {
+        material: 'Material',
+        process: 'Verfahren',
+        size: 'Groesse',
+        weight: 'Gewicht',
+        price: 'Preis',
+        perPiece: 'pro Stueck',
+        bbox: 'BBox',
+        triangles: 'Triangles',
+        cutLen: 'Schnittlaenge',
+        areaSvg: 'Flaeche SVG'
+      },
+      en: {
+        material: 'Material',
+        process: 'Process',
+        size: 'Size',
+        weight: 'Weight',
+        price: 'Price',
+        perPiece: 'per piece',
+        bbox: 'BBox',
+        triangles: 'Triangles',
+        cutLen: 'Cut length',
+        areaSvg: 'SVG area'
+      },
+      fr: {
+        material: 'Materiau',
+        process: 'Procede',
+        size: 'Taille',
+        weight: 'Poids',
+        price: 'Prix',
+        perPiece: 'par piece',
+        bbox: 'BBox',
+        triangles: 'Triangles',
+        cutLen: 'Longueur de coupe',
+        areaSvg: 'Surface SVG'
+      },
+      es: {
+        material: 'Material',
+        process: 'Proceso',
+        size: 'Tamano',
+        weight: 'Peso',
+        price: 'Precio',
+        perPiece: 'por pieza',
+        bbox: 'BBox',
+        triangles: 'Triangulos',
+        cutLen: 'Longitud de corte',
+        areaSvg: 'Area SVG'
+      },
+      it: {
+        material: 'Materiale',
+        process: 'Processo',
+        size: 'Dimensione',
+        weight: 'Peso',
+        price: 'Prezzo',
+        perPiece: 'per pezzo',
+        bbox: 'BBox',
+        triangles: 'Triangoli',
+        cutLen: 'Lunghezza taglio',
+        areaSvg: 'Area SVG'
+      }
+    };
+    return labels[lang] || labels.de;
+  }
+
+  function prototypeLine(min, max, perPiece) {
+    var lang = clippyLang();
+    if (lang === 'en') return 'Prototyping is custom. Based on your inputs I estimate €' + min + ' - €' + max + ' ' + perPiece + '. For an exact offer, tell me more about your project.';
+    if (lang === 'fr') return 'Le prototypage est individuel. Selon vos infos, j estime €' + min + ' - €' + max + ' ' + perPiece + '. Pour un devis exact, racontez-moi votre projet.';
+    if (lang === 'es') return 'El prototipado es individual. Segun tus datos, estimo €' + min + ' - €' + max + ' ' + perPiece + '. Para una oferta exacta, cuentame mas de tu proyecto.';
+    if (lang === 'it') return 'La prototipazione e personalizzata. In base ai dati, stimo €' + min + ' - €' + max + ' ' + perPiece + '. Per un preventivo preciso, raccontami di piu del progetto.';
+    return 'Prototyping ist individuell. Basierend auf deinen Angaben schatze ich €' + min + ' - €' + max + ' ' + perPiece + '. Fuer ein genaues Angebot erzaehl mir mehr ueber dein Projekt.';
+  }
+
+  function buildResultMessage(calc, exactInfo) {
     var tx = textSet();
-    var q = tx.q;
-    return [
-      q[0].text + ' ' + (state.answers.use_case || '-'),
-      q[1].text + ' ' + (state.answers.environment || '-'),
-      q[2].text + ' ' + (state.answers.load || '-'),
-      q[3].text + ' ' + (state.answers.look || '-')
-    ].join('\n');
+    var lbl = resultLabels();
+    var lines = [];
+    lines.push(exactInfo ? tx.exactTitle : tx.resultTitle);
+    lines.push(lbl.material + ': ' + (tx.materials[calc.materialKey] || calc.materialKey));
+    lines.push(lbl.process + ': ' + (tx.process[calc.processKey] || calc.processKey));
+
+    if (calc.volumeCm3 != null) {
+      lines.push(lbl.size + ': ' + (exactInfo ? (calc.volumeCm3.toFixed(1) + 'cm³') : calc.sizeText));
+      if (calc.weightG != null) lines.push(lbl.weight + ': ' + calc.weightG.toFixed(1) + 'g');
+    } else if (calc.areaCm2 != null) {
+      lines.push(lbl.size + ': ' + (exactInfo ? (calc.areaCm2.toFixed(1) + 'cm²') : calc.sizeText));
+    }
+
+    if (calc.extra === 'prototype') {
+      lines.push(prototypeLine(formatCurrency(calc.priceMin), formatCurrency(calc.priceMax), lbl.perPiece));
+    } else {
+      lines.push(lbl.price + ': ca. €' + formatCurrency(calc.priceMin) + ' - €' + formatCurrency(calc.priceMax) + ' ' + lbl.perPiece);
+    }
+
+    if (calc.warning) lines.push(calc.warning);
+
+    if (exactInfo && exactInfo.bbox) {
+      lines.push(lbl.bbox + ': ' + exactInfo.bbox.x + 'x' + exactInfo.bbox.y + 'x' + exactInfo.bbox.z + ' mm');
+      lines.push(lbl.triangles + ': ' + exactInfo.triangles);
+    }
+
+    if (exactInfo && exactInfo.pathCm) {
+      lines.push(lbl.cutLen + ': ' + exactInfo.pathCm.toFixed(1) + ' cm');
+      lines.push(lbl.areaSvg + ': ' + exactInfo.areaCm2.toFixed(1) + ' cm²');
+    }
+
+    lines.push('');
+    lines.push(tx.shipping);
+
+    return lines.join('\n');
   }
 
   async function callOllama(userMessage) {
-    var messages = [{ role: 'system', content: buildSystemPrompt() }].concat(state.history).concat([{ role: 'user', content: userMessage }]);
+    var messages = [{ role: 'system', content: buildSystemPrompt() }]
+      .concat(state.history)
+      .concat([{ role: 'user', content: userMessage }]);
 
     var res = await fetch(OLLAMA_URL, {
       method: 'POST',
@@ -530,25 +1295,12 @@
     return out;
   }
 
-  async function finishQuestionsAndCallOllama() {
+  function finishQuestionsWithInstantPrice() {
     state.finishedQuestions = true;
     elFileBtn.classList.remove('clippy-hidden');
-
-    var tx = textSet();
-    var seed = questionnaireSummary();
-
-    appendMessage(tx.typing, 'bot');
-    setBusy(true);
-
-    try {
-      var reply = await callOllama(seed);
-      elMessages.lastChild.textContent = reply;
-      appendMessage(tx.askMore, 'bot');
-    } catch (err) {
-      elMessages.lastChild.textContent = 'Ollama error: ' + (err && err.message ? err.message : 'unknown');
-    } finally {
-      setBusy(false);
-    }
+    var calc = calculatePrice(state.answers, null);
+    appendMessage(buildResultMessage(calc), 'bot');
+    appendActionButtons();
   }
 
   async function sendUserMessage() {
@@ -557,8 +1309,13 @@
     elInput.value = '';
     appendMessage(v, 'user');
 
-    if (!state.finishedQuestions) {
-      appendMessage(textSet().intro, 'bot');
+    if (!state.asked || !state.finishedQuestions) {
+      appendMessage(textSet().askFirst, 'bot');
+      return;
+    }
+
+    if (!state.followupEnabled) {
+      appendMessage(textSet().chatLocked, 'bot');
       return;
     }
 
@@ -577,32 +1334,56 @@
   function handleFile(file) {
     if (!file) return;
     var tx = textSet();
-    if (!/\.stl$/i.test(file.name)) {
+    if (!state.finishedQuestions) {
+      appendMessage(tx.askFirst, 'bot');
+      return;
+    }
+
+    var service = state.answers.service;
+    var lower = file.name.toLowerCase();
+    var isStl = /\.stl$/i.test(lower);
+    var isSvg = /\.svg$/i.test(lower);
+    if (!isStl && !isSvg) {
       appendMessage(tx.fileErr, 'bot');
+      return;
+    }
+
+    if ((service === 'laser_cut' || service === 'laser_engrave') && isStl) {
+      appendMessage(tx.stlFor3d, 'bot');
+      return;
+    }
+    if ((service === 'fdm' || service === 'resin' || service === 'prototype') && isSvg) {
+      appendMessage(tx.svgForLaser, 'bot');
       return;
     }
 
     var reader = new FileReader();
     reader.onload = function (ev) {
       try {
-        var stl = analyzeSTL(ev.target.result);
-        var est = estimatePrice(stl, 'PLA', 20);
-        appendMessage(
-          tx.fileReady + '\n' +
-          'Volume: ' + stl.volumeCm3.toFixed(1) + ' cm3\n' +
-          'BBox: ' + stl.bbox.x + 'x' + stl.bbox.y + 'x' + stl.bbox.z + ' mm\n' +
-          'Triangles: ' + stl.triangles + '\n' +
-          'Price: EUR ' + est.priceMin + ' - ' + est.priceMax,
-          'bot'
-        );
+        if (isStl) {
+          var stl = analyzeSTL(ev.target.result);
+          var calc = calculatePrice(state.answers, { volumeCm3: stl.volumeCm3 });
+          appendMessage(buildResultMessage(calc, stl), 'bot');
+        } else {
+          var svgText = typeof ev.target.result === 'string' ? ev.target.result : new TextDecoder().decode(ev.target.result);
+          var svg = analyzeSVG(svgText);
+          var calcSvg = calculatePrice(state.answers, { areaCm2: svg.areaCm2, pathCm: svg.pathCm });
+          appendMessage(buildResultMessage(calcSvg, svg), 'bot');
+        }
       } catch (e) {
         appendMessage(tx.fileErr, 'bot');
       }
     };
+
     reader.onerror = function () {
       appendMessage(tx.fileErr, 'bot');
     };
-    reader.readAsArrayBuffer(file);
+
+    if (isStl) {
+      reader.readAsArrayBuffer(file);
+    } else {
+      reader.readAsText(file);
+    }
   }
 
   function toggleChat() {
@@ -638,12 +1419,12 @@
     e.target.value = '';
   });
 
-  document.addEventListener('mousemove', function(e) {
+  document.addEventListener('mousemove', function (e) {
     var svg = document.getElementById('clippy-svg');
     if (!svg) return;
     var rect = svg.getBoundingClientRect();
-    var dx = Math.max(-2.5, Math.min(2.5, (e.clientX - (rect.left + rect.width / 2)) / window.innerWidth * 3));
-    var dy = Math.max(-2, Math.min(2, (e.clientY - (rect.top + rect.height * 0.35)) / window.innerHeight * 2));
+    var dx = Math.max(-2.5, Math.min(2.5, ((e.clientX - (rect.left + rect.width / 2)) / window.innerWidth) * 3));
+    var dy = Math.max(-2, Math.min(2, ((e.clientY - (rect.top + rect.height * 0.35)) / window.innerHeight) * 2));
     var pL = document.querySelector('.clippy-pupil-l');
     var pR = document.querySelector('.clippy-pupil-r');
     if (pL && pR) {

@@ -304,8 +304,11 @@
   root.innerHTML = [
     '<style id="clippy-style">',
     '#clippy-container{position:fixed;right:16px;bottom:16px;z-index:2147483000;font-family:Arial,sans-serif;}',
-    '#clippy-toggle{width:74px;height:74px;border:0;border-radius:999px;background:#ffe28a;color:#232323;box-shadow:0 8px 20px rgba(0,0,0,.22);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:34px;}',
-    '#clippy-toggle:hover{transform:translateY(-1px);}',
+    '.clippy-toggle{background:none;border:none;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));transition:transform 0.2s;}',
+    '.clippy-toggle:hover{transform:translateY(-2px) scale(1.05);}',
+    '.clippy-label{background:#E8A000;color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;margin-top:2px;white-space:nowrap;}',
+    '@keyframes clippy-wiggle{0%,100%{transform:rotate(0deg);}25%{transform:rotate(-8deg);}75%{transform:rotate(8deg);}}',
+    '.clippy-wiggle{animation:clippy-wiggle 0.4s ease-in-out;}',
     '#clippy-chat{position:absolute;right:0;bottom:88px;width:min(370px,calc(100vw - 24px));height:min(560px,calc(100vh - 120px));background:#fff;border:1px solid #dcdcdc;border-radius:14px;box-shadow:0 14px 36px rgba(0,0,0,.25);display:flex;flex-direction:column;overflow:hidden;}',
     '.clippy-hidden{display:none !important;}',
     '.clippy-header{height:48px;background:#212121;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 12px;font-size:14px;}',
@@ -342,7 +345,23 @@
     '      <button id="clippy-send" type="button"></button>',
     '    </div>',
     '  </div>',
-    '  <button id="clippy-toggle" aria-label="Clippy" type="button">📎</button>',
+    '  <button id="clippy-toggle" class="clippy-toggle" aria-label="Clippy">',
+    '    <svg viewBox="0 0 100 160" width="56" height="84" class="clippy-svg" id="clippy-svg">',
+    '      <ellipse cx="50" cy="95" rx="18" ry="50" fill="none" stroke="#5C5C5C" stroke-width="8" stroke-linecap="round"/>',
+    '      <ellipse cx="42" cy="55" rx="8" ry="10" fill="white" stroke="#888" stroke-width="2"/>',
+    '      <ellipse cx="43" cy="56" rx="3.5" ry="4.5" fill="#222" class="clippy-pupil-l"/>',
+    '      <ellipse cx="44" cy="54" rx="1.5" ry="2" fill="white" class="clippy-glint-l"/>',
+    '      <ellipse cx="42" cy="55" rx="8" ry="0" fill="#E8A000" class="clippy-lid-l"/>',
+    '      <ellipse cx="58" cy="55" rx="8" ry="10" fill="white" stroke="#888" stroke-width="2"/>',
+    '      <ellipse cx="59" cy="56" rx="3.5" ry="4.5" fill="#222" class="clippy-pupil-r"/>',
+    '      <ellipse cx="60" cy="54" rx="1.5" ry="2" fill="white" class="clippy-glint-r"/>',
+    '      <ellipse cx="58" cy="55" rx="8" ry="0" fill="#E8A000" class="clippy-lid-r"/>',
+    '      <path d="M34 44 Q42 38 50 44" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" class="clippy-brow-l"/>',
+    '      <path d="M50 44 Q58 38 66 44" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" class="clippy-brow-r"/>',
+    '      <path d="M42 70 Q50 78 58 70" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" class="clippy-mouth"/>',
+    '    </svg>',
+    '    <span class="clippy-label">Frag mich!</span>',
+    '  </button>',
     '</div>'
   ].join('');
 
@@ -356,6 +375,7 @@
   var elSend = document.getElementById('clippy-send');
   var elFileBtn = document.getElementById('clippy-file-btn');
   var elFileInput = document.getElementById('clippy-file-input');
+  var elToggleLabel = elToggle.querySelector('.clippy-label');
 
   var state = {
     asked: false,
@@ -370,9 +390,39 @@
     var tx = textSet();
     document.getElementById('clippy-title').textContent = tx.title;
     elToggle.title = tx.openLabel;
+    if (elToggleLabel) elToggleLabel.textContent = tx.openLabel;
     elInput.placeholder = tx.placeholder;
     elSend.textContent = tx.send;
     elFileBtn.title = tx.fileTitle;
+  }
+
+  function blink() {
+    var lL = document.querySelector('.clippy-lid-l');
+    var lR = document.querySelector('.clippy-lid-r');
+    if (!lL) return;
+    lL.setAttribute('ry', '10');
+    lR.setAttribute('ry', '10');
+    setTimeout(function() {
+      lL.setAttribute('ry', '0');
+      lR.setAttribute('ry', '0');
+    }, 150);
+  }
+
+  function raiseBrows() {
+    var bL = document.querySelector('.clippy-brow-l');
+    var bR = document.querySelector('.clippy-brow-r');
+    if (!bL) return;
+    bL.setAttribute('d', 'M34 40 Q42 34 50 40');
+    bR.setAttribute('d', 'M50 40 Q58 34 66 40');
+    setTimeout(function() {
+      bL.setAttribute('d', 'M34 44 Q42 38 50 44');
+      bR.setAttribute('d', 'M50 44 Q58 38 66 44');
+    }, 800);
+  }
+
+  function startIdle() {
+    setInterval(blink, 3000 + Math.random() * 4000);
+    setTimeout(function() { blink(); }, 800);
   }
 
   function scrollBottom() {
@@ -555,6 +605,11 @@
   }
 
   function toggleChat() {
+    elToggle.classList.remove('clippy-wiggle');
+    void elToggle.offsetWidth;
+    elToggle.classList.add('clippy-wiggle');
+    raiseBrows();
+
     var hidden = elChat.classList.contains('clippy-hidden');
     if (hidden) {
       elChat.classList.remove('clippy-hidden');
@@ -582,7 +637,25 @@
     e.target.value = '';
   });
 
+  document.addEventListener('mousemove', function(e) {
+    var svg = document.getElementById('clippy-svg');
+    if (!svg) return;
+    var rect = svg.getBoundingClientRect();
+    var dx = Math.max(-2.5, Math.min(2.5, (e.clientX - (rect.left + rect.width / 2)) / window.innerWidth * 3));
+    var dy = Math.max(-2, Math.min(2, (e.clientY - (rect.top + rect.height * 0.35)) / window.innerHeight * 2));
+    var pL = document.querySelector('.clippy-pupil-l');
+    var pR = document.querySelector('.clippy-pupil-r');
+    if (pL && pR) {
+      pL.setAttribute('cx', 43 + dx);
+      pL.setAttribute('cy', 56 + dy);
+      pR.setAttribute('cx', 59 + dx);
+      pR.setAttribute('cy', 56 + dy);
+    }
+  });
+
   document.addEventListener('pita-lang-changed', function () {
     applyLanguageTexts();
   });
+
+  startIdle();
 })();

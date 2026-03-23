@@ -685,6 +685,10 @@ function createMiniPreview(stlBuffer, containerId) {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 var chatHistory = [];
+  botMsgCount = 0;
+  var fbr = document.getElementById("clippy-file-btn");
+  if (fbr) fbr.classList.add("clippy-hidden");
+var botMsgCount = 0;
 var lastSTLData = null;
 var lastSTLFile = null;
 var lastSTLBuffer = null;
@@ -707,6 +711,11 @@ function appendUser(msg) {
 }
 
 function appendBot(msg, quickReplies) {
+  botMsgCount++;
+  if (botMsgCount >= 4) {
+    var fb = document.getElementById("clippy-file-btn");
+    if (fb) fb.classList.remove("clippy-hidden");
+  }
   var el = document.createElement('div');
   el.className = 'clippy-msg clippy-bot';
   el.innerHTML = '<span>' + msg.replace(/\n/g, '<br>') + '</span>';
@@ -1180,6 +1189,9 @@ function toggleClippy() {
 
 function resetClippy() {
   chatHistory = [];
+  botMsgCount = 0;
+  var fbr = document.getElementById("clippy-file-btn");
+  if (fbr) fbr.classList.add("clippy-hidden");
   lastSTLData = null;
   lastSTLFile = null;
   lastSTLBuffer = null;
@@ -1371,7 +1383,7 @@ document.addEventListener('mousemove', function(e) {
         <br><small style="opacity:0.7;font-size:0.78rem;">STL · OBJ · SVG · DXF</small>\
       </div>\
       <div class="clippy-input-row">\
-        <label class="clippy-file-btn" title="Datei hochladen">\
+        <label class="clippy-file-btn clippy-hidden" id="clippy-file-btn" title="Datei hochladen (optional, nach Angebot)">\
           📂\
           <input type="file" id="clippy-file-input" accept=".stl,.3mf,.obj,.svg,.dxf" style="display:none">\
         </label>\

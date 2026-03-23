@@ -1343,11 +1343,6 @@ document.addEventListener('mousemove', function(e) {
       <div id="clippy-messages" class="clippy-messages">\
         <div class="clippy-msg clippy-bot"><span id="clippy-greeting"></span></div>\
       </div>\
-      <div id="clippy-drop-zone" class="clippy-drop-zone clippy-hidden">\
-        <span id="clippy-drop-text"></span>\
-        <br><small style="opacity:0.7;font-size:0.78rem;">STL · OBJ · SVG · DXF</small>\
-      </div>\
-      <div class="clippy-input-row">\
         <label class="clippy-file-btn clippy-hidden" id="clippy-file-btn" title="Datei hochladen (optional, nach Angebot)">\
           📂\
           <input type="file" id="clippy-file-input" accept=".stl,.3mf,.obj,.svg,.dxf" style="display:none">\
@@ -1384,9 +1379,6 @@ document.addEventListener('mousemove', function(e) {
   var greetEl = document.getElementById('clippy-greeting');
   if (greetEl) greetEl.innerHTML = t('greeting');
 
-  var dropEl = document.getElementById('clippy-drop-text');
-  if (dropEl) dropEl.textContent = t('dropzone');
-
   var inp = document.getElementById('clippy-input');
   if (inp) inp.placeholder = t('placeholder');
 
@@ -1421,8 +1413,6 @@ document.addEventListener('mousemove', function(e) {
   document.addEventListener('pita-lang-changed', function() {
     var greetEl2 = document.getElementById('clippy-greeting');
     if (greetEl2) greetEl2.innerHTML = t('greeting');
-    var dropEl2 = document.getElementById('clippy-drop-text');
-    if (dropEl2) dropEl2.textContent = t('dropzone');
     var langInp = document.getElementById('clippy-input');
     if (langInp) langInp.placeholder = t('placeholder');
     // Sprache geändert

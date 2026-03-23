@@ -1403,6 +1403,17 @@
       setTimeout(function () { elInput.focus(); }, 0);
     } else {
       elChat.classList.add('clippy-hidden');
+      elMessages.innerHTML = '';
+      state.asked = false;
+      state.step = 0;
+      state.answers = {};
+      state.finishedQuestions = false;
+      state.busy = false;
+      state.history = [];
+      state.followupEnabled = false;
+      state.actionsShown = false;
+      elFileBtn.classList.add('clippy-hidden');
+      setBusy(false);
     }
   }
 

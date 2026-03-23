@@ -252,22 +252,15 @@ const OLLAMA_URL = 'http://69.62.105.159:32768/api/chat';
 
 function buildSystemPrompt() {
   var lang = clippyLang();
-
   var prompts = {
-    de: "Du bist Clippy, der warmherzige Projektberater von PitA (Printing in the Alps). Antworte IMMER auf Deutsch.\n\nPERSOENLICHKEIT:\n- Du bist ein PROJEKT-BERATER. Du beginnst IMMER beim Projekt des Kunden.\n- Du fuehrst ein Gespraech, keine Checkliste.\n- Stelle EINE Frage nach der anderen, nicht alles auf einmal.\n- Halte Antworten auf 2-4 Saetze, dann naechste Frage.\n- Denke MIT dem Kunden.\n\nGRUNDREGELN:\n- NIEMALS Kontaktformular als Antwort auf eine Frage!\n- Dateien sind IMMER optional.\n- IMMER konkreten Preis nennen, auch ohne Datei.\n- Keine Sackgassen.\n\nNACH DEN 4 HAUPTFRAGEN (Produkt/Umgebung/Belastung/Optik) — Empfehle Material + Verfahren mit Begruendung, frage nach Groesse und Stueckzahl, nenne Preisbereich, biete Datei-Upload als optionalen Bonus an.\n\nPREISKALKULATION: PLA 0.04EUR/g,1.24 | PETG 0.05,1.27 | ABS 0.05,1.05 | TPU 0.08,1.21 | PA 0.12,1.14 | CF 0.18,1.30. Maschine 4EUR/h (~2cm3/min). Setup 3.50. Min 5EUR. Resin Standard 0.15/cm3 min 10EUR. Laser Holz 0.005/cm2, Acryl 0.012/cm2 min 8EUR. Versand DE 4.90 EU 7.90.\n\nPRINTFARM: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T. Lieferzeit 2-5 Werktage.",
-
-    en: "You are Clippy, the friendly project advisor at PitA (Printing in the Alps). ALWAYS respond in English.\n\nPERSONALITY:\n- You are a PROJECT ADVISOR. Always start with the customer's project.\n- Have a conversation, not a checklist.\n- Ask ONE question at a time.\n- Keep answers to 2-4 sentences, then next question.\n- Think WITH the customer.\n\nRULES:\n- NEVER refer to the contact form as an answer!\n- Files are ALWAYS optional.\n- ALWAYS give a concrete price estimate, even without a file.\n- No dead ends.\n\nAFTER THE 4 MAIN QUESTIONS (product/environment/load/appearance) — Recommend material + process with reasoning, ask about size and quantity, give price range, offer file upload as optional bonus.\n\nPRICING: PLA 0.04EUR/g,1.24 | PETG 0.05,1.27 | ABS 0.05,1.05 | TPU 0.08,1.21 | PA 0.12,1.14 | CF 0.18,1.30. Machine 4EUR/h (~2cm3/min). Setup 3.50. Min 5EUR. Resin Standard 0.15/cm3 min 10EUR. Laser Wood 0.005/cm2, Acrylic 0.012/cm2 min 8EUR. Shipping DE 4.90 EU 7.90.\n\nPRINT FARM: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T. Delivery 2-5 business days.",
-
-    fr: "Tu es Clippy, le conseiller de projet chaleureux de PitA (Printing in the Alps). Reponds TOUJOURS en francais.\n\nPERSONNALITE:\n- Tu es un CONSEILLER DE PROJET. Commence toujours par le projet du client.\n- Mene une conversation, pas une checklist.\n- Pose UNE question a la fois.\n- Garde les reponses a 2-4 phrases, puis prochaine question.\n- Reflechis AVEC le client.\n\nREGLES:\n- Ne jamais renvoyer vers le formulaire de contact comme reponse!\n- Les fichiers sont TOUJOURS optionnels.\n- Toujours donner une estimation de prix concrete, meme sans fichier.\n- Pas d'impasses.\n\nAPRES LES 4 QUESTIONS PRINCIPALES (produit/environnement/charge/apparence) — Recommande materiau + procede avec justification, demande taille et quantite, donne une fourchette de prix, propose upload de fichier comme bonus optionnel.\n\nTARIFS: PLA 0.04EUR/g,1.24 | PETG 0.05,1.27 | ABS 0.05,1.05 | TPU 0.08,1.21 | PA 0.12,1.14 | CF 0.18,1.30. Machine 4EUR/h. Setup 3.50. Min 5EUR. Resine Standard 0.15/cm3 min 10EUR. Laser Bois 0.005/cm2, Acrylique 0.012/cm2 min 8EUR. Livraison DE 4.90 EU 7.90.\n\nATELIER: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T. Delai 2-5 jours ouvrables.",
-
-    es: "Eres Clippy, el amable asesor de proyectos de PitA (Printing in the Alps). SIEMPRE responde en espanol.\n\nPERSONALIDAD:\n- Eres un ASESOR DE PROYECTOS. Empieza siempre con el proyecto del cliente.\n- Mantén una conversación, no una lista de verificación.\n- Haz UNA pregunta a la vez.\n- Mantén las respuestas en 2-4 frases, luego la siguiente pregunta.\n- Piensa CON el cliente.\n\nREGLAS:\n- NUNCA remitir al formulario de contacto como respuesta!\n- Los archivos son SIEMPRE opcionales.\n- SIEMPRE dar una estimación de precio concreta, incluso sin archivo.\n- Sin callejones sin salida.\n\nDESPUES DE LAS 4 PREGUNTAS PRINCIPALES (producto/entorno/carga/apariencia) — Recomienda material + proceso con justificación, pregunta sobre tamaño y cantidad, da rango de precios, ofrece carga de archivo como bonus opcional.\n\nPRECIOS: PLA 0.04EUR/g,1.24 | PETG 0.05,1.27 | ABS 0.05,1.05 | TPU 0.08,1.21 | PA 0.12,1.14 | CF 0.18,1.30. Maquina 4EUR/h. Setup 3.50. Min 5EUR. Resina Estandar 0.15/cm3 min 10EUR. Laser Madera 0.005/cm2, Acrilico 0.012/cm2 min 8EUR. Envio DE 4.90 UE 7.90.\n\nTALLER: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T. Entrega 2-5 dias laborables.",
-
-    it: "Sei Clippy, il cordiale consulente di progetto di PitA (Printing in the Alps). Rispondi SEMPRE in italiano.\n\nPERSONALITA:\n- Sei un CONSULENTE DI PROGETTO. Inizia sempre con il progetto del cliente.\n- Conduci una conversazione, non una checklist.\n- Fai UNA domanda alla volta.\n- Mantieni le risposte a 2-4 frasi, poi la domanda successiva.\n- Pensa CON il cliente.\n\nREGOLE:\n- NON rimandare mai al modulo di contatto come risposta!\n- I file sono SEMPRE opzionali.\n- Dai SEMPRE una stima di prezzo concreta, anche senza file.\n- Niente vicoli ciechi.\n\nDOPO LE 4 DOMANDE PRINCIPALI (prodotto/ambiente/carico/aspetto) — Raccomanda materiale + processo con motivazione, chiedi dimensioni e quantita, dai un range di prezzo, offri upload file come bonus opzionale.\n\nPREZZI: PLA 0.04EUR/g,1.24 | PETG 0.05,1.27 | ABS 0.05,1.05 | TPU 0.08,1.21 | PA 0.12,1.14 | CF 0.18,1.30. Macchina 4EUR/h. Setup 3.50. Min 5EUR. Resina Standard 0.15/cm3 min 10EUR. Laser Legno 0.005/cm2, Acrilico 0.012/cm2 min 8EUR. Spedizione DE 4.90 UE 7.90.\n\nSTAMPERIA: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T. Consegna 2-5 giorni lavorativi.",
+    de: "Du bist Clippy, der Projektberater von PitA (Printing in the Alps). Antworte IMMER auf Deutsch.\n\nPERSOENLICHKEIT: Du bist ein PROJEKT-BERATER. Beginne IMMER beim Projekt des Kunden. Fuehre ein Gespraech, keine Checkliste. Stelle EINE Frage nach der anderen. Halte Antworten auf 2-4 Saetze.\n\nGRUNDREGELN: NIEMALS Kontaktformular als Antwort. Dateien sind IMMER optional. IMMER konkreten Preis nennen. Keine Sackgassen.\n\nNACH DEN 4 HAUPTFRAGEN — Empfehle Material+Verfahren mit Begruendung, frage Groesse+Stueckzahl, nenne Preisbereich, biete Datei als optionalen Bonus an.\n\nPREISE: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05 | TPU 0.08 | PA 0.12 | CF 0.18. Maschine 4EUR/h. Setup 3.50. Min 5EUR. Resin 0.15/cm3 min 10EUR. Laser Holz 0.005/cm2 Acryl 0.012/cm2 min 8EUR. Versand DE 4.90 EU 7.90. Lieferzeit 2-5 Werktage.\n\nPRINTFARM: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T.",
+    en: "You are Clippy, the project advisor at PitA (Printing in the Alps). ALWAYS respond in English.\n\nPERSONALITY: You are a PROJECT ADVISOR. Always start with the customer's project. Have a conversation, not a checklist. Ask ONE question at a time. Keep answers to 2-4 sentences.\n\nRULES: NEVER refer to the contact form as an answer. Files are ALWAYS optional. ALWAYS give a concrete price estimate. No dead ends.\n\nAFTER THE 4 MAIN QUESTIONS — Recommend material+process with reasoning, ask size+quantity, give price range, offer file upload as optional bonus.\n\nPRICING: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05 | TPU 0.08 | PA 0.12 | CF 0.18. Machine 4EUR/h. Setup 3.50. Min 5EUR. Resin 0.15/cm3 min 10EUR. Laser Wood 0.005/cm2 Acrylic 0.012/cm2 min 8EUR. Shipping DE 4.90 EU 7.90. Delivery 2-5 business days.\n\nPRINT FARM: 7x Bambu H2D, 9x P1S, 3x Creality Falcon Laser, CO2 Laser, Snapmaker A350T.",
+    fr: "Tu es Clippy, le conseiller de projet de PitA (Printing in the Alps). Reponds TOUJOURS en francais.\n\nPERSONNALITE: Tu es un CONSEILLER DE PROJET. Commence toujours par le projet du client. Mene une conversation, pas une checklist. Pose UNE question a la fois. 2-4 phrases max.\n\nREGLES: Ne jamais renvoyer vers le formulaire. Fichiers toujours optionnels. Toujours donner un prix. Pas d'impasses.\n\nAPRES LES 4 QUESTIONS — Recommande materiau+procede, demande taille+quantite, donne fourchette de prix, propose fichier en bonus.\n\nTARIFS: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05 | TPU 0.08 | PA 0.12 | CF 0.18. Machine 4EUR/h. Setup 3.50. Min 5EUR. Resine 0.15/cm3 min 10EUR. Laser Bois 0.005/cm2 Acrylique 0.012/cm2 min 8EUR. Livraison DE 4.90 UE 7.90. Delai 2-5 jours.",
+    es: "Eres Clippy, el asesor de proyectos de PitA (Printing in the Alps). SIEMPRE responde en espanol.\n\nPERSONALIDAD: Eres un ASESOR DE PROYECTOS. Empieza con el proyecto del cliente. Conversacion, no checklist. UNA pregunta a la vez. 2-4 frases max.\n\nREGLAS: NUNCA remitir al formulario. Archivos siempre opcionales. Siempre dar precio. Sin callejones.\n\nDESPUES DE LAS 4 PREGUNTAS — Recomienda material+proceso, pregunta tamano+cantidad, da rango de precios, ofrece archivo como bonus.\n\nPRECIOS: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05 | TPU 0.08 | PA 0.12 | CF 0.18. Maquina 4EUR/h. Setup 3.50. Min 5EUR. Resina 0.15/cm3 min 10EUR. Laser Madera 0.005/cm2 Acrilico 0.012/cm2 min 8EUR. Envio DE 4.90 UE 7.90. Entrega 2-5 dias.",
+    it: "Sei Clippy, il consulente di progetto di PitA (Printing in the Alps). Rispondi SEMPRE in italiano.\n\nPERSONALITA: Sei un CONSULENTE DI PROGETTO. Inizia sempre con il progetto del cliente. Conversazione, non checklist. UNA domanda alla volta. 2-4 frasi max.\n\nREGOLE: NON rimandare mai al modulo. File sempre opzionali. Dai sempre un prezzo. Niente vicoli ciechi.\n\nDOPO LE 4 DOMANDE — Raccomanda materiale+processo, chiedi dimensioni+quantita, dai range di prezzo, offri file come bonus.\n\nPREZZI: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05 | TPU 0.08 | PA 0.12 | CF 0.18. Macchina 4EUR/h. Setup 3.50. Min 5EUR. Resina 0.15/cm3 min 10EUR. Laser Legno 0.005/cm2 Acrilico 0.012/cm2 min 8EUR. Spedizione DE 4.90 UE 7.90. Consegna 2-5 giorni.",
   };
-
   return prompts[lang] || prompts.de;
 }
-
 /* ═══════════════════════════════════════════════════════════════════════════
    §3  FALLBACK-LOGIK (Offline / Error)
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -587,29 +580,39 @@ function createMiniPreview(stlBuffer, containerId) {
    §9  STATE VARIABLES
    ═══════════════════════════════════════════════════════════════════════════ */
 
+
+// Ollama vorwärmen
+function warmupOllama() {
+  fetch('http://69.62.105.159:32768/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model: 'mistral:7b', messages: [], stream: false, keep_alive: '10m' }),
+  }).catch(function(){});
+}
+
 var chatHistory = [];
 
 var botMsgCount = 0;
 var clippyFlow = {
   step: 0,
-  mainQuestions: {
+  q: {
     de: [
-      { q: 'Was möchtest du herstellen?', opts: ['🖨️ 3D-Druck Teil', '✂️ Laser schneiden', '🔥 Laser gravieren', '🧪 Resin / Harz', '🔩 Prototyp', '💡 Noch unsicher'] },
-      { q: 'Wo wird es eingesetzt?', opts: ['🏠 Drinnen (Büro/Wohnung)', '🌧️ Draußen / Wetter', '🏭 Industrie / Werkstatt', '🍽️ Lebensmittelkontakt', '💧 Wasser / Feuchtigkeit'] },
-      { q: 'Wie wird es belastet?', opts: ['🎨 Rein dekorativ', '📎 Leicht (Halterung, Clip)', '⚙️ Stark (Zahnrad, Werkzeug)', '🌡️ Hitze über 60°C', '🔄 Biegung / Flexibel'] },
+      { q: 'Was möchtest du herstellen?', opts: ['🖨️ 3D-Druck', '✂️ Laser schneiden', '🔥 Laser gravieren', '🧪 Resin / Harz', '🔩 Prototyp', '💡 Noch unsicher'] },
+      { q: 'Wo wird es eingesetzt?', opts: ['🏠 Drinnen', '🌧️ Draußen / Wetter', '🏭 Industrie / Werkstatt', '🍽️ Lebensmittelkontakt', '💧 Wasser / Feuchtigkeit'] },
+      { q: 'Wie wird es belastet?', opts: ['🎨 Rein dekorativ', '📎 Leicht (Halterung)', '⚙️ Stark (Zahnrad, Werkzeug)', '🌡️ Hitze über 60°C', '🔄 Biegung / Flexibel'] },
       { q: 'Wie wichtig ist das Aussehen?', opts: ['✨ Muss perfekt sein', '🔧 Funktional reicht', '🎨 Bestimmte Farbe', '🔍 Transparent'] },
     ],
     en: [
       { q: 'What do you want to make?', opts: ['🖨️ 3D Print', '✂️ Laser cutting', '🔥 Laser engraving', '🧪 Resin', '🔩 Prototype', '💡 Not sure yet'] },
       { q: 'Where will it be used?', opts: ['🏠 Indoors', '🌧️ Outdoors / weather', '🏭 Industrial', '🍽️ Food contact', '💧 Water / moisture'] },
-      { q: 'How will it be loaded?', opts: ['🎨 Decorative', '📎 Light use', '⚙️ Heavy use', '🌡️ Heat above 60°C', '🔄 Flexible / bending'] },
+      { q: 'How will it be loaded?', opts: ['🎨 Decorative', '📎 Light use', '⚙️ Heavy use', '🌡️ Heat above 60°C', '🔄 Flexible'] },
       { q: 'How important is appearance?', opts: ['✨ Must be perfect', '🔧 Functional is fine', '🎨 Specific color', '🔍 Transparent'] },
     ],
     fr: [
       { q: 'Que voulez-vous fabriquer ?', opts: ['🖨️ Impression 3D', '✂️ Découpe laser', '🔥 Gravure laser', '🧪 Résine', '🔩 Prototype', '💡 Pas encore sûr'] },
       { q: 'Où sera-t-il utilisé ?', opts: ['🏠 Intérieur', '🌧️ Extérieur', '🏭 Industriel', '🍽️ Contact alimentaire', '💧 Eau / humidité'] },
       { q: 'Comment sera-t-il sollicité ?', opts: ['🎨 Décoratif', '📎 Usage léger', '⚙️ Usage intensif', '🌡️ Chaleur +60°C', '🔄 Flexible'] },
-      { q: "L'apparence est-elle importante ?", opts: ['✨ Doit être parfait', '🔧 Fonctionnel suffit', '🎨 Couleur précise', '🔍 Transparent'] },
+      { q: "Quelle importance pour l'apparence ?", opts: ['✨ Doit être parfait', '🔧 Fonctionnel suffit', '🎨 Couleur précise', '🔍 Transparent'] },
     ],
     es: [
       { q: '¿Qué quieres fabricar?', opts: ['🖨️ Impresión 3D', '✂️ Corte láser', '🔥 Grabado láser', '🧪 Resina', '🔩 Prototipo', '💡 Aún no sé'] },
@@ -624,46 +627,34 @@ var clippyFlow = {
       { q: "Quanto è importante l'aspetto?", opts: ['✨ Deve essere perfetto', '🔧 Funzionale va bene', '🎨 Colore specifico', '🔍 Trasparente'] },
     ],
   },
-  getMainQ: function(idx) {
-    var lang = clippyLang();
-    var qs = this.mainQuestions[lang] || this.mainQuestions.de;
+  getQ: function(idx) {
+    var qs = this.q[clippyLang()] || this.q.de;
     return qs[idx] || null;
   },
   start: function() {
     this.step = 0;
-    var q = this.getMainQ(0);
+    botMsgCount = 0;
+    var fb = document.getElementById('clippy-file-btn');
+    if (fb) fb.classList.add('clippy-hidden');
+    var q = this.getQ(0);
     if (q) appendBot(q.q, q.opts);
+    warmupOllama();
   },
-  handleStep: function(answer) {
+  next: function(answer) {
     this.step++;
-    var q = this.getMainQ(this.step);
-    if (q && this.step < 4) {
-      var self = this;
-      setTimeout(function() { appendBot(q.q, q.opts); }, 400);
-      return true;
+    if (this.step < 4) {
+      var q = this.getQ(this.step);
+      if (q) { setTimeout(function() { appendBot(q.q, q.opts); }, 350); return true; }
     }
     return false;
   },
   reset: function() {
     this.step = 0;
     botMsgCount = 0;
-    var fb = document.getElementById("clippy-file-btn");
-    if (fb) fb.classList.add("clippy-hidden");
+    var fb = document.getElementById('clippy-file-btn');
+    if (fb) fb.classList.add('clippy-hidden');
   }
 };
-
-
-// Ollama vorwärmen beim Seitenaufruf
-function warmupOllama() {
-  try {
-    fetch('http://69.62.105.159:32768/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'mistral:7b', messages: [], stream: false, keep_alive: '10m' }),
-    }).catch(function(){});
-  } catch(e) {}
-}
-
 
 var lastSTLData = null;
 var lastSTLFile = null;
@@ -687,12 +678,11 @@ function appendUser(msg) {
 }
 
 function appendBot(msg, quickReplies) {
-  // File-Button nach Schritt 4 einblenden
-  if (clippyFlow && clippyFlow.step >= 4) {
+  botMsgCount++;
+  if (clippyFlow.step >= 4) {
     var fb = document.getElementById('clippy-file-btn');
     if (fb) fb.classList.remove('clippy-hidden');
   }
-  botMsgCount++;
   var el = document.createElement('div');
   el.className = 'clippy-msg clippy-bot';
   el.innerHTML = '<span>' + msg.replace(/\n/g, '<br>') + '</span>';
@@ -1106,9 +1096,7 @@ function sendClippy() {
   if (mouth) mouth.setAttribute('d', 'M42 70 Q50 74 58 70');
 
   chatHistory.push({ role: 'user', content: msg });
-  if (clippyFlow.step < 4) {
-    if (clippyFlow.handleStep(msg)) return;
-  }
+  if (clippyFlow.step < 4 && clippyFlow.next(msg)) return;
 
   var reply;
   fetch(OLLAMA_URL, {
@@ -1169,9 +1157,6 @@ function toggleClippy() {
 
 function resetClippy() {
   chatHistory = [];
-  botMsgCount = 0;
-  var fbr = document.getElementById("clippy-file-btn");
-  if (fbr) fbr.classList.add("clippy-hidden");
   lastSTLData = null;
   lastSTLFile = null;
   lastSTLBuffer = null;
@@ -1187,8 +1172,8 @@ function resetClippy() {
 
     // Flow neu starten
     clippyFlow.reset();
-    clippyFlow.start();
   }
+  clippyFlow.start();
 }
 
 function showContextHint() {
@@ -1343,7 +1328,12 @@ document.addEventListener('mousemove', function(e) {
       <div id="clippy-messages" class="clippy-messages">\
         <div class="clippy-msg clippy-bot"><span id="clippy-greeting"></span></div>\
       </div>\
-        <label class="clippy-file-btn clippy-hidden" id="clippy-file-btn" title="Datei hochladen (optional, nach Angebot)">\
+      <div id="clippy-drop-zone" class="clippy-drop-zone clippy-hidden">\
+        <span id="clippy-drop-text"></span>\
+        <br><small style="opacity:0.7;font-size:0.78rem;">STL · OBJ · SVG · DXF</small>\
+      </div>\
+      <div class="clippy-input-row">\
+        <label class="clippy-file-btn clippy-hidden" id="clippy-file-btn" title="Datei hochladen (optional)">\
           📂\
           <input type="file" id="clippy-file-input" accept=".stl,.3mf,.obj,.svg,.dxf" style="display:none">\
         </label>\
@@ -1379,10 +1369,13 @@ document.addEventListener('mousemove', function(e) {
   var greetEl = document.getElementById('clippy-greeting');
   if (greetEl) greetEl.innerHTML = t('greeting');
 
+  var dropEl = document.getElementById('clippy-drop-text');
+  if (dropEl) dropEl.textContent = t('dropzone');
+
   var inp = document.getElementById('clippy-input');
   if (inp) inp.placeholder = t('placeholder');
 
-  // Strukturierten Flow starten
+  // Flow starten
   clippyFlow.start();
 
   // Event listeners
@@ -1413,9 +1406,19 @@ document.addEventListener('mousemove', function(e) {
   document.addEventListener('pita-lang-changed', function() {
     var greetEl2 = document.getElementById('clippy-greeting');
     if (greetEl2) greetEl2.innerHTML = t('greeting');
+    var dropEl2 = document.getElementById('clippy-drop-text');
+    if (dropEl2) dropEl2.textContent = t('dropzone');
     var langInp = document.getElementById('clippy-input');
     if (langInp) langInp.placeholder = t('placeholder');
-    // Sprache geändert
+    // Update quick-start buttons text
+    var qs = document.getElementById('clippy-quick-start');
+    if (qs) {
+      var newBtns = T.quickStart[clippyLang()] || T.quickStart.de;
+      var buttons = qs.querySelectorAll('.clippy-qr-btn');
+      buttons.forEach(function(btn, i) {
+        if (newBtns[i]) btn.textContent = newBtns[i];
+      });
+    }
   });
 
   // Start idle animations

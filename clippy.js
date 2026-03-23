@@ -685,10 +685,83 @@ function createMiniPreview(stlBuffer, containerId) {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 var chatHistory = [];
-  botMsgCount = 0;
-  var fbr = document.getElementById("clippy-file-btn");
-  if (fbr) fbr.classList.add("clippy-hidden");
+
 var botMsgCount = 0;
+var clippyFlow = {
+  step: 0,
+  mainQuestions: {
+    de: [
+      { q: 'Was möchtest du herstellen?', opts: ['🖨️ 3D-Druck Teil', '✂️ Laser schneiden', '🔥 Laser gravieren', '🧪 Resin / Harz', '🔩 Prototyp', '💡 Noch unsicher'] },
+      { q: 'Wo wird es eingesetzt?', opts: ['🏠 Drinnen (Büro/Wohnung)', '🌧️ Draußen / Wetter', '🏭 Industrie / Werkstatt', '🍽️ Lebensmittelkontakt', '💧 Wasser / Feuchtigkeit'] },
+      { q: 'Wie wird es belastet?', opts: ['🎨 Rein dekorativ', '📎 Leicht (Halterung, Clip)', '⚙️ Stark (Zahnrad, Werkzeug)', '🌡️ Hitze über 60°C', '🔄 Biegung / Flexibel'] },
+      { q: 'Wie wichtig ist das Aussehen?', opts: ['✨ Muss perfekt sein', '🔧 Funktional reicht', '🎨 Bestimmte Farbe', '🔍 Transparent'] },
+    ],
+    en: [
+      { q: 'What do you want to make?', opts: ['🖨️ 3D Print', '✂️ Laser cutting', '🔥 Laser engraving', '🧪 Resin', '🔩 Prototype', '💡 Not sure yet'] },
+      { q: 'Where will it be used?', opts: ['🏠 Indoors', '🌧️ Outdoors / weather', '🏭 Industrial', '🍽️ Food contact', '💧 Water / moisture'] },
+      { q: 'How will it be loaded?', opts: ['🎨 Decorative', '📎 Light use', '⚙️ Heavy use', '🌡️ Heat above 60°C', '🔄 Flexible / bending'] },
+      { q: 'How important is appearance?', opts: ['✨ Must be perfect', '🔧 Functional is fine', '🎨 Specific color', '🔍 Transparent'] },
+    ],
+    fr: [
+      { q: 'Que voulez-vous fabriquer ?', opts: ['🖨️ Impression 3D', '✂️ Découpe laser', '🔥 Gravure laser', '🧪 Résine', '🔩 Prototype', '💡 Pas encore sûr'] },
+      { q: 'Où sera-t-il utilisé ?', opts: ['🏠 Intérieur', '🌧️ Extérieur', '🏭 Industriel', '🍽️ Contact alimentaire', '💧 Eau / humidité'] },
+      { q: 'Comment sera-t-il sollicité ?', opts: ['🎨 Décoratif', '📎 Usage léger', '⚙️ Usage intensif', '🌡️ Chaleur +60°C', '🔄 Flexible'] },
+      { q: "L'apparence est-elle importante ?", opts: ['✨ Doit être parfait', '🔧 Fonctionnel suffit', '🎨 Couleur précise', '🔍 Transparent'] },
+    ],
+    es: [
+      { q: '¿Qué quieres fabricar?', opts: ['🖨️ Impresión 3D', '✂️ Corte láser', '🔥 Grabado láser', '🧪 Resina', '🔩 Prototipo', '💡 Aún no sé'] },
+      { q: '¿Dónde se usará?', opts: ['🏠 Interior', '🌧️ Exterior', '🏭 Industrial', '🍽️ Contacto alimentario', '💧 Agua / humedad'] },
+      { q: '¿Cómo se cargará?', opts: ['🎨 Decorativo', '📎 Uso ligero', '⚙️ Uso intenso', '🌡️ Calor +60°C', '🔄 Flexible'] },
+      { q: '¿Qué importancia tiene el aspecto?', opts: ['✨ Debe ser perfecto', '🔧 Funcional vale', '🎨 Color específico', '🔍 Transparente'] },
+    ],
+    it: [
+      { q: 'Cosa vuoi realizzare?', opts: ['🖨️ Stampa 3D', '✂️ Taglio laser', '🔥 Incisione laser', '🧪 Resina', '🔩 Prototipo', '💡 Non ancora sicuro'] },
+      { q: 'Dove verrà utilizzato?', opts: ['🏠 Interno', '🌧️ Esterno', '🏭 Industriale', '🍽️ Contatto alimentare', '💧 Acqua / umidità'] },
+      { q: 'Come verrà sollecitato?', opts: ['🎨 Decorativo', '📎 Uso leggero', '⚙️ Uso intenso', '🌡️ Calore +60°C', '🔄 Flessibile'] },
+      { q: "Quanto è importante l'aspetto?", opts: ['✨ Deve essere perfetto', '🔧 Funzionale va bene', '🎨 Colore specifico', '🔍 Trasparente'] },
+    ],
+  },
+  getMainQ: function(idx) {
+    var lang = clippyLang();
+    var qs = this.mainQuestions[lang] || this.mainQuestions.de;
+    return qs[idx] || null;
+  },
+  start: function() {
+    this.step = 0;
+    var q = this.getMainQ(0);
+    if (q) appendBot(q.q, q.opts);
+  },
+  handleStep: function(answer) {
+    this.step++;
+    var q = this.getMainQ(this.step);
+    if (q && this.step < 4) {
+      var self = this;
+      setTimeout(function() { appendBot(q.q, q.opts); }, 400);
+      return true;
+    }
+    return false;
+  },
+  reset: function() {
+    this.step = 0;
+    botMsgCount = 0;
+    var fb = document.getElementById("clippy-file-btn");
+    if (fb) fb.classList.add("clippy-hidden");
+  }
+};
+
+
+// Ollama vorwärmen beim Seitenaufruf
+function warmupOllama() {
+  try {
+    fetch('http://69.62.105.159:32768/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'mistral:7b', messages: [], stream: false, keep_alive: '10m' }),
+    }).catch(function(){});
+  } catch(e) {}
+}
+
+
 var lastSTLData = null;
 var lastSTLFile = null;
 var lastSTLBuffer = null;
@@ -711,11 +784,12 @@ function appendUser(msg) {
 }
 
 function appendBot(msg, quickReplies) {
-  botMsgCount++;
-  if (botMsgCount >= 4) {
-    var fb = document.getElementById("clippy-file-btn");
-    if (fb) fb.classList.remove("clippy-hidden");
+  // File-Button nach Schritt 4 einblenden
+  if (clippyFlow && clippyFlow.step >= 4) {
+    var fb = document.getElementById('clippy-file-btn');
+    if (fb) fb.classList.remove('clippy-hidden');
   }
+  botMsgCount++;
   var el = document.createElement('div');
   el.className = 'clippy-msg clippy-bot';
   el.innerHTML = '<span>' + msg.replace(/\n/g, '<br>') + '</span>';
@@ -1129,6 +1203,9 @@ function sendClippy() {
   if (mouth) mouth.setAttribute('d', 'M42 70 Q50 74 58 70');
 
   chatHistory.push({ role: 'user', content: msg });
+  if (clippyFlow.step < 4) {
+    if (clippyFlow.handleStep(msg)) return;
+  }
 
   var reply;
   fetch(OLLAMA_URL, {
@@ -1205,24 +1282,9 @@ function resetClippy() {
     var greetEl = document.getElementById('clippy-greeting');
     if (greetEl) greetEl.innerHTML = t('greeting');
 
-    // Re-add quick start buttons
-    var qsButtons = T.quickStart[clippyLang()] || T.quickStart.de;
-    var qr = document.createElement('div');
-    qr.className = 'clippy-quick-replies';
-    qr.id = 'clippy-quick-start';
-    qsButtons.forEach(function(text) {
-      var btn = document.createElement('button');
-      btn.className = 'clippy-qr-btn';
-      btn.textContent = text;
-      btn.addEventListener('click', function() {
-        qr.remove();
-        var inp = document.getElementById('clippy-input');
-        inp.value = text;
-        sendClippy();
-      });
-      qr.appendChild(btn);
-    });
-    msgs.appendChild(qr);
+    // Flow neu starten
+    clippyFlow.reset();
+    clippyFlow.start();
   }
 }
 
@@ -1425,27 +1487,8 @@ document.addEventListener('mousemove', function(e) {
   var inp = document.getElementById('clippy-input');
   if (inp) inp.placeholder = t('placeholder');
 
-  // Quick-Start Buttons
-  var qsButtons = T.quickStart[clippyLang()] || T.quickStart.de;
-  var msgs0 = document.getElementById('clippy-messages');
-  if (msgs0 && qsButtons) {
-    var qr = document.createElement('div');
-    qr.className = 'clippy-quick-replies';
-    qr.id = 'clippy-quick-start';
-    qsButtons.forEach(function(text) {
-      var btn = document.createElement('button');
-      btn.className = 'clippy-qr-btn';
-      btn.textContent = text;
-      btn.addEventListener('click', function() {
-        qr.remove();
-        var inp2 = document.getElementById('clippy-input');
-        inp2.value = text;
-        sendClippy();
-      });
-      qr.appendChild(btn);
-    });
-    msgs0.appendChild(qr);
-  }
+  // Strukturierten Flow starten
+  clippyFlow.start();
 
   // Event listeners
   document.getElementById('clippy-toggle').addEventListener('click', function(e) {
@@ -1469,26 +1512,7 @@ document.addEventListener('mousemove', function(e) {
     if (e.target.files[0]) handleFile(e.target.files[0]);
   });
 
-  // Drag & Drop
-  var chat = document.getElementById('clippy-chat');
-  var dropZone = document.getElementById('clippy-drop-zone');
-  chat.addEventListener('dragover', function(e) {
-    e.preventDefault();
-    dropZone.classList.remove('clippy-hidden');
-    chat.style.boxShadow = '0 0 0 3px rgba(198,125,74,0.5)';
-  });
-  chat.addEventListener('dragleave', function(e) {
-    if (!chat.contains(e.relatedTarget)) {
-      dropZone.classList.add('clippy-hidden');
-      chat.style.boxShadow = '';
-    }
-  });
-  chat.addEventListener('drop', function(e) {
-    e.preventDefault();
-    dropZone.classList.add('clippy-hidden');
-    chat.style.boxShadow = '';
-    if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
-  });
+  // Drag & Drop deaktiviert
 
   // Language change listener (from i18n.js)
   document.addEventListener('pita-lang-changed', function() {
@@ -1498,15 +1522,7 @@ document.addEventListener('mousemove', function(e) {
     if (dropEl2) dropEl2.textContent = t('dropzone');
     var langInp = document.getElementById('clippy-input');
     if (langInp) langInp.placeholder = t('placeholder');
-    // Update quick-start buttons text
-    var qs = document.getElementById('clippy-quick-start');
-    if (qs) {
-      var newBtns = T.quickStart[clippyLang()] || T.quickStart.de;
-      var buttons = qs.querySelectorAll('.clippy-qr-btn');
-      buttons.forEach(function(btn, i) {
-        if (newBtns[i]) btn.textContent = newBtns[i];
-      });
-    }
+    // Sprache geändert
   });
 
   // Start idle animations

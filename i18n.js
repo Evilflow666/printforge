@@ -12,6 +12,7 @@ const TRANSLATIONS = {
   'nav.blog':         { de:'Blog',        en:'Blog',        fr:'Blog',        es:'Blog',        it:'Blog'        },
   'nav.faq':          { de:'FAQ',         en:'FAQ',         fr:'FAQ',         es:'FAQ',         it:'FAQ'         },
   'nav.about':        { de:'Über uns',    en:'About us',    fr:'À propos',    es:'Sobre nosotros', it:'Chi siamo'  },
+  'nav.kontakt':      { de:'Kontakt',     en:'Contact',     fr:'Contact',     es:'Contacto',    it:'Contatto'   },
 
   'skip.link':     { de:'Zum Inhalt springen', en:'Skip to content', fr:'Aller au contenu', es:'Saltar al contenido', it:'Vai al contenuto' },
 

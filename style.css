@@ -211,22 +211,7 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 .hero-cta {
   margin-top: 8px;
 }
-.hero-clippy-hint {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: rgba(232, 230, 225, 0.78);
-  font-size: 0.88rem;
-  cursor: pointer;
-  text-decoration: none;
-  animation: pulse 2.4s ease-in-out infinite;
-  transition: color 0.2s ease, opacity 0.2s ease;
-}
-.hero-clippy-hint:hover {
-  color: rgba(232, 230, 225, 0.96);
-}
+/* Hero Clippy Hint — uses .btn .btn-primary .hero-cta base styles */
 
 /* ===== CTA DIVIDER ===== */
 /* ===== BUTTONS (Apple Glass Style) ===== */

@@ -253,9 +253,10 @@
       document.getElementById('p-specs').innerHTML = rows;
     }
 
-    // Colors
-    if (p.specs && p.specs.farben) {
-      document.getElementById('p-colors').textContent = '🎨 Farben: ' + p.specs.farben;
+    // Colors (optional legacy target)
+    const colorsEl = document.getElementById('p-colors');
+    if (colorsEl && p.specs && p.specs.farben) {
+      colorsEl.textContent = '🎨 Farben: ' + p.specs.farben;
     }
 
     // Stock
@@ -332,15 +333,15 @@
 
   function addProductToCart() {
     const p = window._product;
+    if (!p || !window._productId) return;
     const qty = parseInt(document.getElementById('qty-input').value) || 1;
     let price = p.price;
     for (const s of p.staffelpreise || []) {
       if (qty >= s.ab) price = s.preis;
     }
     var itemName = p.name + (window._selectedColor ? ' (' + window._selectedColor + ')' : '');
-    if (typeof addToCart === 'function') {
-      addToCart(window._productId + (window._selectedColor ? '-' + window._selectedColor.toLowerCase().replace(/\s+/g,'-') : ''), itemName, price, qty);
-    }
+    if (typeof addToCart !== 'function') return;
+    addToCart(window._productId + (window._selectedColor ? '-' + window._selectedColor.toLowerCase().replace(/\s+/g,'-') : ''), itemName, price, qty);
     // Visual feedback
     const btn = document.getElementById('btn-add-cart');
     btn.textContent = '✅ Hinzugefügt!';

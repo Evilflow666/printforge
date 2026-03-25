@@ -4,7 +4,11 @@
   if (document.getElementById('clippy-container')) return;
 
   function clippyLang() {
-    return localStorage.getItem('pita-lang') || 'de';
+    var stored = localStorage.getItem('pita-lang');
+    if (stored) return stored;
+    var browser = (navigator.language || 'de').slice(0,2);
+    var supported = ['de','en','fr','es','it'];
+    return supported.indexOf(browser) >= 0 ? browser : 'de';
   }
 
   function clippyBase() {

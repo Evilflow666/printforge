@@ -1132,6 +1132,7 @@
       rTotal *= discount;
       rTotal = Math.max(10, rTotal);
       out.materialKey = resin.matKey;
+      if (answers.color) out.colorKey = answers.color;
       out.volumeCm3 = rVol;
       out.total = rTotal;
       out.priceMin = rTotal * 0.85;
@@ -1701,6 +1702,7 @@
     var labels = {
       de: {
         material: 'Material',
+        color: 'Farbe',
         process: 'Verfahren',
         size: 'Groesse',
         weight: 'Gewicht',
@@ -1713,6 +1715,7 @@
       },
       en: {
         material: 'Material',
+        color: 'Color',
         process: 'Process',
         size: 'Size',
         weight: 'Weight',
@@ -1725,6 +1728,7 @@
       },
       fr: {
         material: 'Materiau',
+        color: 'Couleur',
         process: 'Procede',
         size: 'Taille',
         weight: 'Poids',
@@ -1737,6 +1741,7 @@
       },
       es: {
         material: 'Material',
+        color: 'Color',
         process: 'Proceso',
         size: 'Tamano',
         weight: 'Peso',
@@ -1749,6 +1754,7 @@
       },
       it: {
         material: 'Materiale',
+        color: 'Colore',
         process: 'Processo',
         size: 'Dimensione',
         weight: 'Peso',
@@ -1761,6 +1767,12 @@
       }
     };
     return labels[lang] || labels.de;
+  }
+
+  function colorLabelFromId(colorId, tx) {
+    if (!colorId || !tx || !tx.q || !tx.q.color || !Array.isArray(tx.q.color.options)) return colorId || '';
+    var hit = tx.q.color.options.find(function (opt) { return opt.id === colorId; });
+    return hit ? hit.label : colorId;
   }
 
   function prototypeLine(min, max, perPiece) {
@@ -1778,6 +1790,7 @@
     var lines = [];
     lines.push(exactInfo ? tx.exactTitle : tx.resultTitle);
     lines.push(lbl.material + ': ' + (tx.materials[calc.materialKey] || calc.materialKey));
+    if (calc.colorKey) lines.push(lbl.color + ': ' + colorLabelFromId(calc.colorKey, tx));
     lines.push(lbl.process + ': ' + (tx.process[calc.processKey] || calc.processKey));
 
     if (calc.volumeCm3 != null) {

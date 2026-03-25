@@ -911,22 +911,22 @@
   })();
 
   var MATS = {
-    PLA:      { density: 1.24, ppg: 0.02, labelKey: 'pla' },
-    PLA_MATTE:{ density: 1.24, ppg: 0.03, labelKey: 'pla_matte' },
-    PLA_SILK: { density: 1.24, ppg: 0.04, labelKey: 'pla_silk' },
-    PLA_MARBLE:{ density: 1.24, ppg: 0.04, labelKey: 'pla_marble' },
-    PLA_CF:   { density: 1.30, ppg: 0.08, labelKey: 'pla_cf' },
-    PETG:     { density: 1.27, ppg: 0.03, labelKey: 'petg' },
-    PETG_HF:  { density: 1.27, ppg: 0.04, labelKey: 'petg_hf' },
-    PETG_CF:  { density: 1.30, ppg: 0.08, labelKey: 'petg_cf' },
-    ABS:      { density: 1.05, ppg: 0.05, labelKey: 'abs' },
-    ASA:      { density: 1.07, ppg: 0.06, labelKey: 'asa' },
-    TPU:      { density: 1.21, ppg: 0.06, labelKey: 'tpu' },
-    PA:       { density: 1.14, ppg: 0.08, labelKey: 'pa' },
-    PA6_CF:   { density: 1.25, ppg: 0.12, labelKey: 'pa_cf' },
-    PPA_CF:   { density: 1.30, ppg: 0.15, labelKey: 'ppa_cf' },
-    PET_CF:   { density: 1.30, ppg: 0.08, labelKey: 'pet_cf' },
-    PC:       { density: 1.20, ppg: 0.08, labelKey: 'pc' }
+    PLA:      { density: 1.24, ppg: 0.020, labelKey: 'pla' },
+    PLA_MATTE:{ density: 1.24, ppg: 0.020, labelKey: 'pla_matte' },
+    PLA_SILK: { density: 1.24, ppg: 0.024, labelKey: 'pla_silk' },
+    PLA_MARBLE:{ density: 1.24, ppg: 0.024, labelKey: 'pla_marble' },
+    PLA_CF:   { density: 1.30, ppg: 0.028, labelKey: 'pla_cf' },
+    PETG:     { density: 1.27, ppg: 0.020, labelKey: 'petg' },
+    PETG_HF:  { density: 1.27, ppg: 0.020, labelKey: 'petg_hf' },
+    PETG_CF:  { density: 1.30, ppg: 0.032, labelKey: 'petg_cf' },
+    ABS:      { density: 1.05, ppg: 0.022, labelKey: 'abs' },
+    ASA:      { density: 1.07, ppg: 0.026, labelKey: 'asa' },
+    TPU:      { density: 1.21, ppg: 0.028, labelKey: 'tpu' },
+    PA:       { density: 1.14, ppg: 0.032, labelKey: 'pa' },
+    PA6_CF:   { density: 1.25, ppg: 0.046, labelKey: 'pa_cf' },
+    PPA_CF:   { density: 1.30, ppg: 0.050, labelKey: 'ppa_cf' },
+    PET_CF:   { density: 1.30, ppg: 0.036, labelKey: 'pet_cf' },
+    PC:       { density: 1.20, ppg: 0.036, labelKey: 'pc' }
   };
 
   // Map user's material answer to MATS key

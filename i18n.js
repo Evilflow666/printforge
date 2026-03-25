@@ -19,6 +19,7 @@ const TRANSLATIONS = {
   'hero.eco':      { de:'☀️ Überwiegend mit PV-Energie produziert', en:'☀️ Produced mostly with solar energy', fr:"☀️ Produit principalement avec de l'énergie solaire", es:'☀️ Producido principalmente con energía solar', it:"☀️ Prodotto principalmente con energia solare" },
   'hero.storage':  { de:'🔋 120 kWh Speicherkapazität. Printfarm läuft auch wenn die Sonne nicht scheint', en:'🔋 120 kWh storage capacity. Print farm runs even when the sun is down', fr:'🔋 120 kWh de capacité de stockage. La ferme tourne même sans soleil', es:'🔋 120 kWh de almacenamiento. La granja funciona incluso sin sol', it:'🔋 120 kWh di capacità. La stamperia funziona anche senza sole' },
   'hero.cta':      { de:'Angebot anfragen', en:'Request a quote', fr:'Demander un devis', es:'Solicitar presupuesto', it:'Richiedi un preventivo' },
+  'hero.clippyHint': { de:'💡 Brauchst du Hilfe? Frag Clippy!', en:'💡 Need help? Ask Clippy!', fr:'💡 Besoin d aide ? Demandez a Clippy !', es:'💡 Necesitas ayuda? Pregunta a Clippy!', it:'💡 Ti serve aiuto? Chiedi a Clippy!' },
 
   'section.leistungen':   { de:'Unsere Leistungen',  en:'Our Services',    fr:'Nos Services',    es:'Nuestros Servicios', it:'I Nostri Servizi'  },
   'section.projekte':     { de:'Unsere Projekte',    en:'Our Projects',    fr:'Nos Projets',     es:'Nuestros Proyectos', it:'I Nostri Progetti' },

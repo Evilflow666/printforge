@@ -98,6 +98,8 @@
       <p class="hero-sub"><span data-i18n="hero.sub">3D-Druck · Lasercutting · Lasergravur · Prototyping</span></p>
       <p class="hero-eco"><span data-i18n="hero.eco">☀️ Überwiegend mit PV-Energie produziert</span></p>
       <p class="hero-eco hero-eco-sub"><span data-i18n="hero.storage">🔋 120 kWh Speicherkapazität. Printfarm läuft auch wenn die Sonne nicht scheint</span></p>
+      <a href="#kontakt" class="btn btn-primary hero-cta" data-i18n="hero.cta">Angebot anfragen</a>
+      <button type="button" id="hero-clippy-hint" class="hero-clippy-hint" data-i18n="hero.clippyHint">💡 Brauchst du Hilfe? Frag Clippy!</button>
       <div id="solar-widget" style="text-align:center;width:100%;"></div>
     </div>
   </section>
@@ -372,6 +374,22 @@
   <script src="auth.js"></script>
   <script src="script.js?v=1774052069"></script>
   <script src="clippy.js?v=1774052069"></script>
+  <script>
+    (function () {
+      var hint = document.getElementById('hero-clippy-hint');
+      if (!hint) return;
+      hint.addEventListener('click', function () {
+        var toggle = document.getElementById('clippy-toggle');
+        var chat = document.getElementById('clippy-chat');
+        if (!toggle) return;
+        if (!chat || chat.classList.contains('clippy-hidden')) {
+          toggle.click();
+        }
+        var input = document.getElementById('clippy-input');
+        if (input) setTimeout(function () { input.focus(); }, 0);
+      });
+    })();
+  </script>
   <script src="solar-widget.js"></script>
 </body>
 </html>

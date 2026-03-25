@@ -72,11 +72,19 @@
         ask: '💬 Ich hab noch Fragen',
         contact: '📧 Anfrage senden'
       },
+      productSuggestions: {
+        intro: 'Schau dir auch unsere fertigen Produkte an:',
+        browseIntro: 'Klar, hier kannst du direkt durch unsere Produktkategorien stöbern:',
+        fdm: '🛒 Fertige FDM-Produkte ansehen',
+        laser: '✂️ Lasercut-Sortiment ansehen',
+        all: '📦 Alle Produkte'
+      },
       q: {
         need: {
           key: 'service',
           text: 'Was brauchst du?',
           options: [
+            { id: 'browse', label: '🛒 Produkte durchstöbern' },
             { id: 'fdm', label: '🖨️ FDM 3D-Druck' },
             { id: 'resin', label: '🧪 Resin-Druck' },
             { id: 'laser_cut', label: '✂️ Laser schneiden' },
@@ -186,11 +194,19 @@
         ask: '💬 I still have questions',
         contact: '📧 Send inquiry'
       },
+      productSuggestions: {
+        intro: 'Take a look at our ready-made products too:',
+        browseIntro: 'Sure, you can browse our product categories here:',
+        fdm: '🛒 View ready-made FDM products',
+        laser: '✂️ View laser cut collection',
+        all: '📦 All products'
+      },
       q: {
         need: {
           key: 'service',
           text: 'What do you need?',
           options: [
+            { id: 'browse', label: '🛒 Browse products' },
             { id: 'fdm', label: '🖨️ FDM 3D Print' },
             { id: 'resin', label: '🧪 Resin Print' },
             { id: 'laser_cut', label: '✂️ Laser Cutting' },
@@ -290,11 +306,19 @@
         ask: '💬 J ai encore des questions',
         contact: '📧 Envoyer une demande'
       },
+      productSuggestions: {
+        intro: 'Regardez aussi nos produits finis :',
+        browseIntro: 'Bien sûr, voici nos catégories de produits :',
+        fdm: '🛒 Voir les produits FDM finis',
+        laser: '✂️ Voir la collection découpe laser',
+        all: '📦 Tous les produits'
+      },
       q: {
         need: {
           key: 'service',
           text: 'De quoi avez-vous besoin?',
           options: [
+            { id: 'browse', label: '🛒 Parcourir les produits' },
             { id: 'fdm', label: '🖨️ Impression 3D FDM' },
             { id: 'resin', label: '🧪 Impression resine' },
             { id: 'laser_cut', label: '✂️ Decoupe laser' },
@@ -394,11 +418,19 @@
         ask: '💬 Tengo mas preguntas',
         contact: '📧 Enviar solicitud'
       },
+      productSuggestions: {
+        intro: 'Mira tambien nuestros productos terminados:',
+        browseIntro: 'Claro, aqui puedes explorar nuestras categorias de productos:',
+        fdm: '🛒 Ver productos FDM terminados',
+        laser: '✂️ Ver catalogo de corte laser',
+        all: '📦 Todos los productos'
+      },
       q: {
         need: {
           key: 'service',
           text: 'Que necesitas?',
           options: [
+            { id: 'browse', label: '🛒 Explorar productos' },
             { id: 'fdm', label: '🖨️ Impresion 3D FDM' },
             { id: 'resin', label: '🧪 Impresion en resina' },
             { id: 'laser_cut', label: '✂️ Corte laser' },
@@ -498,11 +530,19 @@
         ask: '💬 Ho ancora domande',
         contact: '📧 Invia richiesta'
       },
+      productSuggestions: {
+        intro: 'Dai un occhiata anche ai nostri prodotti finiti:',
+        browseIntro: 'Certo, qui puoi sfogliare le nostre categorie di prodotti:',
+        fdm: '🛒 Vedi prodotti FDM pronti',
+        laser: '✂️ Vedi assortimento taglio laser',
+        all: '📦 Tutti i prodotti'
+      },
       q: {
         need: {
           key: 'service',
           text: 'Di cosa hai bisogno?',
           options: [
+            { id: 'browse', label: '🛒 Sfoglia i prodotti' },
             { id: 'fdm', label: '🖨️ Stampa 3D FDM' },
             { id: 'resin', label: '🧪 Stampa in resina' },
             { id: 'laser_cut', label: '✂️ Taglio laser' },
@@ -1107,6 +1147,44 @@
     scrollBottom();
   }
 
+  function appendProductSuggestions(service, introText) {
+    var tx = textSet();
+    var ps = tx.productSuggestions || {};
+    var links = [];
+
+    if (service === 'fdm' || service === 'browse') {
+      links.push({ label: ps.fdm || '🛒 FDM products', href: '/produkte/3d-fdm-druck.html' });
+    }
+    if (service === 'laser_cut' || service === 'laser_engrave' || service === 'browse') {
+      links.push({ label: ps.laser || '✂️ Laser products', href: '/produkte/lasercut.html' });
+    }
+    links.push({ label: ps.all || '📦 All products', href: '/produkte.html' });
+
+    var wrap = document.createElement('div');
+    wrap.className = 'clippy-msg clippy-question';
+
+    var text = document.createElement('div');
+    text.textContent = introText || ps.intro || '';
+    wrap.appendChild(text);
+
+    var options = document.createElement('div');
+    options.className = 'clippy-options';
+    links.forEach(function (item) {
+      var btn = document.createElement('button');
+      btn.className = 'clippy-option-btn';
+      btn.type = 'button';
+      btn.textContent = item.label;
+      btn.addEventListener('click', function () {
+        window.location.href = item.href;
+      });
+      options.appendChild(btn);
+    });
+
+    wrap.appendChild(options);
+    elMessages.appendChild(wrap);
+    scrollBottom();
+  }
+
   function setBusy(on) {
     state.busy = on;
     elSend.disabled = on;
@@ -1145,6 +1223,13 @@
     removeQuestionButtons();
     state.answers[key] = value;
     appendMessage(label, 'user');
+    if (key === 'service' && value === 'browse') {
+      state.finishedQuestions = true;
+      state.step = 4;
+      appendMessage(textSet().productSuggestions.browseIntro, 'bot');
+      appendProductSuggestions('browse');
+      return;
+    }
     state.step += 1;
     renderNextQuestion();
   }
@@ -1268,6 +1353,11 @@
     return lines.join('\n');
   }
 
+  function showResult(calc, exactInfo) {
+    appendMessage(buildResultMessage(calc, exactInfo), 'bot');
+    appendProductSuggestions(state.answers.service);
+  }
+
   async function callOllama(userMessage) {
     var messages = [{ role: 'system', content: buildSystemPrompt() }]
       .concat(state.history)
@@ -1299,7 +1389,7 @@
     state.finishedQuestions = true;
     elFileBtn.classList.remove('clippy-hidden');
     var calc = calculatePrice(state.answers, null);
-    appendMessage(buildResultMessage(calc), 'bot');
+    showResult(calc);
     appendActionButtons();
   }
 
@@ -1363,12 +1453,12 @@
         if (isStl) {
           var stl = analyzeSTL(ev.target.result);
           var calc = calculatePrice(state.answers, { volumeCm3: stl.volumeCm3 });
-          appendMessage(buildResultMessage(calc, stl), 'bot');
+          showResult(calc, stl);
         } else {
           var svgText = typeof ev.target.result === 'string' ? ev.target.result : new TextDecoder().decode(ev.target.result);
           var svg = analyzeSVG(svgText);
           var calcSvg = calculatePrice(state.answers, { areaCm2: svg.areaCm2, pathCm: svg.pathCm });
-          appendMessage(buildResultMessage(calcSvg, svg), 'bot');
+          showResult(calcSvg, svg);
         }
       } catch (e) {
         appendMessage(tx.fileErr, 'bot');

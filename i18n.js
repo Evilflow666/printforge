@@ -4,7 +4,7 @@
 
 const TRANSLATIONS = {
   'nav.leistungen':   { de:'Leistungen',  en:'Services',    fr:'Services',    es:'Servicios',   it:'Servizi'     },
-  'nav.materialien':  { de:'Materialien', en:'Materials',   fr:'Matériaux',   es:'Materiales',  it:'Materiali'   },
+  'nav.materialien':  { de:'🧪 Materialien', en:'🧪 Materials',   fr:'🧪 Matériaux',   es:'🧪 Materiales',  it:'🧪 Materiali'   },
   'nav.produkte':      { de:'Produkte',     en:'Products',   fr:'Produits',   es:'Productos',    it:'Prodotti'    },
   'nav.galerie':      { de:'Galerie',     en:'Gallery',     fr:'Galerie',     es:'Galería',     it:'Galleria'    },
   'nav.ablauf':       { de:'Ablauf',      en:'Process',     fr:'Processus',   es:'Proceso',     it:'Processo'    },

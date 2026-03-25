@@ -1854,6 +1854,10 @@
 
   document.addEventListener('pita-lang-changed', function () {
     applyLanguageTexts();
+    thoughtIndex = 0;
+    if (thoughtVisible) {
+      thoughtText.textContent = getThoughtMessages()[0];
+    }
   });
 
   startIdle();

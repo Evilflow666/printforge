@@ -50,6 +50,19 @@
         pla: 'PLA (preiswert, ideal für Deko)',
         petg: 'PETG (wetterbeständig, robust)',
         abs: 'ABS (industrienah, temperaturstabil)',
+        pla_matte: 'PLA Matte (ohne Layerlines)',
+        pla_silk: 'PLA Silk (Metallic-Glanz)',
+        pla_marble: 'PLA Marble (Steinoptik)',
+        pla_cf: 'PLA-CF (Carbon-verstärkt)',
+        petg_hf: 'PETG HF (High-Speed)',
+        petg_cf: 'PETG-CF (Carbon, leicht)',
+        asa: 'ASA (UV-stabil, Outdoor)',
+        tpu: 'TPU 95A (flexibel)',
+        pa: 'PA Nylon (belastbar)',
+        pa_cf: 'PA6-CF (Engineering)',
+        ppa_cf: 'PPA-CF (Hochtemperatur)',
+        pet_cf: 'PET-CF (nachhaltig, stark)',
+        pc: 'PC Polycarbonat (schlagfest)',
         resin_std: 'Standard Resin',
         resin_tough: 'Tough Resin',
         wood3: 'Holz 3mm',
@@ -207,6 +220,19 @@
         pla: 'PLA (cost-effective, good for display)',
         petg: 'PETG (weather resistant, strong)',
         abs: 'ABS (industrial, temperature stable)',
+        pla_matte: 'PLA Matte (no layer lines)',
+        pla_silk: 'PLA Silk (metallic shine)',
+        pla_marble: 'PLA Marble (stone look)',
+        pla_cf: 'PLA-CF (carbon reinforced)',
+        petg_hf: 'PETG HF (high-speed)',
+        petg_cf: 'PETG-CF (carbon, light)',
+        asa: 'ASA (UV stable, outdoor)',
+        tpu: 'TPU 95A (flexible)',
+        pa: 'PA Nylon (load-bearing)',
+        pa_cf: 'PA6-CF (engineering)',
+        ppa_cf: 'PPA-CF (high-temp)',
+        pet_cf: 'PET-CF (sustainable, strong)',
+        pc: 'PC Polycarbonate (impact resistant)',
         resin_std: 'Standard Resin',
         resin_tough: 'Tough Resin',
         wood3: 'Wood 3mm',
@@ -363,6 +389,19 @@
         pla: 'PLA (economique, ideal deco)',
         petg: 'PETG (resistant meteo, robuste)',
         abs: 'ABS (industriel, stable chaleur)',
+        pla_matte: 'PLA Mat (sans lignes)',
+        pla_silk: 'PLA Silk (brillant metallique)',
+        pla_marble: 'PLA Marbre (aspect pierre)',
+        pla_cf: 'PLA-CF (carbone)',
+        petg_hf: 'PETG HF (haute vitesse)',
+        petg_cf: 'PETG-CF (carbone, leger)',
+        asa: 'ASA (UV stable, exterieur)',
+        tpu: 'TPU 95A (flexible)',
+        pa: 'PA Nylon (resistant)',
+        pa_cf: 'PA6-CF (ingenierie)',
+        ppa_cf: 'PPA-CF (haute temperature)',
+        pet_cf: 'PET-CF (durable, solide)',
+        pc: 'PC Polycarbonate (resistant chocs)',
         resin_std: 'Resine standard',
         resin_tough: 'Resine tough',
         wood3: 'Bois 3mm',
@@ -510,6 +549,19 @@
         pla: 'PLA (economico, ideal para decoracion)',
         petg: 'PETG (resistente a clima, robusto)',
         abs: 'ABS (industrial, estable al calor)',
+        pla_matte: 'PLA Mate (sin lineas)',
+        pla_silk: 'PLA Silk (brillo metalico)',
+        pla_marble: 'PLA Marmol (aspecto piedra)',
+        pla_cf: 'PLA-CF (carbono)',
+        petg_hf: 'PETG HF (alta velocidad)',
+        petg_cf: 'PETG-CF (carbono, ligero)',
+        asa: 'ASA (UV estable, exterior)',
+        tpu: 'TPU 95A (flexible)',
+        pa: 'PA Nylon (resistente)',
+        pa_cf: 'PA6-CF (ingenieria)',
+        ppa_cf: 'PPA-CF (alta temperatura)',
+        pet_cf: 'PET-CF (sostenible, fuerte)',
+        pc: 'PC Policarbonato (resistente impactos)',
         resin_std: 'Resina estandar',
         resin_tough: 'Resina tough',
         wood3: 'Madera 3mm',
@@ -657,6 +709,19 @@
         pla: 'PLA (economico, ideale per deco)',
         petg: 'PETG (resistente alle intemperie, robusto)',
         abs: 'ABS (industriale, stabile al calore)',
+        pla_matte: 'PLA Opaco (senza linee)',
+        pla_silk: 'PLA Silk (metallico)',
+        pla_marble: 'PLA Marmo (effetto pietra)',
+        pla_cf: 'PLA-CF (carbonio)',
+        petg_hf: 'PETG HF (alta velocita)',
+        petg_cf: 'PETG-CF (carbonio, leggero)',
+        asa: 'ASA (UV stabile, esterno)',
+        tpu: 'TPU 95A (flessibile)',
+        pa: 'PA Nylon (resistente)',
+        pa_cf: 'PA6-CF (ingegneria)',
+        ppa_cf: 'PPA-CF (alta temperatura)',
+        pet_cf: 'PET-CF (sostenibile, forte)',
+        pc: 'PC Policarbonato (resistente urti)',
         resin_std: 'Resina standard',
         resin_tough: 'Resina tough',
         wood3: 'Legno 3mm',
@@ -805,9 +870,31 @@
   })();
 
   var MATS = {
-    PLA: { density: 1.24, ppg: 0.04, labelKey: 'pla' },
-    PETG: { density: 1.27, ppg: 0.05, labelKey: 'petg' },
-    ABS: { density: 1.05, ppg: 0.05, labelKey: 'abs' }
+    PLA:      { density: 1.24, ppg: 0.02, labelKey: 'pla' },
+    PLA_MATTE:{ density: 1.24, ppg: 0.03, labelKey: 'pla_matte' },
+    PLA_SILK: { density: 1.24, ppg: 0.04, labelKey: 'pla_silk' },
+    PLA_MARBLE:{ density: 1.24, ppg: 0.04, labelKey: 'pla_marble' },
+    PLA_CF:   { density: 1.30, ppg: 0.08, labelKey: 'pla_cf' },
+    PETG:     { density: 1.27, ppg: 0.03, labelKey: 'petg' },
+    PETG_HF:  { density: 1.27, ppg: 0.04, labelKey: 'petg_hf' },
+    PETG_CF:  { density: 1.30, ppg: 0.08, labelKey: 'petg_cf' },
+    ABS:      { density: 1.05, ppg: 0.05, labelKey: 'abs' },
+    ASA:      { density: 1.07, ppg: 0.06, labelKey: 'asa' },
+    TPU:      { density: 1.21, ppg: 0.06, labelKey: 'tpu' },
+    PA:       { density: 1.14, ppg: 0.08, labelKey: 'pa' },
+    PA6_CF:   { density: 1.25, ppg: 0.12, labelKey: 'pa_cf' },
+    PPA_CF:   { density: 1.30, ppg: 0.15, labelKey: 'ppa_cf' },
+    PET_CF:   { density: 1.30, ppg: 0.08, labelKey: 'pet_cf' },
+    PC:       { density: 1.20, ppg: 0.08, labelKey: 'pc' }
+  };
+
+  // Map user's material answer to MATS key
+  var MATERIAL_MAP = {
+    pla: 'PLA', pla_matte: 'PLA_MATTE', pla_silk: 'PLA_SILK', pla_marble: 'PLA_MARBLE',
+    petg: 'PETG', petg_hf: 'PETG_HF', petg_cf: 'PETG_CF',
+    abs: 'ABS', asa: 'ASA', tpu: 'TPU',
+    pla_cf: 'PLA_CF', pa_cf: 'PA6_CF', pc: 'PC',
+    unsure: null
   };
 
   function signedVolTri(ax, ay, az, bx, by, bz, cx, cy, cz) {
@@ -976,13 +1063,18 @@
 
     if (service === 'fdm' || service === 'prototype') {
       var fdm = usageToFdm(usage);
+      // User's material choice overrides usage-based suggestion
+      var userMat = answers.material && MATERIAL_MAP[answers.material];
+      var matKey = userMat || fdm.mat;
+      var infill = fdm.infill;
       var vol = exactInput && exactInput.volumeCm3 ? exactInput.volumeCm3 : (VOLUME_MAP[size] || VOLUME_MAP.phone);
-      var est = estimatePrice({ volumeCm3: vol }, fdm.mat, fdm.infill);
+      var est = estimatePrice({ volumeCm3: vol }, matKey, infill);
       var total = est.total;
       if (qty === '1_sanded') total *= 1.3;
       total *= discount;
       total = Math.max(5, total);
-      out.materialKey = (MATS[fdm.mat] && MATS[fdm.mat].labelKey) || 'pla';
+      out.materialKey = (MATS[matKey] && MATS[matKey].labelKey) || 'pla';
+      if (answers.color) out.colorKey = answers.color;
       out.volumeCm3 = vol;
       out.weightG = Number(est.weightG);
       out.total = total;

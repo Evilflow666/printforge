@@ -970,6 +970,9 @@
     '#clippy-send{border:0;background:#C67D4A;color:#fff;border-radius:10px;padding:9px 12px;cursor:pointer;}',
     '#clippy-send[disabled]{opacity:.5;cursor:not-allowed;}',
     '@media (max-width:520px){#clippy-container{right:8px;bottom:8px;}#clippy-chat{width:calc(100vw - 16px);height:min(72vh,620px);right:0;bottom:calc(100% + 12px);}}',
+    '.clippy-thought{position:absolute;bottom:calc(100% + 18px);right:0;background:rgba(15,15,30,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);color:#e8e6e1;padding:10px 16px;border-radius:14px;font-size:0.85rem;max-width:220px;text-align:center;opacity:0;transform:translateY(8px);transition:opacity 0.4s ease,transform 0.4s ease;pointer-events:none;line-height:1.4;box-shadow:0 4px 16px rgba(0,0,0,0.3);}',
+    '.clippy-thought.visible{opacity:1;transform:translateY(0);pointer-events:auto;}',
+    '.clippy-thought::after{content:"";position:absolute;bottom:-8px;right:24px;width:14px;height:14px;background:rgba(15,15,30,0.85);border-right:1px solid rgba(255,255,255,0.12);border-bottom:1px solid rgba(255,255,255,0.12);transform:rotate(45deg);}',
     '</style>',
     '<div id="clippy-container">',
     '  <div id="clippy-chat" class="clippy-hidden">',
@@ -987,6 +990,7 @@
     '      <button id="clippy-send" type="button"></button>',
     '    </div>',
     '  </div>',
+    '  <div id="clippy-thought" class="clippy-thought"><span id="clippy-thought-text"></span></div>',
     '  <button id="clippy-toggle" class="clippy-toggle" aria-label="Clippy">',
     '    <svg viewBox="0 0 100 160" width="56" height="84" class="clippy-svg" id="clippy-svg">',
     '      <ellipse cx="50" cy="95" rx="18" ry="50" fill="none" stroke="#5C5C5C" stroke-width="8" stroke-linecap="round"/>',
@@ -1029,6 +1033,59 @@
     followupEnabled: false,
     actionsShown: false
   };
+
+  // === Thought Bubble ===
+  var thoughtEl = document.getElementById('clippy-thought');
+  var thoughtText = document.getElementById('clippy-thought-text');
+  var thoughtMessages = [
+    '👋 Hey! Ich bin Clippy!',
+    '🖨️ Wusstest du? Wir drucken mit Solarstrom! ☀️',
+    '💡 Brauchst du Hilfe bei deinem Projekt?',
+    '🛒 Schon unsere FDM-Produkte entdeckt?',
+    '✂️ Lasercut-Sortiment kommt bald!',
+    '🎨 PLA Silk in Gold sieht mega aus!',
+    '📦 Einzelstück oder Kleinserie? Frag mich!',
+    '⚡ PETG HF = Turbo-Druck auf dem H2D!',
+    '🌿 Vogelfutterstellen ab 4,90€!',
+    '🔥 Tütenclips ab 0,99€ im 10er-Pack!',
+    '🏔️ Printing in the Alps — Made in Germany',
+    '💎 PLA Sparkle für echten Glitzer-Effekt!',
+    '📱 Credit Card Phone Stand passt ins Portemonnaie!',
+    '🤔 STL oder SVG? Ich rechne dir den Preis!',
+    '☕ Kaffee? Wir drucken auch Tassen... naja, fast.'
+  ];
+  var thoughtIndex = 0;
+  var thoughtTimer = null;
+  var thoughtVisible = false;
+
+  function showThought() {
+    if (elChat && !elChat.classList.contains('clippy-hidden')) return;
+    thoughtText.textContent = thoughtMessages[thoughtIndex];
+    thoughtEl.classList.add('visible');
+    thoughtVisible = true;
+    thoughtIndex = (thoughtIndex + 1) % thoughtMessages.length;
+    setTimeout(function() {
+      if (thoughtVisible) {
+        thoughtEl.classList.remove('visible');
+        thoughtVisible = false;
+      }
+    }, 5000);
+  }
+
+  function startThoughtCycle() {
+    setTimeout(function() {
+      showThought();
+      thoughtTimer = setInterval(showThought, 10000);
+    }, 3000);
+  }
+
+  function hideThought() {
+    thoughtEl.classList.remove('visible');
+    thoughtVisible = false;
+    if (thoughtTimer) { clearInterval(thoughtTimer); thoughtTimer = null; }
+  }
+
+  startThoughtCycle();
 
   function applyLanguageTexts() {
     var tx = textSet();
@@ -1490,6 +1547,7 @@
 
     var hidden = elChat.classList.contains('clippy-hidden');
     if (hidden) {
+      hideThought();
       elChat.classList.remove('clippy-hidden');
       if (!state.asked) {
         state.asked = true;
@@ -1499,6 +1557,7 @@
       setTimeout(function () { elInput.focus(); }, 0);
     } else {
       elChat.classList.add('clippy-hidden');
+      startThoughtCycle();
       elMessages.innerHTML = '';
       state.asked = false;
       state.step = 0;

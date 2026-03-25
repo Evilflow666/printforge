@@ -139,6 +139,41 @@
             { id: '6_20', label: '6-20 Stück' },
             { id: '20_plus', label: '20+ Stück' }
           ]
+        },
+
+        material: {
+          key: 'material',
+          text: 'Welches Material?',
+          options: [
+            { id: 'pla', label: '🟢 PLA Basic (Standard)' },
+            { id: 'pla_matte', label: '⚪ PLA Matte (keine Layerlines)' },
+            { id: 'pla_silk', label: '✨ PLA Silk (Metallic-Glanz)' },
+            { id: 'pla_marble', label: '🪨 PLA Marble (Steinoptik)' },
+            { id: 'petg', label: '🔵 PETG (robust, Outdoor)' },
+            { id: 'petg_hf', label: '⚡ PETG HF (High-Speed)' },
+            { id: 'abs', label: '🟡 ABS (hitzebeständig)' },
+            { id: 'asa', label: '🟠 ASA (UV-stabil, Outdoor)' },
+            { id: 'tpu', label: '🟣 TPU 95A (flexibel)' },
+            { id: 'pla_cf', label: '⚫ PLA-CF (Carbon-verstärkt)' },
+            { id: 'petg_cf', label: '🔷 PETG-CF (Carbon, leicht)' },
+            { id: 'pa_cf', label: '🟤 PA6-CF (Engineering)' },
+            { id: 'pc', label: '⬜ PC (Polycarbonat)' },
+            { id: 'unsure', label: '🤔 Bin mir unsicher' }
+          ]
+        },
+        color: {
+          key: 'color',
+          text: 'Welche Farbe?',
+          options: [
+            { id: 'white', label: '⬜ Weiß' },
+            { id: 'black', label: '⬛ Schwarz' },
+            { id: 'gray', label: '🩶 Grau' },
+            { id: 'red', label: '🟥 Rot' },
+            { id: 'blue', label: '🟦 Blau' },
+            { id: 'green', label: '🟩 Grün' },
+            { id: 'gold', label: '🥇 Gold / Kupfer' },
+            { id: 'custom', label: '🎨 Andere / nach Absprache' }
+          ]
         }
       }
     },
@@ -261,6 +296,40 @@
             { id: '6_20', label: '6-20 parts' },
             { id: '20_plus', label: '20+ parts' }
           ]
+        },
+        material: {
+          key: 'material',
+          text: 'Which material?',
+          options: [
+            { id: 'pla', label: '🟢 PLA Basic (standard)' },
+            { id: 'pla_matte', label: '⚪ PLA Matte (no layer lines)' },
+            { id: 'pla_silk', label: '✨ PLA Silk (metallic shine)' },
+            { id: 'pla_marble', label: '🪨 PLA Marble (stone look)' },
+            { id: 'petg', label: '🔵 PETG (robust, outdoor)' },
+            { id: 'petg_hf', label: '⚡ PETG HF (high-speed)' },
+            { id: 'abs', label: '🟡 ABS (heat resistant)' },
+            { id: 'asa', label: '🟠 ASA (UV stable, outdoor)' },
+            { id: 'tpu', label: '🟣 TPU 95A (flexible)' },
+            { id: 'pla_cf', label: '⚫ PLA-CF (carbon reinforced)' },
+            { id: 'petg_cf', label: '🔷 PETG-CF (carbon, light)' },
+            { id: 'pa_cf', label: '🟤 PA6-CF (engineering)' },
+            { id: 'pc', label: '⬜ PC (polycarbonate)' },
+            { id: 'unsure', label: '🤔 Not sure' }
+          ]
+        },
+        color: {
+          key: 'color',
+          text: 'What color?',
+          options: [
+            { id: 'white', label: '⬜ White' },
+            { id: 'black', label: '⬛ Black' },
+            { id: 'gray', label: '🩶 Gray' },
+            { id: 'red', label: '🟥 Red' },
+            { id: 'blue', label: '🟦 Blue' },
+            { id: 'green', label: '🟩 Green' },
+            { id: 'gold', label: '🥇 Gold / Copper' },
+            { id: 'custom', label: '🎨 Other / on request' }
+          ]
         }
       }
     },
@@ -372,6 +441,41 @@
             { id: '2_5', label: '2-5 pieces' },
             { id: '6_20', label: '6-20 pieces' },
             { id: '20_plus', label: '20+ pieces' }
+          ]
+        },
+
+        material: {
+          key: 'material',
+          text: 'Which material?',
+          options: [
+            { id: 'pla', label: '🟢 PLA Basic (standard)' },
+            { id: 'pla_matte', label: '⚪ PLA Matte (no layer lines)' },
+            { id: 'pla_silk', label: '✨ PLA Silk (metallic shine)' },
+            { id: 'pla_marble', label: '🪨 PLA Marble (stone look)' },
+            { id: 'petg', label: '🔵 PETG (robust, outdoor)' },
+            { id: 'petg_hf', label: '⚡ PETG HF (high-speed)' },
+            { id: 'abs', label: '🟡 ABS (heat resistant)' },
+            { id: 'asa', label: '🟠 ASA (UV stable, outdoor)' },
+            { id: 'tpu', label: '🟣 TPU 95A (flexible)' },
+            { id: 'pla_cf', label: '⚫ PLA-CF (carbon reinforced)' },
+            { id: 'petg_cf', label: '🔷 PETG-CF (carbon, light)' },
+            { id: 'pa_cf', label: '🟤 PA6-CF (engineering)' },
+            { id: 'pc', label: '⬜ PC (polycarbonate)' },
+            { id: 'unsure', label: '🤔 Not sure' }
+          ]
+        },
+        color: {
+          key: 'color',
+          text: 'What color?',
+          options: [
+            { id: 'white', label: '⬜ White' },
+            { id: 'black', label: '⬛ Black' },
+            { id: 'gray', label: '🩶 Gray' },
+            { id: 'red', label: '🟥 Red' },
+            { id: 'blue', label: '🟦 Blue' },
+            { id: 'green', label: '🟩 Green' },
+            { id: 'gold', label: '🥇 Gold / Copper' },
+            { id: 'custom', label: '🎨 Other / on request' }
           ]
         }
       }
@@ -485,6 +589,41 @@
             { id: '6_20', label: '6-20 piezas' },
             { id: '20_plus', label: '20+ piezas' }
           ]
+        },
+
+        material: {
+          key: 'material',
+          text: 'Que material?',
+          options: [
+            { id: 'pla', label: '🟢 PLA Basic (estandar)' },
+            { id: 'pla_matte', label: '⚪ PLA Mate (sin lineas)' },
+            { id: 'pla_silk', label: '✨ PLA Silk (brillo metalico)' },
+            { id: 'pla_marble', label: '🪨 PLA Marmol (aspecto piedra)' },
+            { id: 'petg', label: '🔵 PETG (robusto, exterior)' },
+            { id: 'petg_hf', label: '⚡ PETG HF (alta velocidad)' },
+            { id: 'abs', label: '🟡 ABS (resistente al calor)' },
+            { id: 'asa', label: '🟠 ASA (UV estable)' },
+            { id: 'tpu', label: '🟣 TPU 95A (flexible)' },
+            { id: 'pla_cf', label: '⚫ PLA-CF (carbono)' },
+            { id: 'petg_cf', label: '🔷 PETG-CF (carbono, ligero)' },
+            { id: 'pa_cf', label: '🟤 PA6-CF (ingenieria)' },
+            { id: 'pc', label: '⬜ PC (policarbonato)' },
+            { id: 'unsure', label: '🤔 No estoy seguro' }
+          ]
+        },
+        color: {
+          key: 'color',
+          text: 'Que color?',
+          options: [
+            { id: 'white', label: '⬜ Blanco' },
+            { id: 'black', label: '⬛ Negro' },
+            { id: 'gray', label: '🩶 Gris' },
+            { id: 'red', label: '🟥 Rojo' },
+            { id: 'blue', label: '🟦 Azul' },
+            { id: 'green', label: '🟩 Verde' },
+            { id: 'gold', label: '🥇 Dorado / Cobre' },
+            { id: 'custom', label: '🎨 Otro / consultar' }
+          ]
         }
       }
     },
@@ -596,6 +735,40 @@
             { id: '2_5', label: '2-5 pezzi' },
             { id: '6_20', label: '6-20 pezzi' },
             { id: '20_plus', label: '20+ pezzi' }
+          ]
+        },
+        material: {
+          key: 'material',
+          text: 'Quale materiale?',
+          options: [
+            { id: 'pla', label: '🟢 PLA Basic (standard)' },
+            { id: 'pla_matte', label: '⚪ PLA Opaco (senza linee)' },
+            { id: 'pla_silk', label: '✨ PLA Silk (metallico)' },
+            { id: 'pla_marble', label: '🪨 PLA Marmo (effetto pietra)' },
+            { id: 'petg', label: '🔵 PETG (robusto, esterno)' },
+            { id: 'petg_hf', label: '⚡ PETG HF (alta velocita)' },
+            { id: 'abs', label: '🟡 ABS (resistente calore)' },
+            { id: 'asa', label: '🟠 ASA (UV stabile)' },
+            { id: 'tpu', label: '🟣 TPU 95A (flessibile)' },
+            { id: 'pla_cf', label: '⚫ PLA-CF (carbonio)' },
+            { id: 'petg_cf', label: '🔷 PETG-CF (carbonio, leggero)' },
+            { id: 'pa_cf', label: '🟤 PA6-CF (ingegneria)' },
+            { id: 'pc', label: '⬜ PC (policarbonato)' },
+            { id: 'unsure', label: '🤔 Non sono sicuro' }
+          ]
+        },
+        color: {
+          key: 'color',
+          text: 'Quale colore?',
+          options: [
+            { id: 'white', label: '⬜ Bianco' },
+            { id: 'black', label: '⬛ Nero' },
+            { id: 'gray', label: '🩶 Grigio' },
+            { id: 'red', label: '🟥 Rosso' },
+            { id: 'blue', label: '🟦 Blu' },
+            { id: 'green', label: '🟩 Verde' },
+            { id: 'gold', label: '🥇 Oro / Rame' },
+            { id: 'custom', label: '🎨 Altro / su richiesta' }
           ]
         }
       }
@@ -1269,6 +1442,12 @@
       return tx.q.size3d;
     }
     if (state.step === 3) return tx.q.qty;
+    if (state.step === 4) {
+      var service = state.answers.service;
+      if (service === 'fdm' || service === 'resin' || service === 'prototype') return tx.q.material;
+      return null;
+    }
+    if (state.step === 5) return tx.q.color;
     return null;
   }
 

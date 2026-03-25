@@ -2948,16 +2948,16 @@ body.page-sub {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 0.6rem;
+  gap: 1.2rem;
 }
-.hero-center h1 { margin-bottom: 0.2rem; }
-.hero-center .hero-sub { margin-bottom: 0.5rem; }
+.hero-center h1 { margin: 0; }
+.hero-center .hero-sub { margin: 0; }
 .hero-badges {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.75rem;
-  margin: 0.5rem 0 1rem;
+  margin: 0;
 }
 .hero-badge {
   background: rgba(255,255,255,0.06);

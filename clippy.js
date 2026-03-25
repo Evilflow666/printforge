@@ -1210,33 +1210,105 @@
   // === Thought Bubble ===
   var thoughtEl = document.getElementById('clippy-thought');
   var thoughtText = document.getElementById('clippy-thought-text');
-  var thoughtMessages = [
-    '👋 Hey! Ich bin Clippy!',
-    '🖨️ Wusstest du? Wir drucken mit Solarstrom! ☀️',
-    '💡 Brauchst du Hilfe bei deinem Projekt?',
-    '🛒 Schon unsere FDM-Produkte entdeckt?',
-    '✂️ Lasercut-Sortiment kommt bald!',
-    '🎨 PLA Silk in Gold sieht mega aus!',
-    '📦 Einzelstück oder Kleinserie? Frag mich!',
-    '⚡ PETG HF = Turbo-Druck auf dem H2D!',
-    '🌿 Vogelfutterstellen ab 4,90€!',
-    '🔥 Tütenclips ab 0,99€ im 10er-Pack!',
-    '🏔️ Printing in the Alps — Made in Germany',
-    '💎 PLA Sparkle für echten Glitzer-Effekt!',
-    '📱 Credit Card Phone Stand passt ins Portemonnaie!',
-    '🤔 STL oder SVG? Ich rechne dir den Preis!',
-    '☕ Kaffee? Wir drucken auch Tassen... naja, fast.'
-  ];
+  var thoughtI18n = {
+    de: [
+      '👋 Hey! Ich bin Clippy!',
+      '🖨️ Wusstest du? Wir drucken mit Solarstrom! ☀️',
+      '💡 Brauchst du Hilfe bei deinem Projekt?',
+      '🛒 Schon unsere FDM-Produkte entdeckt?',
+      '✂️ Lasercut-Sortiment kommt bald!',
+      '🎨 PLA Silk in Gold sieht mega aus!',
+      '📦 Einzelstück oder Kleinserie? Frag mich!',
+      '⚡ PETG HF = Turbo-Druck auf dem H2D!',
+      '🌿 Vogelfutterstellen ab 4,90€!',
+      '🔥 Tütenclips ab 0,99€ im 10er-Pack!',
+      '🏔️ Printing in the Alps — Made in Germany',
+      '💎 PLA Sparkle für echten Glitzer-Effekt!',
+      '📱 Credit Card Phone Stand passt ins Portemonnaie!',
+      '🤔 STL oder SVG? Ich rechne dir den Preis!',
+      '☕ Kaffee? Wir drucken auch Tassen... naja, fast.'
+    ],
+    en: [
+      '👋 Hey! I\'m Clippy!',
+      '🖨️ Did you know? We print with solar power! ☀️',
+      '💡 Need help with your project?',
+      '🛒 Checked out our FDM products yet?',
+      '✂️ Laser cut range coming soon!',
+      '🎨 PLA Silk in Gold looks amazing!',
+      '📦 One-off or small batch? Ask me!',
+      '⚡ PETG HF = Turbo printing on the H2D!',
+      '🌿 Bird feeders from €4.90!',
+      '🔥 Bag clips from €0.99 in 10-packs!',
+      '🏔️ Printing in the Alps — Made in Germany',
+      '💎 PLA Sparkle for real glitter effect!',
+      '📱 Credit Card Phone Stand fits in your wallet!',
+      '🤔 STL or SVG? I\'ll calculate the price!',
+      '☕ Coffee? We also print mugs... well, almost.'
+    ],
+    fr: [
+      '👋 Salut ! Je suis Clippy !',
+      '🖨️ Le saviez-vous ? On imprime au solaire ! ☀️',
+      '💡 Besoin d\'aide pour votre projet ?',
+      '🛒 Decouvrez nos produits FDM !',
+      '✂️ Gamme decoupe laser bientot !',
+      '🎨 PLA Silk en Or — superbe !',
+      '📦 Piece unique ou petite serie ? Demandez !',
+      '⚡ PETG HF = Impression turbo !',
+      '🌿 Mangeoires a oiseaux des 4,90€ !',
+      '🔥 Clips de sac des 0,99€ par 10 !',
+      '🏔️ Printing in the Alps — Made in Germany',
+      '💎 PLA Sparkle pour un effet paillete !',
+      '📱 Support telephone format carte de credit !',
+      '🤔 STL ou SVG ? Je calcule le prix !',
+      '☕ Cafe ? On imprime aussi des tasses... presque.'
+    ],
+    es: [
+      '👋 Hola! Soy Clippy!',
+      '🖨️ Sabias que imprimimos con energia solar? ☀️',
+      '💡 Necesitas ayuda con tu proyecto?',
+      '🛒 Ya viste nuestros productos FDM?',
+      '✂️ Gama de corte laser pronto!',
+      '🎨 PLA Silk en Oro se ve increible!',
+      '📦 Pieza unica o serie? Preguntame!',
+      '⚡ PETG HF = Impresion turbo!',
+      '🌿 Comederos para pajaros desde 4,90€!',
+      '🔥 Clips de bolsa desde 0,99€ x10!',
+      '🏔️ Printing in the Alps — Made in Germany',
+      '💎 PLA Sparkle para efecto brillante!',
+      '📱 Soporte movil tamano tarjeta de credito!',
+      '🤔 STL o SVG? Calculo el precio!',
+      '☕ Cafe? Tambien imprimimos tazas... casi.'
+    ],
+    it: [
+      '👋 Ciao! Sono Clippy!',
+      '🖨️ Lo sapevi? Stampiamo con energia solare! ☀️',
+      '💡 Hai bisogno di aiuto con il tuo progetto?',
+      '🛒 Hai visto i nostri prodotti FDM?',
+      '✂️ Gamma taglio laser in arrivo!',
+      '🎨 PLA Silk in Oro e fantastico!',
+      '📦 Pezzo unico o piccola serie? Chiedimi!',
+      '⚡ PETG HF = Stampa turbo!',
+      '🌿 Mangiatoie per uccelli da 4,90€!',
+      '🔥 Clip per sacchetti da 0,99€ x10!',
+      '🏔️ Printing in the Alps — Made in Germany',
+      '💎 PLA Sparkle per effetto glitter!',
+      '📱 Supporto telefono formato carta di credito!',
+      '🤔 STL o SVG? Calcolo il prezzo!',
+      '☕ Caffe? Stampiamo anche tazze... quasi.'
+    ]
+  };
+  function getThoughtMessages() { return thoughtI18n[clippyLang()] || thoughtI18n.de; }
   var thoughtIndex = 0;
   var thoughtTimer = null;
   var thoughtVisible = false;
 
   function showThought() {
     if (elChat && !elChat.classList.contains('clippy-hidden')) return;
-    thoughtText.textContent = thoughtMessages[thoughtIndex];
+    var msgs = getThoughtMessages();
+    thoughtText.textContent = msgs[thoughtIndex % msgs.length];
     thoughtEl.classList.add('visible');
     thoughtVisible = true;
-    thoughtIndex = (thoughtIndex + 1) % thoughtMessages.length;
+    thoughtIndex = (thoughtIndex + 1) % msgs.length;
     setTimeout(function() {
       if (thoughtVisible) {
         thoughtEl.classList.remove('visible');

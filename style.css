@@ -69,7 +69,7 @@ body {
 
 /* ===== LAYOUT ===== */
 .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-.section { padding: 80px 0; }
+.section { padding: 80px 0; text-align: center; }
 .section-alt { background: rgba(11,15,25,0.55); backdrop-filter: blur(2px); }
 /* Entfernt - nur Hero hat jetzt Alpenbild */
 
@@ -462,11 +462,11 @@ select { cursor: pointer; appearance: none;
 /* ===== FOOTER ===== */
 .footer { padding: 48px 0 0; border-top: none; }
 .footer-inner {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  flex-wrap: wrap; gap: 24px; padding-bottom: 32px;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  gap: 16px; padding-bottom: 32px;
 }
 .footer-brand p { margin-top: 8px; font-size: 0.85rem; }
-.footer-links { display: flex; gap: 20px; }
+.footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
 .footer-links a {
   color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;
   transition: color var(--transition);
@@ -2714,6 +2714,7 @@ body.page-sub {
   padding: 0.5rem 0;
   font-size: 0.9rem;
   color: var(--text-secondary, #888);
+  text-align: center;
 }
 .breadcrumb a {
   color: var(--accent, #fa6831);
@@ -2970,9 +2971,9 @@ body.page-sub {
 }
 
 /* === About Page === */
-.about-content { max-width: 800px; margin: 0 auto; }
-.about-block { margin-bottom: 3rem; }
-.about-block h2 { margin-bottom: 1rem; font-size: 1.4rem; }
+.about-content { max-width: 800px; margin: 0 auto; text-align: center; }
+.about-block { margin-bottom: 3rem; text-align: center; }
+.about-block h2 { margin-bottom: 1rem; font-size: 1.4rem; text-align: center; }
 .about-block p { line-height: 1.7; color: var(--text-secondary, #aaa); margin-bottom: 0.8rem; }
 
 .about-stats {
@@ -3058,7 +3059,8 @@ body.page-sub {
   border-color: rgba(250,104,49,0.3);
 }
 .about-value > span { font-size: 1.5rem; flex-shrink: 0; }
-.about-value p { font-size: 0.9rem; color: var(--text-secondary); margin: 0.2rem 0 0; }
+.about-value p { font-size: 0.9rem; color: var(--text-secondary); margin: 0.2rem 0 0; text-align: left; }
+.about-value strong { text-align: left; }
 
 /* === Leistungen More Links === */
 .leistungen-more {

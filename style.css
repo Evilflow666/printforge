@@ -2941,3 +2941,86 @@ body.page-sub {
   font-size: 0.85rem;
   color: var(--text-secondary);
 }
+
+/* === Hero Center Layout === */
+.hero-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+}
+.hero-center h1 { margin-bottom: 0.2rem; }
+.hero-center .hero-sub { margin-bottom: 0.5rem; }
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0 1rem;
+}
+.hero-badge {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 2rem;
+  padding: 0.4rem 1rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary, #aaa);
+  backdrop-filter: blur(6px);
+}
+
+/* === About Page === */
+.about-content { max-width: 800px; margin: 0 auto; }
+.about-block { margin-bottom: 3rem; }
+.about-block h2 { margin-bottom: 1rem; font-size: 1.4rem; }
+.about-block p { line-height: 1.7; color: var(--text-secondary, #aaa); margin-bottom: 0.8rem; }
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+.about-stat {
+  text-align: center;
+  padding: 1.2rem;
+  background: var(--card-bg, #1a1a2e);
+  border-radius: 1rem;
+  border: 1px solid var(--border, #333);
+}
+.about-stat-number {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent, #fa6831);
+}
+.about-stat-label { font-size: 0.85rem; color: var(--text-secondary); }
+
+.about-machines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.about-machine {
+  padding: 1rem;
+  background: var(--card-bg, #1a1a2e);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border, #333);
+  text-align: center;
+}
+.about-machine-icon { font-size: 1.5rem; display: block; margin-bottom: 0.3rem; }
+.about-machine p { font-size: 0.85rem; color: var(--text-secondary); margin: 0.3rem 0 0; }
+
+.about-values-list { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1rem; }
+.about-value {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  background: var(--card-bg, #1a1a2e);
+  border-radius: 0.75rem;
+  border: 1px solid var(--border, #333);
+}
+.about-value > span { font-size: 1.5rem; flex-shrink: 0; }
+.about-value p { font-size: 0.9rem; color: var(--text-secondary); margin: 0.2rem 0 0; }

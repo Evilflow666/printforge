@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Über uns – PitA | Printing in the Alps</title>
+  <meta name="description" content="Wer steckt hinter PitA? Unsere Geschichte, unsere Printfarm und warum wir mit Solarstrom drucken.">
+  <link rel="canonical" href="https://evilflow666.github.io/printforge/ueber-uns.html">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js?v=1774052069"></script>
+</head>
+<body class="page-sub">
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="logo.svg" alt="PitA" class="logo-svg"></a>
+      <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
+        <div class="nav-dropdown"><a href="produkte.html" class="nav-dropdown-trigger" data-i18n="nav.produkte">Produkte</a><div class="nav-dropdown-menu"><a href="produkte/3d-fdm-druck.html" data-i18n="produkte.cat.fdm">🖨️ 3D-FDM-Druck</a><a href="produkte/lasercut.html" data-i18n="produkte.cat.laser">✂️ Lasercut &amp; Gravur</a></div></div>
+        <a href="index.html#leistungen" data-i18n="nav.leistungen">Leistungen</a>
+        <a href="materialien.html" data-i18n="nav.materialien">Materialien</a>
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="ueber-uns.html" data-i18n="nav.about">Über uns</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switcher-compact">
+          <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
+          <div class="lang-dropdown" id="lang-dropdown">
+            <button onclick="setLang('de')" data-lang="de">🇩🇪 DE</button>
+            <button onclick="setLang('en')" data-lang="en">🇬🇧 EN</button>
+            <button onclick="setLang('fr')" data-lang="fr">🇫🇷 FR</button>
+            <button onclick="setLang('es')" data-lang="es">🇪🇸 ES</button>
+            <button onclick="setLang('it')" data-lang="it">🇮🇹 IT</button>
+          </div>
+        </div>
+        <a href="warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
+        <div class="header-auth" id="header-auth">
+          <button onclick="openAuthModal('login')" class="auth-icon-btn" id="nav-login-btn" title="Anmelden">👤</button>
+          <a href="profil.html" class="auth-icon-btn auth-icon-active" id="nav-user-btn" style="display:none" title="Mein Konto">👤</a>
+        </div>
+      </div>
+      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+  <div class="sub-page-wrapper">
+
+  <section class="sub-hero">
+    <div class="container">
+      <h1>🏔️ <span class="accent" data-i18n="about.title">Über uns</span></h1>
+      <p data-i18n="about.sub">Die Geschichte hinter Printing in the Alps.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about-content">
+
+      <div class="about-block">
+        <h2 data-i18n="about.story.title">Unsere Geschichte</h2>
+        <p data-i18n="about.story.p1">PitA — Printing in the Alps — entstand aus einer einfachen Idee: Was, wenn man die Ruhe und Präzision der Alpen mit modernster Fertigungstechnik verbindet? Aus einer Garage im Schwarzwald wurde eine Printfarm mit über 16 Druckern, Lasercuttern und einer ganzen Menge Leidenschaft für saubere Ergebnisse.</p>
+        <p data-i18n="about.story.p2">Wir sind kein Großkonzern — wir sind Macher. Jedes Teil das unsere Werkstatt verlässt, wurde mit Sorgfalt gefertigt, geprüft und verpackt. Ob Einzelstück oder Kleinserie: bei uns bekommt jeder Auftrag die gleiche Aufmerksamkeit.</p>
+      </div>
+
+      <div class="about-block">
+        <h2 data-i18n="about.farm.title">Unsere Printfarm</h2>
+        <div class="about-stats">
+          <div class="about-stat">
+            <span class="about-stat-number">16+</span>
+            <span class="about-stat-label" data-i18n="about.farm.printers">3D-Drucker</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-number">3</span>
+            <span class="about-stat-label" data-i18n="about.farm.lasers">Laser-Systeme</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-number">4.3 kWp</span>
+            <span class="about-stat-label" data-i18n="about.farm.solar">Solartracker</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-number">23.5 kWh</span>
+            <span class="about-stat-label" data-i18n="about.farm.battery">Speicher</span>
+          </div>
+        </div>
+        <p data-i18n="about.farm.desc">Unsere Farm läuft überwiegend mit Solarstrom. Ein 4.3 kWp Solartracker und 23.5 kWh Batteriespeicher sorgen dafür, dass unsere Drucker auch dann laufen, wenn die Sonne mal nicht scheint. Nachhaltigkeit ist für uns kein Marketing — es ist die Stromrechnung.</p>
+      </div>
+
+      <div class="about-block">
+        <h2 data-i18n="about.machines.title">Unsere Maschinen</h2>
+        <div class="about-machines-grid">
+          <div class="about-machine">
+            <span class="about-machine-icon">🖨️</span>
+            <strong>7× Bambu Lab H2D</strong>
+            <p>High-Speed FDM für Serien</p>
+          </div>
+          <div class="about-machine">
+            <span class="about-machine-icon">🖨️</span>
+            <strong>9× Bambu Lab P1S</strong>
+            <p>Enclosed, zuverlässig, vielseitig</p>
+          </div>
+          <div class="about-machine">
+            <span class="about-machine-icon">✂️</span>
+            <strong>3× Creality Falcon</strong>
+            <p>Laser-Gravur & Cutting</p>
+          </div>
+          <div class="about-machine">
+            <span class="about-machine-icon">✂️</span>
+            <strong>CO₂ Laser</strong>
+            <p>Für dickere Materialien</p>
+          </div>
+          <div class="about-machine">
+            <span class="about-machine-icon">🔧</span>
+            <strong>Snapmaker A350T</strong>
+            <p>CNC + Laser + 3D-Druck Hybrid</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-block">
+        <h2 data-i18n="about.values.title">Wofür wir stehen</h2>
+        <div class="about-values-list">
+          <div class="about-value">
+            <span>⚡</span>
+            <div>
+              <strong data-i18n="about.values.fast">Schnell</strong>
+              <p data-i18n="about.values.fast.desc">Einzelteile in 24–72h. Kleinserien in unter einer Woche.</p>
+            </div>
+          </div>
+          <div class="about-value">
+            <span>🎯</span>
+            <div>
+              <strong data-i18n="about.values.precise">Präzise</strong>
+              <p data-i18n="about.values.precise.desc">Kalibrierte Maschinen, geprüfte Teile, konstante Qualität.</p>
+            </div>
+          </div>
+          <div class="about-value">
+            <span>☀️</span>
+            <div>
+              <strong data-i18n="about.values.green">Nachhaltig</strong>
+              <p data-i18n="about.values.green.desc">Solarstrom, minimaler Abfall, recycelbare Materialien wo möglich.</p>
+            </div>
+          </div>
+          <div class="about-value">
+            <span>🤝</span>
+            <div>
+              <strong data-i18n="about.values.personal">Persönlich</strong>
+              <p data-i18n="about.values.personal.desc">Direkter Kontakt, keine Warteschleifen, echte Menschen.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  </div>
+
+  <div class="mountain-divider">
+    <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,180 L0,120 L80,95 L160,110 L240,70 L320,90 L400,50 L480,75 L540,30 L600,60 L680,40 L720,15 L780,45 L840,25 L900,55 L960,35 L1020,65 L1080,45 L1140,70 L1200,50 L1280,80 L1360,60 L1440,90 L1440,180Z" fill="var(--bg)"/>
+    </svg>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo">Pit<span class="accent">A</span></span>
+      <p><span data-i18n="footer.tagline">Präzision aus den Alpen.</span></p>
+      <div class="footer-links">
+        <a href="blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="impressum.html" data-i18n="footer.impressum">Impressum</a>
+        <a href="datenschutz.html" data-i18n="footer.datenschutz">Datenschutz</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copy">&copy; 2026 PitA. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script src="script.js?v=1774052069"></script>
+  <script src="clippy.js?v=1774052069"></script>
+  <script src="cart.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -1677,7 +1677,7 @@
           setTimeout(function() {
             appendQuestionCard(qObj);
             scrollBottom();
-          }, 3600);
+          }, 7200);
           return;
         }
       }

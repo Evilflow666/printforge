@@ -32,6 +32,7 @@ const PRODUKTE = {
       { ab: 3, preis: 10.90 },
       { ab: 10, preis: 8.90 }
     ],
+    colorOptions: [{ name: 'Weiß', hex: '#FFFFFF' }, { name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Gold', hex: '#C9A84C' }, { name: 'Kupfer', hex: '#B87333' }, { name: 'Roségold', hex: '#B76E79' }, { name: 'Silber', hex: '#C0C0C0' }],
     inStock: true
   },
 
@@ -62,6 +63,7 @@ const PRODUKTE = {
       { ab: 5, preis: 6.90 },
       { ab: 10, preis: 5.50 }
     ],
+    colorOptions: [{ name: 'Weiß', hex: '#FFFFFF' }, { name: 'Creme', hex: '#FFFDD0' }, { name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Warmgrau', hex: '#9E9E9E' }],
     inStock: true
   },
 
@@ -91,6 +93,7 @@ const PRODUKTE = {
       { ab: 1, preis: 9.90 },
       { ab: 3, preis: 7.90 }
     ],
+    colorOptions: [{ name: 'Weiß', hex: '#FFFFFF' }, { name: 'Grau', hex: '#808080' }, { name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Terracotta', hex: '#C04000' }, { name: 'Salbei', hex: '#9CAF88' }],
     inStock: true
   },
 
@@ -120,6 +123,7 @@ const PRODUKTE = {
       { ab: 1, preis: 14.90 },
       { ab: 3, preis: 12.90 }
     ],
+    colorOptions: [{ name: 'Natur/Transluzent', hex: '#F5F0E8' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Warmweiß', hex: '#FFF8DC' }, { name: 'Gelb', hex: '#FFD700' }],
     inStock: true
   },
 
@@ -150,6 +154,7 @@ const PRODUKTE = {
       { ab: 5, preis: 2.20 },
       { ab: 10, preis: 1.50 }
     ],
+    colorOptions: [{ name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Grau', hex: '#808080' }, { name: 'Blau', hex: '#2962FF' }, { name: 'Rot', hex: '#D32F2F' }],
     inStock: true
   },
 
@@ -179,6 +184,7 @@ const PRODUKTE = {
       { ab: 1, preis: 11.90 },
       { ab: 3, preis: 9.90 }
     ],
+    colorOptions: [{ name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Holzoptik', hex: '#8B6914' }, { name: 'Dunkelgrau', hex: '#404040' }],
     inStock: true
   },
 
@@ -208,6 +214,7 @@ const PRODUKTE = {
       { ab: 1, preis: 6.90 },
       { ab: 5, preis: 5.50 }
     ],
+    colorOptions: [{ name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Blau', hex: '#2962FF' }, { name: 'Grün', hex: '#2E7D32' }, { name: 'Rot', hex: '#D32F2F' }],
     inStock: true
   },
 
@@ -236,6 +243,7 @@ const PRODUKTE = {
       { ab: 1, preis: 7.90 },
       { ab: 3, preis: 6.50 }
     ],
+    colorOptions: [{ name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Grau', hex: '#808080' }],
     inStock: true
   },
 
@@ -267,6 +275,7 @@ const PRODUKTE = {
       { ab: 10, preis: 0.99 },
       { ab: 25, preis: 0.79 }
     ],
+    colorOptions: [{ name: 'Rot', hex: '#D32F2F' }, { name: 'Grün', hex: '#2E7D32' }, { name: 'Blau', hex: '#2962FF' }, { name: 'Gelb', hex: '#FBC02D' }, { name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Bunt gemischt', hex: '#FF6B35' }],
     inStock: true
   },
 
@@ -296,6 +305,7 @@ const PRODUKTE = {
       { ab: 5, preis: 1.90 },
       { ab: 10, preis: 1.40 }
     ],
+    colorOptions: [{ name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Grau', hex: '#808080' }, { name: 'Grün', hex: '#2E7D32' }, { name: 'Orange', hex: '#FF6B35' }],
     inStock: true
   },
 
@@ -325,6 +335,7 @@ const PRODUKTE = {
       { ab: 5, preis: 2.90 },
       { ab: 10, preis: 2.20 }
     ],
+    colorOptions: [{ name: 'Weiß', hex: '#FFFFFF' }, { name: 'Grau', hex: '#808080' }, { name: 'Schwarz', hex: '#1a1a1a' }],
     inStock: true
   },
 
@@ -353,6 +364,7 @@ const PRODUKTE = {
       { ab: 1, preis: 8.90 },
       { ab: 3, preis: 7.50 }
     ],
+    colorOptions: [{ name: 'Weiß', hex: '#FFFFFF' }, { name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Holzoptik', hex: '#8B6914' }],
     inStock: true
   },
 
@@ -383,6 +395,7 @@ const PRODUKTE = {
       { ab: 5, preis: 2.90 },
       { ab: 10, preis: 1.90 }
     ],
+    colorOptions: [{ name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Transparent', hex: '#E8E8E8' }],
     inStock: true
   },
 
@@ -411,6 +424,7 @@ const PRODUKTE = {
       { ab: 5, preis: 2.50 },
       { ab: 10, preis: 1.90 }
     ],
+    colorOptions: [{ name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Grau', hex: '#808080' }, { name: 'Rot', hex: '#D32F2F' }],
     inStock: true
   },
 
@@ -439,6 +453,7 @@ const PRODUKTE = {
       { ab: 1, preis: 6.90 },
       { ab: 3, preis: 5.50 }
     ],
+    colorOptions: [{ name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Weiß', hex: '#FFFFFF' }],
     inStock: true
   },
 
@@ -468,6 +483,7 @@ const PRODUKTE = {
       { ab: 5, preis: 2.90 },
       { ab: 10, preis: 2.20 }
     ],
+    colorOptions: [{ name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Grau', hex: '#808080' }, { name: 'Blau', hex: '#2962FF' }],
     inStock: true
   },
 
@@ -499,6 +515,7 @@ const PRODUKTE = {
       { ab: 3, preis: 6.50 },
       { ab: 10, preis: 4.90 }
     ],
+    colorOptions: [{ name: 'Terracotta', hex: '#C04000' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Grau', hex: '#808080' }, { name: 'Schwarz', hex: '#1a1a1a' }, { name: 'Salbei', hex: '#9CAF88' }],
     inStock: true
   },
 
@@ -528,6 +545,7 @@ const PRODUKTE = {
       { ab: 1, preis: 5.90 },
       { ab: 3, preis: 4.90 }
     ],
+    colorOptions: [{ name: 'Grün', hex: '#2E7D32' }, { name: 'Braun', hex: '#5D4037' }, { name: 'Schwarz', hex: '#1a1a1a' }],
     inStock: true
   },
 
@@ -557,6 +575,7 @@ const PRODUKTE = {
       { ab: 1, preis: 4.90 },
       { ab: 3, preis: 3.90 }
     ],
+    colorOptions: [{ name: 'Grün', hex: '#2E7D32' }, { name: 'Braun', hex: '#5D4037' }],
     inStock: true
   },
 
@@ -586,6 +605,7 @@ const PRODUKTE = {
       { ab: 1, preis: 9.90 },
       { ab: 3, preis: 8.50 }
     ],
+    colorOptions: [{ name: 'Braun', hex: '#5D4037' }, { name: 'Grün', hex: '#2E7D32' }, { name: 'Natur', hex: '#DEB887' }],
     inStock: true
   }
 };

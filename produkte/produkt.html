@@ -99,8 +99,12 @@
                 <span class="stock-dot stock-in"></span> Auf Lager — Fertigung in 2–5 Werktagen
               </div>
 
-              <!-- Color hint -->
-              <p class="produkt-colors" id="p-colors" style="margin-top:0.8rem;font-size:0.9rem;color:var(--text-secondary);"></p>
+              <!-- Color Picker -->
+              <div class="produkt-color-picker" id="p-color-picker" style="margin-top:1rem;display:none;">
+                <label style="font-weight:600;font-size:0.95rem;">🎨 Farbe wählen:</label>
+                <div class="color-options" id="color-options"></div>
+                <p class="color-selected" id="color-selected" style="font-size:0.85rem;color:var(--text-secondary);margin-top:0.3rem;"></p>
+              </div>
             </div>
           </div>
 
@@ -268,6 +272,35 @@
     }
 
     // Cart integration
+    // Color picker
+    if (p.colorOptions && p.colorOptions.length > 0) {
+      const pickerDiv = document.getElementById('p-color-picker');
+      const optionsDiv = document.getElementById('color-options');
+      const selectedDiv = document.getElementById('color-selected');
+      pickerDiv.style.display = 'block';
+      
+      p.colorOptions.forEach(function(c, i) {
+        const swatch = document.createElement('button');
+        swatch.className = 'color-swatch' + (i === 0 ? ' active' : '');
+        swatch.style.background = c.hex;
+        swatch.title = c.name;
+        swatch.setAttribute('data-color', c.name);
+        if (c.hex === '#FFFFFF' || c.hex === '#ffffff' || c.hex === '#FFFFF0') {
+          swatch.style.border = '2px solid var(--border, #444)';
+        }
+        swatch.onclick = function() {
+          document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+          this.classList.add('active');
+          window._selectedColor = c.name;
+          selectedDiv.textContent = 'Gewählt: ' + c.name;
+        };
+        optionsDiv.appendChild(swatch);
+      });
+      
+      window._selectedColor = p.colorOptions[0].name;
+      selectedDiv.textContent = 'Gewählt: ' + p.colorOptions[0].name;
+    }
+
     window._productId = id;
     window._product = p;
   })();
@@ -303,8 +336,9 @@
     for (const s of p.staffelpreise || []) {
       if (qty >= s.ab) price = s.preis;
     }
+    var itemName = p.name + (window._selectedColor ? ' (' + window._selectedColor + ')' : '');
     if (typeof addToCart === 'function') {
-      addToCart(window._productId, p.name, price, qty);
+      addToCart(window._productId + (window._selectedColor ? '-' + window._selectedColor.toLowerCase().replace(/\s+/g,'-') : ''), itemName, price, qty);
     }
     // Visual feedback
     const btn = document.getElementById('btn-add-cart');

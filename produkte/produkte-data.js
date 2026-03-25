@@ -1,5 +1,5 @@
 /**
- * PitA Product Data — Alle FDM-Produkte
+ * FACTUM3D Product Data — Alle FDM-Produkte
  * Neues Produkt? Einfach unten einen Eintrag ergänzen.
  */
 const PRODUKTE = {

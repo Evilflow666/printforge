@@ -25,7 +25,7 @@
 
   var UI = {
     de: {
-      title: 'Clippy - PitA Assistent',
+      title: 'Clippy - FACTUM3D Assistent',
       openLabel: 'Frag mich!',
       placeholder: 'Nachricht schreiben...',
       send: 'Senden',
@@ -202,7 +202,7 @@
       }
     },
     en: {
-      title: 'Clippy - PitA Assistant',
+      title: 'Clippy - FACTUM3D Assistant',
       openLabel: 'Ask me!',
       placeholder: 'Write a message...',
       send: 'Send',
@@ -378,7 +378,7 @@
       }
     },
     fr: {
-      title: 'Clippy - Assistant PitA',
+      title: 'Clippy - Assistant FACTUM3D',
       openLabel: 'Demandez-moi!',
       placeholder: 'Ecrire un message...',
       send: 'Envoyer',
@@ -545,7 +545,7 @@
       }
     },
     es: {
-      title: 'Clippy - Asistente PitA',
+      title: 'Clippy - Asistente FACTUM3D',
       openLabel: 'Preguntame!',
       placeholder: 'Escribe un mensaje...',
       send: 'Enviar',
@@ -712,7 +712,7 @@
       }
     },
     it: {
-      title: 'Clippy - Assistente PitA',
+      title: 'Clippy - Assistente FACTUM3D',
       openLabel: 'Chiedimi!',
       placeholder: 'Scrivi un messaggio...',
       send: 'Invia',
@@ -893,11 +893,11 @@
   function buildSystemPrompt() {
     var lang = clippyLang();
     var prompts = {
-      de: "Du bist Clippy, der Projektberater von PitA (Printing in the Alps). Antworte IMMER auf Deutsch.\\n\\nPERSOENLICHKEIT: Du bist ein PROJEKT-BERATER. Beginne IMMER beim Projekt des Kunden. Fuehre ein Gespraech, keine Checkliste. Stelle EINE Frage nach der anderen. Halte Antworten auf 2-4 Saetze.\\n\\nGRUNDREGELN: NIEMALS Kontaktformular als Antwort. Dateien sind IMMER optional. IMMER konkreten Preis nennen. Keine Sackgassen.\\n\\nPREISE: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05. Maschine 4EUR/h. Setup 3.50. Min 5EUR. Resin 0.15-0.22/cm3 min 10EUR. Laser Holz 0.005/cm2 Acryl 0.012-0.018/cm2 min 8EUR. Versand DE 4.90 EU 7.90. Lieferzeit 2-5 Werktage, Kleinserie 5-10.",
-      en: "You are Clippy, project advisor at PitA (Printing in the Alps). ALWAYS answer in English. Keep it concise, practical, and price-oriented.",
-      fr: "Tu es Clippy, conseiller projet de PitA. Reponds toujours en francais de maniere concise et pratique.",
-      es: "Eres Clippy, asesor de proyectos de PitA. Responde siempre en espanol de forma breve y practica.",
-      it: "Sei Clippy, consulente di progetto di PitA. Rispondi sempre in italiano, in modo conciso e pratico."
+      de: "Du bist Clippy, der Projektberater von FACTUM3D. Antworte IMMER auf Deutsch.\\n\\nPERSOENLICHKEIT: Du bist ein PROJEKT-BERATER. Beginne IMMER beim Projekt des Kunden. Fuehre ein Gespraech, keine Checkliste. Stelle EINE Frage nach der anderen. Halte Antworten auf 2-4 Saetze.\\n\\nGRUNDREGELN: NIEMALS Kontaktformular als Antwort. Dateien sind IMMER optional. IMMER konkreten Preis nennen. Keine Sackgassen.\\n\\nPREISE: PLA 0.04EUR/g | PETG 0.05 | ABS 0.05. Maschine 4EUR/h. Setup 3.50. Min 5EUR. Resin 0.15-0.22/cm3 min 10EUR. Laser Holz 0.005/cm2 Acryl 0.012-0.018/cm2 min 8EUR. Versand DE 4.90 EU 7.90. Lieferzeit 2-5 Werktage, Kleinserie 5-10.",
+      en: "You are Clippy, project advisor at FACTUM3D. ALWAYS answer in English. Keep it concise, practical, and price-oriented.",
+      fr: "Tu es Clippy, conseiller projet de FACTUM3D. Reponds toujours en francais de maniere concise et pratique.",
+      es: "Eres Clippy, asesor de proyectos de FACTUM3D. Responde siempre en espanol de forma breve y practica.",
+      it: "Sei Clippy, consulente di progetto di FACTUM3D. Rispondi sempre in italiano, in modo conciso e pratico."
     };
     return prompts[lang] || prompts.de;
   }
@@ -1360,7 +1360,7 @@
       '⚡ PETG HF = Turbo-Druck auf dem H2D!',
       '🌿 Vogelfutterstellen ab 4,90€!',
       '🔥 Tütenclips ab 0,99€ im 10er-Pack!',
-      '🏔️ Printing in the Alps — Made in Germany',
+      '🏔️ FACTUM3D — Made in Germany',
       '💎 PLA Sparkle für echten Glitzer-Effekt!',
       '📱 Credit Card Phone Stand passt ins Portemonnaie!',
       '🤔 STL oder SVG? Ich rechne dir den Preis!',
@@ -1377,7 +1377,7 @@
       '⚡ PETG HF = Turbo printing on the H2D!',
       '🌿 Bird feeders from €4.90!',
       '🔥 Bag clips from €0.99 in 10-packs!',
-      '🏔️ Printing in the Alps — Made in Germany',
+      '🏔️ FACTUM3D — Made in Germany',
       '💎 PLA Sparkle for real glitter effect!',
       '📱 Credit Card Phone Stand fits in your wallet!',
       '🤔 STL or SVG? I\'ll calculate the price!',
@@ -1394,7 +1394,7 @@
       '⚡ PETG HF = Impression turbo !',
       '🌿 Mangeoires a oiseaux des 4,90€ !',
       '🔥 Clips de sac des 0,99€ par 10 !',
-      '🏔️ Printing in the Alps — Made in Germany',
+      '🏔️ FACTUM3D — Made in Germany',
       '💎 PLA Sparkle pour un effet paillete !',
       '📱 Support telephone format carte de credit !',
       '🤔 STL ou SVG ? Je calcule le prix !',
@@ -1411,7 +1411,7 @@
       '⚡ PETG HF = Impresion turbo!',
       '🌿 Comederos para pajaros desde 4,90€!',
       '🔥 Clips de bolsa desde 0,99€ x10!',
-      '🏔️ Printing in the Alps — Made in Germany',
+      '🏔️ FACTUM3D — Made in Germany',
       '💎 PLA Sparkle para efecto brillante!',
       '📱 Soporte movil tamano tarjeta de credito!',
       '🤔 STL o SVG? Calculo el precio!',
@@ -1428,7 +1428,7 @@
       '⚡ PETG HF = Stampa turbo!',
       '🌿 Mangiatoie per uccelli da 4,90€!',
       '🔥 Clip per sacchetti da 0,99€ x10!',
-      '🏔️ Printing in the Alps — Made in Germany',
+      '🏔️ FACTUM3D — Made in Germany',
       '💎 PLA Sparkle per effetto glitter!',
       '📱 Supporto telefono formato carta di credito!',
       '🤔 STL o SVG? Calcolo il prezzo!',

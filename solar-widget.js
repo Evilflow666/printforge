@@ -1,5 +1,5 @@
 /**
- * PitA Solar-Widget — Live Akku-Anzeige im Hero
+ * FACTUM3D Solar-Widget — Live Akku-Anzeige im Hero
  * Nutzt Open-Meteo API (kostenlos, kein Key nötig)
  * Simuliert Akku-Level basierend auf echten Wetterdaten
  */

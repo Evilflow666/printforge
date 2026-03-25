@@ -1,5 +1,5 @@
 /**
- * PitA Warenkorb — localStorage-basiert
+ * FACTUM3D Warenkorb — localStorage-basiert
  */
 
 const CART_KEY = "pita-cart";

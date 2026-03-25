@@ -1,5 +1,5 @@
 /**
- * PitA Auth System — localStorage Mode (Hostinger-Backend ready)
+ * FACTUM3D Auth System — localStorage Mode (Hostinger-Backend ready)
  * Wenn AUTH_BACKEND gesetzt → API-Calls statt localStorage
  */
 

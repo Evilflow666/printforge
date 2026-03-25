@@ -1,5 +1,5 @@
 /**
- * Clippy — PitA KI-Assistent v3.0
+ * Clippy — FACTUM3D KI-Assistent v3.0
  * Mehrsprachig: DE / EN / FR / ES / IT
  * Features: STL/SVG Analyse, Preisschätzung, Navigation, Idle-Animationen
  */
@@ -12,11 +12,11 @@ function clippyLang() {
 // ─── ÜBERSETZUNGEN ──────────────────────────────────────────────────────────
 const T = {
   greeting: {
-    de: 'Hey! 👋 Ich bin Clippy, dein Berater bei PitA.<br><br>Was hast du vor? Erzähl mir von deinem Projekt!',
-    en: "Hey! 👋 I'm Clippy, your advisor at PitA.<br><br>What are you working on? Tell me about your project!",
-    fr: 'Salut ! 👋 Je suis Clippy, votre conseiller chez PitA.<br><br>Quel est votre projet ? Racontez-moi !',
-    es: '¡Hola! 👋 Soy Clippy, tu asesor en PitA.<br><br>¿Qué tienes en mente? ¡Cuéntame sobre tu proyecto!',
-    it: 'Ciao! 👋 Sono Clippy, il tuo consulente di PitA.<br><br>Cosa hai in mente? Raccontami del tuo progetto!',
+    de: 'Hey! 👋 Ich bin Clippy, dein Berater bei FACTUM3D.<br><br>Was hast du vor? Erzähl mir von deinem Projekt!',
+    en: "Hey! 👋 I'm Clippy, your advisor at FACTUM3D.<br><br>What are you working on? Tell me about your project!",
+    fr: 'Salut ! 👋 Je suis Clippy, votre conseiller chez FACTUM3D.<br><br>Quel est votre projet ? Racontez-moi !',
+    es: '¡Hola! 👋 Soy Clippy, tu asesor en FACTUM3D.<br><br>¿Qué tienes en mente? ¡Cuéntame sobre tu proyecto!',
+    it: 'Ciao! 👋 Sono Clippy, il tuo consulente di FACTUM3D.<br><br>Cosa hai in mente? Raccontami del tuo progetto!',
   },
   quickStart: {
     de: ['💡 Ich habe eine Idee', '🔧 Ersatzteil gesucht', '🎁 Geschenk oder Deko', '🏢 Für mein Business', '🔍 Was bietet ihr an?', '📦 Im Katalog stöbern'],
@@ -241,7 +241,7 @@ function buildSystemPrompt() {
     it: 'Rispondi sempre in italiano.',
   };
   const instr = langInstr[clippyLang()] ?? langInstr.de;
-  return `Du bist Clippy, der warmherzige Fertigungsberater von PitA (Printing in the Alps). ${instr}
+  return `Du bist Clippy, der warmherzige Fertigungsberater von FACTUM3D (FACTUM3D). ${instr}
 
 PERSOENLICHKEIT:
 - Du bist der Fertigungsexperte im Team. Du LOEST Probleme, du verweist nicht weiter.
@@ -483,7 +483,7 @@ function getFallback(msg) {
   <div id="clippy-container" class="clippy-container">
     <div id="clippy-chat" class="clippy-chat clippy-hidden">
       <div class="clippy-header">
-        <span>📎 Clippy — PitA Assistent</span>
+        <span>📎 Clippy — FACTUM3D Assistent</span>
         <button id="clippy-close-btn" class="clippy-close" aria-label="Schließen">✕</button>
       </div>
       <div id="clippy-messages" class="clippy-messages">

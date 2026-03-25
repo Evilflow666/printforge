@@ -7,6 +7,12 @@
     return localStorage.getItem('pita-lang') || 'de';
   }
 
+  function clippyBase() {
+    var path = window.location.pathname;
+    if (path.includes('/produkte/') || path.includes('/leistungen/')) return '../';
+    return '';
+  }
+
   var OLLAMA_URL = 'http://69.62.105.159:32768/api/chat';
 
   var VOLUME_MAP = { stamp: 5, phone: 80, shoebox: 800, bigger: 1600 };
@@ -1136,7 +1142,7 @@
           appendMessage(tx.enableChat, 'bot');
         } else {
           appendMessage(tx.contactMsg, 'bot');
-          window.location.href = '/index.html#kontakt';
+          window.location.href = clippyBase() + 'index.html#kontakt';
         }
       });
       options.appendChild(btn);
@@ -1153,12 +1159,12 @@
     var links = [];
 
     if (service === 'fdm' || service === 'browse') {
-      links.push({ label: ps.fdm || '🛒 FDM products', href: '/produkte/3d-fdm-druck.html' });
+      links.push({ label: ps.fdm || '🛒 FDM products', href: clippyBase() + 'produkte/3d-fdm-druck.html' });
     }
     if (service === 'laser_cut' || service === 'laser_engrave' || service === 'browse') {
-      links.push({ label: ps.laser || '✂️ Laser products', href: '/produkte/lasercut.html' });
+      links.push({ label: ps.laser || '✂️ Laser products', href: clippyBase() + 'produkte/lasercut.html' });
     }
-    links.push({ label: ps.all || '📦 All products', href: '/produkte.html' });
+    links.push({ label: ps.all || '📦 All products', href: clippyBase() + 'produkte.html' });
 
     var wrap = document.createElement('div');
     wrap.className = 'clippy-msg clippy-question';

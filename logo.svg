@@ -8,7 +8,7 @@
   <line x1="18" y1="18" x2="40" y2="18" stroke="#E8A000" stroke-width="0.5" opacity="0.2"/>
   <!-- FACTUM Schriftzug -->
   <text x="62" y="30" font-family="Inter, -apple-system, sans-serif" font-weight="700" font-size="24" letter-spacing="2" fill="white">
-    FACTUM<tspan fill="#E8A000" font-size="20" dx="3">3D</tspan>
+    FACTUM<tspan fill="#E8A000" dx="3">3D</tspan>
   </text>
   <!-- Gradients -->
   <defs>

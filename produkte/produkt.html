@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Produkt – PitA</title>
+  <meta name="description" content="Produktdetails — PitA Printing in the Alps">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../i18n.js?v=1774052069"></script>
+</head>
+<body class="page-sub">
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><img src="../logo.svg" alt="PitA" class="logo-svg"></a>
+      <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
+        <a href="../index.html#leistungen" data-i18n="nav.leistungen">Leistungen</a>
+        <a href="../materialien.html" data-i18n="nav.materialien">Materialien</a>
+        <div class="nav-dropdown"><a href="../produkte.html" class="nav-dropdown-trigger" data-i18n="nav.produkte">Produkte</a><div class="nav-dropdown-menu"><a href="../produkte/3d-fdm-druck.html" data-i18n="produkte.cat.fdm">🖨️ 3D-FDM-Druck</a><a href="../produkte/lasercut.html" data-i18n="produkte.cat.laser">✂️ Lasercut &amp; Gravur</a></div></div>
+        <a href="../blog.html" data-i18n="nav.blog">Blog</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switcher-compact">
+          <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
+          <div class="lang-dropdown" id="lang-dropdown">
+            <button onclick="setLang('de')" data-lang="de">🇩🇪 DE</button>
+            <button onclick="setLang('en')" data-lang="en">🇬🇧 EN</button>
+            <button onclick="setLang('fr')" data-lang="fr">🇫🇷 FR</button>
+            <button onclick="setLang('es')" data-lang="es">🇪🇸 ES</button>
+            <button onclick="setLang('it')" data-lang="it">🇮🇹 IT</button>
+          </div>
+        </div>
+        <a href="../warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
+        <div class="header-auth" id="header-auth">
+          <button onclick="openAuthModal('login')" class="auth-icon-btn" id="nav-login-btn" title="Anmelden">👤</button>
+          <a href="../profil.html" class="auth-icon-btn auth-icon-active" id="nav-user-btn" style="display:none" title="Mein Konto">👤</a>
+        </div>
+      </div>
+      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+  <div class="sub-page-wrapper">
+
+    <!-- Breadcrumb -->
+    <div class="container" style="padding-top:1.5rem;">
+      <nav class="breadcrumb" id="breadcrumb">
+        <a href="../produkte.html">Produkte</a>
+        <span class="sep">›</span>
+        <a href="3d-fdm-druck.html">3D-FDM-Druck</a>
+        <span class="sep">›</span>
+        <span id="bc-product">...</span>
+      </nav>
+    </div>
+
+    <!-- Product Content -->
+    <section class="section" style="padding-top:1rem;">
+      <div class="container">
+        <div class="produkt-detail" id="produkt-detail">
+
+          <!-- Top: Gallery + Info -->
+          <div class="produkt-top">
+            <!-- Gallery -->
+            <div class="produkt-gallery" id="gallery">
+              <div class="gallery-main" id="gallery-main">
+                <div class="katalog-item-placeholder" style="height:350px;font-size:3rem;">📷</div>
+              </div>
+              <div class="gallery-thumbs" id="gallery-thumbs"></div>
+            </div>
+
+            <!-- Info -->
+            <div class="produkt-info">
+              <span class="produkt-category" id="p-category"></span>
+              <h1 id="p-name" style="margin:0.3rem 0 0.5rem;">Laden…</h1>
+              <p class="produkt-short" id="p-short"></p>
+
+              <!-- Price -->
+              <div class="produkt-price" id="p-price"></div>
+
+              <!-- Staffelpreise -->
+              <div class="produkt-staffel" id="p-staffel"></div>
+
+              <!-- Quantity + Cart -->
+              <div class="produkt-cart-row">
+                <div class="qty-picker">
+                  <button onclick="changeQty(-1)" class="qty-btn">−</button>
+                  <input type="number" id="qty-input" value="1" min="1" max="99">
+                  <button onclick="changeQty(1)" class="qty-btn">+</button>
+                </div>
+                <button class="btn btn-primary btn-lg" id="btn-add-cart" onclick="addProductToCart()">
+                  🛒 In den Warenkorb
+                </button>
+              </div>
+
+              <!-- Stock -->
+              <div class="produkt-stock" id="p-stock">
+                <span class="stock-dot stock-in"></span> Auf Lager — Fertigung in 2–5 Werktagen
+              </div>
+
+              <!-- Color hint -->
+              <p class="produkt-colors" id="p-colors" style="margin-top:0.8rem;font-size:0.9rem;color:var(--text-secondary);"></p>
+            </div>
+          </div>
+
+          <!-- Video -->
+          <div class="produkt-video" id="p-video" style="display:none;">
+            <h2>🎬 Herstellungsvideo</h2>
+            <div class="video-container" id="video-container"></div>
+          </div>
+
+          <!-- Description -->
+          <div class="produkt-desc-block">
+            <h2>📝 Beschreibung</h2>
+            <div id="p-desc"></div>
+          </div>
+
+          <!-- Specs -->
+          <div class="produkt-specs-block">
+            <h2>📋 Spezifikationen</h2>
+            <table class="specs-table" id="p-specs"></table>
+          </div>
+
+          <!-- License -->
+          <div class="produkt-license" id="p-license" style="margin-top:2rem; padding:1rem; background:var(--card-bg,#1a1a2e); border-radius:0.75rem; font-size:0.85rem; color:var(--text-secondary);">
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="mountain-divider">
+    <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,180 L0,120 L80,95 L160,110 L240,70 L320,90 L400,50 L480,75 L540,30 L600,60 L680,40 L720,15 L780,45 L840,25 L900,55 L960,35 L1020,65 L1080,45 L1140,70 L1200,50 L1280,80 L1360,60 L1440,90 L1440,180Z" fill="var(--bg)"/>
+    </svg>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo">Pit<span class="accent">A</span></span>
+      <p><span data-i18n="footer.tagline">Präzision aus den Alpen.</span></p>
+      <div class="footer-links">
+        <a href="../blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="../faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="../impressum.html" data-i18n="footer.impressum">Impressum</a>
+        <a href="../datenschutz.html" data-i18n="footer.datenschutz">Datenschutz</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copy">&copy; 2026 PitA. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js?v=1774052069"></script>
+  <script src="../cart.js"></script>
+  <script src="../auth.js"></script>
+  <script src="produkte-data.js"></script>
+  <script>
+  (function() {
+    const id = new URLSearchParams(location.search).get('id');
+    const p = id && PRODUKTE[id];
+
+    if (!p) {
+      document.getElementById('p-name').textContent = 'Produkt nicht gefunden';
+      document.getElementById('p-short').textContent = 'Dieses Produkt existiert nicht oder wurde entfernt.';
+      return;
+    }
+
+    // Title
+    document.title = p.name + ' – PitA';
+
+    // Breadcrumb
+    document.getElementById('bc-product').textContent = p.name;
+
+    // Basic info
+    document.getElementById('p-category').innerHTML = p.categoryIcon + ' ' + p.category;
+    document.getElementById('p-name').textContent = p.name;
+    document.getElementById('p-short').textContent = p.shortDesc;
+
+    // Price
+    const priceEl = document.getElementById('p-price');
+    priceEl.innerHTML = '<span class="price-big">' + p.priceUnit + ' ' + p.price.toFixed(2) + '</span>';
+
+    // Staffelpreise
+    if (p.staffelpreise && p.staffelpreise.length > 1) {
+      const rows = p.staffelpreise.map(s =>
+        '<tr><td>ab ' + s.ab + ' Stück</td><td><strong>' + p.priceUnit + ' ' + s.preis.toFixed(2) + '</strong></td></tr>'
+      ).join('');
+      document.getElementById('p-staffel').innerHTML =
+        '<details class="staffel-details"><summary>📊 Staffelpreise</summary><table class="staffel-table">' + rows + '</table></details>';
+    }
+
+    // Description
+    document.getElementById('p-desc').innerHTML = p.description;
+
+    // Gallery
+    const mainGal = document.getElementById('gallery-main');
+    const thumbs = document.getElementById('gallery-thumbs');
+    if (p.images && p.images.length > 0) {
+      const isPlaceholder = p.images[0].startsWith('📷');
+      if (isPlaceholder) {
+        mainGal.innerHTML = '<div class="katalog-item-placeholder" style="height:350px;font-size:2rem;display:flex;align-items:center;justify-content:center;">' + p.images[0] + '</div>';
+      } else {
+        mainGal.innerHTML = '<img src="' + p.images[0] + '" alt="' + p.name + '" class="gallery-img" id="gallery-active">';
+        p.images.forEach(function(img, i) {
+          const thumb = document.createElement('img');
+          thumb.src = img;
+          thumb.alt = p.name + ' ' + (i+1);
+          thumb.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
+          thumb.onclick = function() {
+            document.getElementById('gallery-active').src = img;
+            document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+          };
+          thumbs.appendChild(thumb);
+        });
+      }
+    }
+
+    // Video
+    if (p.video) {
+      const videoSection = document.getElementById('p-video');
+      const container = document.getElementById('video-container');
+      videoSection.style.display = 'block';
+      if (p.video.includes('youtube.com') || p.video.includes('youtu.be')) {
+        const vid = p.video.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+        if (vid) {
+          container.innerHTML = '<iframe src="https://www.youtube.com/embed/' + vid[1] + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:0.75rem;"></iframe>';
+        }
+      } else {
+        container.innerHTML = '<video controls style="width:100%;border-radius:0.75rem;"><source src="' + p.video + '" type="video/mp4">Video nicht unterstützt.</video>';
+      }
+    }
+
+    // Specs
+    if (p.specs) {
+      const specLabels = {
+        material:'Material', höhe:'Höhe', breite:'Breite', durchmesser:'Durchmesser',
+        größe:'Größe', druckzeit:'Druckzeit', gewicht:'Gewicht', infill:'Infill',
+        layerHeight:'Schichthöhe', farben:'Verfügbare Farben'
+      };
+      const rows = Object.entries(p.specs).map(function(e) {
+        return '<tr><td>' + (specLabels[e[0]] || e[0]) + '</td><td>' + e[1] + '</td></tr>';
+      }).join('');
+      document.getElementById('p-specs').innerHTML = rows;
+    }
+
+    // Colors
+    if (p.specs && p.specs.farben) {
+      document.getElementById('p-colors').textContent = '🎨 Farben: ' + p.specs.farben;
+    }
+
+    // Stock
+    if (!p.inStock) {
+      const stockEl = document.getElementById('p-stock');
+      stockEl.innerHTML = '<span class="stock-dot stock-out"></span> Aktuell nicht verfügbar';
+    }
+
+    // License
+    if (p.license) {
+      document.getElementById('p-license').innerHTML =
+        '📜 Design-Lizenz: <strong>' + p.license.type + '</strong> — ' +
+        'Original-Designer: ' + p.license.designer +
+        (p.license.url ? ' · <a href="' + p.license.url + '" target="_blank" rel="noopener" style="color:var(--accent);">Originalmodell ansehen ↗</a>' : '');
+    }
+
+    // Cart integration
+    window._productId = id;
+    window._product = p;
+  })();
+
+  function changeQty(delta) {
+    const inp = document.getElementById('qty-input');
+    let v = parseInt(inp.value) || 1;
+    v = Math.max(1, Math.min(99, v + delta));
+    inp.value = v;
+    updateDisplayPrice(v);
+  }
+
+  function updateDisplayPrice(qty) {
+    const p = window._product;
+    if (!p || !p.staffelpreise) return;
+    let price = p.price;
+    for (const s of p.staffelpreise) {
+      if (qty >= s.ab) price = s.preis;
+    }
+    document.getElementById('p-price').innerHTML =
+      '<span class="price-big">' + p.priceUnit + ' ' + price.toFixed(2) + '</span>' +
+      (price !== p.price ? ' <span class="price-discount">statt ' + p.priceUnit + ' ' + p.price.toFixed(2) + '</span>' : '');
+  }
+
+  document.getElementById('qty-input').addEventListener('change', function() {
+    updateDisplayPrice(parseInt(this.value) || 1);
+  });
+
+  function addProductToCart() {
+    const p = window._product;
+    const qty = parseInt(document.getElementById('qty-input').value) || 1;
+    let price = p.price;
+    for (const s of p.staffelpreise || []) {
+      if (qty >= s.ab) price = s.preis;
+    }
+    if (typeof addToCart === 'function') {
+      addToCart(window._productId, p.name, price, qty);
+    }
+    // Visual feedback
+    const btn = document.getElementById('btn-add-cart');
+    btn.textContent = '✅ Hinzugefügt!';
+    btn.style.background = '#2d8a4e';
+    setTimeout(function() {
+      btn.textContent = '🛒 In den Warenkorb';
+      btn.style.background = '';
+    }, 1500);
+  }
+  </script>
+</body>
+</html>

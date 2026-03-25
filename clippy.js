@@ -44,6 +44,13 @@
       stlFor3d: 'STL passt am besten für 3D-Druck. Bei Laser bitte SVG hochladen.',
       svgForLaser: 'SVG passt am besten für Laser. Bei 3D-Druck bitte STL hochladen.',
       foodWarn: 'Hinweis: Lebensmittelkontakt ist bei diesem Verfahren/Material nur eingeschränkt geeignet.',
+      materialAdvice: {
+        decor: 'Für Deko empfehle ich PLA Matte (versteckt Layerlines) oder PLA Silk für metallischen Glanz. Wenn du unsicher bist, PLA Basic ist immer eine gute Wahl!',
+        functional: 'Für funktionale Teile empfehle ich PETG — robust, langlebig und lebensmittelecht. Für extra Steifigkeit: PETG-CF.',
+        industry: 'Für industrielle Anwendungen empfehle ich ABS (hitzebeständig) oder PA6-CF für maximale Belastbarkeit.',
+        outdoor: 'Für Outdoor ist ASA die beste Wahl — UV-stabil und wetterbeständig. PETG geht auch gut.',
+        food: 'Für Lebensmittelkontakt empfehle ich PETG — das ist am besten geeignet. Bitte beachte: 3D-Druck ist nur bedingt lebensmittelecht.'
+      },
       resultTitle: '📊 Deine Schätzung:',
       exactTitle: '📊 Exakte Berechnung:',
       materials: {
@@ -214,6 +221,13 @@
       stlFor3d: 'STL is best for 3D print parts. For laser, please upload SVG.',
       svgForLaser: 'SVG is best for laser jobs. For 3D print, please upload STL.',
       foodWarn: 'Note: food contact is only limited/restricted with this process/material.',
+      materialAdvice: {
+        decor: 'For decor, I recommend PLA Matte (hides layer lines) or PLA Silk for metallic shine. If you are unsure, PLA Basic is always a good choice!',
+        functional: 'For functional parts, I recommend PETG — robust, durable, and food-safe. For extra stiffness: PETG-CF.',
+        industry: 'For industrial applications, I recommend ABS (heat-resistant) or PA6-CF for maximum load capacity.',
+        outdoor: 'For outdoor use, ASA is the best choice — UV-stable and weather-resistant. PETG also works well.',
+        food: 'For food contact, I recommend PETG — it is the most suitable option. Please note: 3D printing is only conditionally food-safe.'
+      },
       resultTitle: '📊 Your estimate:',
       exactTitle: '📊 Exact calculation:',
       materials: {
@@ -383,6 +397,13 @@
       stlFor3d: 'STL est ideal pour impression 3D. Pour laser, envoyez SVG.',
       svgForLaser: 'SVG est ideal pour laser. Pour impression 3D, envoyez STL.',
       foodWarn: 'Note: contact alimentaire limite avec ce procede/materiau.',
+      materialAdvice: {
+        decor: 'Pour la deco, je recommande PLA Matte (cache les lignes de couche) ou PLA Silk pour un brillant metallique. Si vous hesitez, PLA Basic est toujours un bon choix.',
+        functional: 'Pour des pieces fonctionnelles, je recommande PETG — robuste, durable et apte au contact alimentaire. Pour plus de rigidite: PETG-CF.',
+        industry: 'Pour des applications industrielles, je recommande ABS (resistant a la chaleur) ou PA6-CF pour une resistance maximale.',
+        outdoor: 'Pour l exterieur, ASA est le meilleur choix — stable aux UV et resistant aux intemperies. PETG fonctionne aussi tres bien.',
+        food: 'Pour le contact alimentaire, je recommande PETG — c est l option la plus adaptee. Notez que l impression 3D n est que partiellement apte au contact alimentaire.'
+      },
       resultTitle: '📊 Votre estimation:',
       exactTitle: '📊 Calcul exact:',
       materials: {
@@ -543,6 +564,13 @@
       stlFor3d: 'STL es mejor para impresion 3D. Para laser, sube SVG.',
       svgForLaser: 'SVG es mejor para laser. Para impresion 3D, sube STL.',
       foodWarn: 'Nota: contacto alimentario limitado con este proceso/material.',
+      materialAdvice: {
+        decor: 'Para decoracion, recomiendo PLA Matte (oculta lineas de capa) o PLA Silk para brillo metalico. Si no estas seguro, PLA Basic siempre es una buena opcion.',
+        functional: 'Para piezas funcionales, recomiendo PETG — robusto, duradero y apto para contacto alimentario. Para mas rigidez: PETG-CF.',
+        industry: 'Para aplicaciones industriales, recomiendo ABS (resistente al calor) o PA6-CF para carga maxima.',
+        outdoor: 'Para exterior, ASA es la mejor opcion — estable a UV y resistente al clima. PETG tambien va muy bien.',
+        food: 'Para contacto con alimentos, recomiendo PETG — es la opcion mas adecuada. Ten en cuenta: la impresion 3D solo es apta para alimentos de forma limitada.'
+      },
       resultTitle: '📊 Tu estimacion:',
       exactTitle: '📊 Calculo exacto:',
       materials: {
@@ -703,6 +731,13 @@
       stlFor3d: 'STL e migliore per stampa 3D. Per laser, carica SVG.',
       svgForLaser: 'SVG e migliore per laser. Per stampa 3D, carica STL.',
       foodWarn: 'Nota: contatto alimentare limitato con questo processo/materiale.',
+      materialAdvice: {
+        decor: 'Per decorazione, consiglio PLA Matte (nasconde le linee di layer) oppure PLA Silk per una finitura metallica. Se non sei sicuro, PLA Basic e sempre una buona scelta.',
+        functional: 'Per parti funzionali, consiglio PETG — robusto, durevole e adatto al contatto alimentare. Per maggiore rigidita: PETG-CF.',
+        industry: 'Per applicazioni industriali, consiglio ABS (resistente al calore) oppure PA6-CF per carichi massimi.',
+        outdoor: 'Per esterno, ASA e la scelta migliore — stabile ai raggi UV e resistente alle intemperie. Anche PETG va molto bene.',
+        food: 'Per contatto alimentare, consiglio PETG — e l opzione piu adatta. Nota: la stampa 3D e idonea al contatto alimentare solo in modo limitato.'
+      },
       resultTitle: '📊 La tua stima:',
       exactTitle: '📊 Calcolo esatto:',
       materials: {
@@ -847,6 +882,12 @@
   function textSet() {
     var lang = clippyLang();
     return UI[lang] || UI.de;
+  }
+
+  function getMaterialRecommendation(usage, lang) {
+    var tx = UI[lang] || UI.de;
+    var advice = tx.materialAdvice || {};
+    return advice[usage] || '';
   }
 
   function buildSystemPrompt() {
@@ -1624,6 +1665,13 @@
     if (!qObj) {
       finishQuestionsWithInstantPrice();
       return;
+    }
+    if (state.step === 4) {
+      var service = state.answers.service;
+      if (service === 'fdm' || service === 'resin' || service === 'prototype') {
+        var advice = getMaterialRecommendation(state.answers.usage, clippyLang());
+        if (advice) appendMessage('💡 ' + advice, 'bot');
+      }
     }
     appendQuestionCard(qObj);
   }

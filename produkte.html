@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Katalog – PitA | Unser Komplettangebot</title>
   <meta name="description" content="Unser Komplettangebot — von Einzelteilen über Kleinserien bis hin zu individuellen Projekten. Alle Sparten auf einen Blick.">
-  <link rel="canonical" href="https://evilflow666.github.io/printforge/katalog.html">
+  <link rel="canonical" href="https://evilflow666.github.io/printforge/produkte.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Katalog – PitA | Unser Komplettangebot">
   <meta property="og:description" content="Von Einzelteilen bis Kleinserien — alle Sparten auf einen Blick.">
-  <meta property="og:url" content="https://evilflow666.github.io/printforge/katalog.html">
+  <meta property="og:url" content="https://evilflow666.github.io/printforge/produkte.html">
   <meta property="og:locale" content="de_DE">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,7 +26,7 @@
       <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
         <a href="index.html#leistungen" data-i18n="nav.leistungen">Leistungen</a>
         <a href="materialien.html" data-i18n="nav.materialien">Materialien</a>
-        <a href="katalog.html" data-i18n="nav.katalog">Katalog</a>
+        <a href="produkte.html" data-i18n="nav.produkte">Katalog</a>
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
       
       </nav>
@@ -54,8 +54,24 @@
 
   <section class="sub-hero">
     <div class="container">
-      <h1>📦 <span class="accent" data-i18n="katalog.title">Katalog</span></h1>
-      <p><span data-i18n="katalog.sub">Unser Komplettangebot — alle Sparten, eine Werkstatt.</span></p>
+      <h1>📦 <span class="accent" data-i18n="produkte.title">Produkte</span></h1>
+      <p><span data-i18n="produkte.sub">Unser Komplettangebot — alle Sparten, eine Werkstatt.</span></p>
+    </div>
+  </section>
+
+  <!-- SUBCATEGORY NAV -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <nav class="produkte-subnav" aria-label="Produktkategorien">
+        <a href="produkte/3d-fdm-druck.html" class="subnav-pill">
+          <span class="subnav-icon">🖨️</span>
+          <span data-i18n="produkte.cat.fdm">3D-FDM-Druck</span>
+        </a>
+        <a href="produkte/lasercut.html" class="subnav-pill">
+          <span class="subnav-icon">✂️</span>
+          <span data-i18n="produkte.cat.laser">Lasercut & Gravur</span>
+        </a>
+      </nav>
     </div>
   </section>
 
@@ -67,124 +83,124 @@
         <div class="katalog-header">
           <span class="katalog-icon">⚙️</span>
           <div>
-            <h2 data-i18n="kat.func">⚙️ Funktionsteile & Ersatzteile</h2>
-            <p class="katalog-sub"><span data-i18n="kat.func.desc">Kaputt? Gibt's nicht mehr? Wir drucken es neu.</span></p>
+            <h2 data-i18n="prod.func">⚙️ Funktionsteile & Ersatzteile</h2>
+            <p class="katalog-sub"><span data-i18n="prod.func.desc">Kaputt? Gibt's nicht mehr? Wir drucken es neu.</span></p>
           </div>
         </div>
         <div class="katalog-grid">
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.func.item1">Zahnräder & Mechanik</h4>
-            <p data-i18n="kat.func.item1.desc">Verschleißteile, Adapter, Halterungen</p>
+            <h4 data-i18n="prod.func.item1">Zahnräder & Mechanik</h4>
+            <p data-i18n="prod.func.item1.desc">Verschleißteile, Adapter, Halterungen</p>
             <button class="btn-cart" onclick="addToCart('funktionsteile-item1', &quot;Zahnräder &amp; Mechanik&quot;, 5, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.func.item2">Gehäuse & Abdeckungen</h4>
-            <p data-i18n="kat.func.item2.desc">Elektronik-Gehäuse, Schutzabdeckungen</p>
+            <h4 data-i18n="prod.func.item2">Gehäuse & Abdeckungen</h4>
+            <p data-i18n="prod.func.item2.desc">Elektronik-Gehäuse, Schutzabdeckungen</p>
             <button class="btn-cart" onclick="addToCart('funktionsteile-item2', &quot;Gehäuse &amp; Abdeckungen&quot;, 8, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.func.item3">Clips & Verbinder</h4>
-            <p data-i18n="kat.func.item3.desc">Kabelclips, Rohrhalter, Schnappverschlüsse</p>
+            <h4 data-i18n="prod.func.item3">Clips & Verbinder</h4>
+            <p data-i18n="prod.func.item3.desc">Kabelclips, Rohrhalter, Schnappverschlüsse</p>
             <button class="btn-cart" onclick="addToCart('funktionsteile-item3', &quot;Clips &amp; Verbinder&quot;, 2, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
         </div>
-        <div style="text-align:center;margin-top:20px;"><a href="katalog/funktionsteile.html" class="btn btn-primary btn-sm" data-i18n="kat.funktionsteile.viewall">Alles anzeigen →</a></div>
+        <div style="text-align:center;margin-top:20px;"><a href="produkte/funktionsteile.html" class="btn btn-primary btn-sm" data-i18n="prod.funktionsteile.viewall">Alles anzeigen →</a></div>
       </div>
 
       <div class="katalog-sparte" id="deko">
         <div class="katalog-header">
           <span class="katalog-icon">🎨</span>
           <div>
-            <h2 data-i18n="kat.deko">🎨 Deko & Geschenke</h2>
-            <p class="katalog-sub"><span data-i18n="kat.deko.desc">Personalisierte Einzelstücke mit Charakter.</span></p>
+            <h2 data-i18n="prod.deko">🎨 Deko & Geschenke</h2>
+            <p class="katalog-sub"><span data-i18n="prod.deko.desc">Personalisierte Einzelstücke mit Charakter.</span></p>
           </div>
         </div>
         <div class="katalog-grid">
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.deko.item1">Gravierte Holzschilder</h4>
-            <p data-i18n="kat.deko.item1.desc">Namen, Sprüche, Logos auf Echtholz</p>
+            <h4 data-i18n="prod.deko.item1">Gravierte Holzschilder</h4>
+            <p data-i18n="prod.deko.item1.desc">Namen, Sprüche, Logos auf Echtholz</p>
             <button class="btn-cart" onclick="addToCart('deko-item1', &quot;Gravierte Holzschilder&quot;, 12, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.deko.item2">3D-Druck Figuren</h4>
-            <p data-i18n="kat.deko.item2.desc">Miniaturen, Deko-Objekte, Vasen</p>
+            <h4 data-i18n="prod.deko.item2">3D-Druck Figuren</h4>
+            <p data-i18n="prod.deko.item2.desc">Miniaturen, Deko-Objekte, Vasen</p>
             <button class="btn-cart" onclick="addToCart('deko-item2', &quot;3D-Druck Figuren&quot;, 8, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.deko.item3">Personalisierte Geschenke</h4>
-            <p data-i18n="kat.deko.item3.desc">Schlüsselanhänger, Untersetzer, Boxen</p>
+            <h4 data-i18n="prod.deko.item3">Personalisierte Geschenke</h4>
+            <p data-i18n="prod.deko.item3.desc">Schlüsselanhänger, Untersetzer, Boxen</p>
             <button class="btn-cart" onclick="addToCart('deko-item3', &quot;Personalisierte Geschenke&quot;, 6, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
         </div>
-        <div style="text-align:center;margin-top:20px;"><a href="katalog/deko.html" class="btn btn-primary btn-sm" data-i18n="kat.deko.viewall">Alles anzeigen →</a></div>
+        <div style="text-align:center;margin-top:20px;"><a href="produkte/deko.html" class="btn btn-primary btn-sm" data-i18n="prod.deko.viewall">Alles anzeigen →</a></div>
       </div>
 
       <div class="katalog-sparte" id="business">
         <div class="katalog-header">
           <span class="katalog-icon">💼</span>
           <div>
-            <h2 data-i18n="kat.biz">💼 Business & Branding</h2>
-            <p class="katalog-sub"><span data-i18n="kat.biz.desc">Professionelle Lösungen für Firmen und Marken.</span></p>
+            <h2 data-i18n="prod.biz">💼 Business & Branding</h2>
+            <p class="katalog-sub"><span data-i18n="prod.biz.desc">Professionelle Lösungen für Firmen und Marken.</span></p>
           </div>
         </div>
         <div class="katalog-grid">
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.biz.item1">Firmenschilder</h4>
-            <p data-i18n="kat.biz.item1.desc">Acryl, Holz oder Metall — lasergeschnitten & graviert</p>
+            <h4 data-i18n="prod.biz.item1">Firmenschilder</h4>
+            <p data-i18n="prod.biz.item1.desc">Acryl, Holz oder Metall — lasergeschnitten & graviert</p>
             <button class="btn-cart" onclick="addToCart('business-item1', &quot;Firmenschilder&quot;, 25, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.biz.item2">Produkt-Prototypen</h4>
-            <p data-i18n="kat.biz.item2.desc">Vom Konzept zum anfassbaren Modell</p>
+            <h4 data-i18n="prod.biz.item2">Produkt-Prototypen</h4>
+            <p data-i18n="prod.biz.item2.desc">Vom Konzept zum anfassbaren Modell</p>
             <button class="btn-cart" onclick="addToCart('business-item2', &quot;Produkt-Prototypen&quot;, 15, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.biz.item3">Kleinserien</h4>
-            <p data-i18n="kat.biz.item3.desc">Verpackungen, Displays, Werbemittel</p>
+            <h4 data-i18n="prod.biz.item3">Kleinserien</h4>
+            <p data-i18n="prod.biz.item3.desc">Verpackungen, Displays, Werbemittel</p>
             <button class="btn-cart" onclick="addToCart('business-item3', &quot;Kleinserien&quot;, 30, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
         </div>
-        <div style="text-align:center;margin-top:20px;"><a href="katalog/business.html" class="btn btn-primary btn-sm" data-i18n="kat.business.viewall">Alles anzeigen →</a></div>
+        <div style="text-align:center;margin-top:20px;"><a href="produkte/business.html" class="btn btn-primary btn-sm" data-i18n="prod.business.viewall">Alles anzeigen →</a></div>
       </div>
 
       <div class="katalog-sparte" id="maker">
         <div class="katalog-header">
           <span class="katalog-icon">🔧</span>
           <div>
-            <h2 data-i18n="kat.maker">🔧 Maker & DIY</h2>
-            <p class="katalog-sub"><span data-i18n="kat.maker.desc">Für Bastler, Tüftler und Kreative.</span></p>
+            <h2 data-i18n="prod.maker">🔧 Maker & DIY</h2>
+            <p class="katalog-sub"><span data-i18n="prod.maker.desc">Für Bastler, Tüftler und Kreative.</span></p>
           </div>
         </div>
         <div class="katalog-grid">
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.maker.item1">Smart Home Halterungen</h4>
-            <p data-i18n="kat.maker.item1.desc">Sensor-Mounts, Kamera-Halter, Kabelmanagement</p>
+            <h4 data-i18n="prod.maker.item1">Smart Home Halterungen</h4>
+            <p data-i18n="prod.maker.item1.desc">Sensor-Mounts, Kamera-Halter, Kabelmanagement</p>
             <button class="btn-cart" onclick="addToCart('maker-item1', &quot;Smart Home Halterungen&quot;, 3, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.maker.item2">Werkzeug-Organizer</h4>
-            <p data-i18n="kat.maker.item2.desc">Tool-Holder, Bit-Halter, Sortierboxen</p>
+            <h4 data-i18n="prod.maker.item2">Werkzeug-Organizer</h4>
+            <p data-i18n="prod.maker.item2.desc">Tool-Holder, Bit-Halter, Sortierboxen</p>
             <button class="btn-cart" onclick="addToCart('maker-item2', &quot;Werkzeug-Organizer&quot;, 5, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
           <div class="katalog-item">
             <div class="katalog-item-placeholder">📷</div>
-            <h4 data-i18n="kat.maker.item3">Modellbau</h4>
-            <p data-i18n="kat.maker.item3.desc">Architekturmodelle, Gelände, Fahrzeugteile</p>
+            <h4 data-i18n="prod.maker.item3">Modellbau</h4>
+            <p data-i18n="prod.maker.item3.desc">Architekturmodelle, Gelände, Fahrzeugteile</p>
             <button class="btn-cart" onclick="addToCart('maker-item3', &quot;Modellbau&quot;, 8, 1)" data-i18n="cart.add">In den Warenkorb</button>
           </div>
         </div>
-        <div style="text-align:center;margin-top:20px;"><a href="katalog/maker.html" class="btn btn-primary btn-sm" data-i18n="kat.maker.viewall">Alles anzeigen →</a></div>
+        <div style="text-align:center;margin-top:20px;"><a href="produkte/maker.html" class="btn btn-primary btn-sm" data-i18n="prod.maker.viewall">Alles anzeigen →</a></div>
       </div>
 
     </div>
@@ -192,8 +208,8 @@
 
   <section class="section section-alt" style="text-align:center;">
     <div class="container">
-      <p style="color:var(--text-secondary); margin-bottom:8px;" data-i18n="kat.custom.title">Du hast etwas anderes im Kopf?</p>
-      <p style="color:var(--text-secondary); margin-bottom:20px; font-size:0.9rem;" data-i18n="kat.custom.desc">Wir fertigen auch individuelle Projekte — schreib uns einfach.</p>
+      <p style="color:var(--text-secondary); margin-bottom:8px;" data-i18n="prod.custom.title">Du hast etwas anderes im Kopf?</p>
+      <p style="color:var(--text-secondary); margin-bottom:20px; font-size:0.9rem;" data-i18n="prod.custom.desc">Wir fertigen auch individuelle Projekte — schreib uns einfach.</p>
     </div>
   </section>
 

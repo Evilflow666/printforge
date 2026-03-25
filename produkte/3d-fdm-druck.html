@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3D-FDM-Druck – PitA | Produkte</title>
+  <meta name="description" content="3D-FDM-Druck Produkte — Home & Deko, Büro, Küche, Tech-Zubehör und Garten.">
+  <link rel="canonical" href="https://evilflow666.github.io/printforge/produkte/3d-fdm-druck.html">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../i18n.js?v=1774052069"></script>
+</head>
+<body class="page-sub">
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><img src="../logo.svg" alt="PitA" class="logo-svg"></a>
+      <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
+        <a href="../index.html#leistungen" data-i18n="nav.leistungen">Leistungen</a>
+        <a href="../materialien.html" data-i18n="nav.materialien">Materialien</a>
+        <a href="../produkte.html" data-i18n="nav.produkte">Produkte</a>
+        <a href="../blog.html" data-i18n="nav.blog">Blog</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switcher-compact">
+          <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
+          <div class="lang-dropdown" id="lang-dropdown">
+            <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪 DE</button>
+            <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧 EN</button>
+            <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷 FR</button>
+            <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸 ES</button>
+            <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹 IT</button>
+          </div>
+        </div>
+        <a href="../warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
+        <div class="header-auth" id="header-auth">
+          <button onclick="openAuthModal('login')" class="auth-icon-btn" id="nav-login-btn" title="Anmelden / Registrieren">👤</button>
+          <a href="../profil.html" class="auth-icon-btn auth-icon-active" id="nav-user-btn" style="display:none" title="Mein Konto">👤</a>
+        </div>
+      </div>
+      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+  <div class="sub-page-wrapper">
+
+  <!-- BREADCRUMB -->
+  <div class="container" style="padding-top:1.5rem;">
+    <nav class="breadcrumb">
+      <a href="../produkte.html" data-i18n="nav.produkte">Produkte</a>
+      <span class="sep">›</span>
+      <span data-i18n="produkte.cat.fdm">3D-FDM-Druck</span>
+    </nav>
+  </div>
+
+  <section class="sub-hero" style="padding-top:1rem;">
+    <div class="container">
+      <h1>🖨️ <span class="accent" data-i18n="produkte.cat.fdm">3D-FDM-Druck</span></h1>
+      <p data-i18n="produkte.fdm.sub">Fertige Produkte aus unserer Printfarm — direkt bestellen.</p>
+    </div>
+  </section>
+
+  <!-- ===== HOME & DEKO ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="katalog-sparte" id="home-deko">
+        <div class="katalog-header">
+          <span class="katalog-icon">🏠</span>
+          <div>
+            <h2>🏠 Home & Deko</h2>
+            <p class="katalog-sub">Vasen, Pflanzgefäße, Teelichthalter, Lampenschirme</p>
+          </div>
+        </div>
+        <div class="katalog-grid">
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Spiral Vase Rose</h4>
+            <p>Elegante Spiralvase im Vase-Mode — Blickfang für jedes Regal</p>
+            <span class="price-tag">ab €12,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-home-1','Spiral Vase Rose',12.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Melting Candle Teelichthalter</h4>
+            <p>Schmelzende Kerze als Deko — hält echte Teelichter</p>
+            <span class="price-tag">ab €8,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-home-2','Melting Candle Teelichthalter',8.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Moon Planter</h4>
+            <p>Mond-Pflanzgefäß für Sukkulenten — mit Drainage</p>
+            <span class="price-tag">ab €9,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-home-3','Moon Planter',9.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Spiral Lampenschirm</h4>
+            <p>Vase-Mode Lampenschirm mit Lichtspiel-Effekt</p>
+            <span class="price-tag">ab €14,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-home-4','Spiral Lampenschirm',14.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== BÜRO & ORGANISATION ===== -->
+      <div class="katalog-sparte" id="buero">
+        <div class="katalog-header">
+          <span class="katalog-icon">🗂️</span>
+          <div>
+            <h2>🗂️ Büro & Organisation</h2>
+            <p class="katalog-sub">Kabelmanagement, Kopfhörer-Ständer, Stiftehalter</p>
+          </div>
+        </div>
+        <div class="katalog-grid">
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>KLAMMA Kabelclip</h4>
+            <p>Verriegelbarer Kabelclip — hält Kabel sauber am Schreibtisch</p>
+            <span class="price-tag">ab €2,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-buero-1','KLAMMA Kabelclip',2.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Kopfhörer-Ständer</h4>
+            <p>Minimalistischer Stand für Over-Ear Kopfhörer</p>
+            <span class="price-tag">ab €11,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-buero-2','Kopfhörer-Ständer',11.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Spiral Stiftebecher</h4>
+            <p>Spiral-Vase als Stiftehalter — funktional & dekorativ</p>
+            <span class="price-tag">ab €6,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-buero-3','Spiral Stiftebecher',6.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Klemm-Kopfhörerhalter</h4>
+            <p>Parametrisch, klemmt an jede Tischkante</p>
+            <span class="price-tag">ab €7,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-buero-4','Klemm-Kopfhörerhalter',7.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== KÜCHE & HAUSHALT ===== -->
+      <div class="katalog-sparte" id="kueche">
+        <div class="katalog-header">
+          <span class="katalog-icon">🍳</span>
+          <div>
+            <h2>🍳 Küche & Haushalt</h2>
+            <p class="katalog-sub">Tütenclips, Gewürzregale, praktische Küchenhelfer</p>
+          </div>
+        </div>
+        <div class="katalog-grid">
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Zippy Tütenclip</h4>
+            <p>Print-in-Place Beutelclip — druckt fertig zusammengebaut</p>
+            <span class="price-tag">ab €1,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-kueche-1','Zippy Tütenclip',1.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Cam-Lock Tütenclip</h4>
+            <p>Nocken-Verschluss für sichere Beutelverschlüsse</p>
+            <span class="price-tag">ab €2,50</span>
+            <button class="btn-cart" onclick="addToCart('fdm-kueche-2','Cam-Lock Tütenclip',2.50,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Tütenclip mit Schraubkappe</h4>
+            <p>Clip + Ausgießer in einem — für Mehl, Zucker, Müsli</p>
+            <span class="price-tag">ab €3,50</span>
+            <button class="btn-cart" onclick="addToCart('fdm-kueche-3','Tütenclip Schraubkappe',3.50,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Gewürzregal</h4>
+            <p>Modulares Gewürzregal — stapelbar, wandmontierbar</p>
+            <span class="price-tag">ab €8,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-kueche-4','Gewürzregal',8.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== TECH-ZUBEHÖR ===== -->
+      <div class="katalog-sparte" id="tech">
+        <div class="katalog-header">
+          <span class="katalog-icon">📱</span>
+          <div>
+            <h2>📱 Tech-Zubehör</h2>
+            <p class="katalog-sub">Handyständer, Tablet-Halter, AirTag-Halterungen</p>
+          </div>
+        </div>
+        <div class="katalog-grid">
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Credit Card Phone Stand</h4>
+            <p>Ultradünn, passt ins Portemonnaie — Print-in-Place</p>
+            <span class="price-tag">ab €3,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-tech-1','Credit Card Phone Stand',3.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Schlüsselanhänger Phone Stand</h4>
+            <p>Handyständer am Schlüsselbund — immer dabei</p>
+            <span class="price-tag">ab €3,50</span>
+            <button class="btn-cart" onclick="addToCart('fdm-tech-2','Keychain Phone Stand',3.50,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Universal Tablet-Ständer</h4>
+            <p>Für alle Handys & Tablets — stufenlos verstellbar</p>
+            <span class="price-tag">ab €6,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-tech-3','Universal Tablet-Ständer',6.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>AirTag Clip-Halter</h4>
+            <p>Clip-on Halterung für Apple AirTag — Rucksack, Schlüssel</p>
+            <span class="price-tag">ab €3,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-tech-4','AirTag Clip-Halter',3.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== GARTEN & OUTDOOR ===== -->
+      <div class="katalog-sparte" id="garten">
+        <div class="katalog-header">
+          <span class="katalog-icon">🌿</span>
+          <div>
+            <h2>🌿 Garten & Outdoor</h2>
+            <p class="katalog-sub">Pflanzgefäße, Vogelhäuser, Gartenzubehör</p>
+          </div>
+        </div>
+        <div class="katalog-grid">
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Terracotta Planter</h4>
+            <p>Terracotta-Look im Vase-Mode — für drinnen & draußen</p>
+            <span class="price-tag">ab €7,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-garten-1','Terracotta Planter',7.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Vogelfutter-Halter</h4>
+            <p>Halter für Meisenknödel — wetterfest druckbar</p>
+            <span class="price-tag">ab €5,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-garten-2','Vogelfutter-Halter',5.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Flaschen-Vogelfutterstelle</h4>
+            <p>PET-Flasche wird zum Futterhaus — Upcycling-Design</p>
+            <span class="price-tag">ab €4,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-garten-3','Flaschen-Vogelfutterstelle',4.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+          <div class="katalog-item">
+            <div class="katalog-item-placeholder">📷</div>
+            <h4>Vogel-Futterhaus</h4>
+            <p>Klassisches Vogelhaus — dekorativ & funktional</p>
+            <span class="price-tag">ab €9,90</span>
+            <button class="btn-cart" onclick="addToCart('fdm-garten-4','Vogel-Futterhaus',9.90,1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  </div><!-- /sub-page-wrapper -->
+
+  <div class="mountain-divider">
+    <svg viewBox="0 0 1440 180" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,180 L0,120 L80,95 L160,110 L240,70 L320,90 L400,50 L480,75 L540,30 L600,60 L680,40 L720,15 L780,45 L840,25 L900,55 L960,35 L1020,65 L1080,45 L1140,70 L1200,50 L1280,80 L1360,60 L1440,90 L1440,180Z" fill="var(--bg)"/>
+    </svg>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo">Pit<span class="accent">A</span></span>
+      <p><span data-i18n="footer.tagline">Präzision aus den Alpen.</span></p>
+      <div class="footer-links">
+        <a href="../blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="../faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="../impressum.html"><span data-i18n="footer.impressum">Impressum</span></a>
+        <a href="../datenschutz.html"><span data-i18n="footer.datenschutz">Datenschutz</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copy">&copy; 2026 PitA. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js?v=1774052069"></script>
+  <script src="../cart.js"></script>
+  <script src="../auth.js"></script>
+</body>
+</html>

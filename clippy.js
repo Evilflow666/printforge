@@ -1671,7 +1671,15 @@
       var service = state.answers.service;
       if (service === 'fdm' || service === 'resin' || service === 'prototype') {
         var advice = getMaterialRecommendation(state.answers.usage, clippyLang());
-        if (advice) appendMessage('💡 ' + advice, 'bot');
+        if (advice) {
+          appendMessage('💡 ' + advice, 'bot');
+          scrollBottom();
+          setTimeout(function() {
+            appendQuestionCard(qObj);
+            scrollBottom();
+          }, 1800);
+          return;
+        }
       }
     }
     appendQuestionCard(qObj);

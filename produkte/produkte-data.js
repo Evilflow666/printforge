@@ -607,5 +607,354 @@ const PRODUKTE = {
     ],
     colorOptions: [{ name: 'Braun', hex: '#5D4037' }, { name: 'Grün', hex: '#2E7D32' }, { name: 'Natur', hex: '#DEB887' }],
     inStock: true
+  },
+
+  // ============================================
+  // ===== LASERCUT & GRAVUR PRODUKTE ==========
+  // ============================================
+
+  // ===== HOME & WANDDEKO =====
+  'laser-deko-1': {
+    name: '3D Multilayer Wandbild',
+    category: 'Home & Wanddeko',
+    categoryIcon: '🏠',
+    shortDesc: 'Mehrschichtiges Holz-Wandbild — Berge, Natur oder individuell',
+    description: '<p>Ein beeindruckendes Wandbild aus 4-5 Schichten lasergeschnittenem Holz. Die Tiefenwirkung entsteht durch Abstandshalter zwischen den Schichten.</p><p>Verfügbar in verschiedenen Motiven: Bergpanorama, Wald, Stadtsilhouette oder nach deinem Wunschmotiv. Ein echtes Statement-Piece für jede Wand.</p>',
+    price: 29.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm (4-5 Schichten)', größe: '~400 × 250 mm', schnittzeit: '~45 Min', gewicht: '~200 g', farben: 'Natur, gebeizt, lackiert' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/wall-art/' },
+    staffelpreise: [{ ab: 1, preis: 29.90 }, { ab: 3, preis: 24.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel gebeizt', hex: '#5D4037' }, { name: 'Weiß lackiert', hex: '#FFFFFF' }],
+    inStock: true
+  },
+
+  'laser-deko-2': {
+    name: 'Mandala Wanddeko',
+    category: 'Home & Wanddeko',
+    categoryIcon: '🏠',
+    shortDesc: 'Filigrane Mandala-Kunst aus Holz — rund, detailliert, beeindruckend',
+    description: '<p>Filigranes Mandala, präzise lasergeschnitten aus Holz. Die feinen Muster erzeugen bei Gegenlicht wunderschöne Schattenspiele an der Wand.</p><p>Erhältlich in verschiedenen Durchmessern und Designs. Jedes Stück ist ein Kunstwerk.</p>',
+    price: 19.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', durchmesser: '~300 mm', schnittzeit: '~30 Min', gewicht: '~80 g', farben: 'Natur, Weiß, Gold' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/mandala/' },
+    staffelpreise: [{ ab: 1, preis: 19.90 }, { ab: 3, preis: 15.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Gold', hex: '#C9A84C' }],
+    inStock: true
+  },
+
+  'laser-deko-3': {
+    name: 'Geometrische Wanduhr',
+    category: 'Home & Wanddeko',
+    categoryIcon: '🏠',
+    shortDesc: 'Holzuhr mit Hexagon-/Wabenstruktur — inkl. Uhrwerk',
+    description: '<p>Eine einzigartige Wanduhr mit geometrischem Muster aus lasergeschnittenem Holz. Das Uhrwerk (Quarz, lautlos) ist inklusive.</p><p>Die offene Hexagon-Struktur gibt der Uhr einen modernen, luftigen Look. Passt in jedes Wohnzimmer oder Büro.</p>',
+    price: 24.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm + Quarz-Uhrwerk', durchmesser: '~300 mm', schnittzeit: '~25 Min', gewicht: '~150 g (mit Uhrwerk)', extras: 'Uhrwerk + Zeiger inklusive' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/clock/' },
+    staffelpreise: [{ ab: 1, preis: 24.90 }, { ab: 3, preis: 21.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel', hex: '#5D4037' }, { name: 'Schwarz', hex: '#1a1a1a' }],
+    inStock: true
+  },
+
+  'laser-deko-4': {
+    name: 'Namensschild / Türschild',
+    category: 'Home & Wanddeko',
+    categoryIcon: '🏠',
+    shortDesc: 'Personalisierbar mit Namen, Sprüchen oder Logos',
+    description: '<p>Ein individuelles Namensschild aus Holz oder Acryl — perfekt für die Haustür, Kinderzimmer oder als Firmenschild.</p><p>Wir gravieren deinen Wunschtext, Namen oder Logo. Verschiedene Schriftarten und Größen möglich.</p>',
+    price: 12.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm oder Acryl 3mm', größe: '~200 × 80 mm (anpassbar)', schnittzeit: '~15 Min', gewicht: '~40 g', personalisierung: 'Text, Name, Logo' },
+    license: { type: 'Eigendesign', designer: 'FACTUM3D', url: '' },
+    staffelpreise: [{ ab: 1, preis: 12.90 }, { ab: 5, preis: 9.90 }, { ab: 10, preis: 7.90 }],
+    colorOptions: [{ name: 'Holz Natur', hex: '#DEB887' }, { name: 'Holz Dunkel', hex: '#5D4037' }, { name: 'Acryl Weiß', hex: '#FFFFFF' }, { name: 'Acryl Schwarz', hex: '#1a1a1a' }, { name: 'Acryl Transparent', hex: '#E8E8E8' }],
+    inStock: true
+  },
+
+  // ===== UNTERSETZER & TISCH =====
+  'laser-tisch-1': {
+    name: 'Untersetzer-Set mit Box',
+    category: 'Untersetzer & Tischzubehör',
+    categoryIcon: '🍺',
+    shortDesc: '4-6 Stück mit dekorativer Aufbewahrungsbox — verschiedene Muster',
+    description: '<p>Ein elegantes Set aus 4-6 Untersetzern mit passender Holzbox. Verschiedene Muster verfügbar: geometrisch, floral, Mandala oder personalisiert.</p><p>Die Box schützt die Untersetzer und sieht dabei selbst dekorativ aus. Perfektes Geschenk!</p>',
+    price: 14.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', größe: '~100 × 100 mm (pro Untersetzer)', schnittzeit: '~20 Min (Set)', gewicht: '~120 g (Set)', umfang: '4-6 Untersetzer + Box' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/coaster-designs/' },
+    staffelpreise: [{ ab: 1, preis: 14.90 }, { ab: 3, preis: 12.90 }, { ab: 5, preis: 10.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel gebeizt', hex: '#5D4037' }],
+    inStock: true
+  },
+
+  'laser-tisch-2': {
+    name: 'Mandala Untersetzer',
+    category: 'Untersetzer & Tischzubehör',
+    categoryIcon: '🍺',
+    shortDesc: 'Filigrane Mandala-Muster — einzeln oder als Set',
+    description: '<p>Einzelner Untersetzer mit filigranem Mandala-Muster. Lasergeschnitten aus Holz — schützt den Tisch und sieht dabei fantastisch aus.</p>',
+    price: 3.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', durchmesser: '~100 mm', schnittzeit: '~5 Min', gewicht: '~15 g' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/coasters/' },
+    staffelpreise: [{ ab: 1, preis: 3.90 }, { ab: 5, preis: 2.90 }, { ab: 10, preis: 1.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel', hex: '#5D4037' }],
+    inStock: true
+  },
+
+  'laser-tisch-3': {
+    name: 'Serviettenhalter',
+    category: 'Untersetzer & Tischzubehör',
+    categoryIcon: '🍺',
+    shortDesc: 'Dekorativer Halter aus Holz — verschiedene Motive',
+    description: '<p>Ein dekorativer Serviettenhalter aus lasergeschnittenem Holz. Steckverbindung, kein Kleber nötig. Verschiedene Motive: floral, geometrisch oder schlicht.</p>',
+    price: 8.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', größe: '~140 × 80 × 40 mm', schnittzeit: '~10 Min', gewicht: '~35 g' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/napkin-holder/' },
+    staffelpreise: [{ ab: 1, preis: 8.90 }, { ab: 3, preis: 7.50 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel', hex: '#5D4037' }, { name: 'Weiß', hex: '#FFFFFF' }],
+    inStock: true
+  },
+
+  'laser-tisch-4': {
+    name: 'Weinflaschenhalter',
+    category: 'Untersetzer & Tischzubehör',
+    categoryIcon: '🍺',
+    shortDesc: 'Puzzle-Steckdesign — Hingucker und Geschenkidee',
+    description: '<p>Ein Weinflaschenhalter der die Flasche scheinbar schwebend hält. Puzzle-Steckdesign aus Holz — baut sich in Sekunden zusammen, kein Kleber nötig.</p><p>Perfekt als Geschenk für Weinliebhaber oder als Hingucker auf dem Esstisch.</p>',
+    price: 11.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 6mm', größe: '~300 × 120 × 120 mm', schnittzeit: '~15 Min', gewicht: '~80 g', tragkraft: 'Standard Weinflasche (0.75l)' },
+    license: { type: 'Frei kommerziell', designer: 'VectorsFile Community', url: 'https://vectorsfile.com/laser-cut/wine-holder/' },
+    staffelpreise: [{ ab: 1, preis: 11.90 }, { ab: 3, preis: 9.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel gebeizt', hex: '#5D4037' }],
+    inStock: true
+  },
+
+  // ===== BÜRO =====
+  'laser-buero-1': {
+    name: 'Schreibtisch-Organizer',
+    category: 'Büro & Organisation',
+    categoryIcon: '🗂️',
+    shortDesc: 'Steckverbindung — Fächer für Stifte, Handy, Karten, Notizen',
+    description: '<p>Ein vielseitiger Schreibtisch-Organizer aus Holz. Mehrere Fächer für Stifte, Smartphone, Visitenkarten und Notizzettel. Alles steckt zusammen — kein Kleber.</p>',
+    price: 16.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', größe: '~250 × 150 × 120 mm', schnittzeit: '~25 Min', gewicht: '~120 g', montage: 'Steckverbindung, kein Kleber' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/organizer/' },
+    staffelpreise: [{ ab: 1, preis: 16.90 }, { ab: 3, preis: 13.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel', hex: '#5D4037' }, { name: 'Weiß', hex: '#FFFFFF' }],
+    inStock: true
+  },
+
+  'laser-buero-2': {
+    name: 'Visitenkarten-Halter',
+    category: 'Büro & Organisation',
+    categoryIcon: '🗂️',
+    shortDesc: 'Eleganter Holzständer für Visitenkarten — personalisierbar',
+    description: '<p>Ein schlichter, eleganter Halter für Visitenkarten. Optional mit Firmenlogo oder Name gravierbar.</p>',
+    price: 9.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm oder Acryl', größe: '~100 × 60 × 30 mm', schnittzeit: '~8 Min', gewicht: '~25 g' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/business-card-holder/' },
+    staffelpreise: [{ ab: 1, preis: 9.90 }, { ab: 5, preis: 7.90 }, { ab: 10, preis: 5.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel', hex: '#5D4037' }, { name: 'Acryl klar', hex: '#E8E8E8' }],
+    inStock: true
+  },
+
+  'laser-buero-3': {
+    name: 'Stiftehalter',
+    category: 'Büro & Organisation',
+    categoryIcon: '🗂️',
+    shortDesc: 'Geometrisches oder Tier-Motiv — Steckdesign aus Holz',
+    description: '<p>Ein dekorativer Stiftehalter in geometrischem Design oder als Tier-Motiv (Eule, Katze, Hirsch). Steckverbindung aus lasergeschnittenem Holz.</p>',
+    price: 8.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', größe: '~80 × 80 × 100 mm', schnittzeit: '~12 Min', gewicht: '~40 g' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/pen-holder/' },
+    staffelpreise: [{ ab: 1, preis: 8.90 }, { ab: 5, preis: 6.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel', hex: '#5D4037' }],
+    inStock: true
+  },
+
+  'laser-buero-4': {
+    name: 'Briefständer / Dokumentenhalter',
+    category: 'Büro & Organisation',
+    categoryIcon: '🗂️',
+    shortDesc: 'Vertikaler Holzständer für Post und Dokumente',
+    description: '<p>Hält Briefe, Dokumente und Zeitschriften aufrecht. Dekoratives Muster an den Seiten. Steckverbindung aus Holz.</p>',
+    price: 12.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', größe: '~200 × 80 × 150 mm', schnittzeit: '~15 Min', gewicht: '~60 g' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/organizer/' },
+    staffelpreise: [{ ab: 1, preis: 12.90 }, { ab: 3, preis: 10.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel', hex: '#5D4037' }, { name: 'Weiß', hex: '#FFFFFF' }],
+    inStock: true
+  },
+
+  // ===== GESCHENKE =====
+  'laser-geschenk-1': {
+    name: 'Schmuckbox',
+    category: 'Geschenke & Personalisierung',
+    categoryIcon: '🎁',
+    shortDesc: 'Holzbox mit Steckverbindung — kein Kleber nötig, gravierbar',
+    description: '<p>Eine elegante Schmuckbox aus lasergeschnittenem Holz. Steckverbindung — baut sich ohne Kleber zusammen. Optional mit Gravur personalisierbar.</p>',
+    price: 14.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', größe: '~120 × 80 × 50 mm', schnittzeit: '~15 Min', gewicht: '~45 g', personalisierung: 'Gravur optional' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/box/' },
+    staffelpreise: [{ ab: 1, preis: 14.90 }, { ab: 3, preis: 12.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel', hex: '#5D4037' }],
+    inStock: true
+  },
+
+  'laser-geschenk-2': {
+    name: 'Schlüsselanhänger',
+    category: 'Geschenke & Personalisierung',
+    categoryIcon: '🎁',
+    shortDesc: 'Holz oder Acryl — mit Name, Initiale oder Logo graviert',
+    description: '<p>Ein personalisierter Schlüsselanhänger aus Holz oder Acryl. Gravur mit Name, Initiale, Datum oder Logo. Kleines Geschenk, große Wirkung.</p>',
+    price: 4.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm oder Acryl', größe: '~50 × 30 mm', schnittzeit: '~3 Min', gewicht: '~5 g', personalisierung: 'Gravur inklusive' },
+    license: { type: 'Eigendesign', designer: 'FACTUM3D', url: '' },
+    staffelpreise: [{ ab: 1, preis: 4.90 }, { ab: 5, preis: 3.50 }, { ab: 10, preis: 2.50 }, { ab: 25, preis: 1.90 }],
+    colorOptions: [{ name: 'Holz Natur', hex: '#DEB887' }, { name: 'Acryl Weiß', hex: '#FFFFFF' }, { name: 'Acryl Schwarz', hex: '#1a1a1a' }, { name: 'Acryl Transparent', hex: '#E8E8E8' }],
+    inStock: true
+  },
+
+  'laser-geschenk-3': {
+    name: '3D Grußkarte',
+    category: 'Geschenke & Personalisierung',
+    categoryIcon: '🎁',
+    shortDesc: 'Pop-up Karte aus Holz oder Karton — handlich & beeindruckend',
+    description: '<p>Eine dreidimensionale Grußkarte die sich beim Öffnen auffaltet. Lasergeschnitten aus dünnem Holz oder Karton. Verfügbar für Geburtstag, Weihnachten, Valentinstag.</p>',
+    price: 6.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 1mm oder Karton', größe: '~150 × 100 mm (zugeklappt)', schnittzeit: '~8 Min', gewicht: '~15 g' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/card/' },
+    staffelpreise: [{ ab: 1, preis: 6.90 }, { ab: 5, preis: 4.90 }, { ab: 10, preis: 3.90 }],
+    colorOptions: [{ name: 'Holz Natur', hex: '#DEB887' }, { name: 'Weiß Karton', hex: '#FFFFFF' }, { name: 'Kraft Karton', hex: '#C4A882' }],
+    inStock: true
+  },
+
+  'laser-geschenk-4': {
+    name: 'Fotorahmen mit Gravur',
+    category: 'Geschenke & Personalisierung',
+    categoryIcon: '🎁',
+    shortDesc: 'Holzrahmen mit persönlicher Gravur — Datum, Name, Spruch',
+    description: '<p>Ein Fotorahmen aus lasergeschnittenem Holz mit personalisierter Gravur. Perfekt für besondere Anlässe: Hochzeit, Geburt, Jubiläum.</p>',
+    price: 11.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', größe: '~180 × 130 mm (für 10×15 Foto)', schnittzeit: '~12 Min', gewicht: '~50 g', personalisierung: 'Gravur inklusive' },
+    license: { type: 'Eigendesign', designer: 'FACTUM3D', url: '' },
+    staffelpreise: [{ ab: 1, preis: 11.90 }, { ab: 3, preis: 9.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel', hex: '#5D4037' }, { name: 'Weiß', hex: '#FFFFFF' }],
+    inStock: true
+  },
+
+  // ===== SAISONAL =====
+  'laser-saison-1': {
+    name: 'Weihnachts-Ornamente',
+    category: 'Saisonal & Events',
+    categoryIcon: '🎄',
+    shortDesc: 'Schneeflocken, Bäume, Sterne — zum Aufhängen am Baum',
+    description: '<p>Filigrane Weihnachtsornamente aus lasergeschnittenem Holz. Schneeflocken, Tannenbäume, Sterne und mehr. Zum Aufhängen am Weihnachtsbaum oder als Fensterdeko.</p>',
+    price: 2.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', größe: '~60-80 mm', schnittzeit: '~3 Min/Stück', gewicht: '~5 g' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/christmas/' },
+    staffelpreise: [{ ab: 1, preis: 2.90 }, { ab: 5, preis: 2.20 }, { ab: 10, preis: 1.50 }, { ab: 25, preis: 0.99 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Weiß', hex: '#FFFFFF' }, { name: 'Rot', hex: '#D32F2F' }, { name: 'Gold', hex: '#C9A84C' }],
+    inStock: true
+  },
+
+  'laser-saison-2': {
+    name: 'Oster-Deko Set',
+    category: 'Saisonal & Events',
+    categoryIcon: '🎄',
+    shortDesc: 'Hasen, Eierhalter, Frühlingsdeko aus Holz',
+    description: '<p>Ein frühlingshaftes Deko-Set aus Holz: Osterhasen, Eierhalter und Blumen-Motive. Steckdesign — einfach zusammenbauen und aufstellen.</p>',
+    price: 7.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', größe: 'Verschiedene Teile, ~100 mm hoch', schnittzeit: '~15 Min (Set)', gewicht: '~40 g' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/easter/' },
+    staffelpreise: [{ ab: 1, preis: 7.90 }, { ab: 3, preis: 5.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Bunt bemalt', hex: '#4CAF50' }],
+    inStock: true
+  },
+
+  'laser-saison-3': {
+    name: 'Hochzeits-Deko',
+    category: 'Saisonal & Events',
+    categoryIcon: '🎄',
+    shortDesc: 'Cake Topper, Tischkarten, Ringbox — personalisierbar',
+    description: '<p>Personalisierte Hochzeitsdeko aus Holz: Cake Topper mit Namen, Tischkarten mit Gravur, oder eine elegante Ringbox. Alles lasergeschnitten und individuell gestaltet.</p>',
+    price: 9.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm / Acryl', größe: 'Je nach Produkt', schnittzeit: '~10-20 Min', personalisierung: 'Namen, Datum, Spruch' },
+    license: { type: 'Eigendesign', designer: 'FACTUM3D', url: '' },
+    staffelpreise: [{ ab: 1, preis: 9.90 }, { ab: 5, preis: 7.90 }],
+    colorOptions: [{ name: 'Holz Natur', hex: '#DEB887' }, { name: 'Acryl Gold', hex: '#C9A84C' }, { name: 'Acryl Silber', hex: '#C0C0C0' }, { name: 'Acryl Roségold', hex: '#B76E79' }],
+    inStock: true
+  },
+
+  'laser-saison-4': {
+    name: 'Teelichthalter',
+    category: 'Saisonal & Events',
+    categoryIcon: '🎄',
+    shortDesc: 'Stern- oder Herzmuster — erzeugt wunderschöne Lichtspiele',
+    description: '<p>Ein Teelichthalter aus lasergeschnittenem Holz mit filigranem Stern- oder Herzmuster. Wenn das Teelicht brennt, projiziert es wunderschöne Muster an die umliegenden Wände.</p>',
+    price: 8.90,
+    priceUnit: '€',
+    images: ['📷 Produktfoto kommt'],
+    video: null,
+    specs: { material: 'Sperrholz 3mm', größe: '~80 × 80 × 80 mm', schnittzeit: '~12 Min', gewicht: '~30 g', extras: 'Teelicht nicht inklusive' },
+    license: { type: 'Frei kommerziell', designer: '3axis.co Community', url: 'https://3axis.co/laser-cut/candle-holder/' },
+    staffelpreise: [{ ab: 1, preis: 8.90 }, { ab: 3, preis: 6.90 }, { ab: 10, preis: 4.90 }],
+    colorOptions: [{ name: 'Natur', hex: '#DEB887' }, { name: 'Dunkel', hex: '#5D4037' }, { name: 'Weiß', hex: '#FFFFFF' }],
+    inStock: true
   }
 };

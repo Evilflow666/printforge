@@ -2721,3 +2721,72 @@ body.page-sub {
 .breadcrumb .sep {
   margin: 0 0.4rem;
 }
+
+/* === Nav Dropdown (Produkte) === */
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.nav-dropdown-trigger {
+  cursor: pointer;
+}
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  background: var(--card-bg, #1a1a2e);
+  border: 1px solid var(--border, #333);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  padding: 0.5rem 0;
+  z-index: 1000;
+  flex-direction: column;
+}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+  display: flex;
+}
+.nav-dropdown-menu a {
+  padding: 0.6rem 1.2rem;
+  color: var(--text, #fff);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+.nav-dropdown-menu a:hover {
+  background: var(--accent, #fa6831);
+  color: #fff;
+}
+.nav-dropdown-menu a:first-child {
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+.nav-dropdown-menu a:last-child {
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+
+/* Mobile: show dropdown items inline */
+@media (max-width: 768px) {
+  .nav-dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    display: none;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown.open .nav-dropdown-menu {
+    display: flex;
+  }
+  .nav-dropdown-menu a {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary, #aaa);
+  }
+}

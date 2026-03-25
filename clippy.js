@@ -1045,11 +1045,29 @@
     };
   }
 
-  function qtyDiscount(qtyId) {
-    if (qtyId === '2_5') return 0.95;
-    if (qtyId === '6_20') return 0.9;
-    if (qtyId === '20_plus') return 0.85;
-    return 1;
+  // H2D bed: 325×320mm = 1040 cm²
+  // Smaller parts = more per bed = cheaper per piece (less machine time)
+  var BED_AREA_CM2 = 1040;
+  var PARTS_PER_BED = {
+    stamp: 60,    // ~3×4cm = 12cm² → ~60 per bed
+    phone: 6,     // ~15×7cm = 105cm² → ~6 per bed
+    shoebox: 1,   // ~34×21cm = 714cm² → 1 per bed
+    bigger: 1     // won't fit more than 1
+  };
+
+  function qtyDiscount(qtyId, sizeId) {
+    var baseDiscount = 1;
+    if (qtyId === '2_5') baseDiscount = 0.95;
+    if (qtyId === '6_20') baseDiscount = 0.90;
+    if (qtyId === '20_plus') baseDiscount = 0.82;
+
+    // Batch bonus: smaller parts get extra discount because we fit more per bed
+    var perBed = PARTS_PER_BED[sizeId] || 1;
+    if (perBed >= 10) baseDiscount *= 0.88;       // tiny parts: 12% extra off (batch printing)
+    else if (perBed >= 4) baseDiscount *= 0.93;    // small parts: 7% extra off
+    else if (perBed >= 2) baseDiscount *= 0.97;    // medium: 3% extra off
+
+    return Math.max(0.65, baseDiscount); // floor at 35% discount
   }
 
   function usageToFdm(usage) {
@@ -1086,7 +1104,7 @@
     var usage = answers.usage;
     var qty = answers.qty_finish;
     var size = answers.size;
-    var discount = qtyDiscount(qty);
+    var discount = qtyDiscount(qty, size);
     var out = {
       processKey: service,
       materialKey: 'pla',

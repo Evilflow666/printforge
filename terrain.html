@@ -1371,12 +1371,12 @@ async function startGenerate() {
     lon: state.lon,
     width: state.regionSizeDeg,
     height: state.regionSizeDeg,
-    z_scale: 10.0,
+    z_scale: 1.5,
     base_height_mm: 5,
     tilewidth_mm: state.selectedSize.mm,
     target_height_mm: state.selectedSize.height,
     add_labels: false,
-    printres: 0.4,
+    printres: 0.3,
     format: 'stl'
   };
 
@@ -1596,25 +1596,29 @@ function loadSTLFromUrl(url, scene, camera, renderer) {
       for (let i = 0; i < positions.length; i += 3) {
         const t = (positions[i + 2] - minY) / range; // 0=Tal, 1=Gipfel
         let r, g, b;
-        if (t < 0.01) {
-          // Basis/Boden — dunkelgrau
+        if (t < 0.005) {
+          // Basis/Boden (flat bottom) — dunkelgrau
           r = 0.2; g = 0.2; b = 0.22;
-        } else if (t < 0.3) {
-          // Tiefland — Grün
-          const s = t / 0.3;
-          r = 0.15 + s * 0.15; g = 0.45 + s * 0.1; b = 0.12 + s * 0.08;
-        } else if (t < 0.6) {
-          // Mittelgebirge — Braun/Ocker
-          const s = (t - 0.3) / 0.3;
-          r = 0.3 + s * 0.35; g = 0.55 - s * 0.15; b = 0.2 - s * 0.05;
-        } else if (t < 0.85) {
-          // Hochgebirge — Grau/Fels
-          const s = (t - 0.6) / 0.25;
-          r = 0.65 - s * 0.1; g = 0.4 + s * 0.15; b = 0.15 + s * 0.25;
+        } else if (t < 0.25) {
+          // Tiefland — satter Grün
+          const s = t / 0.25;
+          r = 0.18 + s * 0.12; g = 0.4 + s * 0.15; b = 0.15 + s * 0.05;
+        } else if (t < 0.5) {
+          // Hügelland — Gelbgrün → Ocker
+          const s = (t - 0.25) / 0.25;
+          r = 0.3 + s * 0.3; g = 0.55 - s * 0.05; b = 0.2 - s * 0.05;
+        } else if (t < 0.75) {
+          // Gebirge — Braun → Grau
+          const s = (t - 0.5) / 0.25;
+          r = 0.6 - s * 0.1; g = 0.5 - s * 0.1; b = 0.15 + s * 0.2;
+        } else if (t < 0.9) {
+          // Hochgebirge — Fels
+          const s = (t - 0.75) / 0.15;
+          r = 0.5 + s * 0.1; g = 0.4 + s * 0.15; b = 0.35 + s * 0.15;
         } else {
-          // Gipfel — Weiß/Schnee
-          const s = (t - 0.85) / 0.15;
-          r = 0.55 + s * 0.4; g = 0.55 + s * 0.4; b = 0.4 + s * 0.55;
+          // Gipfel — Schnee
+          const s = (t - 0.9) / 0.1;
+          r = 0.6 + s * 0.35; g = 0.55 + s * 0.4; b = 0.5 + s * 0.45;
         }
         colors[i] = r;
         colors[i + 1] = g;

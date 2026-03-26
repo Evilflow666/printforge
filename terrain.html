@@ -290,6 +290,60 @@
       box-shadow: 0 0 0 1px var(--accent), 0 0 24px var(--accent-glow), var(--shadow);
     }
 
+    /* Holzauswahl */
+    .wood-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .wood-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .wood-card:hover {
+      border-color: rgba(0,212,255,0.3);
+      background: rgba(0,212,255,0.04);
+    }
+    .wood-card.active {
+      border-color: var(--accent);
+      background: rgba(0,212,255,0.08);
+      box-shadow: 0 0 0 1px var(--accent), 0 0 20px var(--accent-glow);
+    }
+    .wood-sample {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .wood-linde {
+      background: linear-gradient(135deg, #e8d5a3 0%, #f0e2b8 30%, #d4c090 60%, #e0cc9c 100%);
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.15);
+    }
+    .wood-eiche {
+      background: linear-gradient(135deg, #6b4226 0%, #8b5e3c 30%, #5a3520 60%, #7a4f30 100%);
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.25);
+    }
+    .wood-name {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #fff;
+    }
+    .wood-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.15rem;
+    }
+    @media (max-width: 500px) {
+      .wood-options { grid-template-columns: 1fr; }
+    }
+
     .badge-popular {
       position: absolute;
       top: -12px;
@@ -783,10 +837,37 @@
     </div>
   </div>
 
-  <!-- STEP 2: REGION -->
+  <!-- STEP 2: HOLZART -->
   <div class="section-card" id="step-2">
     <div class="section-header">
       <div class="section-num">2</div>
+      <div>
+        <div class="section-title">Holzsockel wählen</div>
+        <div class="section-sub">Dein Terrain-Modell wird auf einem massiven Holzsockel mit Laser-Gravur montiert</div>
+      </div>
+    </div>
+    <div class="wood-options">
+      <div class="wood-card active" data-wood="linde" onclick="selectWood('linde')">
+        <div class="wood-sample wood-linde"></div>
+        <div class="wood-info">
+          <div class="wood-name">🪵 Linde</div>
+          <div class="wood-desc">Hell · Feine Maserung · Elegant</div>
+        </div>
+      </div>
+      <div class="wood-card" data-wood="eiche" onclick="selectWood('eiche')">
+        <div class="wood-sample wood-eiche"></div>
+        <div class="wood-info">
+          <div class="wood-name">🪵 Eiche</div>
+          <div class="wood-desc">Dunkel · Markante Maserung · Rustikal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: REGION -->
+  <div class="section-card" id="step-3">
+    <div class="section-header">
+      <div class="section-num">3</div>
       <div>
         <div class="section-title">Region wählen</div>
         <div class="section-sub">Zeichne ein Quadrat über deiner Wunschregion</div>
@@ -813,10 +894,10 @@
     </div>
   </div>
 
-  <!-- STEP 3: GENERATE -->
-  <div class="section-card" id="step-3">
+  <!-- STEP 4: GENERATE -->
+  <div class="section-card" id="step-4">
     <div class="section-header">
-      <div class="section-num">3</div>
+      <div class="section-num">4</div>
       <div>
         <div class="section-title">Modell erstellen</div>
         <div class="section-sub">Echtzeit-Berechnung aus Satelliten-Höhendaten</div>
@@ -839,10 +920,10 @@
     </div>
   </div>
 
-  <!-- STEP 4: PREVIEW -->
-  <div class="section-card" id="step-4" style="display:none;">
+  <!-- STEP 5: PREVIEW -->
+  <div class="section-card" id="step-5" style="display:none;">
     <div class="section-header">
-      <div class="section-num">4</div>
+      <div class="section-num">5</div>
       <div>
         <div class="section-title">Vorschau &amp; Warenkorb</div>
         <div class="section-sub">Drehe und zoome dein Terrain-Modell</div>
@@ -871,7 +952,7 @@
       </div>
       <div class="order-row">
         <span class="key">Sockel</span>
-        <span class="val">Holzsockel mit Laser-Gravur</span>
+        <span class="val" id="sum-wood">—</span>
       </div>
       <div class="order-row total">
         <span class="key">Gesamt</span>
@@ -944,6 +1025,7 @@ const SIZES = {
 // ─────────────────────────────────────────────
 const state = {
   selectedSize: SIZES.M,
+  selectedWood: 'linde',
   bounds: null,
   lat: null,
   lon: null,
@@ -989,7 +1071,21 @@ function selectSize(card) {
 }
 
 // ─────────────────────────────────────────────
-// STEP 2: MAP
+// STEP 2: WOOD SELECTION
+// ─────────────────────────────────────────────
+function selectWood(type) {
+  state.selectedWood = type;
+  document.querySelectorAll('.wood-card').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.wood-card[data-wood="${type}"]`).classList.add('active');
+  updateGenerateSummary();
+}
+
+function getWoodLabel() {
+  return state.selectedWood === 'linde' ? 'Linde (Hell)' : 'Eiche (Dunkel)';
+}
+
+// ─────────────────────────────────────────────
+// STEP 3: MAP
 // ─────────────────────────────────────────────
 let map, drawnLayer, drawControl;
 
@@ -1122,7 +1218,7 @@ function applyBounds(bounds) {
 
   // Scroll to step 3
   setTimeout(() => {
-    document.getElementById('step-3').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('step-4').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 300);
 }
 
@@ -1329,7 +1425,7 @@ async function pollStatus(jobId) {
 // ─────────────────────────────────────────────
 function showPreview(jobId) {
   updateStepNav(4);
-  const step4 = document.getElementById('step-4');
+  const step4 = document.getElementById('step-5');
   step4.style.display = 'block';
 
   // Fill summary
@@ -1339,6 +1435,7 @@ function showPreview(jobId) {
   document.getElementById('sum-region').textContent = regionText;
   document.getElementById('sum-size').textContent =
     `${state.selectedSize.label} — ${state.selectedSize.dims}, ${state.selectedSize.height}mm Höhe`;
+  document.getElementById('sum-wood').textContent = getWoodLabel() + ' · Laser-Gravur';
   document.getElementById('sum-price').textContent = state.selectedSize.priceStr;
 
   setTimeout(() => {
@@ -1626,7 +1723,10 @@ function addTerrainToCart() {
     id: 'terrain-' + state.jobId,
     name: 'Terrain-Modell ' + state.selectedSize.label,
     size: state.selectedSize.label,
+    dims: state.selectedSize.dims,
     region: regionText,
+    wood: state.selectedWood,
+    woodLabel: getWoodLabel(),
     price: state.selectedSize.price,
     quantity: 1,
     jobId: state.jobId,

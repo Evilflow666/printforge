@@ -806,17 +806,24 @@
             <div class="panel-section-title">⚙️ Parameter</div>
             <div class="slider-group">
               <div class="slider-label">
-                <span>Höhenübertreibung</span>
-                <span class="val" id="valZ">2×</span>
+                <span>🏔️ Modellhöhe</span>
+                <span class="val" id="valHeight">50 mm</span>
               </div>
-              <input type="range" id="sliderZ" min="1" max="5" value="2" step="0.5" />
+              <input type="range" id="sliderHeight" min="20" max="100" value="50" step="5" />
+              <small style="color:rgba(255,255,255,0.4);font-size:0.7rem;">Höhe vom tiefsten Tal zum höchsten Gipfel</small>
             </div>
             <div class="slider-group">
               <div class="slider-label">
                 <span>Basishöhe</span>
-                <span class="val" id="valBase">2 mm</span>
+                <span class="val" id="valBase">5 mm</span>
               </div>
-              <input type="range" id="sliderBase" min="1" max="5" value="2" step="0.5" />
+              <input type="range" id="sliderBase" min="2" max="10" value="5" step="1" />
+            </div>
+            <div class="slider-group" style="margin-top:0.5rem;">
+              <label style="display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.8);font-size:0.85rem;cursor:pointer;">
+                <input type="checkbox" id="chkLabels" checked style="accent-color:#00d4ff;width:16px;height:16px;" />
+                📐 Höhenangaben eingravieren
+              </label>
             </div>
           </div>
 
@@ -948,8 +955,9 @@ const state = {
   regionName: null,
   width_cm: 15,
   height_cm: 15,
-  z_scale: 2,
-  base_mm: 2,
+  target_height_mm: 50,
+  base_mm: 5,
+  add_labels: true,
   format: 'stl',
   jobId: null,
   polling: null,
@@ -1213,8 +1221,9 @@ function initSlider(id, displayId, unit, decimals = 0, callback) {
 
 initSlider('sliderW', 'valW', 'cm', 0, v => { state.width_cm = v; });
 initSlider('sliderH', 'valH', 'cm', 0, v => { state.height_cm = v; });
-initSlider('sliderZ', 'valZ', '×', 1, v => { state.z_scale = v; });
-initSlider('sliderBase', 'valBase', 'mm', 1, v => { state.base_mm = v; });
+initSlider('sliderHeight', 'valHeight', 'mm', 0, v => { state.target_height_mm = v; });
+initSlider('sliderBase', 'valBase', 'mm', 0, v => { state.base_mm = v; });
+document.getElementById('chkLabels').addEventListener('change', e => { state.add_labels = e.target.checked; });
 
 // ────────────────────────────────────────────────────────────
 // FORMAT TOGGLE
@@ -1351,12 +1360,14 @@ btnGenerate.addEventListener('click', async () => {
   const payload = {
     lat: state.lat,
     lon: state.lon,
-    width: state.width_cm / 100,   // degrees or normalized — backend decides
+    width: state.width_cm / 100,
     height: state.height_cm / 100,
-    z_scale: state.z_scale,
+    z_scale: 10.0,  // high initial z_scale, post_process will normalize to target_height
     base_height_mm: state.base_mm,
     tilewidth_mm: tilewidth_mm,
-    printres: 0.5,
+    target_height_mm: state.target_height_mm,
+    add_labels: state.add_labels,
+    printres: 0.4,
     format: state.format,
   };
 

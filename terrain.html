@@ -344,6 +344,47 @@
       .wood-options { grid-template-columns: 1fr; }
     }
 
+    /* Großer Draw-Button */
+    .btn-draw-region {
+      display: block;
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(0,212,255,0.04));
+      border: 2px dashed rgba(0,212,255,0.4);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-draw-region:hover {
+      background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,212,255,0.08));
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(0,212,255,0.15);
+    }
+    .btn-draw-region.drawing {
+      background: rgba(0,212,255,0.15);
+      border-color: var(--accent);
+      border-style: solid;
+      animation: drawPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes drawPulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(0,212,255,0.2); }
+      50% { box-shadow: 0 0 25px rgba(0,212,255,0.4); }
+    }
+    .btn-draw-region.done {
+      background: rgba(0,200,100,0.1);
+      border-color: rgba(0,200,100,0.5);
+      border-style: solid;
+      color: rgba(0,200,100,0.9);
+    }
+
+    /* Verstecke die kleine Leaflet.draw Toolbar */
+    .leaflet-draw-toolbar { display: none !important; }
+
     .badge-popular {
       position: absolute;
       top: -12px;
@@ -882,12 +923,12 @@
         Suchen
       </button>
     </div>
+    <button class="btn-draw-region" id="btn-draw" onclick="startDrawing()">
+      ✏️ Region auf der Karte markieren
+    </button>
     <div id="map"></div>
-    <div class="map-hint">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>
-      </svg>
-      Nutze das Rechteck-Werkzeug in der Karte, um deine Region auszuwählen. Die Auswahl wird automatisch quadratisch.
+    <div class="map-hint" id="map-hint">
+      💡 Klicke oben auf den Button und ziehe dann ein Rechteck auf der Karte. Die Auswahl wird automatisch quadratisch.
     </div>
     <div class="coords-display" id="coords-display">
       📍 Koordinaten werden angezeigt…
@@ -1085,6 +1126,19 @@ function getWoodLabel() {
 }
 
 // ─────────────────────────────────────────────
+// DRAW BUTTON
+// ─────────────────────────────────────────────
+function startDrawing() {
+  const btn = document.getElementById('btn-draw');
+  btn.classList.add('drawing');
+  btn.classList.remove('done');
+  btn.innerHTML = '✏️ Ziehe jetzt ein Rechteck auf der Karte...';
+  document.getElementById('map-hint').textContent = '👆 Klicke und ziehe auf der Karte um deine Region zu markieren';
+  // Trigger Leaflet.draw rectangle tool
+  new L.Draw.Rectangle(map, drawControl.options.draw.rectangle).enable();
+}
+
+// ─────────────────────────────────────────────
 // STEP 3: MAP
 // ─────────────────────────────────────────────
 let map, drawnLayer, drawControl;
@@ -1096,10 +1150,9 @@ function initMap() {
     zoomControl: true
   });
 
-  // Dark tile layer (CartoDB Dark Matter)
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© OpenStreetMap, © CartoDB',
-    subdomains: 'abcd',
+  // Standard OpenStreetMap (hell, gute Lesbarkeit)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     maxZoom: 19
   }).addTo(map);
 
@@ -1145,6 +1198,12 @@ function initMap() {
     drawnLayer.addLayer(layer);
 
     applyBounds(squareBounds);
+
+    // Update draw button to "done" state
+    const btn = document.getElementById('btn-draw');
+    btn.classList.remove('drawing');
+    btn.classList.add('done');
+    btn.innerHTML = '✅ Region ausgewählt — klicke erneut zum Ändern';
   });
 
   map.on(L.Draw.Event.EDITED, function(e) {

@@ -1594,42 +1594,41 @@ function loadSTLFromUrl(url, scene, camera, renderer) {
       mesh.castShadow = true;
       mesh.receiveShadow = true;
 
-      // Rotate so Z-up (STL) becomes Y-up (Three.js) — model lies flat
+      // Rotate so Z-up (STL) becomes Y-up (Three.js)
       mesh.rotation.x = -Math.PI / 2;
+      mesh.updateMatrixWorld(true);
 
-      // Wrap in a group so we can position cleanly
-      const group = new THREE.Group();
-      group.add(mesh);
-      scene.add(group);
+      // Get bounding box after rotation
+      const box = new THREE.Box3().setFromObject(mesh);
 
-      // Compute bounding box after rotation
-      group.updateMatrixWorld(true);
-      const rotatedBox = new THREE.Box3().setFromObject(group);
+      // Position mesh so it's centered on X/Z at origin, bottom at Y=0
+      const cx = (box.max.x + box.min.x) / 2;
+      const cy = box.min.y;
+      const cz = (box.max.z + box.min.z) / 2;
+      mesh.position.set(-cx, -cy, -cz);
 
-      // Center X/Z, but sit on ground (Y min = 0)
-      const cx = (rotatedBox.max.x + rotatedBox.min.x) / 2;
-      const cy = rotatedBox.min.y;  // bottom of model
-      const cz = (rotatedBox.max.z + rotatedBox.min.z) / 2;
-      group.position.set(-cx, -cy, -cz);
+      // Drehteller: Pivot-Group dreht sich um Y-Achse am exakten Zentrum
+      const turntable = new THREE.Group();
+      turntable.add(mesh);
+      scene.add(turntable);
+      scene.userData.model = turntable;
 
-      scene.userData.model = group;
-
-      // Recalculate bounding box after repositioning
-      group.updateMatrixWorld(true);
-      const finalBox = new THREE.Box3().setFromObject(group);
+      // Finale Größe berechnen
+      turntable.updateMatrixWorld(true);
+      const finalBox = new THREE.Box3().setFromObject(turntable);
       const size = new THREE.Vector3();
       finalBox.getSize(size);
+      const modelCenterY = size.y / 2;
 
-      // Camera: isometric-style view from front-right, looking at center of model
-      const modelCenterY = size.y / 2;  // vertical center of the terrain
+      // Kamera: fixierte isometrische Position
       const maxDim = Math.max(size.x, size.y, size.z);
       const fov = camera.fov * (Math.PI / 180);
       let dist = Math.abs(maxDim / 2 / Math.tan(fov / 2));
       dist *= 1.5;
 
-      // Isometric angle: 35° elevation, slight right offset
-      const angle = 35 * Math.PI / 180;
-      camera.position.set(dist * 0.6, dist * Math.sin(angle) + modelCenterY, dist * 0.7);
+      // 35° Blickwinkel von oben, Kamera schaut auf Modellmitte
+      const elevAngle = 35 * Math.PI / 180;
+      camera.position.set(0, dist * Math.sin(elevAngle) + modelCenterY, dist * Math.cos(elevAngle));
       camera.lookAt(0, modelCenterY, 0);
       state._modelCenterY = modelCenterY;
       camera.near = dist / 100;

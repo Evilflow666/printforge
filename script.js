@@ -62,6 +62,19 @@ if (mobileToggle) mobileToggle.addEventListener('click', () => {
   mobileToggle.textContent = isOpen ? '✕' : '☰';
 });
 
+// Mobile dropdowns: use tap to expand/collapse instead of hover behavior
+document.querySelectorAll('.nav-dropdown > .nav-dropdown-trigger').forEach(trigger => {
+  trigger.addEventListener('click', (e) => {
+    if (window.innerWidth > 768) return;
+    e.preventDefault();
+    const parent = trigger.closest('.nav-dropdown');
+    if (!parent) return;
+    const shouldOpen = !parent.classList.contains('open');
+    document.querySelectorAll('.nav-dropdown.open').forEach(dd => dd.classList.remove('open'));
+    if (shouldOpen) parent.classList.add('open');
+  });
+});
+
 // Karten-Links funktionieren nativ als <a href="...">
 
 // Header scroll effect
@@ -111,7 +124,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       // Close mobile nav
       if (window.innerWidth <= 768) {
-        nav.style.display = 'none';
+        nav.classList.remove('mobile-open');
+        mobileToggle?.setAttribute('aria-expanded', 'false');
+        if (mobileToggle) mobileToggle.textContent = '☰';
+        document.querySelectorAll('.nav-dropdown.open').forEach(dd => dd.classList.remove('open'));
       }
     }
   });

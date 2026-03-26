@@ -127,10 +127,21 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   margin-left: auto;
   flex-shrink: 0;
   flex-wrap: nowrap;
+}
+.header-actions > *,
+.header-actions .cart-icon,
+.header-actions .lang-switcher-compact,
+.header-actions .header-auth,
+.header-actions + .mobile-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
 }
 .cart-icon {
   position: relative;
@@ -160,6 +171,8 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 .mobile-toggle {
   display: none; background: none; border: none;
   color: var(--text-primary); font-size: 1.5rem; cursor: pointer;
+  min-width: 36px; min-height: 36px;
+  align-items: center; justify-content: center;
 }
 
 /* ===== HERO ===== */

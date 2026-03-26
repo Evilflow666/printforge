@@ -9,9 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H"
+        crossorigin="anonymous">
   <!-- Leaflet Draw CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
+        integrity="sha384-NZLkVuBRMEeB4VeZz27WwTRvlhec30biQ8Xx7zG7JJnkvEKRg5qi6BNbEXo9ydwv"
+        crossorigin="anonymous">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,41 +58,30 @@
       z-index: 0;
     }
 
-    /* === NAV === */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: rgba(5,11,20,0.85);
-      border-bottom: 1px solid var(--glass-border);
-      padding: 0 24px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* === HEADER / NAV === */
+    .header { position: sticky; top: 0; z-index: 1000; background: rgba(11,15,25,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0.6rem 0; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .logo { text-decoration: none; font-size: 1.3rem; font-weight: 700; color: #E8E6E1; }
+    .logo .accent, .logo-svg { color: #C67D4A; height: 28px; }
+    .nav { display: flex; gap: 1.5rem; align-items: center; }
+    .nav a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .nav a:hover { color: #fff; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-trigger { cursor: pointer; }
+    .nav-dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: rgba(22,29,48,0.95); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.5rem 0; min-width: 200px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+    .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu a { display: block; padding: 0.5rem 1rem; font-size: 0.85rem; }
+    .nav-dropdown-menu a:hover { background: rgba(198,125,74,0.1); }
+    .mobile-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.3rem; cursor: pointer; }
+    .header-actions { display: flex; align-items: center; gap: 1rem; }
+    .cart-badge { display: none; align-items: center; justify-content: center; }
+    @media (max-width: 768px) {
+      .nav { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(11,15,25,0.98); padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .nav.nav-open { display: flex; }
+      .mobile-toggle { display: block; }
+      .nav-dropdown-menu { position: static; box-shadow: none; border: none; background: rgba(255,255,255,0.03); border-radius: 8px; margin-top: 0.3rem; }
+      .nav-dropdown:hover .nav-dropdown-menu { display: block; }
     }
-
-    .nav-logo {
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: 0.05em;
-      color: #fff;
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--accent); }
-
-    .nav-back {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.875rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s;
-    }
-    .nav-back:hover { color: var(--accent); }
 
     /* === MAIN WRAPPER === */
     .main {
@@ -796,16 +789,23 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo">FACTUM<span>3D</span></a>
-  <a href="/" class="nav-back">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M19 12H5M12 5l-7 7 7 7"/>
-    </svg>
-    Zurück zur Hauptseite
-  </a>
-</nav>
+<!-- HEADER / NAV -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo"><img src="logo.svg" alt="FACTUM3D" class="logo-svg" onerror="this.outerHTML='FACTUM<span class=accent>3D</span>'"></a>
+    <nav class="nav" id="mainNav">
+      <div class="nav-dropdown"><a href="produkte.html" class="nav-dropdown-trigger">Produkte</a><div class="nav-dropdown-menu"><a href="produkte/3d-fdm-druck.html">🖨️ 3D-FDM-Druck</a><a href="produkte/lasercut.html">✂️ Lasercut & Gravur</a></div></div>
+      <div class="nav-dropdown"><a href="#leistungen" class="nav-dropdown-trigger">Leistungen</a><div class="nav-dropdown-menu"><a href="leistungen/3d-druck.html">🖨️ 3D-Druck</a><a href="leistungen/lasercutting.html">✂️ Lasercutting</a><a href="leistungen/lasergravur.html">🔍 Lasergravur</a><a href="leistungen/resin-druck.html">💧 Resin-Druck</a><a href="leistungen/prototyping.html">🔧 Prototyping</a><a href="materialien.html">🧪 Materialien</a></div></div>
+      <a href="terrain.html" style="color:#C67D4A;font-weight:700;">🏔️ Terrain</a>
+      <a href="ueber-uns.html">Über uns</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+    <div class="header-actions">
+      <a href="warenkorb.html" class="cart-icon" style="position:relative;font-size:1.2rem;text-decoration:none;">🛒<span id="cart-badge" class="cart-badge" style="position:absolute;top:-6px;right:-10px;background:#C67D4A;color:#000;font-size:0.6rem;font-weight:700;border-radius:50%;width:16px;height:16px;display:none;align-items:center;justify-content:center;"></span></a>
+    </div>
+    <button class="mobile-toggle" onclick="document.getElementById('mainNav').classList.toggle('nav-open')">☰</button>
+  </div>
+</header>
 
 <!-- HERO -->
 <section class="hero">
@@ -826,16 +826,21 @@
   <div class="step-line" id="sline-1"></div>
   <div class="step-dot" id="sdot-2">
     <div class="circle">2</div>
-    <span class="label">Region</span>
+    <span class="label">Holz</span>
   </div>
   <div class="step-line" id="sline-2"></div>
   <div class="step-dot" id="sdot-3">
     <div class="circle">3</div>
-    <span class="label">Generieren</span>
+    <span class="label">Region</span>
   </div>
   <div class="step-line" id="sline-3"></div>
   <div class="step-dot" id="sdot-4">
     <div class="circle">4</div>
+    <span class="label">Generieren</span>
+  </div>
+  <div class="step-line" id="sline-4"></div>
+  <div class="step-dot" id="sdot-5">
+    <div class="circle">5</div>
     <span class="label">Vorschau</span>
   </div>
 </div>
@@ -1041,11 +1046,17 @@
 <!-- === SCRIPTS === -->
 
 <!-- Leaflet -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH"
+        crossorigin="anonymous"></script>
 <!-- Leaflet Draw -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"
+        integrity="sha384-JP5UPxIO2Tm2o79Fb0tGYMa44jkWar53aBoCbd8ah0+LcCDoohTIYr+zIXyfGIJN"
+        crossorigin="anonymous"></script>
 <!-- Three.js r128 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+        integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu"
+        crossorigin="anonymous"></script>
 
 <script>
 'use strict';
@@ -1086,14 +1097,16 @@ const state = {
 // STEP NAV
 // ─────────────────────────────────────────────
 function updateStepNav(activeStep) {
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= 5; i++) {
     const dot = document.getElementById('sdot-' + i);
+    if (!dot) continue;
     dot.className = 'step-dot';
     if (i < activeStep) dot.classList.add('done');
     else if (i === activeStep) dot.classList.add('active');
   }
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 4; i++) {
     const line = document.getElementById('sline-' + i);
+    if (!line) continue;
     line.className = 'step-line' + (i < activeStep ? ' done' : '');
   }
 }
@@ -1364,7 +1377,7 @@ async function startGenerate() {
   progressWrap.classList.add('visible');
   setProgress(5, 'Sende Anfrage…', 'Verbinde mit Server…');
 
-  updateStepNav(3);
+  updateStepNav(4);
 
   const payload = {
     lat: state.lat,
@@ -1483,7 +1496,7 @@ async function pollStatus(jobId) {
 // STEP 4: STL PREVIEW
 // ─────────────────────────────────────────────
 function showPreview(jobId) {
-  updateStepNav(4);
+  updateStepNav(5);
   const step4 = document.getElementById('step-5');
   step4.style.display = 'block';
 
@@ -1844,6 +1857,13 @@ document.addEventListener('DOMContentLoaded', function() {
   initMap();
   updateStepNav(1);
   updateGenerateBtn();
+  // Cart badge init
+  const cart = JSON.parse(localStorage.getItem('pita-cart') || '[]');
+  const badge = document.getElementById('cart-badge');
+  if (badge && cart.length > 0) {
+    badge.textContent = cart.length;
+    badge.style.display = 'flex';
+  }
 });
 </script>
 

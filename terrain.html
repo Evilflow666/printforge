@@ -1535,24 +1535,28 @@ function loadSTLFromUrl(url, scene, camera, renderer) {
       mesh.castShadow = true;
       mesh.receiveShadow = true;
 
-      // Center model
-      const box = geometry.boundingBox;
-      const cx = (box.max.x + box.min.x) / 2;
-      const cy = (box.max.y + box.min.y) / 2;
-      const cz = (box.max.z + box.min.z) / 2;
+      // Rotate so Z-up (STL) becomes Y-up (Three.js) — model lies flat
+      mesh.rotation.x = -Math.PI / 2;
+      mesh.updateMatrixWorld(true);
+
+      // Compute bounding box AFTER rotation
+      const rotatedBox = new THREE.Box3().setFromObject(mesh);
+      const cx = (rotatedBox.max.x + rotatedBox.min.x) / 2;
+      const cy = (rotatedBox.max.y + rotatedBox.min.y) / 2;
+      const cz = (rotatedBox.max.z + rotatedBox.min.z) / 2;
       mesh.position.set(-cx, -cy, -cz);
 
       scene.add(mesh);
       scene.userData.model = mesh;
 
-      // Auto-fit camera
+      // Auto-fit camera — view from above-front-right
       const size = new THREE.Vector3();
-      box.getSize(size);
+      rotatedBox.getSize(size);
       const maxDim = Math.max(size.x, size.y, size.z);
       const fov = camera.fov * (Math.PI / 180);
       let dist = Math.abs(maxDim / 2 / Math.tan(fov / 2));
       dist *= 1.6;
-      camera.position.set(dist * 0.7, dist * 0.5, dist * 0.9);
+      camera.position.set(dist * 0.5, dist * 0.7, dist * 0.6);
       camera.lookAt(0, 0, 0);
       camera.near = dist / 100;
       camera.far = dist * 10;
@@ -1734,15 +1738,16 @@ function addTerrainToCart() {
     type: 'terrain'
   };
 
-  let cart = JSON.parse(localStorage.getItem('factum3d_cart') || '[]');
+  let cart = JSON.parse(localStorage.getItem('pita-cart') || '[]');
   // Avoid duplicates
   cart = cart.filter(c => c.id !== item.id);
   cart.push(item);
-  localStorage.setItem('factum3d_cart', JSON.stringify(cart));
+  localStorage.setItem('pita-cart', JSON.stringify(cart));
 
-  // Update badge
+  // Update badge + dispatch event for cart.js compatibility
   const badge = document.getElementById('cart-badge');
   if (badge) badge.textContent = cart.length;
+  document.dispatchEvent(new CustomEvent('pita-cart-changed'));
 
   showConfirmation();
 }

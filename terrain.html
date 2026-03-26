@@ -17,11 +17,11 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --accent: #00d4ff;
-      --accent-glow: rgba(0, 212, 255, 0.35);
-      --accent-dim: rgba(0, 212, 255, 0.12);
-      --bg: #050b14;
-      --bg2: #080f1c;
+      --accent: #C67D4A;
+      --accent-glow: rgba(198, 125, 74, 0.35);
+      --accent-dim: rgba(198, 125, 74, 0.12);
+      --bg: #0B0F19;
+      --bg2: #12182A;
       --glass: rgba(255,255,255,0.05);
       --glass-border: rgba(255,255,255,0.10);
       --text: #e8f0fe;
@@ -48,7 +48,7 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 20% 0%, rgba(0,212,255,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 60% at 20% 0%, rgba(198,125,74,0.08) 0%, transparent 60%),
         radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0,100,255,0.06) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
@@ -110,7 +110,7 @@
       align-items: center;
       gap: 8px;
       background: var(--accent-dim);
-      border: 1px solid rgba(0,212,255,0.3);
+      border: 1px solid rgba(198,125,74,0.3);
       color: var(--accent);
       font-size: 0.75rem;
       font-weight: 600;
@@ -218,7 +218,7 @@
     }
 
     .section-card.active-section {
-      border-color: rgba(0,212,255,0.25);
+      border-color: rgba(198,125,74,0.25);
     }
 
     .section-header {
@@ -233,7 +233,7 @@
       height: 44px;
       border-radius: 12px;
       background: var(--accent-dim);
-      border: 1px solid rgba(0,212,255,0.3);
+      border: 1px solid rgba(198,125,74,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -279,14 +279,14 @@
     }
 
     .size-card:hover {
-      border-color: rgba(0,212,255,0.4);
-      background: rgba(0,212,255,0.04);
+      border-color: rgba(198,125,74,0.4);
+      background: rgba(198,125,74,0.04);
       transform: translateY(-2px);
     }
 
     .size-card.selected {
       border-color: var(--accent);
-      background: rgba(0,212,255,0.08);
+      background: rgba(198,125,74,0.08);
       box-shadow: 0 0 0 1px var(--accent), 0 0 24px var(--accent-glow), var(--shadow);
     }
 
@@ -308,12 +308,12 @@
       transition: all 0.2s;
     }
     .wood-card:hover {
-      border-color: rgba(0,212,255,0.3);
-      background: rgba(0,212,255,0.04);
+      border-color: rgba(198,125,74,0.3);
+      background: rgba(198,125,74,0.04);
     }
     .wood-card.active {
       border-color: var(--accent);
-      background: rgba(0,212,255,0.08);
+      background: rgba(198,125,74,0.08);
       box-shadow: 0 0 0 1px var(--accent), 0 0 20px var(--accent-glow);
     }
     .wood-sample {
@@ -350,8 +350,8 @@
       width: 100%;
       padding: 0.9rem 1.5rem;
       margin-bottom: 0.8rem;
-      background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(0,212,255,0.04));
-      border: 2px dashed rgba(0,212,255,0.4);
+      background: linear-gradient(135deg, rgba(198,125,74,0.12), rgba(198,125,74,0.04));
+      border: 2px dashed rgba(198,125,74,0.4);
       border-radius: 12px;
       color: #fff;
       font-size: 1rem;
@@ -361,19 +361,19 @@
       transition: all 0.2s;
     }
     .btn-draw-region:hover {
-      background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(0,212,255,0.08));
+      background: linear-gradient(135deg, rgba(198,125,74,0.2), rgba(198,125,74,0.08));
       border-color: var(--accent);
-      box-shadow: 0 0 20px rgba(0,212,255,0.15);
+      box-shadow: 0 0 20px rgba(198,125,74,0.15);
     }
     .btn-draw-region.drawing {
-      background: rgba(0,212,255,0.15);
+      background: rgba(198,125,74,0.15);
       border-color: var(--accent);
       border-style: solid;
       animation: drawPulse 1.5s ease-in-out infinite;
     }
     @keyframes drawPulse {
-      0%, 100% { box-shadow: 0 0 10px rgba(0,212,255,0.2); }
-      50% { box-shadow: 0 0 25px rgba(0,212,255,0.4); }
+      0%, 100% { box-shadow: 0 0 10px rgba(198,125,74,0.2); }
+      50% { box-shadow: 0 0 25px rgba(198,125,74,0.4); }
     }
     .btn-draw-region.done {
       background: rgba(0,200,100,0.1);
@@ -485,7 +485,7 @@
       transform: translateY(-1px);
     }
     .btn-primary:disabled {
-      background: rgba(0,212,255,0.25);
+      background: rgba(198,125,74,0.25);
       color: rgba(255,255,255,0.3);
       cursor: not-allowed;
     }
@@ -524,8 +524,8 @@
     .coords-display {
       margin-top: 12px;
       padding: 12px 16px;
-      background: rgba(0,212,255,0.06);
-      border: 1px solid rgba(0,212,255,0.2);
+      background: rgba(198,125,74,0.06);
+      border: 1px solid rgba(198,125,74,0.2);
       border-radius: 10px;
       font-size: 0.82rem;
       color: var(--accent);
@@ -544,8 +544,8 @@
 
     /* === GENERATE === */
     .generate-summary {
-      background: rgba(0,212,255,0.05);
-      border: 1px solid rgba(0,212,255,0.15);
+      background: rgba(198,125,74,0.05);
+      border: 1px solid rgba(198,125,74,0.15);
       border-radius: 12px;
       padding: 16px 20px;
       margin-bottom: 20px;
@@ -628,11 +628,11 @@
       width: 100%;
       height: 400px;
       border-radius: 16px;
-      border: 1px solid rgba(0,212,255,0.25);
+      border: 1px solid rgba(198,125,74,0.25);
       overflow: hidden;
       position: relative;
       background: rgba(0,10,20,0.8);
-      box-shadow: 0 0 40px rgba(0,212,255,0.1);
+      box-shadow: 0 0 40px rgba(198,125,74,0.1);
     }
 
     #stl-canvas {
@@ -664,7 +664,7 @@
     .spinner {
       width: 40px;
       height: 40px;
-      border: 3px solid rgba(0,212,255,0.15);
+      border: 3px solid rgba(198,125,74,0.15);
       border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
@@ -1171,9 +1171,9 @@ function initMap() {
       marker: false,
       rectangle: {
         shapeOptions: {
-          color: '#00d4ff',
+          color: '#C67D4A',
           weight: 2,
-          fillColor: '#00d4ff',
+          fillColor: '#C67D4A',
           fillOpacity: 0.08
         }
       }
@@ -1190,9 +1190,9 @@ function initMap() {
     const rawBounds = layer.getBounds();
     const squareBounds = squarifyBounds(rawBounds);
     layer = L.rectangle(squareBounds, {
-      color: '#00d4ff',
+      color: '#C67D4A',
       weight: 2,
-      fillColor: '#00d4ff',
+      fillColor: '#C67D4A',
       fillOpacity: 0.12
     });
     drawnLayer.addLayer(layer);
@@ -1212,9 +1212,9 @@ function initMap() {
       const squareBounds = squarifyBounds(rawBounds);
       drawnLayer.clearLayers();
       const newLayer = L.rectangle(squareBounds, {
-        color: '#00d4ff',
+        color: '#C67D4A',
         weight: 2,
-        fillColor: '#00d4ff',
+        fillColor: '#C67D4A',
         fillOpacity: 0.12
       });
       drawnLayer.addLayer(newLayer);
@@ -1540,7 +1540,7 @@ function loadSTLViewer(jobId) {
   dirLight.castShadow = true;
   scene.add(dirLight);
 
-  const rimLight = new THREE.DirectionalLight(0x00d4ff, 0.3);
+  const rimLight = new THREE.DirectionalLight(0xC67D4A, 0.3);
   rimLight.position.set(-200, 100, -200);
   scene.add(rimLight);
 
@@ -1582,11 +1582,50 @@ function loadSTLFromUrl(url, scene, camera, renderer) {
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
 
+      // Höhenstufen-Farben: grün (Tal) → braun (Hang) → grau (Fels) → weiß (Gipfel)
+      const positions = geometry.attributes.position.array;
+      let minY = Infinity, maxY = -Infinity;
+      // STL Z-Achse = Höhe (vor Rotation)
+      for (let i = 2; i < positions.length; i += 3) {
+        if (positions[i] < minY) minY = positions[i];
+        if (positions[i] > maxY) maxY = positions[i];
+      }
+      const range = maxY - minY || 1;
+
+      const colors = new Float32Array(positions.length);
+      for (let i = 0; i < positions.length; i += 3) {
+        const t = (positions[i + 2] - minY) / range; // 0=Tal, 1=Gipfel
+        let r, g, b;
+        if (t < 0.01) {
+          // Basis/Boden — dunkelgrau
+          r = 0.2; g = 0.2; b = 0.22;
+        } else if (t < 0.3) {
+          // Tiefland — Grün
+          const s = t / 0.3;
+          r = 0.15 + s * 0.15; g = 0.45 + s * 0.1; b = 0.12 + s * 0.08;
+        } else if (t < 0.6) {
+          // Mittelgebirge — Braun/Ocker
+          const s = (t - 0.3) / 0.3;
+          r = 0.3 + s * 0.35; g = 0.55 - s * 0.15; b = 0.2 - s * 0.05;
+        } else if (t < 0.85) {
+          // Hochgebirge — Grau/Fels
+          const s = (t - 0.6) / 0.25;
+          r = 0.65 - s * 0.1; g = 0.4 + s * 0.15; b = 0.15 + s * 0.25;
+        } else {
+          // Gipfel — Weiß/Schnee
+          const s = (t - 0.85) / 0.15;
+          r = 0.55 + s * 0.4; g = 0.55 + s * 0.4; b = 0.4 + s * 0.55;
+        }
+        colors[i] = r;
+        colors[i + 1] = g;
+        colors[i + 2] = b;
+      }
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
       const material = new THREE.MeshPhongMaterial({
-        color: 0x00d4ff,
-        emissive: 0x003344,
-        specular: 0x66eeff,
-        shininess: 60,
+        vertexColors: true,
+        specular: 0x333333,
+        shininess: 20,
         side: THREE.DoubleSide
       });
 

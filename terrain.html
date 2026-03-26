@@ -1628,9 +1628,10 @@ function loadSTLFromUrl(url, scene, camera, renderer) {
 
       const material = new THREE.MeshPhongMaterial({
         vertexColors: true,
-        specular: 0x333333,
-        shininess: 20,
-        side: THREE.DoubleSide
+        specular: 0x222222,
+        shininess: 10,
+        side: THREE.DoubleSide,
+        flatShading: false  // smooth shading für weichere Übergänge
       });
 
       const mesh = new THREE.Mesh(geometry, material);

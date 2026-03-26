@@ -1596,27 +1596,42 @@ function loadSTLFromUrl(url, scene, camera, renderer) {
 
       // Rotate so Z-up (STL) becomes Y-up (Three.js) — model lies flat
       mesh.rotation.x = -Math.PI / 2;
-      mesh.updateMatrixWorld(true);
 
-      // Compute bounding box AFTER rotation
-      const rotatedBox = new THREE.Box3().setFromObject(mesh);
+      // Wrap in a group so we can position cleanly
+      const group = new THREE.Group();
+      group.add(mesh);
+      scene.add(group);
+
+      // Compute bounding box after rotation
+      group.updateMatrixWorld(true);
+      const rotatedBox = new THREE.Box3().setFromObject(group);
+
+      // Center X/Z, but sit on ground (Y min = 0)
       const cx = (rotatedBox.max.x + rotatedBox.min.x) / 2;
-      const cy = (rotatedBox.max.y + rotatedBox.min.y) / 2;
+      const cy = rotatedBox.min.y;  // bottom of model
       const cz = (rotatedBox.max.z + rotatedBox.min.z) / 2;
-      mesh.position.set(-cx, -cy, -cz);
+      group.position.set(-cx, -cy, -cz);
 
-      scene.add(mesh);
-      scene.userData.model = mesh;
+      scene.userData.model = group;
 
-      // Auto-fit camera — view from above-front-right
+      // Recalculate bounding box after repositioning
+      group.updateMatrixWorld(true);
+      const finalBox = new THREE.Box3().setFromObject(group);
       const size = new THREE.Vector3();
-      rotatedBox.getSize(size);
+      finalBox.getSize(size);
+
+      // Camera: isometric-style view from front-right, looking at center of model
+      const modelCenterY = size.y / 2;  // vertical center of the terrain
       const maxDim = Math.max(size.x, size.y, size.z);
       const fov = camera.fov * (Math.PI / 180);
       let dist = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-      dist *= 1.6;
-      camera.position.set(dist * 0.5, dist * 0.7, dist * 0.6);
-      camera.lookAt(0, 0, 0);
+      dist *= 1.5;
+
+      // Isometric angle: 35° elevation, slight right offset
+      const angle = 35 * Math.PI / 180;
+      camera.position.set(dist * 0.6, dist * Math.sin(angle) + modelCenterY, dist * 0.7);
+      camera.lookAt(0, modelCenterY, 0);
+      state._modelCenterY = modelCenterY;
       camera.near = dist / 100;
       camera.far = dist * 10;
       camera.updateProjectionMatrix();
@@ -1701,10 +1716,12 @@ function setupOrbitControls(camera, domElement) {
   let radius = camera.position.length();
 
   function updateCamera() {
+    // Orbit target: center of model (Y offset for terrain height)
+    const targetY = state._modelCenterY || 0;
     camera.position.x = radius * Math.sin(phi) * Math.sin(theta);
-    camera.position.y = radius * Math.cos(phi);
+    camera.position.y = radius * Math.cos(phi) + targetY;
     camera.position.z = radius * Math.sin(phi) * Math.cos(theta);
-    camera.lookAt(0, 0, 0);
+    camera.lookAt(0, targetY, 0);
   }
 
   domElement.addEventListener('mousedown', e => {

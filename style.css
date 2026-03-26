@@ -2804,6 +2804,7 @@ body.page-sub {
   }
   .nav-dropdown.open .nav-dropdown-menu {
     display: flex;
+    flex-direction: column;
   }
   .nav-dropdown-menu a {
     padding: 0.45rem 1rem 0.45rem 1.6rem;

@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FACTUM3D – Terrain Generator</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Leaflet Draw -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #050b18;
+      --bg-mid:      #0a1628;
+      --glass-bg:    rgba(255,255,255,0.04);
+      --glass-bd:    rgba(255,255,255,0.10);
+      --glass-hover: rgba(255,255,255,0.07);
+      --accent:      #00d4ff;
+      --accent-dim:  rgba(0,212,255,0.15);
+      --accent-glow: rgba(0,212,255,0.35);
+      --text:        #f0f4ff;
+      --text-muted:  #7a8aaa;
+      --text-dim:    #4a5a7a;
+      --success:     #00e676;
+      --warning:     #ffab40;
+      --error:       #ff5252;
+      --radius:      16px;
+      --radius-sm:   10px;
+      --shadow:      0 8px 32px rgba(0,0,0,0.45);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ============================================================
+       ANIMATED HERO BACKGROUND
+    ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+      padding: 0 1rem 3rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(135deg, #020814 0%, #050d20 30%, #071428 60%, #03080f 100%);
+      overflow: hidden;
+    }
+
+    /* Animated aurora blobs */
+    .hero-bg::before,
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.25;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .hero-bg::before {
+      width: 60vw; height: 60vw;
+      background: radial-gradient(circle, #00d4ff 0%, #0057ff 60%, transparent 100%);
+      top: -20%; left: -15%;
+    }
+    .hero-bg::after {
+      width: 50vw; height: 50vw;
+      background: radial-gradient(circle, #0040cc 0%, #00d4ff40 60%, transparent 100%);
+      bottom: -20%; right: -10%;
+      animation-delay: -9s;
+      animation-duration: 22s;
+    }
+
+    .blob-extra {
+      position: absolute;
+      width: 40vw; height: 40vw;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.12;
+      background: radial-gradient(circle, #00ffcc 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: drift 25s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes drift {
+      0%   { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(5%, 3%) scale(1.05); }
+      66%  { transform: translate(-3%, 6%) scale(0.97); }
+      100% { transform: translate(4%, -4%) scale(1.08); }
+    }
+
+    /* Mountain silhouette SVG watermark */
+    .mountain-bg {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 0;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    /* Particle grid */
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+    }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    .navbar {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 0;
+      margin-bottom: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+
+    .nav-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-glow);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .nav-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    /* ============================================================
+       HERO COPY
+    ============================================================ */
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 3rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      opacity: 0.85;
+    }
+
+    .hero-h1 {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #ffffff 0%, #b0d8ff 50%, #00d4ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--text-muted);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       MAIN CONTENT CARD
+    ============================================================ */
+    .content-wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .main-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--radius);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--shadow), 0 0 0 1px rgba(0,212,255,0.05) inset;
+      overflow: hidden;
+    }
+
+    /* ============================================================
+       SEARCH BAR
+    ============================================================ */
+    .search-bar {
+      display: flex;
+      gap: 0.6rem;
+      padding: 1.2rem 1.4rem;
+      border-bottom: 1px solid var(--glass-bd);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .search-bar input {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.7rem 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .search-bar input::placeholder { color: var(--text-dim); }
+    .search-bar input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-ghost {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--glass-bd);
+      color: var(--text);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .btn-accent {
+      background: linear-gradient(135deg, #00c4f0, #0090d0);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+    }
+    .btn-accent:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(0,212,255,0.45);
+    }
+    .btn-accent:active { transform: translateY(0); }
+    .btn-accent:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .btn-success {
+      background: linear-gradient(135deg, #00c853, #00e676);
+      color: #001a00;
+      box-shadow: 0 4px 20px rgba(0,230,118,0.3);
+    }
+    .btn-success:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 28px rgba(0,230,118,0.45);
+    }
+
+    /* Search results dropdown */
+    .search-results {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: #0f1e38;
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      max-height: 240px;
+      overflow-y: auto;
+      display: none;
+    }
+    .search-results.visible { display: block; }
+    .search-result-item {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.15s, color 0.15s;
+    }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background: var(--glass-hover); color: var(--text); }
+    .search-result-item strong { color: var(--text); font-weight: 600; }
+    .search-wrapper { position: relative; flex: 1; }
+
+    /* ============================================================
+       TWO-COLUMN LAYOUT
+    ============================================================ */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      min-height: 520px;
+    }
+    @media (max-width: 900px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       MAP
+    ============================================================ */
+    #map {
+      height: 520px;
+      width: 100%;
+      border-right: 1px solid var(--glass-bd);
+    }
+    @media (max-width: 900px) {
+      #map { height: 360px; border-right: none; border-bottom: 1px solid var(--glass-bd); }
+    }
+
+    /* Override leaflet dark theme for glassmorphism */
+    .leaflet-control-zoom a,
+    .leaflet-bar a {
+      background: rgba(10,22,40,0.9) !important;
+      border-color: rgba(255,255,255,0.12) !important;
+      color: var(--text) !important;
+    }
+    .leaflet-control-zoom a:hover { background: rgba(0,212,255,0.15) !important; }
+    .leaflet-popup-content-wrapper {
+      background: rgba(10,22,40,0.95) !important;
+      border: 1px solid var(--glass-bd) !important;
+      color: var(--text) !important;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow) !important;
+    }
+    .leaflet-popup-tip { background: rgba(10,22,40,0.95) !important; }
+
+    /* ============================================================
+       SIDEBAR / PANEL
+    ============================================================ */
+    .panel {
+      padding: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      overflow-y: auto;
+      background: rgba(255,255,255,0.015);
+    }
+
+    .panel-section-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.8rem;
+    }
+
+    /* ---- Sliders ---- */
+    .slider-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .slider-label .val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg-mid);
+      box-shadow: 0 0 8px var(--accent-glow);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 14px var(--accent-glow);
+    }
+    input[type=range]::-moz-range-thumb {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg-mid);
+      cursor: pointer;
+    }
+
+    /* Dynamic track fill via JS custom property */
+    input[type=range] {
+      background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--val, 50%), rgba(255,255,255,0.1) var(--val, 50%));
+    }
+
+    /* ---- Format Toggle ---- */
+    .format-toggle {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .format-toggle button {
+      flex: 1;
+      padding: 0.55rem;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      transition: all 0.18s;
+    }
+    .format-toggle button.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent-glow);
+    }
+
+    /* ---- Info Box ---- */
+    .info-box {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--radius-sm);
+      padding: 0.9rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+    }
+    .info-row .lbl { color: var(--text-dim); }
+    .info-row .val {
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-align: right;
+      max-width: 60%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .info-row .val.accent { color: var(--accent); }
+
+    /* ---- Price Badge ---- */
+    .price-card {
+      background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,80,180,0.08));
+      border: 1px solid rgba(0,212,255,0.2);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .price-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; }
+    .price-amount {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .price-note { font-size: 0.7rem; color: var(--text-dim); margin-top: 0.2rem; }
+
+    /* ---- Generate Button Area ---- */
+    .generate-area { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    /* ---- Progress ---- */
+    .progress-wrap {
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .progress-wrap.visible { display: flex; }
+    .progress-bar-track {
+      width: 100%;
+      height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00d4ff, #0090d0);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+    .progress-status {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .spinner {
+      width: 12px; height: 12px;
+      border: 2px solid rgba(0,212,255,0.3);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---- Alert / Error ---- */
+    .alert {
+      display: none;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .alert.visible { display: block; }
+    .alert-error { background: rgba(255,82,82,0.12); border: 1px solid rgba(255,82,82,0.3); color: #ff7a7a; }
+    .alert-success { background: rgba(0,230,118,0.1); border: 1px solid rgba(0,230,118,0.25); color: #00e676; }
+
+    /* ============================================================
+       MAP HINT
+    ============================================================ */
+    .map-hint {
+      padding: 0.6rem 1rem;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      background: rgba(0,212,255,0.03);
+      border-top: 1px solid var(--glass-bd);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .map-hint span { color: var(--accent); font-weight: 600; }
+
+    /* ============================================================
+       FEATURES STRIP
+    ============================================================ */
+    .features-strip {
+      display: flex;
+      gap: 1rem;
+      padding: 2.5rem 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .feature-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: 999px;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      backdrop-filter: blur(10px);
+      transition: all 0.2s;
+    }
+    .feature-chip:hover { border-color: var(--accent-glow); color: var(--text); }
+    .feature-chip .icon { font-size: 1rem; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      border-top: 1px solid var(--glass-bd);
+      margin-top: 1rem;
+    }
+    .footer-logo {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-tagline {
+      font-size: 0.83rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .footer-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 0.75rem; color: var(--text-dim); }
+
+    /* ============================================================
+       DRAW SELECTION INFO POPUP (custom)
+    ============================================================ */
+    .coords-tooltip {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(5,11,24,0.92);
+      border: 1px solid var(--accent-glow);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 1rem;
+      font-size: 0.78rem;
+      color: var(--accent);
+      white-space: nowrap;
+      z-index: 500;
+      pointer-events: none;
+      display: none;
+      backdrop-filter: blur(10px);
+    }
+    .coords-tooltip.visible { display: block; }
+
+    /* ============================================================
+       RESPONSIVE TWEAKS
+    ============================================================ */
+    @media (max-width: 600px) {
+      .search-bar { flex-wrap: wrap; }
+      .features-strip { gap: 0.6rem; }
+      .panel { padding: 1rem; }
+      .price-amount { font-size: 1.5rem; }
+    }
+
+    /* Leaflet Draw toolbar dark style */
+    .leaflet-draw-toolbar a {
+      background-color: rgba(10,22,40,0.9) !important;
+    }
+    .leaflet-draw-actions a {
+      background: #0a1628 !important;
+      color: var(--text) !important;
+    }
+  </style>
+</head>
+
+<body>
+<section class="hero">
+  <!-- Animated background -->
+  <div class="hero-bg">
+    <div class="grid-overlay"></div>
+    <div class="blob-extra"></div>
+  </div>
+
+  <!-- Mountain silhouette SVG -->
+  <svg class="mountain-bg" viewBox="0 0 1440 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path fill="#00d4ff" d="M0,280 L0,200 L80,140 L160,180 L260,80 L380,160 L460,100 L560,170 L660,60 L780,150 L880,90 L980,160 L1080,70 L1180,140 L1280,100 L1360,160 L1440,120 L1440,280 Z"/>
+    <path fill="#0090d0" d="M0,280 L0,230 L120,170 L220,210 L320,140 L440,200 L540,150 L640,220 L740,110 L840,180 L940,130 L1040,200 L1140,120 L1240,180 L1340,150 L1440,170 L1440,280 Z" opacity="0.5"/>
+  </svg>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="/" class="logo">FACTUM<span>3D</span></a>
+    <div class="nav-badge">Terrain Generator</div>
+  </nav>
+
+  <!-- Hero copy -->
+  <div class="hero-copy">
+    <div class="hero-eyebrow">🏔 3D-Druck aus Topographiedaten</div>
+    <h1 class="hero-h1">Deine Welt<br/>in 3D</h1>
+    <p class="hero-sub">Wähle einen Ort auf der Karte — wir drucken ihn für dich.</p>
+  </div>
+
+  <!-- Main content -->
+  <div class="content-wrapper">
+    <div class="main-card">
+
+      <!-- Search bar -->
+      <div class="search-bar">
+        <div class="search-wrapper">
+          <input type="text" id="searchInput" placeholder="🔍  Ort suchen — z.B. Zugspitze, Dolomiten, Mont Blanc…" autocomplete="off" />
+          <div class="search-results" id="searchResults"></div>
+        </div>
+        <button class="btn btn-ghost" id="btnDrawRect" title="Rechteck zeichnen">
+          ⬜ Auswahl zeichnen
+        </button>
+        <button class="btn btn-ghost" id="btnClearRect" title="Auswahl löschen">
+          ✕ Leeren
+        </button>
+      </div>
+
+      <!-- Map + Sidebar -->
+      <div class="two-col">
+
+        <!-- MAP -->
+        <div style="position:relative;">
+          <div id="map"></div>
+          <div class="coords-tooltip" id="coordsTooltip"></div>
+        </div>
+
+        <!-- SIDEBAR PANEL -->
+        <div class="panel">
+
+          <!-- SIZE -->
+          <div>
+            <div class="panel-section-title">📐 Druckgröße</div>
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Breite</span>
+                <span class="val" id="valW">15 cm</span>
+              </div>
+              <input type="range" id="sliderW" min="5" max="30" value="15" step="1" />
+            </div>
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Höhe</span>
+                <span class="val" id="valH">15 cm</span>
+              </div>
+              <input type="range" id="sliderH" min="5" max="30" value="15" step="1" />
+            </div>
+          </div>
+
+          <!-- PARAMETERS -->
+          <div>
+            <div class="panel-section-title">⚙️ Parameter</div>
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Höhenübertreibung</span>
+                <span class="val" id="valZ">2×</span>
+              </div>
+              <input type="range" id="sliderZ" min="1" max="5" value="2" step="0.5" />
+            </div>
+            <div class="slider-group">
+              <div class="slider-label">
+                <span>Basishöhe</span>
+                <span class="val" id="valBase">2 mm</span>
+              </div>
+              <input type="range" id="sliderBase" min="1" max="5" value="2" step="0.5" />
+            </div>
+          </div>
+
+          <!-- FORMAT -->
+          <div>
+            <div class="panel-section-title">💾 Dateiformat</div>
+            <div class="format-toggle">
+              <button id="fmtSTL" class="active" onclick="setFormat('stl')">STL</button>
+              <button id="fmtOBJ" onclick="setFormat('obj')">OBJ</button>
+            </div>
+          </div>
+
+          <!-- INFO / PREVIEW -->
+          <div>
+            <div class="panel-section-title">📊 Vorschau-Info</div>
+            <div class="info-box">
+              <div class="info-row"><span class="lbl">Region</span><span class="val" id="infoRegion">— Bitte Ort wählen —</span></div>
+              <div class="info-row"><span class="lbl">Koordinaten</span><span class="val accent" id="infoCoords">lat/lon ausstehend</span></div>
+              <div class="info-row"><span class="lbl">Druckgröße</span><span class="val" id="infoPrintSize">15 × 15 cm</span></div>
+              <div class="info-row"><span class="lbl">Auflösung</span><span class="val" id="infoRes">0.5 mm</span></div>
+              <div class="info-row"><span class="lbl">Est. Dateigröße</span><span class="val" id="infoFileSize">~12 MB</span></div>
+              <div class="info-row"><span class="lbl">Est. Druckzeit</span><span class="val" id="infoPrintTime">~4 h 30 min</span></div>
+            </div>
+          </div>
+
+          <!-- PRICE -->
+          <div class="price-card">
+            <div>
+              <div class="price-label">Preis inkl. Druck</div>
+              <div class="price-note">zzgl. Versand · PLA / PETG</div>
+            </div>
+            <div style="text-align:right;">
+              <div class="price-amount" id="priceDisplay">29,90 €</div>
+            </div>
+          </div>
+
+          <!-- GENERATE -->
+          <div class="generate-area">
+            <div class="alert alert-error" id="alertError"></div>
+            <div class="alert alert-success" id="alertSuccess"></div>
+
+            <div class="progress-wrap" id="progressWrap">
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="progressFill"></div>
+              </div>
+              <div class="progress-status">
+                <div class="spinner"></div>
+                <span id="progressText">Modell wird berechnet…</span>
+              </div>
+            </div>
+
+            <button class="btn btn-accent" id="btnGenerate" style="width:100%; justify-content:center; padding: 0.9rem;">
+              🖨 Modell erstellen
+            </button>
+
+            <button class="btn btn-success" id="btnDownload" style="width:100%; justify-content:center; padding: 0.9rem; display:none;">
+              ⬇ Modell herunterladen
+            </button>
+          </div>
+
+        </div><!-- /panel -->
+      </div><!-- /two-col -->
+
+      <!-- Map hint -->
+      <div class="map-hint">
+        <span>Tipp:</span> Ort suchen oder <span>„Auswahl zeichnen"</span> klicken → Rechteck auf der Karte aufziehen. Alternativ: Kartenklick setzt den Mittelpunkt.
+      </div>
+    </div><!-- /main-card -->
+
+    <!-- Features -->
+    <div class="features-strip">
+      <div class="feature-chip"><span class="icon">🛰</span> SRTM Höhendaten (90m Auflösung)</div>
+      <div class="feature-chip"><span class="icon">🖨</span> Bambu Lab X1C & P1S Drucker</div>
+      <div class="feature-chip"><span class="icon">🏔</span> Alpen · Schwarzwald · Weltweit</div>
+      <div class="feature-chip"><span class="icon">📦</span> PLA & PETG Materialien</div>
+      <div class="feature-chip"><span class="icon">⚡</span> Lieferung in 3–5 Werktagen</div>
+    </div>
+
+  </div><!-- /content-wrapper -->
+
+  <!-- Footer -->
+  <footer style="width:100%;">
+    <div class="footer-logo">FACTUM<span>3D</span></div>
+    <div class="footer-tagline">
+      Powered by SRTM Elevation Data · Gedruckt in PLA oder PETG auf Bambu Lab Druckern<br/>
+      Präzision aus den Alpen — direkt zu dir nach Hause.
+    </div>
+    <div class="footer-links">
+      <a href="/">← Zur Hauptseite</a>
+      <a href="/shop">Shop</a>
+      <a href="/kontakt">Kontakt</a>
+      <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener">© OpenStreetMap</a>
+      <a href="https://srtm.csi.cgiar.org/" target="_blank" rel="noopener">SRTM Daten</a>
+    </div>
+    <div class="footer-copy">© 2025 FACTUM3D · Alle Rechte vorbehalten</div>
+  </footer>
+
+</section>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+'use strict';
+
+// ────────────────────────────────────────────────────────────
+// CONFIG
+// ────────────────────────────────────────────────────────────
+const API_URL = "http://69.62.105.159";
+
+// Price table [cm, price]
+const PRICE_TABLE = [
+  [5,  9.90],
+  [10, 19.90],
+  [15, 29.90],
+  [20, 44.90],
+  [25, 64.90],
+  [30, 89.90],
+];
+
+// ────────────────────────────────────────────────────────────
+// STATE
+// ────────────────────────────────────────────────────────────
+const state = {
+  lat: 47.5,
+  lon: 10.5,
+  boundsSet: false,
+  bounds: null,          // leaflet LatLngBounds or null
+  regionName: null,
+  width_cm: 15,
+  height_cm: 15,
+  z_scale: 2,
+  base_mm: 2,
+  format: 'stl',
+  jobId: null,
+  polling: null,
+};
+
+// ────────────────────────────────────────────────────────────
+// MAP INIT
+// ────────────────────────────────────────────────────────────
+const map = L.map('map', {
+  center: [47.5, 10.5],
+  zoom: 7,
+  zoomControl: true,
+});
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 18,
+}).addTo(map);
+
+// Draw layer
+const drawnItems = new L.FeatureGroup();
+map.addLayer(drawnItems);
+
+const drawControl = new L.Control.Draw({
+  edit: { featureGroup: drawnItems },
+  draw: {
+    polyline: false,
+    polygon: false,
+    circle: false,
+    circlemarker: false,
+    marker: false,
+    rectangle: {
+      shapeOptions: {
+        color: '#00d4ff',
+        weight: 2,
+        fillOpacity: 0.12,
+        fillColor: '#00d4ff',
+      },
+    },
+  },
+});
+
+let drawEnabled = false;
+let selectionRect = null;
+let centerMarker = null;
+
+// Custom icon for center marker
+const centerIcon = L.divIcon({
+  className: '',
+  html: `<div style="
+    width:18px; height:18px;
+    background: #00d4ff;
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(0,212,255,0.7);
+  "></div>`,
+  iconSize: [18, 18],
+  iconAnchor: [9, 9],
+});
+
+// Rectangle created via draw tool
+map.on(L.Draw.Event.CREATED, (e) => {
+  drawnItems.clearLayers();
+  selectionRect = null;
+
+  const layer = e.layer;
+  drawnItems.addLayer(layer);
+  selectionRect = layer;
+
+  const b = layer.getBounds();
+  setBoundsFromLeaflet(b);
+
+  removeDrawControl();
+  drawEnabled = false;
+
+  updateCenterMarker();
+  updateInfoPanel();
+});
+
+// Click on map → set center
+map.on('click', (e) => {
+  if (drawEnabled) return;
+  state.lat = e.latlng.lat;
+  state.lon = e.latlng.lng;
+  state.boundsSet = false;
+  state.bounds = null;
+
+  // Clear drawn rect
+  drawnItems.clearLayers();
+  selectionRect = null;
+
+  updateCenterMarker();
+  updateInfoPanel();
+  showCoordsTooltip(`${state.lat.toFixed(5)}, ${state.lon.toFixed(5)}`);
+});
+
+function updateCenterMarker() {
+  if (centerMarker) map.removeLayer(centerMarker);
+  centerMarker = L.marker([state.lat, state.lon], { icon: centerIcon })
+    .addTo(map)
+    .bindPopup(`<b>${state.regionName || 'Gewählter Punkt'}</b><br/>${state.lat.toFixed(5)}, ${state.lon.toFixed(5)}`);
+}
+
+function setBoundsFromLeaflet(b) {
+  const sw = b.getSouthWest();
+  const ne = b.getNorthEast();
+  // Calculate approximate width/height in km and set sliders accordingly
+  // lat diff → km (roughly 111 km per degree)
+  const latDiff = Math.abs(ne.lat - sw.lat);
+  const lonDiff = Math.abs(ne.lng - sw.lng);
+  const midLat = (ne.lat + sw.lat) / 2;
+
+  state.lat = (ne.lat + sw.lat) / 2;
+  state.lon = (ne.lng + sw.lng) / 2;
+  state.bounds = b;
+  state.boundsSet = true;
+}
+
+// ────────────────────────────────────────────────────────────
+// DRAW TOGGLE
+// ────────────────────────────────────────────────────────────
+function addDrawControl() {
+  if (!map.hasControl || !drawEnabled) {
+    map.addControl(drawControl);
+  }
+}
+function removeDrawControl() {
+  try { map.removeControl(drawControl); } catch(e) {}
+}
+
+document.getElementById('btnDrawRect').addEventListener('click', () => {
+  if (drawEnabled) { removeDrawControl(); drawEnabled = false; return; }
+  drawEnabled = true;
+  addDrawControl();
+  // Programmatically click the rectangle draw button
+  setTimeout(() => {
+    const rectBtn = document.querySelector('.leaflet-draw-draw-rectangle');
+    if (rectBtn) rectBtn.click();
+  }, 100);
+});
+
+document.getElementById('btnClearRect').addEventListener('click', () => {
+  drawnItems.clearLayers();
+  selectionRect = null;
+  state.boundsSet = false;
+  state.bounds = null;
+  removeDrawControl();
+  drawEnabled = false;
+  updateInfoPanel();
+});
+
+// ────────────────────────────────────────────────────────────
+// SEARCH (NOMINATIM)
+// ────────────────────────────────────────────────────────────
+const searchInput = document.getElementById('searchInput');
+const searchResultsEl = document.getElementById('searchResults');
+let searchTimer = null;
+
+searchInput.addEventListener('input', () => {
+  clearTimeout(searchTimer);
+  const q = searchInput.value.trim();
+  if (q.length < 3) { searchResultsEl.classList.remove('visible'); return; }
+  searchTimer = setTimeout(() => doSearch(q), 400);
+});
+
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') { searchResultsEl.classList.remove('visible'); searchInput.blur(); }
+});
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.search-wrapper')) {
+    searchResultsEl.classList.remove('visible');
+  }
+});
+
+async function doSearch(q) {
+  try {
+    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=7&addressdetails=1&accept-language=de`;
+    const res = await fetch(url, { headers: { 'Accept-Language': 'de' } });
+    const data = await res.json();
+    renderSearchResults(data);
+  } catch(err) {
+    console.warn('Nominatim error:', err);
+  }
+}
+
+function renderSearchResults(results) {
+  searchResultsEl.innerHTML = '';
+  if (!results.length) {
+    searchResultsEl.innerHTML = '<div class="search-result-item" style="color:var(--text-dim)">Keine Ergebnisse</div>';
+    searchResultsEl.classList.add('visible');
+    return;
+  }
+  results.forEach(r => {
+    const el = document.createElement('div');
+    el.className = 'search-result-item';
+    const name = r.display_name.split(',').slice(0, 3).join(', ');
+    const type = r.type || r.class;
+    el.innerHTML = `<strong>${r.display_name.split(',')[0]}</strong> <span style="opacity:.6;font-size:.8em">${name.split(',').slice(1).join(', ')}</span>`;
+    el.addEventListener('click', () => {
+      selectSearchResult(r);
+      searchResultsEl.classList.remove('visible');
+      searchInput.value = r.display_name.split(',').slice(0, 2).join(', ');
+    });
+    searchResultsEl.appendChild(el);
+  });
+  searchResultsEl.classList.add('visible');
+}
+
+function selectSearchResult(r) {
+  const lat = parseFloat(r.lat);
+  const lon = parseFloat(r.lon);
+  state.lat = lat;
+  state.lon = lon;
+  state.regionName = r.display_name.split(',')[0];
+  state.boundsSet = false;
+  state.bounds = null;
+
+  // If bounding box available, use it
+  if (r.boundingbox) {
+    const [minLat, maxLat, minLon, maxLon] = r.boundingbox.map(parseFloat);
+    const leafletBounds = L.latLngBounds([[minLat, minLon], [maxLat, maxLon]]);
+    drawnItems.clearLayers();
+    selectionRect = L.rectangle(leafletBounds, {
+      color: '#00d4ff', weight: 2, fillOpacity: 0.1, fillColor: '#00d4ff',
+    });
+    drawnItems.addLayer(selectionRect);
+    state.boundsSet = true;
+    state.bounds = leafletBounds;
+    map.fitBounds(leafletBounds, { padding: [40, 40] });
+  } else {
+    map.setView([lat, lon], 12);
+  }
+
+  updateCenterMarker();
+  updateInfoPanel();
+  showCoordsTooltip(`${state.regionName} — ${lat.toFixed(4)}, ${lon.toFixed(4)}`);
+}
+
+// ────────────────────────────────────────────────────────────
+// SLIDERS
+// ────────────────────────────────────────────────────────────
+function initSlider(id, displayId, unit, decimals = 0, callback) {
+  const slider = document.getElementById(id);
+  const display = document.getElementById(displayId);
+
+  function update() {
+    const v = parseFloat(slider.value);
+    const pct = ((v - slider.min) / (slider.max - slider.min)) * 100;
+    slider.style.setProperty('--val', pct + '%');
+    display.textContent = decimals > 0
+      ? v.toFixed(1).replace('.', ',') + (unit ? ' ' + unit : '')
+      : v + (unit ? ' ' + unit : '');
+    if (callback) callback(v);
+    updateInfoPanel();
+  }
+
+  slider.addEventListener('input', update);
+  update();
+}
+
+initSlider('sliderW', 'valW', 'cm', 0, v => { state.width_cm = v; });
+initSlider('sliderH', 'valH', 'cm', 0, v => { state.height_cm = v; });
+initSlider('sliderZ', 'valZ', '×', 1, v => { state.z_scale = v; });
+initSlider('sliderBase', 'valBase', 'mm', 1, v => { state.base_mm = v; });
+
+// ────────────────────────────────────────────────────────────
+// FORMAT TOGGLE
+// ────────────────────────────────────────────────────────────
+function setFormat(fmt) {
+  state.format = fmt;
+  document.getElementById('fmtSTL').classList.toggle('active', fmt === 'stl');
+  document.getElementById('fmtOBJ').classList.toggle('active', fmt === 'obj');
+  updateInfoPanel();
+}
+
+// ────────────────────────────────────────────────────────────
+// PRICE CALCULATION
+// ────────────────────────────────────────────────────────────
+function calcPrice(widthCm, heightCm) {
+  // Use the larger dimension as reference
+  const size = Math.max(widthCm, heightCm);
+  if (size <= PRICE_TABLE[0][0]) return PRICE_TABLE[0][1];
+  if (size >= PRICE_TABLE[PRICE_TABLE.length-1][0]) return PRICE_TABLE[PRICE_TABLE.length-1][1];
+
+  for (let i = 0; i < PRICE_TABLE.length - 1; i++) {
+    const [s0, p0] = PRICE_TABLE[i];
+    const [s1, p1] = PRICE_TABLE[i + 1];
+    if (size >= s0 && size <= s1) {
+      const t = (size - s0) / (s1 - s0);
+      return p0 + t * (p1 - p0);
+    }
+  }
+  return PRICE_TABLE[PRICE_TABLE.length-1][1];
+}
+
+function formatPrice(p) {
+  return p.toFixed(2).replace('.', ',') + ' €';
+}
+
+// ────────────────────────────────────────────────────────────
+// INFO PANEL UPDATE
+// ────────────────────────────────────────────────────────────
+function updateInfoPanel() {
+  const w = state.width_cm;
+  const h = state.height_cm;
+
+  // Region
+  document.getElementById('infoRegion').textContent =
+    state.regionName || (state.boundsSet ? 'Rechteck gezeichnet' : '— Bitte Ort wählen —');
+
+  // Coords
+  document.getElementById('infoCoords').textContent =
+    `${state.lat.toFixed(4)}, ${state.lon.toFixed(4)}`;
+
+  // Print size
+  document.getElementById('infoPrintSize').textContent = `${w} × ${h} cm`;
+
+  // Resolution info
+  document.getElementById('infoRes').textContent = '0.5 mm';
+
+  // Estimated file size (rough: vertices proportional to area/res²)
+  // area in mm², res 0.5mm → cells = (w*10/0.5) * (h*10/0.5)
+  const cells = (w * 10 / 0.5) * (h * 10 / 0.5);
+  const triangles = cells * 2;
+  const bytesMB = state.format === 'stl'
+    ? (triangles * 50) / (1024 * 1024)  // ~50 bytes per triangle binary STL
+    : (triangles * 80) / (1024 * 1024); // OBJ slightly larger
+  document.getElementById('infoFileSize').textContent = `~${bytesMB.toFixed(0)} MB`;
+
+  // Estimated print time (very rough: 1h per 100cm² base area for 15mm height)
+  const areaCm2 = w * h;
+  const printHours = (areaCm2 / 100) * 3.5 + 0.5;
+  const ph = Math.floor(printHours);
+  const pm = Math.round((printHours - ph) * 60);
+  document.getElementById('infoPrintTime').textContent = `~${ph} h ${pm.toString().padStart(2,'0')} min`;
+
+  // Price
+  const price = calcPrice(w, h);
+  document.getElementById('priceDisplay').textContent = formatPrice(price);
+}
+
+// ────────────────────────────────────────────────────────────
+// COORDS TOOLTIP
+// ────────────────────────────────────────────────────────────
+const coordsTooltip = document.getElementById('coordsTooltip');
+let tooltipTimer = null;
+
+function showCoordsTooltip(text) {
+  coordsTooltip.textContent = text;
+  coordsTooltip.classList.add('visible');
+  clearTimeout(tooltipTimer);
+  tooltipTimer = setTimeout(() => coordsTooltip.classList.remove('visible'), 3000);
+}
+
+// ────────────────────────────────────────────────────────────
+// GENERATE / API
+// ────────────────────────────────────────────────────────────
+const btnGenerate = document.getElementById('btnGenerate');
+const btnDownload = document.getElementById('btnDownload');
+const progressWrap = document.getElementById('progressWrap');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+const alertError = document.getElementById('alertError');
+const alertSuccess = document.getElementById('alertSuccess');
+
+function showError(msg) {
+  alertError.textContent = msg;
+  alertError.classList.add('visible');
+  alertSuccess.classList.remove('visible');
+}
+
+function showSuccess(msg) {
+  alertSuccess.textContent = msg;
+  alertSuccess.classList.add('visible');
+  alertError.classList.remove('visible');
+}
+
+function clearAlerts() {
+  alertError.classList.remove('visible');
+  alertSuccess.classList.remove('visible');
+}
+
+function setProgress(pct, text) {
+  progressFill.style.width = pct + '%';
+  progressText.textContent = text;
+}
+
+btnGenerate.addEventListener('click', async () => {
+  clearAlerts();
+  btnDownload.style.display = 'none';
+  state.jobId = null;
+
+  // Stop previous polling
+  if (state.polling) { clearInterval(state.polling); state.polling = null; }
+
+  // Build payload
+  const tilewidth_mm = Math.max(state.width_cm, state.height_cm) * 10;
+  const payload = {
+    lat: state.lat,
+    lon: state.lon,
+    width: state.width_cm / 100,   // degrees or normalized — backend decides
+    height: state.height_cm / 100,
+    z_scale: state.z_scale,
+    base_height_mm: state.base_mm,
+    tilewidth_mm: tilewidth_mm,
+    printres: 0.5,
+    format: state.format,
+  };
+
+  // If user drew a bounding box, override lat/lon with bbox center
+  if (state.boundsSet && state.bounds) {
+    payload.lat = state.lat;
+    payload.lon = state.lon;
+  }
+
+  console.log('Generating:', payload);
+
+  btnGenerate.disabled = true;
+  progressWrap.classList.add('visible');
+  setProgress(5, 'Job wird gestartet…');
+
+  try {
+    const res = await fetch(API_URL + '/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`Server-Fehler ${res.status}: ${errText}`);
+    }
+
+    const data = await res.json();
+    if (!data.job_id) throw new Error('Keine Job-ID erhalten.');
+
+    state.jobId = data.job_id;
+    setProgress(10, `Job gestartet (ID: ${data.job_id.slice(0,8)}…)`);
+
+    // Start polling
+    startPolling(data.job_id);
+
+  } catch (err) {
+    console.error(err);
+    showError('⚠️ Fehler beim Starten: ' + err.message);
+    progressWrap.classList.remove('visible');
+    btnGenerate.disabled = false;
+  }
+});
+
+function startPolling(jobId) {
+  state.polling = setInterval(async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/status/${jobId}`);
+      if (!res.ok) throw new Error(`Status-Abruf fehlgeschlagen (${res.status})`);
+      const data = await res.json();
+
+      const pct = typeof data.progress === 'number' ? data.progress : 50;
+      const statusMap = {
+        'queued':     'In Warteschlange…',
+        'processing': 'Höhendaten werden verarbeitet…',
+        'rendering':  '3D-Modell wird generiert…',
+        'done':       'Fertig!',
+        'error':      'Fehler aufgetreten.',
+      };
+      const statusText = statusMap[data.status] || `Status: ${data.status}`;
+
+      setProgress(pct, statusText);
+
+      if (data.status === 'done') {
+        clearInterval(state.polling);
+        state.polling = null;
+
+        setProgress(100, '✅ Modell fertig!');
+        showSuccess('Dein 3D-Terrain-Modell ist bereit zum Download!');
+        progressWrap.querySelector('.spinner').style.display = 'none';
+
+        btnDownload.style.display = 'flex';
+        btnGenerate.disabled = false;
+
+      } else if (data.status === 'error') {
+        clearInterval(state.polling);
+        state.polling = null;
+
+        showError('⚠️ Fehler: ' + (data.error || 'Unbekannter Fehler.'));
+        progressWrap.classList.remove('visible');
+        btnGenerate.disabled = false;
+      }
+
+    } catch (err) {
+      console.warn('Polling-Fehler:', err);
+      // Don't abort on single poll failure — keep trying
+    }
+  }, 3000);
+}
+
+btnDownload.addEventListener('click', () => {
+  if (!state.jobId) return;
+  const url = `${API_URL}/api/download/${state.jobId}`;
+  // Trigger download
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `factum3d_terrain_${state.lat.toFixed(3)}_${state.lon.toFixed(3)}.${state.format}`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+});
+
+// ────────────────────────────────────────────────────────────
+// INIT
+// ────────────────────────────────────────────────────────────
+updateInfoPanel();
+updateCenterMarker();
+</script>
+</body>
+</html>

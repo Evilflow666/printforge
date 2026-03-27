@@ -105,6 +105,9 @@ h3 { font-size: 1.15rem; margin-bottom: 8px; }
 }
 .header.scrolled { background: rgba(11, 15, 25, 0.98); }
 .header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   gap: 16px;

@@ -1,0 +1,873 @@
+/**
+ * FACTUM3D i18n — DE / EN / FR / ES / IT
+ */
+
+const TRANSLATIONS = {
+  'nav.leistungen':   { de:'Leistungen',  en:'Services',    fr:'Services',    es:'Servicios',   it:'Servizi'     },
+  'nav.materialien':  { de:'🧪 Materialien', en:'🧪 Materials',   fr:'🧪 Matériaux',   es:'🧪 Materiales',  it:'🧪 Materiali'   },
+  'nav.produkte':      { de:'Produkte',     en:'Products',   fr:'Produits',   es:'Productos',    it:'Prodotti'    },
+  'nav.galerie':      { de:'Galerie',     en:'Gallery',     fr:'Galerie',     es:'Galería',     it:'Galleria'    },
+  'nav.ablauf':       { de:'Ablauf',      en:'Process',     fr:'Processus',   es:'Proceso',     it:'Processo'    },
+  'nav.kontakt':      { de:'Kontakt',     en:'Contact',     fr:'Contact',     es:'Contacto',    it:'Contatto'    },
+  'nav.blog':         { de:'Blog',        en:'Blog',        fr:'Blog',        es:'Blog',        it:'Blog'        },
+  'nav.faq':          { de:'FAQ',         en:'FAQ',         fr:'FAQ',         es:'FAQ',         it:'FAQ'         },
+  'nav.about':        { de:'Über uns',    en:'About us',    fr:'À propos',    es:'Sobre nosotros', it:'Chi siamo'  },
+  'nav.kontakt':      { de:'Kontakt',     en:'Contact',     fr:'Contact',     es:'Contacto',    it:'Contatto'   },
+
+  'skip.link':     { de:'Zum Inhalt springen', en:'Skip to content', fr:'Aller au contenu', es:'Saltar al contenido', it:'Vai al contenuto' },
+
+  'hero.tagline':  { de:'Wo pittoreske Landschaft auf Innovation trifft', en:'Where picturesque landscapes meet innovation', fr:"Où les paysages pittoresques rencontrent l'innovation", es:'Donde los paisajes pintorescos se encuentran con la innovación', it:"Dove i paesaggi pittoreschi incontrano l'innovazione" },
+  'hero.sub':      { de:'Schicht für Schicht. Idee für Idee.', en:'Layer by layer. Idea by idea.', fr:'Couche par couche. Idée par idée.', es:'Capa por capa. Idea por idea.', it:'Strato per strato. Idea per idea.' },
+  'hero.eco':      { de:'☀️ Überwiegend mit PV-Energie produziert', en:'☀️ Produced mostly with solar energy', fr:"☀️ Produit principalement avec de l'énergie solaire", es:'☀️ Producido principalmente con energía solar', it:"☀️ Prodotto principalmente con energia solare" },
+  'hero.storage':  { de:'🔋 120 kWh Speicherkapazität. Printfarm läuft auch wenn die Sonne nicht scheint', en:'🔋 120 kWh storage capacity. Print farm runs even when the sun is down', fr:'🔋 120 kWh de capacité de stockage. La ferme tourne même sans soleil', es:'🔋 120 kWh de almacenamiento. La granja funciona incluso sin sol', it:'🔋 120 kWh di capacità. La stamperia funziona anche senza sole' },
+  'hero.cta':      { de:'Angebot anfragen', en:'Request a quote', fr:'Demander un devis', es:'Solicitar presupuesto', it:'Richiedi un preventivo' },
+  'hero.clippyHint': { de:'💡 Brauchst du Hilfe? Frag Clippy!', en:'💡 Need help? Ask Clippy!', fr:'💡 Besoin d aide ? Demandez a Clippy !', es:'💡 Necesitas ayuda? Pregunta a Clippy!', it:'💡 Ti serve aiuto? Chiedi a Clippy!' },
+
+  'section.leistungen':   { de:'Unsere Leistungen',  en:'Our Services',    fr:'Nos Services',    es:'Nuestros Servicios', it:'I Nostri Servizi'  },
+  'section.projekte':     { de:'Unsere Projekte',    en:'Our Projects',    fr:'Nos Projets',     es:'Nuestros Proyectos', it:'I Nostri Progetti' },
+  'section.ablauf':       { de:"So funktioniert's",  en:'How it works',    fr:'Comment ça marche', es:'Cómo funciona',   it:'Come funziona'     },
+  'section.kontakt':      { de:'Kontakt & Angebot',  en:'Contact & Quote', fr:'Contact & Devis', es:'Contacto y Presupuesto', it:'Contatto e Preventivo' },
+
+  'card.3ddruck':      { de:'3D-Druck',      en:'3D Printing',   fr:'Impression 3D', es:'Impresión 3D',  it:'Stampa 3D'      },
+  'card.laser':        { de:'Lasercutting',  en:'Laser Cutting', fr:'Découpe laser', es:'Corte láser',   it:'Taglio laser'   },
+  'card.gravur':       { de:'Lasergravur',   en:'Laser Engraving', fr:'Gravure laser', es:'Grabado láser', it:'Incisione laser'},
+  'card.proto':        { de:'Prototyping',   en:'Prototyping',   fr:'Prototypage',   es:'Prototipado',   it:'Prototipazione' },
+  'card.resin':        { de:'Resin Druck',   en:'Resin Printing',fr:'Impression résine', es:'Impresión resina', it:'Stampa resina' },
+
+  'card.3ddruck.desc': { de:'Vom Einzelstück bis zur Serie — Printfarm mit Bambu Lab H2D & P1S.', en:'From single parts to series — FDM with Bambu Lab H2D & P1S.', fr:'De la pièce unique à la série — FDM avec Bambu Lab H2D & P1S.', es:'Desde piezas únicas hasta series — FDM con Bambu Lab H2D & P1S.', it:'Dal singolo pezzo alla serie — FDM con Bambu Lab H2D & P1S.' },
+  'card.laser.desc':   { de:'Millimetergenaue Schnitte in Holz, Acryl und mehr — Creality Falcon & CO2 Laser.', en:'Millimeter-precise cuts in wood, acrylic and more.', fr:'Coupes millimétriques dans le bois, acrylique et plus.', es:'Cortes milimétricos en madera, acrílico y más.', it:'Tagli millimetrici in legno, acrilico e altro.' },
+  'card.gravur.desc':  { de:'Präzise Personalisierung auf Holz, Metall, Glas und mehr.', en:'Precise personalisation on wood, metal, glass and more.', fr:'Personnalisation précise sur bois, métal, verre et plus.', es:'Personalización precisa en madera, metal, vidrio y más.', it:'Personalizzazione precisa su legno, metallo, vetro e altro.' },
+  'card.proto.desc':   { de:'Von der Idee zum Modell in 24–72h — iterativ und bezahlbar.', en:'From idea to model in 24–72h — iterative and affordable.', fr:"De l'idée au modèle en 24–72h — itératif et abordable.", es:'De la idea al modelo en 24–72h — iterativo y asequible.', it:"Dall'idea al modello in 24–72h — iterativo e conveniente." },
+  'card.resin.desc':   { de:'Hochpräzise Harz-Drucke für Detailarbeiten und Oberflächenqualität.', en:'High-precision resin prints for detail work and surface quality.', fr:'Impressions résine haute précision pour travaux de détail.', es:'Impresiones de resina de alta precisión para trabajos de detalle.', it:'Stampe in resina ad alta precisione per lavori di dettaglio.' },
+
+  'ablauf.step1':      { de:'Anfrage senden',      en:'Send request',        fr:'Envoyer la demande',    es:'Enviar solicitud',       it:'Invia richiesta'       },
+  'ablauf.step2':      { de:'Angebot erhalten',    en:'Receive quote',       fr:'Recevoir le devis',     es:'Recibir presupuesto',    it:'Ricevi preventivo'     },
+  'ablauf.step3':      { de:'Fertigung & Versand', en:'Production & Shipping', fr:'Production & Livraison', es:'Producción y Envío', it:'Produzione e Spedizione' },
+  'ablauf.step1.desc': { de:'Beschreibe dein Projekt oder lade eine Datei hoch — STL, 3MF, DXF, SVG.', en:'Describe your project or upload a file — STL, 3MF, DXF, SVG.', fr:'Décrivez votre projet ou téléchargez un fichier — STL, 3MF, DXF, SVG.', es:'Describe tu proyecto o sube un archivo — STL, 3MF, DXF, SVG.', it:'Descrivi il tuo progetto o carica un file — STL, 3MF, DXF, SVG.' },
+  'ablauf.step2.desc': { de:'Wir prüfen deine Datei und senden dir ein individuelles Angebot.', en:'We check your file and send you an individual quote.', fr:'Nous vérifions votre fichier et vous envoyons un devis individuel.', es:'Revisamos tu archivo y te enviamos un presupuesto individual.', it:'Controlliamo il tuo file e ti inviamo un preventivo individuale.' },
+  'ablauf.step3.desc': { de:'Nach Freigabe fertigen wir dein Teil und liefern direkt zu dir.', en:'After approval we produce your part and deliver directly to you.', fr:'Après validation, nous fabriquons votre pièce et la livrons.', es:'Tras la aprobación fabricamos tu pieza y la entregamos.', it:"Dopo l'approvazione produciamo il tuo pezzo e lo consegniamo." },
+
+  'galerie.1': { de:'3D-Druck Prototyp',   en:'3D Print Prototype',       fr:'Prototype impression 3D', es:'Prototipo impresión 3D', it:'Prototipo stampa 3D' },
+  'galerie.2': { de:'Lasercut Holzschild', en:'Laser Cut Wood Sign',       fr:'Panneau bois découpé laser', es:'Letrero madera láser', it:'Insegna legno laser' },
+  'galerie.3': { de:'Lasergravur Detail',  en:'Laser Engraving Detail',    fr:'Détail gravure laser',    es:'Detalle grabado láser', it:'Dettaglio incisione laser' },
+  'galerie.4': { de:'Prototyping Gehäuse', en:'Prototyping Housing',       fr:'Boîtier prototypage',     es:'Carcasa prototipado',   it:'Alloggiamento prototipazione' },
+  'galerie.5': { de:'Lasergravur Holz',    en:'Laser Engraving Wood',      fr:'Gravure laser bois',      es:'Grabado láser madera',  it:'Incisione laser legno' },
+  'galerie.6': { de:'Resin Druck',         en:'Resin Print',               fr:'Impression résine',       es:'Impresión resina',      it:'Stampa resina' },
+
+  // === Kontakt-Formular ===
+  'kontakt.label.name':    { de:'Name',                 en:'Name',               fr:'Nom',                es:'Nombre',            it:'Nome'               },
+  'kontakt.label.email':   { de:'E-Mail',               en:'Email',              fr:'E-mail',             es:'Correo electrónico', it:'E-mail'             },
+  'kontakt.label.service': { de:'Leistung',             en:'Service',            fr:'Service',            es:'Servicio',          it:'Servizio'           },
+  'kontakt.label.message': { de:'Projektbeschreibung',  en:'Project description', fr:'Description du projet', es:'Descripción del proyecto', it:'Descrizione del progetto' },
+  'kontakt.select.default':{ de:'Leistung wählen',      en:'Select service',     fr:'Choisir un service', es:'Elegir servicio',   it:'Scegli servizio'    },
+  'kontakt.ph.name':  { de:'Dein Name',                  en:'Your name',              fr:'Votre nom',              es:'Tu nombre',             it:'Il tuo nome'            },
+  'kontakt.ph.email': { de:'deine@email.de',              en:'your@email.com',         fr:'votre@email.fr',         es:'tu@email.es',            it:'tua@email.it'           },
+  'kontakt.ph.msg':   { de:'Beschreibe dein Projekt...',  en:'Describe your project...', fr:'Décrivez votre projet...', es:'Describe tu proyecto...', it:'Descrivi il tuo progetto...' },
+  'kontakt.filedrop':      { de:'📎 Datei anhängen (optional) — <span class="accent">klicken oder ziehen</span>', en:'📎 Attach file (optional) — <span class="accent">click or drag</span>', fr:'📎 Joindre un fichier (optionnel) — <span class="accent">cliquer ou glisser</span>', es:'📎 Adjuntar archivo (opcional) — <span class="accent">clic o arrastrar</span>', it:'📎 Allega file (opzionale) — <span class="accent">clicca o trascina</span>' },
+  'kontakt.filedrop.formats': { de:'STL, 3MF, SVG, DXF, PDF, JPG, PNG (max. 25 MB)', en:'STL, 3MF, SVG, DXF, PDF, JPG, PNG (max. 25 MB)', fr:'STL, 3MF, SVG, DXF, PDF, JPG, PNG (max. 25 Mo)', es:'STL, 3MF, SVG, DXF, PDF, JPG, PNG (máx. 25 MB)', it:'STL, 3MF, SVG, DXF, PDF, JPG, PNG (max. 25 MB)' },
+  'kontakt.drop':     { de:'📎 STL, 3MF, SVG, DXF hochladen (max. 25 MB)', en:'📎 Upload STL, 3MF, SVG, DXF (max. 25 MB)', fr:'📎 Télécharger STL, 3MF, SVG, DXF (max. 25 Mo)', es:'📎 Subir STL, 3MF, SVG, DXF (máx. 25 MB)', it:'📎 Carica STL, 3MF, SVG, DXF (max. 25 MB)' },
+  'kontakt.senden':   { de:'Angebot anfordern', en:'Request quote', fr:'Demander un devis', es:'Solicitar presupuesto', it:'Richiedi preventivo' },
+
+  // === Footer ===
+  'footer.tagline':    { de:'Schicht für Schicht. Idee für Idee.', en:'Layer by layer. Idea by idea.', fr:'Couche par couche. Idée par idée.', es:'Capa por capa. Idea por idea.', it:'Strato per strato. Idea per idea.' },
+  'footer.impressum':  { de:'Impressum',   en:'Legal Notice',    fr:'Mentions légales',         es:'Aviso legal',             it:'Note legali'   },
+  'footer.datenschutz':{ de:'Datenschutz', en:'Privacy Policy',  fr:'Politique de confidentialité', es:'Política de privacidad', it:'Privacy Policy' },
+  'footer.copy':       { de:'© 2026 FACTUM3D. Alle Rechte vorbehalten.', en:'© 2026 FACTUM3D. All rights reserved.', fr:'© 2026 FACTUM3D. Tous droits réservés.', es:'© 2026 FACTUM3D. Todos los derechos reservados.', it:'© 2026 FACTUM3D. Tutti i diritti riservati.' },
+
+  // === Leistungen Unterseiten - Abschnitt-Titel ===
+  'sub.materialien.title': { de:'Materialien',      en:'Materials',     fr:'Matériaux',      es:'Materiales',    it:'Materiali'      },
+  'sub.equipment.title':   { de:'Equipment',        en:'Equipment',     fr:'Équipement',     es:'Equipamiento',  it:'Attrezzatura'   },
+  'sub.anwendungen.title': { de:'Anwendungen',      en:'Applications',  fr:'Applications',   es:'Aplicaciones',  it:'Applicazioni'   },
+  'sub.fuerwen':           { de:'Für wen?',          en:'Who is it for?', fr:'Pour qui ?',    es:'¿Para quién?',  it:'Per chi?'       },
+  'sub.turnaround':        { de:'Turnaround',        en:'Turnaround',    fr:'Délai',          es:'Plazo',         it:'Tempi'          },
+  'sub.waswirbietentitle': { de:'Was wir bieten',    en:'What we offer', fr:'Ce que nous offrons', es:'Lo que ofrecemos', it:'Cosa offriamo' },
+  'sub.oberflaechen':      { de:'Oberflächen',       en:'Surfaces',      fr:'Surfaces',       es:'Superficies',   it:'Superfici'      },
+  'sub.detailgrade':       { de:'Detailgrade',       en:'Detail levels', fr:'Niveaux de détail', es:'Niveles de detalle', it:'Livelli di dettaglio' },
+  'sub.warumresin':        { de:'Warum Resin?',      en:'Why Resin?',    fr:'Pourquoi la résine ?', es:'¿Por qué resina?', it:'Perché la resina?' },
+  'sub.quote':             { de:'Angebot anfragen',  en:'Request quote', fr:'Demander un devis', es:'Solicitar presupuesto', it:'Richiedi preventivo' },
+
+  // === 3D-Druck Unterseite ===
+  '3d.title':      { de:'3D-Druck',   en:'3D Printing',  fr:'Impression 3D', es:'Impresión 3D', it:'Stampa 3D'  },
+  '3d.sub':        { de:'FDM-Druck mit Bambu Lab H2D & P1S — vom Einzelstück bis zur Serie.', en:'FDM printing with Bambu Lab H2D & P1S — from single parts to series.', fr:'Impression FDM avec Bambu Lab H2D & P1S — de la pièce unique à la série.', es:'Impresión FDM con Bambu Lab H2D & P1S — desde piezas únicas hasta series.', it:'Stampa FDM con Bambu Lab H2D & P1S — dal singolo pezzo alla serie.' },
+  '3d.mat.standard':{ de:'Standard: PLA, PETG, ABS, ASA, TPU', en:'Standard: PLA, PETG, ABS, ASA, TPU', fr:'Standard : PLA, PETG, ABS, ASA, TPU', es:'Estándar: PLA, PETG, ABS, ASA, TPU', it:'Standard: PLA, PETG, ABS, ASA, TPU' },
+  '3d.mat.eng':    { de:'Engineering: PA (Nylon), PC, PET', en:'Engineering: PA (Nylon), PC, PET', fr:'Ingénierie : PA (Nylon), PC, PET', es:'Ingeniería: PA (Nylon), PC, PET', it:'Ingegneria: PA (Nylon), PC, PET' },
+  '3d.mat.cf':     { de:'Faserverstärkt: PLA-CF, PETG-CF, PA-CF, PC-CF, ABS-CF', en:'Fiber-reinforced: PLA-CF, PETG-CF, PA-CF, PC-CF, ABS-CF', fr:'Renforcé fibres : PLA-CF, PETG-CF, PA-CF, PC-CF, ABS-CF', es:'Reforzado con fibra: PLA-CF, PETG-CF, PA-CF, PC-CF, ABS-CF', it:'Rinforzato con fibra: PLA-CF, PETG-CF, PA-CF, PC-CF, ABS-CF' },
+  '3d.mat.hp':     { de:'High-Performance: PPA-CF, PPS, PPS-CF', en:'High-Performance: PPA-CF, PPS, PPS-CF', fr:'Haute performance : PPA-CF, PPS, PPS-CF', es:'Alto rendimiento: PPA-CF, PPS, PPS-CF', it:'High-Performance: PPA-CF, PPS, PPS-CF' },
+  '3d.mat.support':{ de:'Support: PVA, BVOH (wasserlöslich)', en:'Support: PVA, BVOH (water-soluble)', fr:'Support : PVA, BVOH (hydrosoluble)', es:'Soporte: PVA, BVOH (soluble en agua)', it:'Supporto: PVA, BVOH (idrosolubile)' },
+  '3d.multi':      { de:'Multi-Material & Multi-Color möglich', en:'Multi-material & multi-color possible', fr:'Multi-matière & multi-couleur possible', es:'Multi-material y multi-color posible', it:'Multi-materiale e multi-colore possibile' },
+  '3d.leistung1':  { de:'Einzelstücke & Kleinserien', en:'Single pieces & small series', fr:'Pièces uniques & petites séries', es:'Piezas únicas & series cortas', it:'Pezzi singoli & piccole serie' },
+  '3d.leistung2':  { de:'Funktionsprototypen & Gehäuse', en:'Functional prototypes & housings', fr:'Prototypes fonctionnels & boîtiers', es:'Prototipos funcionales & carcasas', it:'Prototipi funzionali & alloggiamenti' },
+  '3d.leistung3':  { de:'Multi-Material-Druck (z.B. TPU + PLA)', en:'Multi-material printing (e.g. TPU + PLA)', fr:'Impression multi-matière (ex. TPU + PLA)', es:'Impresión multi-material (ej. TPU + PLA)', it:'Stampa multi-materiale (es. TPU + PLA)' },
+  '3d.leistung4':  { de:'Nachbearbeitung auf Wunsch (Schleifen, Lackieren)', en:'Post-processing on request (sanding, painting)', fr:'Post-traitement sur demande (ponçage, peinture)', es:'Post-procesado bajo demanda (lijado, pintado)', it:'Post-lavorazione su richiesta (levigatura, verniciatura)' },
+
+  // === Lasercutting Unterseite ===
+  'laser.title':  { de:'Lasercutting', en:'Laser Cutting', fr:'Découpe laser', es:'Corte láser',  it:'Taglio laser'  },
+  'laser.sub':    { de:'Millimetergenaue Schnitte mit Creality Falcon & Snapmaker A350T.', en:'Millimeter-precise cuts with Creality Falcon & Snapmaker A350T.', fr:'Coupes millimétriques avec Creality Falcon & Snapmaker A350T.', es:'Cortes milimétricos con Creality Falcon & Snapmaker A350T.', it:'Tagli millimetrici con Creality Falcon & Snapmaker A350T.' },
+  'lc.mat1':      { de:'Sperrholz, MDF, Massivholz (bis 8mm)', en:'Plywood, MDF, solid wood (up to 8mm)', fr:"Contreplaqué, MDF, bois massif (jusqu'à 8mm)", es:'Madera contrachapada, MDF, madera maciza (hasta 8mm)', it:'Compensato, MDF, legno massiccio (fino a 8mm)' },
+  'lc.mat2':      { de:'Acryl transparent & farbig (bis 6mm)', en:'Acrylic transparent & coloured (up to 6mm)', fr:"Acrylique transparent & coloré (jusqu'à 6mm)", es:'Acrílico transparente y de color (hasta 6mm)', it:'Acrilico trasparente e colorato (fino a 6mm)' },
+  'lc.mat3':      { de:'Leder, Papier, Karton, Stoff', en:'Leather, paper, cardboard, fabric', fr:'Cuir, papier, carton, tissu', es:'Cuero, papel, cartón, tela', it:'Pelle, carta, cartone, tessuto' },
+  'lc.app1':      { de:'Schilder, Logos & Schriftzüge', en:'Signs, logos & lettering', fr:'Panneaux, logos & lettrage', es:'Señales, logos & letreros', it:'Insegne, loghi & scritte' },
+  'lc.app2':      { de:'Dekorative Elemente & Geschenke', en:'Decorative elements & gifts', fr:'Éléments décoratifs & cadeaux', es:'Elementos decorativos & regalos', it:'Elementi decorativi & regali' },
+  'lc.app3':      { de:'Verpackungen & Displays', en:'Packaging & displays', fr:'Emballages & présentoirs', es:'Embalajes & displays', it:'Imballaggi & display' },
+  'lc.app4':      { de:'Technische Teile & Prototypen', en:'Technical parts & prototypes', fr:'Pièces techniques & prototypes', es:'Piezas técnicas & prototipos', it:'Parti tecniche & prototipi' },
+
+  // === Lasergravur Unterseite ===
+  'gravur.title': { de:'Lasergravur',  en:'Laser Engraving', fr:'Gravure laser', es:'Grabado láser', it:'Incisione laser' },
+  'gravur.sub':   { de:'Präzise Gravuren für Branding, Personalisierung und Detailarbeit.', en:'Precise engravings for branding, personalisation and detail work.', fr:'Gravures précises pour le branding, la personnalisation et le travail de détail.', es:'Grabados precisos para branding, personalización y trabajo de detalle.', it:'Incisioni precise per branding, personalizzazione e lavoro di dettaglio.' },
+  'lg.surf1':     { de:'Holz, Bambus, Kork', en:'Wood, bamboo, cork', fr:'Bois, bambou, liège', es:'Madera, bambú, corcho', it:'Legno, bambù, sughero' },
+  'lg.surf2':     { de:'Metall (beschichtet / eloxiert)', en:'Metal (coated / anodised)', fr:'Métal (revêtu / anodisé)', es:'Metal (recubierto / anodizado)', it:'Metallo (rivestito / anodizzato)' },
+  'lg.surf3':     { de:'Glas, Keramik, Stein', en:'Glass, ceramic, stone', fr:'Verre, céramique, pierre', es:'Vidrio, cerámica, piedra', it:'Vetro, ceramica, pietra' },
+  'lg.surf4':     { de:'Leder, Acryl', en:'Leather, acrylic', fr:'Cuir, acrylique', es:'Cuero, acrílico', it:'Pelle, acrilico' },
+  'lg.det1':      { de:'Standard (0.1mm) — für Text & Logos', en:'Standard (0.1mm) — for text & logos', fr:'Standard (0.1mm) — pour texte & logos', es:'Estándar (0.1mm) — para texto y logos', it:'Standard (0.1mm) — per testo e loghi' },
+  'lg.det2':      { de:'Fein (0.05mm) — Foto-Qualität', en:'Fine (0.05mm) — photo quality', fr:'Fin (0.05mm) — qualité photo', es:'Fino (0.05mm) — calidad fotográfica', it:'Fine (0.05mm) — qualità fotografica' },
+  'lg.det3':      { de:'Grob (0.15mm) — schnelle Großflächen', en:'Coarse (0.15mm) — fast large areas', fr:'Grossier (0.15mm) — grandes surfaces rapides', es:'Grueso (0.15mm) — grandes superficies rápidas', it:'Grezzo (0.15mm) — grandi superfici veloci' },
+  'lg.app1':      { de:'Logo-Branding & Beschriftung', en:'Logo branding & labelling', fr:'Marquage logo & étiquetage', es:'Branding logo & etiquetado', it:'Logo branding & etichettatura' },
+  'lg.app2':      { de:'Personalisierte Geschenke', en:'Personalised gifts', fr:'Cadeaux personnalisés', es:'Regalos personalizados', it:'Regali personalizzati' },
+  'lg.app3':      { de:'QR-Codes & Seriennummern', en:'QR codes & serial numbers', fr:'Codes QR & numéros de série', es:'Códigos QR & números de serie', it:'Codici QR & numeri di serie' },
+  'lg.app4':      { de:'Foto-Gravuren', en:'Photo engravings', fr:'Gravures photo', es:'Grabados fotográficos', it:'Incisioni fotografiche' },
+
+  // === Prototyping Unterseite ===
+  'proto.title':  { de:'Prototyping',  en:'Prototyping',  fr:'Prototypage',  es:'Prototipado',   it:'Prototipazione' },
+  'proto.sub':    { de:'Von der Idee zum funktionalen Modell — schnell, iterativ, bezahlbar.', en:'From idea to functional model — fast, iterative, affordable.', fr:"De l'idée au modèle fonctionnel — rapide, itératif, abordable.", es:'De la idea al modelo funcional — rápido, iterativo, asequible.', it:"Dall'idea al modello funzionale — veloce, iterativo, conveniente." },
+  'proto.for1':   { de:'Entwickler & Ingenieure', en:'Developers & engineers', fr:'Développeurs & ingénieurs', es:'Desarrolladores & ingenieros', it:'Sviluppatori & ingegneri' },
+  'proto.for2':   { de:'Maker & Bastler', en:'Makers & hobbyists', fr:'Makers & bricoleurs', es:'Makers & aficionados', it:'Maker & hobbisti' },
+  'proto.for3':   { de:'Startups & Produktdesigner', en:'Startups & product designers', fr:'Startups & designers produit', es:'Startups & diseñadores de producto', it:'Startup & product designer' },
+  'proto.ta1':    { de:'Schnelle Iterationen (24–72h)', en:'Fast iterations (24–72h)', fr:'Itérations rapides (24–72h)', es:'Iteraciones rápidas (24–72h)', it:'Iterazioni veloci (24–72h)' },
+  'proto.ta2':    { de:'Funktionsmodelle & Passproben', en:'Functional models & fit tests', fr:"Modèles fonctionnels & essais d'ajustement", es:'Modelos funcionales & pruebas de ajuste', it:'Modelli funzionali & prove di adattamento' },
+  'proto.ta3':    { de:'Kleinserien bis 50 Stück', en:'Small series up to 50 pieces', fr:"Petites séries jusqu'à 50 pièces", es:'Series cortas hasta 50 piezas', it:'Piccole serie fino a 50 pezzi' },
+  'proto.off1':   { de:'Beratung zu Material & Fertigungsweg', en:'Consultation on material & manufacturing', fr:'Conseil sur matériau & procédé de fabrication', es:'Consultoría sobre material & fabricación', it:'Consulenza su materiale & processo produttivo' },
+  'proto.off2':   { de:'FDM, Resin oder Laser — je nach Anforderung', en:'FDM, resin or laser — depending on requirements', fr:'FDM, résine ou laser — selon les besoins', es:'FDM, resina o láser — según los requisitos', it:'FDM, resina o laser — a seconda dei requisiti' },
+  'proto.off3':   { de:'Nachbearbeitung & Finishing', en:'Post-processing & finishing', fr:'Post-traitement & finition', es:'Post-procesado & acabado', it:'Post-lavorazione & finitura' },
+  'proto.off4':   { de:'Iterative Optimierung bis zum finalen Teil', en:'Iterative optimisation to the final part', fr:"Optimisation itérative jusqu'à la pièce finale", es:'Optimización iterativa hasta la pieza final', it:'Ottimizzazione iterativa fino al pezzo finale' },
+
+  // === Resin-Druck Unterseite ===
+  'resin.title':  { de:'Resin-Druck',  en:'Resin Printing', fr:'Impression résine', es:'Impresión resina', it:'Stampa resina' },
+  'resin.sub':    { de:'Hochpräzise Harz-Drucke (SLA/DLP) für maximale Detailtreue.', en:'High-precision resin prints (SLA/DLP) for maximum detail.', fr:'Impressions résine haute précision (SLA/DLP) pour un détail maximum.', es:'Impresiones de resina de alta precisión (SLA/DLP) para máximo detalle.', it:'Stampe in resina ad alta precisione (SLA/DLP) per massimo dettaglio.' },
+  'resin.why.desc': { de:'Dort, wo klassischer FDM-Druck an seine Grenzen stößt, glänzt der Resin-Druck. Durch UV-härtende Harze erreichen wir Oberflächenqualitäten und Detailgrade, die fast Spritzguss-Niveau entsprechen.', en:'Where traditional FDM printing reaches its limits, resin printing shines. With UV-curing resins we achieve surface qualities and detail levels close to injection moulding.', fr:"Là où l'impression FDM classique atteint ses limites, l'impression résine brille. Avec des résines UV, nous atteignons des qualités de surface proches du moulage par injection.", es:'Donde la impresión FDM clásica alcanza sus límites, la impresión en resina brilla. Con resinas UV logramos calidades de superficie cercanas a la inyección.', it:"Dove la stampa FDM classica raggiunge i suoi limiti, la stampa in resina brilla. Con resine UV raggiungiamo qualità superficiali vicine allo stampaggio a iniezione." },
+  'resin.mat1':   { de:'Standard-Resin (hohe Detailtreue)', en:'Standard resin (high detail accuracy)', fr:'Résine standard (haute précision)', es:'Resina estándar (alta fidelidad de detalle)', it:'Resina standard (alta fedeltà di dettaglio)' },
+  'resin.mat2':   { de:'Tough Resin (mechanisch belastbar)', en:'Tough resin (mechanically durable)', fr:'Résine tough (résistante mécaniquement)', es:'Resina tough (resistente mecánicamente)', it:'Resina tough (resistente meccanicamente)' },
+  'resin.mat3':   { de:'Flexible Resin (biegsam)', en:'Flexible resin (bendable)', fr:'Résine flexible (souple)', es:'Resina flexible (flexible)', it:'Resina flessibile (pieghevole)' },
+  'resin.mat4':   { de:'Castable Resin (für Gussformen)', en:'Castable resin (for casting moulds)', fr:'Résine castable (pour moules)', es:'Resina castable (para moldes)', it:'Resina castable (per stampi)' },
+  'resin.app1':   { de:'Miniaturen für Tabletop & Spiele', en:'Miniatures for tabletop & games', fr:'Figurines pour jeux de plateau', es:'Miniaturas para juegos de mesa', it:'Miniature per giochi da tavolo' },
+  'resin.app2':   { de:'Schmuck-Designs & Gussformen', en:'Jewellery designs & casting moulds', fr:'Designs bijoux & moules de coulée', es:'Diseños de joyería & moldes de fundición', it:'Design gioielli & stampi per colata' },
+  'resin.app3':   { de:'Hochpräzise technische Prototypen', en:'High-precision technical prototypes', fr:'Prototypes techniques haute précision', es:'Prototipos técnicos de alta precisión', it:'Prototipi tecnici ad alta precisione' },
+  'resin.app4':   { de:'Zahnmedizinische Modelle', en:'Dental models', fr:'Modèles dentaires', es:'Modelos dentales', it:'Modelli dentali' },
+
+  // === Produkte ===
+  'produkte.title': { de:'Produkte',    en:'Products', fr:'Produits', es:'Productos',  it:'Prodotti'  },
+  'produkte.sub':   { de:'Unser Komplettangebot — alle Sparten, eine Werkstatt.', en:'Our full range — all services, one workshop.', fr:'Notre offre complète — tous les services, un seul atelier.', es:'Nuestra oferta completa — todos los servicios, un taller.', it:"La nostra offerta completa — tutti i servizi, un'officina." },
+  'produkte.cat.fdm':   { de:'3D-FDM-Druck', en:'3D FDM Printing', fr:'Impression 3D FDM', es:'Impresión 3D FDM', it:'Stampa 3D FDM' },
+  'produkte.cat.laser': { de:'Lasercut & Gravur', en:'Laser Cut & Engraving', fr:'Découpe & Gravure laser', es:'Corte y Grabado láser', it:'Taglio e Incisione laser' },
+  'produkte.fdm.sub':   { de:'Fertige Produkte aus unserer Printfarm — direkt bestellen.', en:'Ready-made products from our print farm — order directly.', fr:'Produits finis de notre ferme d\'impression — commandez directement.', es:'Productos terminados de nuestra granja de impresión — pida directamente.', it:'Prodotti finiti dalla nostra stamperia — ordina direttamente.' },
+  'produkte.laser.sub':  { de:'Präzise Schnitte und Gravuren in Holz, Acryl und mehr.', en:'Precise cuts and engravings in wood, acrylic and more.', fr:'Découpes et gravures précises dans le bois, l\'acrylique et plus.', es:'Cortes y grabados precisos en madera, acrílico y más.', it:'Tagli e incisioni precisi in legno, acrilico e altro.' },
+  'produkte.laser.soon': { de:'Kommt bald', en:'Coming soon', fr:'Bientôt disponible', es:'Próximamente', it:'Prossimamente' },
+  'produkte.laser.soon.desc': { de:'Wir arbeiten an unserem Lasercut-Sortiment. Schau bald wieder vorbei oder schreib uns für individuelle Anfragen.', en:'We\'re working on our laser cut range. Check back soon or contact us for custom requests.', fr:'Nous travaillons sur notre gamme de découpe laser. Revenez bientôt ou contactez-nous.', es:'Estamos trabajando en nuestra gama de corte láser. Vuelve pronto o escríbenos.', it:'Stiamo lavorando sulla nostra gamma di taglio laser. Torna presto o contattaci.' },
+  'produkte.back': { de:'← Zurück zu Produkte', en:'← Back to Products', fr:'← Retour aux Produits', es:'← Volver a Productos', it:'← Torna ai Prodotti' },
+  'produkte.fdm.card': { de:'Home & Deko, Büro, Küche, Tech-Zubehör, Garten — fertige Produkte aus unserer Printfarm.', en:'Home & Decor, Office, Kitchen, Tech, Garden — ready-made products from our print farm.', fr:'Maison & Déco, Bureau, Cuisine, Tech, Jardin — produits finis de notre ferme.', es:'Hogar & Deco, Oficina, Cocina, Tech, Jardín — productos de nuestra granja.', it:'Casa & Deco, Ufficio, Cucina, Tech, Giardino — prodotti dalla nostra stamperia.' },
+  'produkte.laser.card': { de:'Holzschilder, Acrylschnitte, Gravuren und mehr — kommt bald.', en:'Wood signs, acrylic cuts, engravings and more — coming soon.', fr:'Panneaux en bois, découpes acryliques, gravures — bientôt.', es:'Letreros de madera, cortes acrílicos, grabados — próximamente.', it:'Insegne in legno, tagli acrilici, incisioni — prossimamente.' },
+  'produkte.custom.title': { de:'Du hast etwas anderes im Kopf?', en:'Have something else in mind?', fr:'Vous avez autre chose en tête ?', es:'¿Tienes algo diferente en mente?', it:'Hai qualcos\'altro in mente?' },
+  'produkte.custom.desc': { de:'Wir fertigen auch individuelle Projekte — schreib uns einfach.', en:'We also make custom projects — just contact us.', fr:'Nous réalisons aussi des projets sur mesure — contactez-nous.', es:'También hacemos proyectos personalizados — contáctanos.', it:'Realizziamo anche progetti personalizzati — contattaci.' },
+
+  // === Über uns ===
+  'about.title': { de:'Über uns', en:'About us', fr:'À propos', es:'Sobre nosotros', it:'Chi siamo' },
+  'about.sub': { de:'Die Geschichte hinter FACTUM3D.', en:'The story behind FACTUM3D.', fr:'L\'histoire derrière FACTUM3D.', es:'La historia detrás de FACTUM3D.', it:'La storia dietro FACTUM3D.' },
+  'about.story.title': { de:'Unsere Geschichte', en:'Our Story', fr:'Notre histoire', es:'Nuestra historia', it:'La nostra storia' },
+  'about.story.p1': { de:'FACTUM3D entstand aus einer einfachen Idee: Was, wenn man Präzision und Leidenschaft mit modernster Fertigungstechnik verbindet? Aus einer Garage wurde eine Printfarm mit Druckern, Lasercuttern und einer ganzen Menge Leidenschaft für saubere Ergebnisse.', en:'FACTUM3D was born from a simple idea: What if you combine precision and passion with cutting-edge manufacturing? From a garage grew a print farm with printers, laser cutters, and a whole lot of passion for clean results.', fr:'FACTUM3D est né d\'une idée simple : et si on combinait précision et passion avec la fabrication de pointe ? D\'un garage est née une ferme d\'impression avec des imprimantes, des découpeuses laser et beaucoup de passion.', es:'FACTUM3D nació de una idea simple: ¿y si combinamos precisión y pasión con tecnología de fabricación de vanguardia? De un garaje creció una granja de impresión con impresoras, cortadoras láser y mucha pasión.', it:'FACTUM3D è nato da un\'idea semplice: e se combinassimo precisione e passione con la produzione all\'avanguardia? Da un garage è nata una stamperia con stampanti, laser cutter e tanta passione.' },
+  'about.story.p2': { de:'Wir sind kein Großkonzern — wir sind Macher. Jedes Teil das unsere Werkstatt verlässt, wurde mit Sorgfalt gefertigt, geprüft und verpackt. Ob Einzelstück oder Kleinserie: bei uns bekommt jeder Auftrag die gleiche Aufmerksamkeit.', en:'We\'re not a big corporation — we\'re makers. Every part that leaves our workshop was crafted with care, checked and packed. Whether one-off or small batch: every order gets the same attention.', fr:'Nous ne sommes pas une grande entreprise — nous sommes des makers. Chaque pièce qui quitte notre atelier est fabriquée avec soin, vérifiée et emballée. Pièce unique ou petite série : chaque commande reçoit la même attention.', es:'No somos una gran corporación — somos makers. Cada pieza que sale de nuestro taller fue fabricada con cuidado, verificada y empaquetada. Pieza única o pequeña serie: cada pedido recibe la misma atención.', it:'Non siamo una grande azienda — siamo maker. Ogni pezzo che esce dal nostro laboratorio è realizzato con cura, controllato e imballato. Pezzo unico o piccola serie: ogni ordine riceve la stessa attenzione.' },
+  'about.farm.title': { de:'Unsere Printfarm', en:'Our Print Farm', fr:'Notre ferme d\'impression', es:'Nuestra granja de impresión', it:'La nostra stamperia' },
+  'about.farm.printers': { de:'3D-Drucker', en:'3D Printers', fr:'Imprimantes 3D', es:'Impresoras 3D', it:'Stampanti 3D' },
+  'about.farm.lasers': { de:'Laser-Systeme', en:'Laser Systems', fr:'Systèmes laser', es:'Sistemas láser', it:'Sistemi laser' },
+  'about.farm.solar': { de:'Solartracker', en:'Solar Tracker', fr:'Tracker solaire', es:'Tracker solar', it:'Tracker solare' },
+  'about.farm.battery': { de:'Speicher', en:'Storage', fr:'Stockage', es:'Almacenamiento', it:'Accumulo' },
+  'about.farm.desc': { de:'Unsere Farm läuft überwiegend mit Solarstrom. Eine leistungsstarke PV-Anlage und 120 kWh Batteriespeicher sorgen dafür, dass unsere Drucker rund um die Uhr laufen. Nachhaltigkeit ist für uns kein Marketing — es ist die Stromrechnung.', en:'Our farm runs mostly on solar power. A powerful PV system and 120 kWh battery storage ensure our printers run around the clock. Sustainability isn\'t marketing for us — it\'s the electricity bill.', fr:'Notre ferme fonctionne principalement à l\'énergie solaire. Une installation PV puissante et 120 kWh de stockage garantissent que nos imprimantes tournent 24h/24. La durabilité n\'est pas du marketing — c\'est la facture d\'électricité.', es:'Nuestra granja funciona principalmente con energía solar. Una potente instalación PV y 120 kWh de almacenamiento aseguran que nuestras impresoras funcionen las 24 horas. La sostenibilidad no es marketing — es la factura de luz.', it:'La nostra stamperia funziona principalmente a energia solare. Un potente impianto PV e 120 kWh di accumulo garantiscono che le stampanti funzionino 24 ore su 24. La sostenibilità non è marketing — è la bolletta della luce.' },
+  'about.machines.title': { de:'Unsere Maschinen', en:'Our Machines', fr:'Nos machines', es:'Nuestras máquinas', it:'Le nostre macchine' },
+  'about.values.title': { de:'Wofür wir stehen', en:'What we stand for', fr:'Ce que nous représentons', es:'Lo que representamos', it:'I nostri valori' },
+  'about.values.fast': { de:'Schnell', en:'Fast', fr:'Rapide', es:'Rápido', it:'Veloce' },
+  'about.values.fast.desc': { de:'Einzelteile in 24–72h. Kleinserien in unter einer Woche.', en:'Single parts in 24–72h. Small batches in under a week.', fr:'Pièces uniques en 24–72h. Petites séries en moins d\'une semaine.', es:'Piezas únicas en 24–72h. Pequeñas series en menos de una semana.', it:'Pezzi singoli in 24–72h. Piccole serie in meno di una settimana.' },
+  'about.values.precise': { de:'Präzise', en:'Precise', fr:'Précis', es:'Preciso', it:'Preciso' },
+  'about.values.precise.desc': { de:'Kalibrierte Maschinen, geprüfte Teile, konstante Qualität.', en:'Calibrated machines, tested parts, consistent quality.', fr:'Machines calibrées, pièces testées, qualité constante.', es:'Máquinas calibradas, piezas probadas, calidad constante.', it:'Macchine calibrate, pezzi testati, qualità costante.' },
+  'about.values.green': { de:'Nachhaltig', en:'Sustainable', fr:'Durable', es:'Sostenible', it:'Sostenibile' },
+  'about.values.green.desc': { de:'Solarstrom, minimaler Abfall, recycelbare Materialien wo möglich.', en:'Solar power, minimal waste, recyclable materials where possible.', fr:'Énergie solaire, déchets minimaux, matériaux recyclables si possible.', es:'Energía solar, residuos mínimos, materiales reciclables cuando sea posible.', it:'Energia solare, scarti minimi, materiali riciclabili dove possibile.' },
+  'about.values.personal': { de:'Persönlich', en:'Personal', fr:'Personnel', es:'Personal', it:'Personale' },
+  'about.values.personal.desc': { de:'Direkter Kontakt, keine Warteschleifen, echte Menschen.', en:'Direct contact, no waiting loops, real people.', fr:'Contact direct, pas d\'attente, de vraies personnes.', es:'Contacto directo, sin esperas, personas reales.', it:'Contatto diretto, nessuna attesa, persone reali.' },
+  'prod.func':      { de:'⚙️ Funktionsteile & Ersatzteile', en:'⚙️ Functional & Spare Parts', fr:'⚙️ Pièces fonctionnelles & rechange', es:'⚙️ Piezas funcionales & repuesto', it:'⚙️ Parti funzionali & ricambio' },
+  'prod.func.desc': { de:"Kaputt? Gibt's nicht mehr? Wir drucken es neu.", en:"Broken? Out of stock? We'll print it fresh.", fr:'Cassé ? Plus disponible ? On le réimprime.', es:'¿Roto? ¿Sin stock? Lo imprimimos nuevo.', it:'Rotto? Non più disponibile? Lo stampiamo nuovo.' },
+  'prod.func.item1':     { de:'Zahnräder & Mechanik',     en:'Gears & Mechanics',        fr:'Engrenages & Mécanique',    es:'Engranajes & Mecánica',     it:'Ingranaggi & Meccanica'     },
+  'prod.func.item1.desc':{ de:'Verschleißteile, Adapter, Halterungen', en:'Wear parts, adapters, mounts', fr:"Pièces d'usure, adaptateurs, supports", es:'Piezas de desgaste, adaptadores, soportes', it:'Parti di usura, adattatori, supporti' },
+  'prod.func.item2':     { de:'Gehäuse & Abdeckungen',    en:'Housings & Covers',         fr:'Boîtiers & Couvercles',     es:'Carcasas & Cubiertas',      it:'Alloggiamenti & Coperture'  },
+  'prod.func.item2.desc':{ de:'Elektronik-Gehäuse, Schutzabdeckungen', en:'Electronics housings, protective covers', fr:'Boîtiers électroniques, couvercles de protection', es:'Carcasas electrónicas, cubiertas protectoras', it:'Alloggiamenti elettronici, coperture protettive' },
+  'prod.func.item3':     { de:'Clips & Verbinder',        en:'Clips & Connectors',        fr:'Clips & Connecteurs',       es:'Clips & Conectores',        it:'Clip & Connettori'          },
+  'prod.func.item3.desc':{ de:'Kabelclips, Rohrhalter, Schnappverschlüsse', en:'Cable clips, pipe holders, snap closures', fr:'Clips de câble, supports de tuyaux, fermetures à pression', es:'Clips de cable, soportes de tubo, cierres a presión', it:'Clip per cavi, supporti per tubi, chiusure a scatto' },
+  'prod.deko':      { de:'🎨 Deko & Geschenke', en:'🎨 Decoration & Gifts', fr:'🎨 Déco & Cadeaux', es:'🎨 Decoración & Regalos', it:'🎨 Decorazione & Regali' },
+  'prod.deko.desc': { de:'Personalisierte Einzelstücke mit Charakter.', en:'Personalised unique pieces with character.', fr:'Pièces uniques personnalisées avec du caractère.', es:'Piezas únicas personalizadas con carácter.', it:'Pezzi unici personalizzati con carattere.' },
+  'prod.deko.item1':     { de:'Gravierte Holzschilder',   en:'Engraved Wood Signs',       fr:'Panneaux en bois gravés',   es:'Letreros de madera grabados', it:'Insegne in legno incise'   },
+  'prod.deko.item1.desc':{ de:'Namen, Sprüche, Logos auf Echtholz', en:'Names, quotes, logos on real wood', fr:'Noms, citations, logos sur bois véritable', es:'Nombres, frases, logos en madera real', it:'Nomi, citazioni, loghi su legno vero' },
+  'prod.deko.item2':     { de:'3D-Druck Figuren',         en:'3D Print Figures',           fr:'Figurines impression 3D',   es:'Figuras impresión 3D',       it:'Figure stampa 3D'           },
+  'prod.deko.item2.desc':{ de:'Miniaturen, Deko-Objekte, Vasen', en:'Miniatures, decorative objects, vases', fr:'Miniatures, objets décoratifs, vases', es:'Miniaturas, objetos decorativos, jarrones', it:'Miniature, oggetti decorativi, vasi' },
+  'prod.deko.item3':     { de:'Personalisierte Geschenke', en:'Personalised Gifts',        fr:'Cadeaux personnalisés',     es:'Regalos personalizados',     it:'Regali personalizzati'      },
+  'prod.deko.item3.desc':{ de:'Schlüsselanhänger, Untersetzer, Boxen', en:'Keychains, coasters, boxes', fr:'Porte-clés, sous-verres, boîtes', es:'Llaveros, posavasos, cajas', it:'Portachiavi, sottobicchieri, scatole' },
+  'prod.biz':       { de:'💼 Business & Branding', en:'💼 Business & Branding', fr:'💼 Business & Branding', es:'💼 Negocio & Branding', it:'💼 Business & Branding' },
+  'prod.biz.desc':  { de:'Professionelle Lösungen für Firmen und Marken.', en:'Professional solutions for companies and brands.', fr:'Solutions professionnelles pour entreprises et marques.', es:'Soluciones profesionales para empresas y marcas.', it:'Soluzioni professionali per aziende e marchi.' },
+  'prod.biz.item1':      { de:'Firmenschilder',           en:'Company Signs',              fr:"Enseignes d'entreprise",    es:'Letreros de empresa',        it:'Insegne aziendali'          },
+  'prod.biz.item1.desc': { de:'Acryl, Holz oder Metall — lasergeschnitten & graviert', en:'Acrylic, wood or metal — laser cut & engraved', fr:'Acrylique, bois ou métal — découpé & gravé au laser', es:'Acrílico, madera o metal — cortado y grabado con láser', it:'Acrilico, legno o metallo — tagliato e inciso al laser' },
+  'prod.biz.item2':      { de:'Produkt-Prototypen',       en:'Product Prototypes',         fr:'Prototypes de produits',    es:'Prototipos de productos',    it:'Prototipi di prodotti'      },
+  'prod.biz.item2.desc': { de:'Vom Konzept zum anfassbaren Modell', en:'From concept to tangible model', fr:'Du concept au modèle tangible', es:'Del concepto al modelo tangible', it:'Dal concetto al modello tangibile' },
+  'prod.biz.item3':      { de:'Kleinserien',              en:'Small Series',               fr:'Petites séries',            es:'Series cortas',              it:'Piccole serie'              },
+  'prod.biz.item3.desc': { de:'Verpackungen, Displays, Werbemittel', en:'Packaging, displays, promotional materials', fr:'Emballages, présentoirs, supports publicitaires', es:'Embalajes, displays, material publicitario', it:'Imballaggi, display, materiale promozionale' },
+  'prod.maker':     { de:'🔧 Maker & DIY', en:'🔧 Maker & DIY', fr:'🔧 Maker & DIY', es:'🔧 Maker & DIY', it:'🔧 Maker & DIY' },
+  'prod.maker.desc':{ de:'Für Bastler, Tüftler und Kreative.', en:'For hobbyists, tinkerers and creatives.', fr:'Pour les bricoleurs et les créatifs.', es:'Para aficionados, inventores y creativos.', it:'Per hobbisti, sperimentatori e creativi.' },
+  'prod.maker.item1':     { de:'Smart Home Halterungen',  en:'Smart Home Mounts',          fr:'Supports Smart Home',       es:'Soportes Smart Home',        it:'Supporti Smart Home'        },
+  'prod.maker.item1.desc':{ de:'Sensor-Mounts, Kamera-Halter, Kabelmanagement', en:'Sensor mounts, camera holders, cable management', fr:'Supports capteurs, supports caméra, gestion de câbles', es:'Soportes de sensores, soportes de cámara, gestión de cables', it:'Supporti sensori, supporti telecamera, gestione cavi' },
+  'prod.maker.item2':     { de:'Werkzeug-Organizer',      en:'Tool Organisers',            fr:'Organisateurs outils',      es:'Organizadores de herramientas', it:'Organizzatori utensili'   },
+  'prod.maker.item2.desc':{ de:'Tool-Holder, Bit-Halter, Sortierboxen', en:'Tool holders, bit holders, sorting boxes', fr:'Porte-outils, porte-embouts, boîtes de tri', es:'Portaherramientas, portapuntas, cajas clasificadoras', it:'Portautensili, portapunte, scatole di selezione' },
+  'prod.maker.item3':     { de:'Modellbau',               en:'Model Building',             fr:'Modélisme',                 es:'Modelismo',                  it:'Modellismo'                 },
+  'prod.maker.item3.desc':{ de:'Architekturmodelle, Gelände, Fahrzeugteile', en:'Architectural models, terrain, vehicle parts', fr:'Maquettes architecturales, terrains, pièces de véhicules', es:'Maquetas arquitectónicas, terrenos, piezas de vehículos', it:'Modelli architettonici, terreni, parti di veicoli' },
+  'prod.custom.title':    { de:'Du hast etwas anderes im Kopf?', en:'Got something different in mind?', fr:"Vous avez autre chose en tête ?", es:'¿Tienes algo diferente en mente?', it:'Hai qualcosa di diverso in mente?' },
+  'prod.custom.desc':     { de:'Wir fertigen auch individuelle Projekte — schreib uns einfach.', en:'We also make custom projects — just contact us.', fr:'Nous réalisons aussi des projets personnalisés — contactez-nous.', es:'También hacemos proyectos personalizados — escríbenos.', it:'Realizziamo anche progetti personalizzati — contattaci.' },
+  'prod.custom.cta':      { de:'📬 Projekt anfragen', en:'📬 Request project', fr:'📬 Demander un projet', es:'📬 Solicitar proyecto', it:'📬 Richiedi progetto' },
+
+  // === Blog ===
+  'blog.title':    { de:'Blog',       en:'Blog',      fr:'Blog',      es:'Blog',      it:'Blog'      },
+  'blog.sub':      { de:'News, Projekte und Insights aus der Werkstatt.', en:'News, projects and insights from the workshop.', fr:"Actualités, projets et insights de l'atelier.", es:'Noticias, proyectos e insights del taller.', it:"Notizie, progetti e insights dall'officina." },
+
+  'blog.beta.date':    { de:'20. März 2026', en:'March 20, 2026', fr:'20 mars 2026', es:'20 de marzo de 2026', it:'20 marzo 2026' },
+  'blog.beta.title':   { de:'Sag uns was du denkst. Wirklich. 🛠️', en:"Tell us what you think. Honestly. 🛠️", fr:'Dis-nous ce que tu penses. Vraiment. 🛠️', es:'Dinos lo que piensas. De verdad. 🛠️', it:'Dicci cosa ne pensi. Davvero. 🛠️' },
+  'blog.beta.lead':    { de:'Die Seite ist frisch online und wir wissen, dass noch nicht alles perfekt ist. Bevor wir weiter bauen, wollen wir wissen was ihr davon haltet.', en:"The site just went live and we know it's not perfect yet. Before we keep building, we want to know what you think.", fr:"Le site vient d'être mis en ligne et nous savons que tout n'est pas encore parfait. Avant de continuer, nous voulons savoir ce que vous en pensez.", es:'La web acaba de salir y sabemos que todavía no es perfecta. Antes de seguir construyendo, queremos saber qué opináis.', it:"Il sito è appena andato online e sappiamo che non è ancora perfetto. Prima di continuare a costruire, vogliamo sapere cosa ne pensate." },
+  'blog.beta.h1':      { de:'Ein bisschen Kontext', en:'A bit of context', fr:'Un peu de contexte', es:'Un poco de contexto', it:'Un po\' di contesto' },
+  'blog.beta.p1':      { de:'FACTUM3D ist ein kleines Atelier irgendwo in den Alpen. Wir drucken mit unserer <strong>Printfarm</strong> (Bambu Lab H2D & P1S), lasern mit <strong>Creality Falcon Lasern</strong>, einem <strong>CO2 Laser</strong> und dem <strong>Snapmaker A350T</strong>, und das alles läuft größtenteils auf Solarstrom vom eigenen Dach. Kein großer Betrieb, kein Lager voller Mitarbeiter. Nur jemand der gerne gute Sachen baut und das auch für andere tun möchte.', en:'FACTUM3D is a small workshop somewhere in the Alps. We print with our <strong>print farm</strong> (Bambu Lab H2D & P1S), cut and engrave with <strong>Creality Falcon lasers</strong>, a <strong>CO2 laser</strong> and the <strong>Snapmaker A350T</strong> — all mostly powered by solar energy from our own roof. No big operation, no warehouse full of staff. Just someone who loves making good things and wants to do that for others too.', fr:"FACTUM3D est un petit atelier quelque part dans les Alpes. Nous imprimons avec notre <strong>ferme d'impression</strong> (Bambu Lab H2D & P1S), découpons et gravons avec <strong>Creality Falcon</strong>, un <strong>laser CO2</strong> et le <strong>Snapmaker A350T</strong> — le tout principalement alimenté par l'énergie solaire de notre propre toit. Pas une grande entreprise, pas un entrepôt plein d'employés. Juste quelqu'un qui aime fabriquer de belles choses et veut le faire pour les autres.", es:'FACTUM3D es un pequeño taller en algún lugar de los Alpes. Imprimimos con nuestra <strong>granja de impresión</strong> (Bambu Lab H2D & P1S), cortamos y grabamos con <strong>Creality Falcon</strong>, un <strong>láser CO2</strong> y el <strong>Snapmaker A350T</strong>, todo ello principalmente con energía solar de nuestro propio tejado. No es una gran empresa, no hay almacén lleno de empleados. Solo alguien que disfruta haciendo cosas buenas y quiere hacerlo también para otros.', it:"FACTUM3D è un piccolo atelier da qualche parte nelle Alpi. Stampiamo con la nostra <strong>print farm</strong> (Bambu Lab H2D & P1S), tagliamo e incipiamo con <strong>Creality Falcon</strong>, un <strong>laser CO2</strong> e lo <strong>Snapmaker A350T</strong>, il tutto alimentato principalmente dall'energia solare del nostro tetto. Nessuna grande operazione, nessun magazzino pieno di dipendenti. Solo qualcuno che ama fare cose belle e vuole farlo anche per gli altri." },
+  'blog.beta.p2':      { de:'Die Website haben wir von Grund auf neu gebaut. Mit einem kleinen Assistenten namens Clippy 👋, einem Preisrechner, einem Materialkatalog und dem Ganzen auf fünf Sprachen. Ob das alles so funktioniert wie gedacht, wissen wir ehrlich gesagt noch nicht so genau.', en:"We built the website from scratch. With a little assistant called Clippy 👋, a price calculator, a materials catalogue and the whole thing in five languages. Whether it all works as intended — honestly, we're not entirely sure yet.", fr:"Nous avons construit le site de zéro. Avec un petit assistant nommé Clippy 👋, un calculateur de prix, un catalogue de matériaux et le tout en cinq langues. Est-ce que tout fonctionne comme prévu ? Franchement, nous n'en sommes pas encore tout à fait sûrs.", es:'Hemos construido el sitio desde cero. Con un pequeño asistente llamado Clippy 👋, una calculadora de precios, un catálogo de materiales y todo en cinco idiomas. Si todo funciona como se esperaba, sinceramente aún no estamos del todo seguros.', it:"Abbiamo costruito il sito da zero. Con un piccolo assistente chiamato Clippy 👋, un calcolatore di prezzi, un catalogo dei materiali e il tutto in cinque lingue. Se tutto funziona come previsto, onestamente non ne siamo ancora del tutto sicuri." },
+  'blog.beta.h2':      { de:'Was interessiert uns', en:"What we'd like to know", fr:'Ce qui nous intéresse', es:'Qué nos interesa', it:'Cosa ci interessa' },
+  'blog.beta.h2intro': { de:'Schau dich einfach um und sag uns was dir auffällt. Kein langer Fragebogen, keine Registrierung. Ein paar Zeilen reichen völlig:', en:"Just look around and tell us what you notice. No long survey, no registration. A few lines are more than enough:", fr:"Regarde juste autour de toi et dis-nous ce que tu remarques. Pas de long questionnaire, pas d'inscription. Quelques lignes suffisent amplement :", es:'Solo mira a tu alrededor y dinos qué notas. Sin encuestas largas, sin registro. Unas pocas líneas son más que suficientes:', it:"Guarda pure in giro e dicci cosa noti. Nessun lungo questionario, nessuna registrazione. Bastano poche righe:" },
+  'blog.beta.li1':     { de:'🎨 <strong>Design:</strong> Macht die Seite einen guten Eindruck? Was würdest du anders machen?', en:'🎨 <strong>Design:</strong> Does the site make a good impression? What would you do differently?', fr:'🎨 <strong>Design :</strong> Le site fait-il bonne impression ? Que ferais-tu différemment ?', es:'🎨 <strong>Diseño:</strong> ¿Da el sitio una buena impresión? ¿Qué harías diferente?', it:'🎨 <strong>Design:</strong> Il sito fa una buona impressione? Cosa faresti diversamente?' },
+  'blog.beta.li2':     { de:'🧭 <strong>Navigation:</strong> Findest du dich zurecht oder klickst du dich verloren?', en:'🧭 <strong>Navigation:</strong> Can you find your way around or do you get lost clicking?', fr:'🧭 <strong>Navigation :</strong> Tu t\'y retrouves ou tu te perds en cliquant ?', es:'🧭 <strong>Navegación:</strong> ¿Te orientas o te pierdes haciendo clic?', it:'🧭 <strong>Navigazione:</strong> Riesci a orientarti o ti perdi cliccando?' },
+  'blog.beta.li3':     { de:'💬 <strong>Clippy:</strong> Hilfreich oder eher im Weg?', en:'💬 <strong>Clippy:</strong> Helpful or more in the way?', fr:'💬 <strong>Clippy :</strong> Utile ou plutôt gênant ?', es:'💬 <strong>Clippy:</strong> ¿Útil o más bien estorba?', it:'💬 <strong>Clippy:</strong> Utile o più di intralcio?' },
+  'blog.beta.li4':     { de:'📦 <strong>Angebot:</strong> Was vermisst du? Was brauchst du, das wir noch nicht haben?', en:"📦 <strong>Offer:</strong> What's missing? What do you need that we don't have yet?", fr:"📦 <strong>Offre :</strong> Qu'est-ce qui manque ? Qu'as-tu besoin que nous n'avons pas encore ?", es:'📦 <strong>Oferta:</strong> ¿Qué te falta? ¿Qué necesitas que aún no tenemos?', it:"📦 <strong>Offerta:</strong> Cosa manca? Cosa ti serve che non abbiamo ancora?" },
+  'blog.beta.li5':     { de:'💶 <strong>Preise:</strong> Klingen die Schätzungen realistisch für dich?', en:'💶 <strong>Prices:</strong> Do the estimates sound realistic to you?', fr:'💶 <strong>Prix :</strong> Les estimations te semblent-elles réalistes ?', es:'💶 <strong>Precios:</strong> ¿Te parecen realistas las estimaciones?', it:'💶 <strong>Prezzi:</strong> Le stime ti sembrano realistiche?' },
+  'blog.beta.li6':     { de:'📱 <strong>Handy:</strong> Schaust du gerade vom Handy? Läuft alles flüssig?', en:'📱 <strong>Mobile:</strong> Are you on your phone right now? Does everything run smoothly?', fr:'📱 <strong>Mobile :</strong> Tu regardes depuis ton téléphone ? Tout fonctionne bien ?', es:'📱 <strong>Móvil:</strong> ¿Estás mirando desde el móvil? ¿Todo va bien?', it:'📱 <strong>Mobile:</strong> Stai guardando dal telefono? Tutto funziona bene?' },
+  'blog.beta.h3':      { de:'Wie du uns erreichst', en:'How to reach us', fr:'Comment nous contacter', es:'Cómo contactarnos', it:'Come contattarci' },
+  'blog.beta.h3intro': { de:'Einfach melden, so wie es dir am liebsten ist:', en:'Just get in touch, whichever way you prefer:', fr:'Contacte-nous simplement de la manière qui te convient le mieux :', es:'Escríbenos como prefieras:', it:'Contattaci nel modo che preferisci:' },
+  'blog.beta.mail.title': { de:'Per Mail', en:'By email', fr:'Par e-mail', es:'Por correo', it:'Per email' },
+  'blog.beta.mail.note': { de:'(Postfach kommt bald)', en:'(Mailbox coming soon)', fr:'(Boîte mail bientôt disponible)', es:'(Buzón próximamente)', it:'(Casella presto disponibile)' },
+  'blog.beta.clippy.title': { de:'Über Clippy', en:'Via Clippy', fr:'Via Clippy', es:'Por Clippy', it:'Tramite Clippy' },
+  'blog.beta.clippy.text': { de:'Klick auf das 📎 unten rechts und schreib einfach drauf los. Clippy gibt\'s weiter.', en:"Click the 📎 at the bottom right and just start writing. Clippy will pass it on.", fr:"Clique sur le 📎 en bas à droite et écris simplement. Clippy transmettra.", es:'Haz clic en el 📎 abajo a la derecha y escribe. Clippy lo pasará.', it:"Clicca sul 📎 in basso a destra e scrivi. Clippy lo passerà avanti." },
+  'blog.beta.form.title': { de:'Kontaktformular', en:'Contact form', fr:'Formulaire de contact', es:'Formulario de contacto', it:'Modulo di contatto' },
+  'blog.beta.form.link': { de:'Direkt zum Formular →', en:'Go to form →', fr:'Aller au formulaire →', es:'Ir al formulario →', it:'Vai al modulo →' },
+  'blog.beta.h4':      { de:'Was wir zurückgeben', en:'What you get in return', fr:'Ce que nous donnons en retour', es:'Lo que te damos a cambio', it:'Cosa ti diamo in cambio' },
+  'blog.beta.h4text':  { de:'Wer uns ehrliches Feedback schickt, bekommt beim ersten Auftrag <strong>10% Rabatt</strong>. Einfach beim Kontaktformular "BETA" erwähnen. Kein Ablaufdatum, kein Kleingedrucktes.', en:'Anyone who sends us honest feedback gets <strong>10% off</strong> their first order. Just mention "BETA" in the contact form. No expiry date, no fine print.', fr:'Quiconque nous envoie un retour honnête reçoit <strong>10% de réduction</strong> sur sa première commande. Mentionnez simplement "BETA" dans le formulaire de contact. Pas de date d\'expiration, pas de petits caractères.', es:'Quien nos envíe feedback honesto obtiene un <strong>10% de descuento</strong> en su primer pedido. Solo menciona "BETA" en el formulario. Sin fecha de caducidad, sin letra pequeña.', it:'Chi ci invia un feedback onesto ottiene uno <strong>sconto del 10%</strong> sul primo ordine. Basta menzionare "BETA" nel modulo di contatto. Nessuna scadenza, nessuna scritta in piccolo.' },
+  'blog.beta.thanks':  { de:'Danke fürs Vorbeischauen. Und besonders danke, wenn du dir kurz Zeit nimmst uns zu sagen was du denkst. 🏔️', en:"Thanks for stopping by. And especially thanks if you take a moment to tell us what you think. 🏔️", fr:"Merci de passer. Et merci tout particulièrement si tu prends un moment pour nous dire ce que tu penses. 🏔️", es:'Gracias por pasarte. Y especialmente gracias si te tomas un momento para decirnos lo que piensas. 🏔️', it:"Grazie per essere passato. E grazie soprattutto se ti prendi un momento per dirci cosa ne pensi. 🏔️" },
+  'blog.launch.date':  { de:'18. März 2026', en:'March 18, 2026', fr:'18 mars 2026', es:'18 de marzo de 2026', it:'18 marzo 2026' },
+  'blog.launch.title': { de:'Willkommen bei FACTUM3D! 🏔️', en:'Welcome to FACTUM3D! 🏔️', fr:'Bienvenue chez FACTUM3D ! 🏔️', es:'¡Bienvenido a FACTUM3D! 🏔️', it:'Benvenuti a FACTUM3D! 🏔️' },
+  'blog.launch.text':  { de:'Wir sind online! FACTUM3D bringt professionellen 3D-Druck, Lasercutting und Lasergravur direkt aus den Alpen. In den kommenden Wochen teilen wir hier Projekte, Material-Tests und Einblicke in unsere Werkstatt.', en:"We're online! FACTUM3D brings professional 3D printing, laser cutting and laser engraving straight from the Alps. In the coming weeks we'll share projects, material tests and insights from our workshop.", fr:"Nous sommes en ligne ! FACTUM3D apporte l'impression 3D professionnelle, la découpe et la gravure laser directement depuis les Alpes. Dans les semaines à venir, nous partagerons ici des projets, des tests de matériaux et des aperçus de notre atelier.", es:'¡Estamos en línea! FACTUM3D trae impresión 3D profesional, corte láser y grabado láser directamente desde los Alpes. En las próximas semanas compartiremos aquí proyectos, pruebas de materiales y una mirada a nuestro taller.', it:"Siamo online! FACTUM3D porta la stampa 3D professionale, il taglio e l'incisione laser direttamente dalle Alpi. Nelle prossime settimane condivideremo qui progetti, test sui materiali e uno sguardo al nostro laboratorio." },
+  'blog.comingsoon': { de:'📎 Weitere Beiträge folgen — stay tuned!', en:'📎 More posts coming soon — stay tuned!', fr:'📎 Plus de publications à venir — restez connectés !', es:'📎 Más publicaciones pronto — ¡estad atentos!', it:'📎 Altri post in arrivo — restate sintonizzati!' },
+
+  // === FAQ ===
+  'faq.title':  { de:'Häufige Fragen', en:'Frequently Asked Questions', fr:'Questions fréquentes', es:'Preguntas frecuentes', it:'Domande frequenti' },
+  'faq.sub':    { de:'Alles was du wissen musst — und wenn nicht, frag Clippy!', en:'Everything you need to know — and if not, ask Clippy!', fr:'Tout ce que vous devez savoir — sinon, demandez à Clippy !', es:'Todo lo que necesitas saber — ¡si no, pregunta a Clippy!', it:'Tutto ciò che devi sapere — se no, chiedi a Clippy!' },
+  'faq.q1':     { de:'Welche Dateiformate akzeptiert ihr?', en:'Which file formats do you accept?', fr:'Quels formats de fichier acceptez-vous ?', es:'¿Qué formatos de archivo aceptáis?', it:'Quali formati di file accettate?' },
+  'faq.a1':     { de:'<strong>3D-Druck:</strong> STL, 3MF, OBJ, STEP<br><strong>Lasercutting/-gravur:</strong> SVG, DXF, AI, PDF<br><strong>Bilder für Gravur:</strong> PNG, JPG (min. 300 DPI empfohlen)', en:'<strong>3D Printing:</strong> STL, 3MF, OBJ, STEP<br><strong>Laser cutting/engraving:</strong> SVG, DXF, AI, PDF<br><strong>Images for engraving:</strong> PNG, JPG (min. 300 DPI recommended)', fr:'<strong>Impression 3D :</strong> STL, 3MF, OBJ, STEP<br><strong>Découpe/gravure laser :</strong> SVG, DXF, AI, PDF<br><strong>Images pour gravure :</strong> PNG, JPG (min. 300 DPI recommandé)', es:'<strong>Impresión 3D:</strong> STL, 3MF, OBJ, STEP<br><strong>Corte/grabado láser:</strong> SVG, DXF, AI, PDF<br><strong>Imágenes para grabado:</strong> PNG, JPG (min. 300 DPI recomendado)', it:'<strong>Stampa 3D:</strong> STL, 3MF, OBJ, STEP<br><strong>Taglio/incisione laser:</strong> SVG, DXF, AI, PDF<br><strong>Immagini per incisione:</strong> PNG, JPG (min. 300 DPI consigliati)' },
+  'faq.q2':     { de:'Wie lange dauert eine Bestellung?', en:'How long does an order take?', fr:'Combien de temps prend une commande ?', es:'¿Cuánto tarda un pedido?', it:'Quanto tempo richiede un ordine?' },
+  'faq.a2':     { de:'<strong>Prototypen:</strong> 24–72 Stunden<br><strong>Kleinserien:</strong> 3–7 Werktage<br><strong>Lasergravur:</strong> 1–3 Werktage<br>Eilaufträge nach Absprache möglich.', en:'<strong>Prototypes:</strong> 24–72 hours<br><strong>Small series:</strong> 3–7 business days<br><strong>Laser engraving:</strong> 1–3 business days<br>Rush orders available on request.', fr:'<strong>Prototypes :</strong> 24–72 heures<br><strong>Petites séries :</strong> 3–7 jours ouvrables<br><strong>Gravure laser :</strong> 1–3 jours ouvrables<br>Commandes urgentes sur demande.', es:'<strong>Prototipos:</strong> 24–72 horas<br><strong>Series cortas:</strong> 3–7 días laborables<br><strong>Grabado láser:</strong> 1–3 días laborables<br>Pedidos urgentes bajo consulta.', it:'<strong>Prototipi:</strong> 24–72 ore<br><strong>Piccole serie:</strong> 3–7 giorni lavorativi<br><strong>Incisione laser:</strong> 1–3 giorni lavorativi<br>Ordini urgenti su richiesta.' },
+  'faq.q3':     { de:'Welche Materialien bietet ihr an?', en:'Which materials do you offer?', fr:'Quels matériaux proposez-vous ?', es:'¿Qué materiales ofrecéis?', it:'Quali materiali offrite?' },
+  'faq.a3':     { de:'Über 20 Materialien — von PLA bis PPS-CF. Schau auf unserer <a href="materialien.html" style="color:var(--accent);">Materialien-Seite</a> vorbei für die volle Liste.', en:'Over 20 materials — from PLA to PPS-CF. Check our <a href="materialien.html" style="color:var(--accent);">Materials page</a> for the full list.', fr:'Plus de 20 matériaux — du PLA au PPS-CF. Consultez notre <a href="materialien.html" style="color:var(--accent);">page Matériaux</a> pour la liste complète.', es:'Más de 20 materiales — desde PLA hasta PPS-CF. Consulta nuestra <a href="materialien.html" style="color:var(--accent);">página de Materiales</a> para la lista completa.', it:'Oltre 20 materiali — dal PLA al PPS-CF. Consulta la nostra <a href="materialien.html" style="color:var(--accent);">pagina Materiali</a> per la lista completa.' },
+  'faq.q4':     { de:'Wie groß darf mein Teil maximal sein?', en:'What is the maximum size of my part?', fr:'Quelle est la taille maximale ?', es:'¿Cuál es el tamaño máximo?', it:'Qual è la dimensione massima?' },
+  'faq.a4':     { de:'<strong>FDM (H2D):</strong> 325 × 320 × 325 mm<br><strong>FDM (P1S):</strong> 256 × 256 × 256 mm<br><strong>Laser:</strong> 400 × 400 mm (Creality Falcon)<br>Größere Teile können wir mehrteilig fertigen.', en:'<strong>FDM (H2D):</strong> 325 × 320 × 325 mm<br><strong>FDM (P1S):</strong> 256 × 256 × 256 mm<br><strong>Laser:</strong> 400 × 400 mm (Creality Falcon)<br>Larger parts can be produced in multiple pieces.', fr:'<strong>FDM (H2D) :</strong> 325 × 320 × 325 mm<br><strong>FDM (P1S) :</strong> 256 × 256 × 256 mm<br><strong>Laser :</strong> 400 × 400 mm (Creality Falcon)<br>Les pièces plus grandes peuvent être fabriquées en plusieurs parties.', es:'<strong>FDM (H2D):</strong> 325 × 320 × 325 mm<br><strong>FDM (P1S):</strong> 256 × 256 × 256 mm<br><strong>Láser:</strong> 400 × 400 mm (Creality Falcon)<br>Las piezas más grandes se pueden fabricar en varias partes.', it:'<strong>FDM (H2D):</strong> 325 × 320 × 325 mm<br><strong>FDM (P1S):</strong> 256 × 256 × 256 mm<br><strong>Laser:</strong> 400 × 400 mm (Creality Falcon)<br>I pezzi più grandi possono essere prodotti in più parti.' },
+  'faq.q5':     { de:'Versendet ihr auch?', en:'Do you also ship?', fr:'Livrez-vous aussi ?', es:'¿También hacéis envíos?', it:'Spedite anche voi?' },
+  'faq.a5':     { de:'Ja, deutschlandweit. Versandkosten abhängig von Größe und Gewicht. Abholung vor Ort ist ebenfalls möglich.', en:'Yes, Germany-wide. Shipping costs depend on size and weight. Local pickup is also possible.', fr:'Oui, dans toute la France. Les frais de port dépendent de la taille et du poids. Le retrait sur place est également possible.', es:'Sí, en toda Alemania. Los costes de envío dependen del tamaño y peso. La recogida en persona también es posible.', it:'Sì, in tutta la Germania. I costi di spedizione dipendono da dimensione e peso. Il ritiro in loco è possibile.' },
+  'faq.q6':     { de:'Kann ich mein eigenes Material schicken?', en:'Can I send my own material?', fr:'Puis-je envoyer mon propre matériau ?', es:'¿Puedo enviar mi propio material?', it:'Posso inviare il mio materiale?' },
+  'faq.a6':     { de:'Grundsätzlich ja — vorausgesetzt es ist mit unseren Druckern kompatibel. Bitte vorher kurz absprechen, damit wir Temperatur und Einstellungen prüfen können.', en:'Generally yes — provided it is compatible with our printers. Please check with us beforehand so we can verify temperature and settings.', fr:'En principe oui — à condition que ce soit compatible avec nos imprimantes. Veuillez nous contacter au préalable pour vérifier la température et les paramètres.', es:'En principio sí — siempre que sea compatible con nuestras impresoras. Por favor, consulta previamente para que podamos verificar temperatura y configuración.', it:'In linea di principio sì — a condizione che sia compatibile con le nostre stampanti. Contattateci prima per verificare temperatura e impostazioni.' },
+  'faq.q7':     { de:'Was kostet ein 3D-Druck?', en:'How much does a 3D print cost?', fr:'Combien coûte une impression 3D ?', es:'¿Cuánto cuesta una impresión 3D?', it:'Quanto costa una stampa 3D?' },
+  'faq.a7':     { de:'Abhängig von Material, Größe, Druckzeit und Nachbearbeitung. Einfache PLA-Teile ab ca. 5€. Schick uns deine Datei und wir erstellen ein kostenloses Angebot!', en:'Depends on material, size, print time and post-processing. Simple PLA parts from approx. €5. Send us your file and we will create a free quote!', fr:"Dépend du matériau, de la taille, du temps d'impression et du post-traitement. Pièces PLA simples à partir d'env. 5€. Envoyez-nous votre fichier et nous créerons un devis gratuit !", es:'Depende del material, tamaño, tiempo de impresión y post-procesado. Piezas PLA simples desde aprox. 5€. ¡Envíanos tu archivo y crearemos un presupuesto gratuito!', it:'Dipende da materiale, dimensione, tempo di stampa e post-lavorazione. Parti PLA semplici da ca. 5€. Inviaci il tuo file e creeremo un preventivo gratuito!' },
+  'faq.q8':     { de:'Bietet ihr auch Design-Dienstleistungen an?', en:'Do you also offer design services?', fr:'Proposez-vous aussi des services de design ?', es:'¿Ofrecéis también servicios de diseño?', it:'Offrite anche servizi di design?' },
+  'faq.a8':     { de:'Ja, wir können aus deiner Skizze oder Idee ein druckfertiges 3D-Modell oder eine Laser-Vorlage erstellen. Sprich uns einfach an.', en:'Yes, we can create a print-ready 3D model or laser template from your sketch or idea. Just contact us.', fr:'Oui, nous pouvons créer un modèle 3D prêt à imprimer ou un gabarit laser à partir de votre croquis ou idée. Contactez-nous.', es:'Sí, podemos crear un modelo 3D listo para imprimir o una plantilla láser a partir de tu boceto o idea. Solo contáctanos.', it:'Sì, possiamo creare un modello 3D pronto per la stampa o un modello laser dal tuo schizzo o idea. Contattaci.' },
+  'faq.cta.text': { de:'Frage nicht dabei? Schreib uns direkt!', en:'Question not listed? Contact us directly!', fr:'Question non listée ? Contactez-nous directement !', es:'¿Tu pregunta no aparece? ¡Escríbenos directamente!', it:'Domanda non presente? Contattaci direttamente!' },
+  'faq.cta.btn':  { de:'📬 Kontakt aufnehmen', en:'📬 Get in touch', fr:'📬 Nous contacter', es:'📬 Contactar', it:'📬 Contattaci' },
+
+  // === Materialien-Seite ===
+  'mat.hero.sub':       { de:'Von Standard-Filamenten bis High-Performance — wir drucken, schneiden und gravieren was du brauchst.', en:'From standard filaments to high-performance — we print, cut and engrave what you need.', fr:"Des filaments standard au haute performance — nous imprimons, découpons et gravons ce dont vous avez besoin.", es:'Desde filamentos estándar hasta alto rendimiento — imprimimos, cortamos y grabamos lo que necesites.', it:'Dai filamenti standard all\'high-performance — stampiamo, tagliamo e incidiamo ciò di cui hai bisogno.' },
+  'mat.fdm.title':      { de:'🖨️ FDM-Filamente', en:'🖨️ FDM Filaments', fr:'🖨️ Filaments FDM', es:'🖨️ Filamentos FDM', it:'🖨️ Filamenti FDM' },
+  'mat.fdm.standard':   { de:'Standard', en:'Standard', fr:'Standard', es:'Estándar', it:'Standard' },
+  'mat.fdm.engineering': { de:'Engineering', en:'Engineering', fr:'Ingénierie', es:'Ingeniería', it:'Ingegneria' },
+  'mat.fdm.cf':         { de:'Faserverstärkt (CF/GF)', en:'Fiber-reinforced (CF/GF)', fr:'Renforcé fibres (CF/GF)', es:'Reforzado con fibra (CF/GF)', it:'Rinforzato con fibra (CF/GF)' },
+  'mat.fdm.hp':         { de:'High-Performance', en:'High-Performance', fr:'Haute performance', es:'Alto rendimiento', it:'High-Performance' },
+  'mat.fdm.support':    { de:'Support-Materialien', en:'Support Materials', fr:'Matériaux support', es:'Materiales de soporte', it:'Materiali di supporto' },
+  'mat.pla.desc':       { de:'Universell, einfach zu drucken. Ideal für Prototypen, Deko und Gehäuse.', en:'Universal, easy to print. Ideal for prototypes, decoration and housings.', fr:'Universel, facile à imprimer. Idéal pour prototypes, déco et boîtiers.', es:'Universal, fácil de imprimir. Ideal para prototipos, decoración y carcasas.', it:'Universale, facile da stampare. Ideale per prototipi, decorazioni e alloggiamenti.' },
+  'mat.petg.desc':      { de:'Robust, lebensmittelecht, UV-beständig. Gut für Outdoor und mechanische Teile.', en:'Robust, food-safe, UV-resistant. Good for outdoor and mechanical parts.', fr:'Robuste, alimentaire, résistant UV. Bon pour extérieur et pièces mécaniques.', es:'Robusto, apto para alimentos, resistente UV. Bueno para exterior y piezas mecánicas.', it:'Robusto, per uso alimentare, resistente UV. Buono per esterno e parti meccaniche.' },
+  'mat.abs.desc':       { de:'Hitzebeständig, schlagfest. Klassiker für technische Anwendungen.', en:'Heat-resistant, impact-proof. Classic for technical applications.', fr:'Résistant à la chaleur, aux chocs. Classique pour applications techniques.', es:'Resistente al calor, a los golpes. Clásico para aplicaciones técnicas.', it:'Resistente al calore, agli urti. Classico per applicazioni tecniche.' },
+  'mat.asa.desc':       { de:'Wie ABS, aber UV-stabil. Perfekt für Außenanwendungen.', en:'Like ABS, but UV-stable. Perfect for outdoor applications.', fr:"Comme l'ABS, mais stable UV. Parfait pour l'extérieur.", es:'Como ABS, pero estable UV. Perfecto para exteriores.', it:"Come l'ABS, ma stabile UV. Perfetto per esterni." },
+  'mat.tpu.desc':       { de:'Flexibel, gummiartig. Für Dichtungen, Hüllen, Stoßdämpfer.', en:'Flexible, rubber-like. For seals, cases, shock absorbers.', fr:'Flexible, caoutchouteux. Pour joints, étuis, amortisseurs.', es:'Flexible, gomoso. Para juntas, fundas, amortiguadores.', it:'Flessibile, gommoso. Per guarnizioni, custodie, ammortizzatori.' },
+  'mat.pa.desc':        { de:'Extrem belastbar, verschleißfest. Zahnräder, Scharniere, Funktionsteile.', en:'Extremely durable, wear-resistant. Gears, hinges, functional parts.', fr:'Extrêmement résistant, anti-usure. Engrenages, charnières, pièces fonctionnelles.', es:'Extremadamente resistente, antidesgaste. Engranajes, bisagras, piezas funcionales.', it:'Estremamente resistente, antiusura. Ingranaggi, cerniere, parti funzionali.' },
+  'mat.pc.desc':        { de:'Transparent möglich, schlagfest, hitzebeständig bis 130°C.', en:'Transparent possible, impact-resistant, heat-resistant to 130°C.', fr:'Transparent possible, résistant aux chocs, résistant à la chaleur jusqu\'à 130°C.', es:'Transparente posible, resistente a impactos, resistente al calor hasta 130°C.', it:'Trasparente possibile, resistente agli urti, resistente al calore fino a 130°C.' },
+  'mat.pet.desc':       { de:'Dimensionsstabil, chemisch beständig. Industrielle Anwendungen.', en:'Dimensionally stable, chemically resistant. Industrial applications.', fr:'Dimensionnellement stable, chimiquement résistant. Applications industrielles.', es:'Dimensionalmente estable, químicamente resistente. Aplicaciones industriales.', it:'Dimensionalmente stabile, chimicamente resistente. Applicazioni industriali.' },
+  'mat.placf.desc':     { de:'PLA mit Carbon- oder Glasfaser. Steifer, leichter, maßhaltig.', en:'PLA with carbon or glass fibre. Stiffer, lighter, dimensionally stable.', fr:'PLA avec fibre de carbone ou de verre. Plus rigide, plus léger, dimensionnellement stable.', es:'PLA con fibra de carbono o vidrio. Más rígido, más ligero, dimensionalmente estable.', it:'PLA con fibra di carbonio o vetro. Più rigido, più leggero, dimensionalmente stabile.' },
+  'mat.petgcf.desc':    { de:'Verstärktes PETG. Ideal für Funktionsteile mit höherer Steifigkeit.', en:'Reinforced PETG. Ideal for functional parts with higher rigidity.', fr:'PETG renforcé. Idéal pour pièces fonctionnelles avec rigidité supérieure.', es:'PETG reforzado. Ideal para piezas funcionales con mayor rigidez.', it:'PETG rinforzato. Ideale per parti funzionali con maggiore rigidità.' },
+  'mat.pacf.desc':      { de:'Nylon mit Faser. Höchste Belastbarkeit für Ingenieur-Anwendungen.', en:'Nylon with fibre. Highest durability for engineering applications.', fr:'Nylon avec fibre. Résistance maximale pour applications ingénierie.', es:'Nylon con fibra. Máxima resistencia para aplicaciones de ingeniería.', it:'Nylon con fibra. Massima resistenza per applicazioni ingegneristiche.' },
+  'mat.pccf.desc':      { de:'Polycarbonat mit Faser. Extrem hitze- und schlagfest.', en:'Polycarbonate with fibre. Extremely heat and impact resistant.', fr:'Polycarbonate avec fibre. Extrêmement résistant à la chaleur et aux chocs.', es:'Policarbonato con fibra. Extremadamente resistente al calor y a los golpes.', it:'Policarbonato con fibra. Estremamente resistente al calore e agli urti.' },
+  'mat.abscf.desc':     { de:'Faserverstärktes ABS/ASA für technische Outdoor-Teile.', en:'Fiber-reinforced ABS/ASA for technical outdoor parts.', fr:'ABS/ASA renforcé fibres pour pièces techniques extérieures.', es:'ABS/ASA reforzado con fibra para piezas técnicas de exterior.', it:'ABS/ASA rinforzato con fibra per parti tecniche da esterno.' },
+  'mat.ppacf.desc':     { de:'Polyphthalamid mit Faser. Extreme Hitzebeständigkeit (HDT >200°C).', en:'Polyphthalamide with fibre. Extreme heat resistance (HDT >200°C).', fr:'Polyphtalamide avec fibre. Résistance thermique extrême (HDT >200°C).', es:'Poliftalamida con fibra. Resistencia térmica extrema (HDT >200°C).', it:'Poliftalammide con fibra. Resistenza termica estrema (HDT >200°C).' },
+  'mat.pps.desc':       { de:'Chemisch resistent, hitzebeständig bis 260°C. Aerospace-Grade.', en:'Chemically resistant, heat-resistant to 260°C. Aerospace grade.', fr:'Chimiquement résistant, résistant à la chaleur jusqu\'à 260°C. Qualité aérospatiale.', es:'Químicamente resistente, resistente al calor hasta 260°C. Grado aeroespacial.', it:'Chimicamente resistente, resistente al calore fino a 260°C. Grado aerospaziale.' },
+  'mat.pva.desc':       { de:'Wasserlöslich. Perfekter Support für PLA und PETG.', en:'Water-soluble. Perfect support for PLA and PETG.', fr:'Hydrosoluble. Support parfait pour PLA et PETG.', es:'Soluble en agua. Soporte perfecto para PLA y PETG.', it:'Idrosolubile. Supporto perfetto per PLA e PETG.' },
+  'mat.bvoh.desc':      { de:'Wasserlöslich, bessere Auflösung als PVA. Premium-Support.', en:'Water-soluble, better dissolution than PVA. Premium support.', fr:'Hydrosoluble, meilleure dissolution que le PVA. Support premium.', es:'Soluble en agua, mejor disolución que PVA. Soporte premium.', it:'Idrosolubile, migliore dissoluzione del PVA. Supporto premium.' },
+  'mat.tag.bio':        { de:'Biobasiert', en:'Bio-based', fr:'Biosourcé', es:'Biobasado', it:'Biobasato' },
+  'mat.tag.allrounder': { de:'Allrounder', en:'Allrounder', fr:'Polyvalent', es:'Todoterreno', it:'Tuttofare' },
+  'mat.tag.tech':       { de:'Technisch', en:'Technical', fr:'Technique', es:'Técnico', it:'Tecnico' },
+  'mat.tag.outdoor':    { de:'Outdoor', en:'Outdoor', fr:'Extérieur', es:'Exterior', it:'Esterno' },
+  'mat.tag.flex':       { de:'Flexibel', en:'Flexible', fr:'Flexible', es:'Flexible', it:'Flessibile' },
+  'mat.tag.hp':         { de:'High-Performance', en:'High-Performance', fr:'Haute performance', es:'Alto rendimiento', it:'High-Performance' },
+  'mat.tag.industrial': { de:'Industrial', en:'Industrial', fr:'Industriel', es:'Industrial', it:'Industriale' },
+  'mat.tag.extreme':    { de:'Extrem', en:'Extreme', fr:'Extrême', es:'Extremo', it:'Estremo' },
+  'mat.tag.precision':  { de:'Präzision', en:'Precision', fr:'Précision', es:'Precisión', it:'Precisione' },
+  'mat.tag.durable':    { de:'Belastbar', en:'Durable', fr:'Résistant', es:'Resistente', it:'Resistente' },
+  'mat.tag.jewelry':    { de:'Schmuck', en:'Jewellery', fr:'Bijoux', es:'Joyería', it:'Gioielli' },
+  'mat.tag.gravur':     { de:'Gravur', en:'Engraving', fr:'Gravure', es:'Grabado', it:'Incisione' },
+  'mat.resin.title':    { de:'💧 Resin-Harze', en:'💧 Resin', fr:'💧 Résines', es:'💧 Resinas', it:'💧 Resine' },
+  'mat.resin.standard': { de:'Standard-Resin', en:'Standard Resin', fr:'Résine standard', es:'Resina estándar', it:'Resina standard' },
+  'mat.resin.standard.desc': { de:'Hohe Detailtreue, glatte Oberfläche. Miniaturen, Schmuck, Modelle.', en:'High detail, smooth surface. Miniatures, jewellery, models.', fr:'Haute fidélité de détail, surface lisse. Miniatures, bijoux, modèles.', es:'Alta fidelidad de detalle, superficie lisa. Miniaturas, joyería, modelos.', it:'Alta fedeltà di dettaglio, superficie liscia. Miniature, gioielli, modelli.' },
+  'mat.resin.tough':    { de:'Tough Resin', en:'Tough Resin', fr:'Résine tough', es:'Resina tough', it:'Resina tough' },
+  'mat.resin.tough.desc': { de:'Mechanisch belastbar, ABS-ähnlich. Funktionsteile und Gehäuse.', en:'Mechanically durable, ABS-like. Functional parts and housings.', fr:'Résistant mécaniquement, similaire ABS. Pièces fonctionnelles et boîtiers.', es:'Mecánicamente resistente, similar a ABS. Piezas funcionales y carcasas.', it:'Meccanicamente resistente, simile ABS. Parti funzionali e alloggiamenti.' },
+  'mat.resin.flex':     { de:'Flexible Resin', en:'Flexible Resin', fr:'Résine flexible', es:'Resina flexible', it:'Resina flessibile' },
+  'mat.resin.flex.desc': { de:'Biegsam, gummiartig. Dichtungen und flexible Prototypen.', en:'Bendable, rubber-like. Seals and flexible prototypes.', fr:'Souple, caoutchouteux. Joints et prototypes flexibles.', es:'Flexible, gomoso. Juntas y prototipos flexibles.', it:'Pieghevole, gommoso. Guarnizioni e prototipi flessibili.' },
+  'mat.resin.castable': { de:'Castable Resin', en:'Castable Resin', fr:'Résine castable', es:'Resina castable', it:'Resina castable' },
+  'mat.resin.castable.desc': { de:'Rückstandsfrei ausbrennbar. Für Schmuck-Gussformen.', en:'Burns out cleanly. For jewellery casting moulds.', fr:'Combustion sans résidu. Pour moules de coulée bijoux.', es:'Se quema sin residuos. Para moldes de fundición de joyería.', it:'Combustione senza residui. Per stampi di fusione gioielli.' },
+  'mat.laser.title':    { de:'⚡ Laser-Werkstoffe', en:'⚡ Laser Materials', fr:'⚡ Matériaux laser', es:'⚡ Materiales láser', it:'⚡ Materiali laser' },
+  'mat.laser.cutting':  { de:'Schneidbar', en:'Cuttable', fr:'Découpable', es:'Cortable', it:'Tagliabile' },
+  'mat.laser.engraving':{ de:'Gravierbar', en:'Engravable', fr:'Gravable', es:'Grabable', it:'Incidibile' },
+  'mat.laser.wood':     { de:'Holz', en:'Wood', fr:'Bois', es:'Madera', it:'Legno' },
+  'mat.laser.wood.desc': { de:'Sperrholz, MDF, Massivholz bis 8mm. Schilder, Deko, Prototypen.', en:'Plywood, MDF, solid wood up to 8mm. Signs, decoration, prototypes.', fr:"Contreplaqué, MDF, bois massif jusqu'à 8mm. Panneaux, déco, prototypes.", es:'Madera contrachapada, MDF, madera maciza hasta 8mm. Letreros, decoración, prototipos.', it:'Compensato, MDF, legno massiccio fino a 8mm. Insegne, decorazioni, prototipi.' },
+  'mat.laser.acrylic':  { de:'Acryl', en:'Acrylic', fr:'Acrylique', es:'Acrílico', it:'Acrilico' },
+  'mat.laser.acrylic.desc': { de:'Transparent, farbig, bis 6mm. Displays, Gehäuse, Beschilderung.', en:'Transparent, coloured, up to 6mm. Displays, housings, signage.', fr:"Transparent, coloré, jusqu'à 6mm. Présentoirs, boîtiers, signalétique.", es:'Transparente, de color, hasta 6mm. Displays, carcasas, señalización.', it:'Trasparente, colorato, fino a 6mm. Display, alloggiamenti, segnaletica.' },
+  'mat.laser.leather':  { de:'Leder & Stoff', en:'Leather & Fabric', fr:'Cuir & Tissu', es:'Cuero & Tela', it:'Pelle & Tessuto' },
+  'mat.laser.leather.desc': { de:'Feinschnitte für Mode, Accessoires, Patches.', en:'Fine cuts for fashion, accessories, patches.', fr:'Coupes fines pour mode, accessoires, patchs.', es:'Cortes finos para moda, accesorios, parches.', it:'Tagli fini per moda, accessori, patch.' },
+  'mat.laser.paper':    { de:'Papier & Karton', en:'Paper & Cardboard', fr:'Papier & Carton', es:'Papel & Cartón', it:'Carta & Cartone' },
+  'mat.laser.paper.desc': { de:'Verpackungen, Einladungen, Modelle.', en:'Packaging, invitations, models.', fr:'Emballages, invitations, maquettes.', es:'Embalajes, invitaciones, maquetas.', it:'Imballaggi, inviti, modelli.' },
+  'mat.laser.metal':    { de:'Metall', en:'Metal', fr:'Métal', es:'Metal', it:'Metallo' },
+  'mat.laser.metal.desc': { de:'Beschichtet oder eloxiert. Logos, Seriennummern, Branding.', en:'Coated or anodised. Logos, serial numbers, branding.', fr:'Revêtu ou anodisé. Logos, numéros de série, branding.', es:'Recubierto o anodizado. Logos, números de serie, branding.', it:'Rivestito o anodizzato. Loghi, numeri di serie, branding.' },
+  'mat.laser.glass':    { de:'Glas & Keramik', en:'Glass & Ceramic', fr:'Verre & Céramique', es:'Vidrio & Cerámica', it:'Vetro & Ceramica' },
+  'mat.laser.glass.desc': { de:'Dekorative Gravuren, Geschenke, Schilder.', en:'Decorative engravings, gifts, signs.', fr:'Gravures décoratives, cadeaux, panneaux.', es:'Grabados decorativos, regalos, letreros.', it:'Incisioni decorative, regali, insegne.' },
+  'mat.laser.stone':    { de:'Stein', en:'Stone', fr:'Pierre', es:'Piedra', it:'Pietra' },
+  'mat.laser.stone.desc': { de:'Granit, Schiefer, Marmor. Gedenktafeln, Deko-Objekte.', en:'Granite, slate, marble. Memorial plaques, decorative objects.', fr:'Granit, ardoise, marbre. Plaques commémoratives, objets décoratifs.', es:'Granito, pizarra, mármol. Placas conmemorativas, objetos decorativos.', it:'Granito, ardesia, marmo. Targhe commemorative, oggetti decorativi.' },
+  'mat.cta.text':       { de:'Material nicht dabei? Frag uns — wir finden eine Lösung.', en:'Material not listed? Ask us — we will find a solution.', fr:'Matériau non listé ? Demandez-nous — nous trouverons une solution.', es:'¿Material no incluido? Pregúntanos — encontraremos una solución.', it:'Materiale non elencato? Chiedici — troveremo una soluzione.' },
+  'mat.cta.btn':        { de:'📬 Angebot anfragen', en:'📬 Request quote', fr:'📬 Demander un devis', es:'📬 Solicitar presupuesto', it:'📬 Richiedi preventivo' },
+
+  // === Flip-Card UI ===
+  'mat.hero.hint':      { de:'👉 Klick auf eine Karte für Details!', en:'👉 Click a card for details!', fr:'👉 Cliquez sur une carte pour les détails !', es:'👉 Haz clic en una tarjeta para ver detalles!', it:'👉 Clicca su una scheda per i dettagli!' },
+  'mat.flip.hint':      { de:'↩ Klick für Details', en:'↩ Click for details', fr:'↩ Cliquez pour les détails', es:'↩ Clic para detalles', it:'↩ Clicca per dettagli' },
+  'mat.flip.back':      { de:'↩ Zurück', en:'↩ Back', fr:'↩ Retour', es:'↩ Volver', it:'↩ Indietro' },
+
+  // === Flip-Card Spec Labels ===
+  'mat.spec.temp':      { de:'Drucktemp', en:'Print temp', fr:'Temp. impression', es:'Temp. impresión', it:'Temp. stampa' },
+  'mat.spec.strength':  { de:'Festigkeit', en:'Strength', fr:'Résistance', es:'Resistencia', it:'Resistenza' },
+  'mat.spec.heat':      { de:'Hitzebeständig', en:'Heat resistant', fr:'Résistance chaleur', es:'Resist. al calor', it:'Resist. al calore' },
+  'mat.spec.chemical':  { de:'Chemieresistenz', en:'Chemical resistance', fr:'Résist. chimique', es:'Resist. química', it:'Resist. chimica' },
+  'mat.spec.colors':    { de:'Farbvielfalt', en:'Color variety', fr:'Variété couleurs', es:'Variedad colores', it:'Varietà colori' },
+  'mat.spec.detail':    { de:'Detailtreue', en:'Detail fidelity', fr:'Fidélité détails', es:'Fidelidad detalle', it:'Fedeltà dettagli' },
+  'mat.spec.flexible':  { de:'Flexibilität', en:'Flexibility', fr:'Flexibilité', es:'Flexibilidad', it:'Flessibilità' },
+  'mat.spec.cutting':   { de:'Schneiden', en:'Cutting', fr:'Découpe', es:'Corte', it:'Taglio' },
+  'mat.spec.engraving': { de:'Gravur', en:'Engraving', fr:'Gravure', es:'Grabado', it:'Incisione' },
+  'mat.spec.thickness': { de:'Dicke', en:'Thickness', fr:'Épaisseur', es:'Grosor', it:'Spessore' },
+  'mat.usage.good':     { de:'Perfekt für', en:'Perfect for', fr:'Parfait pour', es:'Perfecto para', it:'Perfetto per' },
+  'mat.usage.bad':      { de:'Nicht ideal für', en:'Not ideal for', fr:'Pas idéal pour', es:'No ideal para', it:'Non ideale per' },
+
+  // === FDM Flip-Card Detail Texts ===
+  'mat.cf.desc':        { de:'Maximale Steifigkeit, federleicht. Für Leichtbau und Ingenieurteile.', en:'Maximum rigidity, featherlight. For lightweight construction and engineering parts.', fr:'Rigidité maximale, ultra-léger. Pour constructions légères et pièces techniques.', es:'Máxima rigidez, ultraligero. Para construcción ligera y piezas de ingeniería.', it:'Massima rigidità, ultraleggero. Per costruzioni leggere e parti ingegneristiche.' },
+  'mat.pla.good1':      { de:'Prototypen', en:'Prototypes', fr:'Prototypes', es:'Prototipos', it:'Prototipi' },
+  'mat.pla.good2':      { de:'Deko & Figuren', en:'Decoration & figurines', fr:'Déco & figurines', es:'Decoración y figuras', it:'Decorazione e figurine' },
+  'mat.pla.good3':      { de:'Gehäuse (Innenbereich)', en:'Housings (indoor)', fr:'Boîtiers (intérieur)', es:'Carcasas (interior)', it:'Alloggiamenti (interno)' },
+  'mat.pla.bad1':       { de:'Outdoor (UV-empfindlich)', en:'Outdoor (UV-sensitive)', fr:'Extérieur (sensible UV)', es:'Exterior (sensible UV)', it:'Esterno (sensibile UV)' },
+  'mat.pla.bad2':       { de:'Heißes Wasser / Spülmaschine', en:'Hot water / dishwasher', fr:'Eau chaude / lave-vaisselle', es:'Agua caliente / lavavajillas', it:'Acqua calda / lavastoviglie' },
+  'mat.petg.good1':     { de:'Outdoor-Einsatz', en:'Outdoor use', fr:'Usage extérieur', es:'Uso exterior', it:'Uso esterno' },
+  'mat.petg.good2':     { de:'Mechanische Teile', en:'Mechanical parts', fr:'Pièces mécaniques', es:'Piezas mecánicas', it:'Parti meccaniche' },
+  'mat.petg.good3':     { de:'Lebensmittelkontakt (bedingt)', en:'Food contact (limited)', fr:'Contact alimentaire (limité)', es:'Contacto alimentario (limitado)', it:'Contatto alimentare (limitato)' },
+  'mat.petg.bad1':      { de:'Hohe Hitze >80°C', en:'High heat >80°C', fr:'Forte chaleur >80°C', es:'Calor alto >80°C', it:'Calore alto >80°C' },
+  'mat.abs.good1':      { de:'Technische Teile', en:'Technical parts', fr:'Pièces techniques', es:'Piezas técnicas', it:'Parti tecniche' },
+  'mat.abs.good2':      { de:'Hitzebereich', en:'Heat applications', fr:'Applications chaleur', es:'Aplicaciones calor', it:'Applicazioni calore' },
+  'mat.abs.bad1':       { de:'Nicht für sehr hohe Temperaturen', en:'Not for very high temperatures', fr:'Pas pour très hautes températures', es:'No para temperaturas muy altas', it:'Non per temperature molto alte' },
+  'mat.asa.good1':      { de:'Outdoor-Einsatz', en:'Outdoor use', fr:'Usage extérieur', es:'Uso exterior', it:'Uso esterno' },
+  'mat.asa.good2':      { de:'UV-Beständigkeit', en:'UV resistance', fr:'Résistance UV', es:'Resistencia UV', it:'Resistenza UV' },
+  'mat.asa.bad1':       { de:'Nicht für Lebensmittelkontakt', en:'Not for food contact', fr:'Pas pour contact alimentaire', es:'No para contacto alimentario', it:'Non per contatto alimentare' },
+  'mat.tpu.good1':      { de:'Dichtungen', en:'Seals', fr:'Joints', es:'Juntas', it:'Guarnizioni' },
+  'mat.tpu.good2':      { de:'Hüllen & Cases', en:'Cases & covers', fr:'Étuis & coques', es:'Fundas & carcasas', it:'Custodie & cover' },
+  'mat.tpu.good3':      { de:'Stoßdämpfer', en:'Shock absorbers', fr:'Amortisseurs', es:'Amortiguadores', it:'Ammortizzatori' },
+  'mat.tpu.bad1':       { de:'Feine Details', en:'Fine details', fr:'Détails fins', es:'Detalles finos', it:'Dettagli fini' },
+  'mat.pa.good1':       { de:'Zahnräder & Scharniere', en:'Gears & hinges', fr:'Engrenages & charnières', es:'Engranajes y bisagras', it:'Ingranaggi e cerniere' },
+  'mat.pa.good2':       { de:'Hochlastteile', en:'High-load parts', fr:'Pièces haute charge', es:'Piezas de alta carga', it:'Parti ad alto carico' },
+  'mat.pa.bad1':        { de:'Feuchtigkeit (trocknen!)', en:'Moisture (dry first!)', fr:'Humidité (sécher !)', es:'Humedad (secar primero!)', it:'Umidità (asciugare!)' },
+  'mat.pc.good1':       { de:'Transparente Teile', en:'Transparent parts', fr:'Pièces transparentes', es:'Piezas transparentes', it:'Parti trasparenti' },
+  'mat.pc.good2':       { de:'Hitze >130°C', en:'Heat >130°C', fr:'Chaleur >130°C', es:'Calor >130°C', it:'Calore >130°C' },
+  'mat.pc.bad1':        { de:'Einfacher Druck', en:'Easy printing', fr:'Impression simple', es:'Impresión sencilla', it:'Stampa semplice' },
+  'mat.cf.good1':       { de:'Max. Steifigkeit', en:'Max. rigidity', fr:'Rigidité max.', es:'Máx. rigidez', it:'Max. rigidità' },
+  'mat.cf.good2':       { de:'Leichtbau', en:'Lightweight construction', fr:'Construction légère', es:'Construcción ligera', it:'Costruzione leggera' },
+  'mat.cf.bad1':        { de:'Flexibilität', en:'Flexibility', fr:'Flexibilité', es:'Flexibilidad', it:'Flessibilità' },
+
+  // === Resin Flip-Card Detail Texts ===
+  'mat.resin.std.good1':    { de:'Miniaturen & Figuren', en:'Miniatures & figurines', fr:'Miniatures & figurines', es:'Miniaturas y figuras', it:'Miniature e figurine' },
+  'mat.resin.std.good2':    { de:'Schmuck-Master', en:'Jewellery masters', fr:'Maîtres bijoux', es:'Masters de joyería', it:'Master gioielli' },
+  'mat.resin.std.bad1':     { de:'Mechanische Last', en:'Mechanical load', fr:'Charge mécanique', es:'Carga mecánica', it:'Carico meccanico' },
+  'mat.resin.tough.good1':  { de:'Funktionsteile', en:'Functional parts', fr:'Pièces fonctionnelles', es:'Piezas funcionales', it:'Parti funzionali' },
+  'mat.resin.tough.good2':  { de:'Gehäuse & Tests', en:'Housings & tests', fr:'Boîtiers & tests', es:'Carcasas y pruebas', it:'Alloggiamenti e test' },
+  'mat.resin.tough.bad1':   { de:'Extreme Details', en:'Extreme details', fr:'Détails extrêmes', es:'Detalles extremos', it:'Dettagli estremi' },
+  'mat.resin.flex.good1':   { de:'Dichtungen & Griffe', en:'Seals & grips', fr:'Joints & poignées', es:'Juntas y empuñaduras', it:'Guarnizioni e impugnature' },
+  'mat.resin.flex.good2':   { de:'Weiche Teile', en:'Soft parts', fr:'Pièces souples', es:'Piezas blandas', it:'Parti morbide' },
+  'mat.resin.flex.bad1':    { de:'Steife Konstruktionen', en:'Rigid constructions', fr:'Constructions rigides', es:'Construcciones rígidas', it:'Costruzioni rigide' },
+  'mat.resin.cast.good1':   { de:'Gussformen', en:'Casting moulds', fr:'Moules de coulée', es:'Moldes de fundición', it:'Stampi di fusione' },
+  'mat.resin.cast.good2':   { de:'Schmuckherstellung', en:'Jewellery making', fr:'Fabrication bijoux', es:'Fabricación de joyería', it:'Fabbricazione gioielli' },
+  'mat.resin.cast.bad1':    { de:'Endprodukte', en:'End products', fr:'Produits finis', es:'Productos finales', it:'Prodotti finiti' },
+
+  // === Laser Flip-Card Detail Texts ===
+  'mat.laser.metalglass':       { de:'Metall / Glas', en:'Metal / Glass', fr:'Métal / Verre', es:'Metal / Vidrio', it:'Metallo / Vetro' },
+  'mat.laser.metalglass.desc':  { de:'Branding, QR-Codes, Geschenke — Gravur auf Metall und Glas.', en:'Branding, QR codes, gifts — engraving on metal and glass.', fr:'Branding, codes QR, cadeaux — gravure sur métal et verre.', es:'Branding, códigos QR, regalos — grabado en metal y vidrio.', it:'Branding, codici QR, regali — incisione su metallo e vetro.' },
+  'mat.laser.wood.good1':      { de:'Schilder & Deko', en:'Signs & decoration', fr:'Panneaux & déco', es:'Letreros y decoración', it:'Insegne e decorazioni' },
+  'mat.laser.wood.good2':      { de:'Verpackungen', en:'Packaging', fr:'Emballages', es:'Embalajes', it:'Imballaggi' },
+  'mat.laser.wood.bad1':       { de:'Feuchtigkeit', en:'Moisture', fr:'Humidité', es:'Humedad', it:'Umidità' },
+  'mat.laser.acrylic.good1':   { de:'Edel-Schilder', en:'Premium signs', fr:'Panneaux premium', es:'Letreros premium', it:'Insegne premium' },
+  'mat.laser.acrylic.good2':   { de:'LED-Displays', en:'LED displays', fr:'Écrans LED', es:'Displays LED', it:'Display LED' },
+  'mat.laser.acrylic.bad1':    { de:'Hitze', en:'Heat', fr:'Chaleur', es:'Calor', it:'Calore' },
+  'mat.laser.mg.good1':        { de:'Branding & QR-Codes', en:'Branding & QR codes', fr:'Branding & codes QR', es:'Branding y códigos QR', it:'Branding e codici QR' },
+  'mat.laser.mg.good2':        { de:'Geschenke', en:'Gifts', fr:'Cadeaux', es:'Regalos', it:'Regali' },
+  'mat.laser.mg.bad1':         { de:'Schneiden', en:'Cutting', fr:'Découpe', es:'Corte', it:'Taglio' },
+
+  // === Legal ===
+  'legal.impressum':   { de:'Impressum',   en:'Legal Notice',  fr:'Mentions légales', es:'Aviso legal', it:'Note legali'  },
+  'legal.datenschutz': { de:'Datenschutzerklärung', en:'Privacy Policy', fr:'Politique de confidentialité', es:'Política de privacidad',  it:'Informativa sulla privacy'     },
+  'legal.note':        { de:'Dieser Text ist ausschließlich auf Deutsch verfügbar (rechtliche Anforderung).', en:'This text is only available in German (legal requirement).', fr:'Ce texte est uniquement disponible en allemand (exigence légale).', es:'Este texto solo está disponible en alemán (requisito legal).', it:'Questo testo è disponibile solo in tedesco (requisito legale).' },
+  'legal.back':        { de:'← Zurück zur Startseite', en:'← Back to homepage', fr:"← Retour à l'accueil", es:'← Volver al inicio', it:'← Torna alla homepage' },
+  // ===== KATALOG DETAIL KEYS =====
+  'prod.funktionsteile.viewall': { de:'Alles anzeigen →', en:'View all →', fr:'Voir tout →', es:'Ver todo →', it:'Vedi tutto →' },
+  'prod.deko.viewall':  { de:'Alles anzeigen →', en:'View all →', fr:'Voir tout →', es:'Ver todo →', it:'Vedi tutto →' },
+  'prod.business.viewall': { de:'Alles anzeigen →', en:'View all →', fr:'Voir tout →', es:'Ver todo →', it:'Vedi tutto →' },
+  'prod.maker.viewall': { de:'Alles anzeigen →', en:'View all →', fr:'Voir tout →', es:'Ver todo →', it:'Vedi tutto →' },
+  'prod.detail.cta':    { de:'Jetzt anfragen', en:'Request now', fr:'Demander maintenant', es:'Solicitar ahora', it:'Richiedi ora' },
+
+  // === Produkte Subnav Titles ===
+  'prod.funktionsteile.title': { de:'⚙️ Funktionsteile', en:'⚙️ Functional Parts', fr:'⚙️ Pièces fonctionnelles', es:'⚙️ Piezas funcionales', it:'⚙️ Parti funzionali' },
+  'prod.deko.title':    { de:'🎨 Deko & Geschenke', en:'🎨 Deco & Gifts', fr:'🎨 Déco & Cadeaux', es:'🎨 Decoración & Regalos', it:'🎨 Deco & Regali' },
+  'prod.business.title': { de:'💼 Business', en:'💼 Business', fr:'💼 Business', es:'💼 Business', it:'💼 Business' },
+  'prod.maker.title':   { de:'🛠️ Maker & DIY', en:'🛠️ Maker & DIY', fr:'🛠️ Maker & DIY', es:'🛠️ Maker & DIY', it:'🛠️ Maker & DIY' },
+
+  // === Warenkorb ===
+  'cart.title':        { de:"Warenkorb",          en:"Shopping Cart",     fr:"Panier",              es:"Carrito",              it:"Carrello"            },
+  'cart.empty':        { de:"Dein Warenkorb ist leer.", en:"Your cart is empty.", fr:"Votre panier est vide.", es:"Tu carrito est\u00e1 vac\u00edo.", it:"Il tuo carrello \u00e8 vuoto." },
+  'cart.total':        { de:"Gesamtsumme",        en:"Total",             fr:"Total",               es:"Total",                it:"Totale"              },
+  'cart.checkout':     { de:"Jetzt bestellen",    en:"Order now",         fr:"Commander",           es:"Pedir ahora",          it:"Ordina ora"          },
+  'cart.clear':        { de:"Warenkorb leeren",   en:"Clear cart",        fr:"Vider le panier",     es:"Vaciar carrito",       it:"Svuota carrello"     },
+  'cart.add':          { de:"In den Warenkorb",   en:"Add to cart",       fr:"Ajouter au panier",   es:"A\u00f1adir al carrito", it:"Aggiungi al carrello" },
+  'cart.remove':       { de:"\u2715",             en:"\u2715",            fr:"\u2715",              es:"\u2715",               it:"\u2715"              },
+  'cart.toprodukte':    { de:"Zu den Produkten",        en:"To products",      fr:"Vers les produits",   es:"A los productos",     it:"Ai prodotti"         },
+  'cart.col.product':  { de:"Produkt",            en:"Product",           fr:"Produit",             es:"Producto",             it:"Prodotto"            },
+  'cart.col.price':    { de:"Preis",              en:"Price",             fr:"Prix",                es:"Precio",               it:"Prezzo"              },
+  'cart.col.qty':      { de:"Menge",              en:"Qty",               fr:"Qt\u00e9",            es:"Cantidad",             it:"Qt\u00e0"            },
+  'cart.col.subtotal': { de:"Summe",              en:"Subtotal",          fr:"Sous-total",          es:"Subtotal",             it:"Subtotale"           },
+
+  // ===== KATALOG DETAIL KEYS (TODO: Übersetzungen en/fr/es/it) =====
+  'prod.business.item1': { de:'Firmenschilder', en:'Company Signs', fr:"Enseignes d'entreprise", es:'Letreros de empresa', it:'Insegne aziendali' },
+  'prod.business.item1.long': { de:'Professionelle Schilder aus Acryl, Holz oder mit Metallgravur. Lasergeschnitten und graviert — für Empfang, Büro oder Messestand.', en:'Professional signs made of acrylic, wood or with metal engraving. Laser cut and engraved — for reception, office or trade fair booth.', fr:'Enseignes professionnelles en acrylique, bois ou avec gravure métal. Découpées et gravées au laser — pour accueil, bureau ou stand de salon.', es:'Letreros profesionales de acrílico, madera o con grabado en metal. Cortados y grabados con láser — para recepción, oficina o stand de feria.', it:'Insegne professionali in acrilico, legno o con incisione su metallo. Tagliate e incise al laser — per reception, ufficio o stand fieristico.' },
+  'prod.business.item1.spec1': { de:'Acryl, Holz, Metall', en:'Acrylic, wood, metal', fr:'Acrylique, bois, métal', es:'Acrílico, madera, metal', it:'Acrilico, legno, metallo' },
+  'prod.business.item1.spec2': { de:'Bis 400×400mm', en:'Up to 400×400mm', fr:"Jusqu'à 400×400mm", es:'Hasta 400×400mm', it:'Fino a 400×400mm' },
+  'prod.business.item1.spec3': { de:'Preis: ab 25 €', en:'Price: from 25 €', fr:'Prix : à partir de 25 €', es:'Precio: desde 25 €', it:'Prezzo: da 25 €' },
+  'prod.business.item2': { de:'Produkt-Prototypen', en:'Product Prototypes', fr:'Prototypes de produits', es:'Prototipos de productos', it:'Prototipi di prodotti' },
+  'prod.business.item2.long': { de:'Vom digitalen Konzept zum anfassbaren Modell. Schnelle Iterationen für Präsentationen, Tests und Investoren-Pitches.', en:'From digital concept to tangible model. Fast iterations for presentations, tests and investor pitches.', fr:'Du concept numérique au modèle tangible. Itérations rapides pour présentations, tests et pitches investisseurs.', es:'Del concepto digital al modelo tangible. Iteraciones rápidas para presentaciones, pruebas y pitches de inversores.', it:'Dal concetto digitale al modello tangibile. Iterazioni rapide per presentazioni, test e pitch per investitori.' },
+  'prod.business.item2.spec1': { de:'FDM, Resin oder Laser', en:'FDM, Resin or Laser', fr:'FDM, Résine ou Laser', es:'FDM, Resina o Láser', it:'FDM, Resina o Laser' },
+  'prod.business.item2.spec2': { de:'Turnaround: 24–72h', en:'Turnaround: 24–72h', fr:'Délai : 24–72h', es:'Plazo: 24–72h', it:'Tempi: 24–72h' },
+  'prod.business.item2.spec3': { de:'Preis: ab 15 €', en:'Price: from 15 €', fr:'Prix : à partir de 15 €', es:'Precio: desde 15 €', it:'Prezzo: da 15 €' },
+  'prod.business.item3': { de:'Kleinserien', en:'Small Series', fr:'Petites séries', es:'Series cortas', it:'Piccole serie' },
+  'prod.business.item3.long': { de:'Serienproduktion bis 50 Stück — Verpackungen, Displays, Werbemittel, Messe-Giveaways.', en:'Series production up to 50 pieces — packaging, displays, promotional materials, trade fair giveaways.', fr:"Production en série jusqu'à 50 pièces — emballages, présentoirs, supports publicitaires, goodies de salon.", es:'Producción en serie hasta 50 piezas — embalajes, displays, material publicitario, regalos de feria.', it:'Produzione in serie fino a 50 pezzi — imballaggi, display, materiale promozionale, gadget fieristici.' },
+  'prod.business.item3.spec1': { de:'Konsistente Qualität', en:'Consistent quality', fr:'Qualité constante', es:'Calidad consistente', it:'Qualità costante' },
+  'prod.business.item3.spec2': { de:'Mengenrabatt möglich', en:'Volume discount possible', fr:'Remise quantité possible', es:'Descuento por cantidad posible', it:'Sconto quantità possibile' },
+  'prod.business.item3.spec3': { de:'Preis: auf Anfrage', en:'Price: on request', fr:'Prix : sur demande', es:'Precio: bajo consulta', it:'Prezzo: su richiesta' },
+  'prod.business.item4': { de:'Messe- & Event-Material', en:'Trade Fair & Event Material', fr:'Matériel salon & événement', es:'Material para ferias & eventos', it:'Materiale fiera & eventi' },
+  'prod.business.item4.long': { de:'Lasergeschnittene Displays, 3D-gedruckte Produkthalter, gravierte Namensschilder für Konferenzen.', en:'Laser-cut displays, 3D-printed product holders, engraved name badges for conferences.', fr:'Présentoirs découpés au laser, supports de produits imprimés en 3D, badges nominatifs gravés pour conférences.', es:'Displays cortados con láser, soportes de productos impresos en 3D, placas de nombre grabadas para conferencias.', it:'Display tagliati al laser, portaprodotti stampati in 3D, badge nominativi incisi per conferenze.' },
+  'prod.business.item4.spec1': { de:'Schnelle Fertigung', en:'Fast production', fr:'Fabrication rapide', es:'Fabricación rápida', it:'Produzione rapida' },
+  'prod.business.item4.spec2': { de:'Auch kurzfristig', en:'Also on short notice', fr:'Aussi en urgence', es:'También con poco aviso', it:'Anche con preavviso breve' },
+  'prod.business.item4.spec3': { de:'Preis: ab 10 €', en:'Price: from 10 €', fr:'Prix : à partir de 10 €', es:'Precio: desde 10 €', it:'Prezzo: da 10 €' },
+  'prod.business.item5': { de:'QR-Code Schilder', en:'QR Code Signs', fr:'Panneaux QR Code', es:'Placas con código QR', it:'Targhe QR Code' },
+  'prod.business.item5.long': { de:'Dauerhaft gravierte QR-Codes auf Holz, Acryl oder Metall — für Menüs, Bewertungen, Visitenkarten.', en:'Permanently engraved QR codes on wood, acrylic or metal — for menus, reviews, business cards.', fr:'Codes QR gravés durablement sur bois, acrylique ou métal — pour menus, avis, cartes de visite.', es:'Códigos QR grabados permanentemente en madera, acrílico o metal — para menús, reseñas, tarjetas de visita.', it:'Codici QR incisi permanentemente su legno, acrilico o metallo — per menu, recensioni, biglietti da visita.' },
+  'prod.business.item5.spec1': { de:'Holz, Acryl, Metall', en:'Wood, acrylic, metal', fr:'Bois, acrylique, métal', es:'Madera, acrílico, metal', it:'Legno, acrilico, metallo' },
+  'prod.business.item5.spec2': { de:'Wetterfest möglich', en:'Weatherproof possible', fr:'Version étanche possible', es:'Versión resistente al agua posible', it:'Versione impermeabile possibile' },
+  'prod.business.item5.spec3': { de:'Preis: ab 8 €', en:'Price: from 8 €', fr:'Prix : à partir de 8 €', es:'Precio: desde 8 €', it:'Prezzo: da 8 €' },
+  'prod.business.item6': { de:'Branding-Pakete', en:'Branding Packages', fr:'Packs Branding', es:'Paquetes de Branding', it:'Pacchetti Branding' },
+  'prod.business.item6.long': { de:'Komplettpaket: Firmenschild + Visitenkarten-Halter + Schlüsselanhänger + Muster. Alles im Corporate Design.', en:'Complete package: company sign + business card holder + keychains + samples. All in corporate design.', fr:'Pack complet : enseigne + porte-cartes de visite + porte-clés + échantillons. Le tout en design corporate.', es:'Paquete completo: letrero de empresa + portavisitas + llaveros + muestras. Todo en diseño corporativo.', it:'Pacchetto completo: insegna aziendale + portabiglietti da visita + portachiavi + campioni. Tutto in design aziendale.' },
+  'prod.business.item6.spec1': { de:'3D-Druck + Laser', en:'3D printing + Laser', fr:'Impression 3D + Laser', es:'Impresión 3D + Láser', it:'Stampa 3D + Laser' },
+  'prod.business.item6.spec2': { de:'Individuelle Beratung', en:'Individual consultation', fr:'Conseil personnalisé', es:'Asesoramiento individual', it:'Consulenza personalizzata' },
+  'prod.business.item6.spec3': { de:'Preis: ab 50 €', en:'Price: from 50 €', fr:'Prix : à partir de 50 €', es:'Precio: desde 50 €', it:'Prezzo: da 50 €' },
+  'prod.deko.item1.long': { de:'Türschilder, Namensschilder, Sprüche und Logos — lasergraviert auf echtem Holz. Perfekt als Geschenk.', en:'Door signs, name plates, quotes and logos — laser engraved on real wood. Perfect as a gift.', fr:'Plaques de porte, plaques nominatives, citations et logos — gravés au laser sur bois véritable. Parfait comme cadeau.', es:'Placas de puerta, placas de nombre, frases y logos — grabados con láser en madera real. Perfecto como regalo.', it:'Targhe per porte, targhette nominative, citazioni e loghi — incisi al laser su legno vero. Perfetto come regalo.' },
+  'prod.deko.item1.spec1': { de:'Material: Echtholz, Bambus', en:'Material: real wood, bamboo', fr:'Matériau : bois véritable, bambou', es:'Material: madera real, bambú', it:'Materiale: legno vero, bambù' },
+  'prod.deko.item1.spec2': { de:'Gravur: 0.1mm Standard', en:'Engraving: 0.1mm standard', fr:'Gravure : 0.1mm standard', es:'Grabado: 0.1mm estándar', it:'Incisione: 0.1mm standard' },
+  'prod.deko.item1.spec3': { de:'Preis: ab 12 €', en:'Price: from 12 €', fr:'Prix : à partir de 12 €', es:'Precio: desde 12 €', it:'Prezzo: da 12 €' },
+  'prod.deko.item2.long': { de:'Miniaturen, Deko-Objekte, Vasen und Skulpturen. Resin für maximale Details oder FDM für größere Stücke.', en:'Miniatures, decorative objects, vases and sculptures. Resin for maximum details or FDM for larger pieces.', fr:'Miniatures, objets décoratifs, vases et sculptures. Résine pour un maximum de détails ou FDM pour les grandes pièces.', es:'Miniaturas, objetos decorativos, jarrones y esculturas. Resina para máximo detalle o FDM para piezas más grandes.', it:'Miniature, oggetti decorativi, vasi e sculture. Resina per massimo dettaglio o FDM per pezzi più grandi.' },
+  'prod.deko.item2.spec1': { de:'FDM oder Resin', en:'FDM or Resin', fr:'FDM ou Résine', es:'FDM o Resina', it:'FDM o Resina' },
+  'prod.deko.item2.spec2': { de:'Bis 325mm Höhe', en:'Up to 325mm height', fr:"Jusqu'à 325mm de hauteur", es:'Hasta 325mm de altura', it:'Fino a 325mm di altezza' },
+  'prod.deko.item2.spec3': { de:'Preis: ab 8 €', en:'Price: from 8 €', fr:'Prix : à partir de 8 €', es:'Precio: desde 8 €', it:'Prezzo: da 8 €' },
+  'prod.deko.item3.long': { de:'Schlüsselanhänger, Untersetzer, Boxen, Handyhüllen — mit Namen, Datum oder eigenem Design.', en:'Keychains, coasters, boxes, phone cases — with name, date or custom design.', fr:'Porte-clés, sous-verres, boîtes, coques de téléphone — avec nom, date ou design personnalisé.', es:'Llaveros, posavasos, cajas, fundas de móvil — con nombre, fecha o diseño propio.', it:'Portachiavi, sottobicchieri, scatole, cover per telefono — con nome, data o design personalizzato.' },
+  'prod.deko.item3.spec1': { de:'3D-Druck + Lasergravur', en:'3D printing + laser engraving', fr:'Impression 3D + gravure laser', es:'Impresión 3D + grabado láser', it:'Stampa 3D + incisione laser' },
+  'prod.deko.item3.spec2': { de:'Einzelstücke oder Sets', en:'Single pieces or sets', fr:'Pièces uniques ou lots', es:'Piezas únicas o sets', it:'Pezzi singoli o set' },
+  'prod.deko.item3.spec3': { de:'Preis: ab 6 €', en:'Price: from 6 €', fr:'Prix : à partir de 6 €', es:'Precio: desde 6 €', it:'Prezzo: da 6 €' },
+  'prod.deko.item4': { de:'Lampen & Lichtspiele', en:'Lamps & Light Art', fr:'Lampes & Jeux de lumière', es:'Lámparas & Juegos de luz', it:'Lampade & Giochi di luce' },
+  'prod.deko.item4.long': { de:'Lithophane, Lampenschirme und LED-Halter — dein Foto als 3D-gedrucktes Lichtkunstwerk.', en:'Lithophanes, lampshades and LED holders — your photo as a 3D-printed light artwork.', fr:'Lithophanes, abat-jour et supports LED — votre photo en oeuvre lumineuse imprimée en 3D.', es:'Litofanías, pantallas de lámpara y soportes LED — tu foto como obra de arte luminosa impresa en 3D.', it:'Litofane, paralumi e supporti LED — la tua foto come opera luminosa stampata in 3D.' },
+  'prod.deko.item4.spec1': { de:'Material: weißes PLA', en:'Material: white PLA', fr:'Matériau : PLA blanc', es:'Material: PLA blanco', it:'Materiale: PLA bianco' },
+  'prod.deko.item4.spec2': { de:'LED nicht enthalten', en:'LED not included', fr:'LED non incluse', es:'LED no incluido', it:'LED non incluso' },
+  'prod.deko.item4.spec3': { de:'Preis: ab 15 €', en:'Price: from 15 €', fr:'Prix : à partir de 15 €', es:'Precio: desde 15 €', it:'Prezzo: da 15 €' },
+  'prod.deko.item5': { de:'Weihnachts- & Saisonales', en:'Christmas & Seasonal', fr:'Noël & Saisonnier', es:'Navidad & Temporada', it:'Natale & Stagionale' },
+  'prod.deko.item5.long': { de:'Christbaumschmuck, Osterdeko, Halloween-Figuren — saisonal wechselnde Designs.', en:'Christmas tree ornaments, Easter decorations, Halloween figures — seasonally changing designs.', fr:'Décorations de sapin, déco de Pâques, figurines Halloween — designs saisonniers changeants.', es:'Adornos de árbol de Navidad, decoración de Pascua, figuras de Halloween — diseños de temporada.', it:"Decorazioni per l'albero di Natale, decorazioni pasquali, figure di Halloween — design stagionali." },
+  'prod.deko.item5.spec1': { de:'Multi-Color möglich', en:'Multi-colour possible', fr:'Multi-couleur possible', es:'Multi-color posible', it:'Multi-colore possibile' },
+  'prod.deko.item5.spec2': { de:'Auch als Serie', en:'Also as series', fr:'Aussi en série', es:'También en serie', it:'Anche in serie' },
+  'prod.deko.item5.spec3': { de:'Preis: ab 4 €', en:'Price: from 4 €', fr:'Prix : à partir de 4 €', es:'Precio: desde 4 €', it:'Prezzo: da 4 €' },
+  'prod.deko.item6': { de:'Acryl-Gravuren', en:'Acrylic Engravings', fr:'Gravures sur acrylique', es:'Grabados en acrílico', it:'Incisioni su acrilico' },
+  'prod.deko.item6.long': { de:'Transparente Acrylplatten mit Lasergravur — leuchtend mit LED-Sockel. Fotos, Logos, Schriftzüge.', en:'Transparent acrylic panels with laser engraving — illuminated with LED base. Photos, logos, lettering.', fr:'Plaques acryliques transparentes avec gravure laser — illuminées avec socle LED. Photos, logos, lettrages.', es:'Placas de acrílico transparente con grabado láser — iluminadas con base LED. Fotos, logos, letras.', it:'Lastre acriliche trasparenti con incisione laser — illuminate con base LED. Foto, loghi, scritte.' },
+  'prod.deko.item6.spec1': { de:'Material: Acryl 3–6mm', en:'Material: acrylic 3–6mm', fr:'Matériau : acrylique 3–6mm', es:'Material: acrílico 3–6mm', it:'Materiale: acrilico 3–6mm' },
+  'prod.deko.item6.spec2': { de:'LED-Sockel optional', en:'LED base optional', fr:'Socle LED en option', es:'Base LED opcional', it:'Base LED opzionale' },
+  'prod.deko.item6.spec3': { de:'Preis: ab 18 €', en:'Price: from 18 €', fr:'Prix : à partir de 18 €', es:'Precio: desde 18 €', it:'Prezzo: da 18 €' },
+  'prod.funktionsteile.item1': { de:'Zahnräder & Mechanik', en:'Gears & Mechanics', fr:'Engrenages & Mécanique', es:'Engranajes & Mecánica', it:'Ingranaggi & Meccanica' },
+  'prod.funktionsteile.item1.long': { de:'Ersatzteile für Maschinen, Geräte und Haushalt. Verschleißteile wie Zahnräder, Adapter und Halterungen — maßgefertigt aus PLA, PETG oder Nylon.', en:'Spare parts for machines, devices and household. Wear parts like gears, adapters and mounts — custom-made from PLA, PETG or Nylon.', fr:"Pièces de rechange pour machines, appareils et maison. Pièces d'usure comme engrenages, adaptateurs et supports — sur mesure en PLA, PETG ou Nylon.", es:'Repuestos para máquinas, dispositivos y hogar. Piezas de desgaste como engranajes, adaptadores y soportes — a medida en PLA, PETG o Nylon.', it:'Ricambi per macchine, dispositivi e casa. Parti di usura come ingranaggi, adattatori e supporti — su misura in PLA, PETG o Nylon.' },
+  'prod.funktionsteile.item1.spec1': { de:'Materialien: PLA, PETG, PA (Nylon)', en:'Materials: PLA, PETG, PA (Nylon)', fr:'Matériaux : PLA, PETG, PA (Nylon)', es:'Materiales: PLA, PETG, PA (Nylon)', it:'Materiali: PLA, PETG, PA (Nylon)' },
+  'prod.funktionsteile.item1.spec2': { de:'Toleranz: ±0.2mm', en:'Tolerance: ±0.2mm', fr:'Tolérance : ±0.2mm', es:'Tolerancia: ±0.2mm', it:'Tolleranza: ±0.2mm' },
+  'prod.funktionsteile.item1.spec3': { de:'Preis: ab 5 €', en:'Price: from 5 €', fr:'Prix : à partir de 5 €', es:'Precio: desde 5 €', it:'Prezzo: da 5 €' },
+  'prod.funktionsteile.item2': { de:'Gehäuse & Abdeckungen', en:'Housings & Covers', fr:'Boîtiers & Couvercles', es:'Carcasas & Cubiertas', it:'Alloggiamenti & Coperture' },
+  'prod.funktionsteile.item2.long': { de:'Individuelle Elektronik-Gehäuse, Schutzabdeckungen und Einhausungen. Passgenau für Arduino, Raspberry Pi, Sensoren und mehr.', en:'Custom electronics housings, protective covers and enclosures. Precision-fit for Arduino, Raspberry Pi, sensors and more.', fr:'Boîtiers électroniques sur mesure, couvercles de protection et enceintes. Ajustés pour Arduino, Raspberry Pi, capteurs et plus.', es:'Carcasas electrónicas a medida, cubiertas protectoras y cerramientos. Ajuste preciso para Arduino, Raspberry Pi, sensores y más.', it:'Alloggiamenti elettronici su misura, coperture protettive e involucri. Su misura per Arduino, Raspberry Pi, sensori e altro.' },
+  'prod.funktionsteile.item2.spec1': { de:'Materialien: PETG, ABS, ASA', en:'Materials: PETG, ABS, ASA', fr:'Matériaux : PETG, ABS, ASA', es:'Materiales: PETG, ABS, ASA', it:'Materiali: PETG, ABS, ASA' },
+  'prod.funktionsteile.item2.spec2': { de:'Multi-Color möglich', en:'Multi-colour possible', fr:'Multi-couleur possible', es:'Multi-color posible', it:'Multi-colore possibile' },
+  'prod.funktionsteile.item2.spec3': { de:'Preis: ab 8 €', en:'Price: from 8 €', fr:'Prix : à partir de 8 €', es:'Precio: desde 8 €', it:'Prezzo: da 8 €' },
+  'prod.funktionsteile.item3': { de:'Clips & Verbinder', en:'Clips & Connectors', fr:'Clips & Connecteurs', es:'Clips & Conectores', it:'Clip & Connettori' },
+  'prod.funktionsteile.item3.long': { de:'Kabelclips, Rohrhalter, Schnappverschlüsse und Montage-Adapter. Kleine Teile, große Wirkung.', en:'Cable clips, pipe holders, snap closures and mounting adapters. Small parts, big impact.', fr:'Clips de câble, supports de tuyaux, fermetures à pression et adaptateurs de montage. Petites pièces, grand effet.', es:'Clips de cable, soportes de tubo, cierres a presión y adaptadores de montaje. Piezas pequeñas, gran efecto.', it:'Clip per cavi, supporti per tubi, chiusure a scatto e adattatori di montaggio. Piccoli pezzi, grande effetto.' },
+  'prod.funktionsteile.item3.spec1': { de:'Materialien: PLA, PETG, TPU', en:'Materials: PLA, PETG, TPU', fr:'Matériaux : PLA, PETG, TPU', es:'Materiales: PLA, PETG, TPU', it:'Materiali: PLA, PETG, TPU' },
+  'prod.funktionsteile.item3.spec2': { de:'Auch in Kleinserien', en:'Also in small series', fr:'Aussi en petites séries', es:'También en series cortas', it:'Anche in piccole serie' },
+  'prod.funktionsteile.item3.spec3': { de:'Preis: ab 2 €', en:'Price: from 2 €', fr:'Prix : à partir de 2 €', es:'Precio: desde 2 €', it:'Prezzo: da 2 €' },
+  'prod.funktionsteile.item4': { de:'Adapter & Übergangsstücke', en:'Adapters & Transition Pieces', fr:'Adaptateurs & Raccords', es:'Adaptadores & Piezas de transición', it:'Adattatori & Raccordi' },
+  'prod.funktionsteile.item4.long': { de:'Wenn nichts passt, drucken wir den Adapter. Schlauchverbinder, Gewindeadapter, Reduzierstücke.', en:'When nothing fits, we print the adapter. Hose connectors, threaded adapters, reducers.', fr:"Quand rien ne convient, nous imprimons l'adaptateur. Raccords de tuyau, adaptateurs filetés, réducteurs.", es:'Cuando nada encaja, imprimimos el adaptador. Conectores de manguera, adaptadores roscados, reductores.', it:"Quando niente si adatta, stampiamo l'adattatore. Raccordi per tubi, adattatori filettati, riduttori." },
+  'prod.funktionsteile.item4.spec1': { de:'Materialien: PETG, PA, ABS', en:'Materials: PETG, PA, ABS', fr:'Matériaux : PETG, PA, ABS', es:'Materiales: PETG, PA, ABS', it:'Materiali: PETG, PA, ABS' },
+  'prod.funktionsteile.item4.spec2': { de:'Nach Maß oder STL', en:'Custom-made or STL', fr:'Sur mesure ou STL', es:'A medida o STL', it:'Su misura o STL' },
+  'prod.funktionsteile.item4.spec3': { de:'Preis: ab 5 €', en:'Price: from 5 €', fr:'Prix : à partir de 5 €', es:'Precio: desde 5 €', it:'Prezzo: da 5 €' },
+  'prod.funktionsteile.item5': { de:'Scharniere & Gelenke', en:'Hinges & Joints', fr:'Charnières & Articulations', es:'Bisagras & Articulaciones', it:'Cerniere & Giunti' },
+  'prod.funktionsteile.item5.long': { de:'Funktionale Scharniere, Drehgelenke und Klappenmechanismen — auch aus flexiblem TPU.', en:'Functional hinges, pivot joints and flap mechanisms — also in flexible TPU.', fr:'Charnières fonctionnelles, articulations pivotantes et mécanismes de clapet — aussi en TPU flexible.', es:'Bisagras funcionales, articulaciones giratorias y mecanismos de solapa — también en TPU flexible.', it:'Cerniere funzionali, giunti rotanti e meccanismi a ribalta — anche in TPU flessibile.' },
+  'prod.funktionsteile.item5.spec1': { de:'Materialien: TPU, PA, PETG', en:'Materials: TPU, PA, PETG', fr:'Matériaux : TPU, PA, PETG', es:'Materiales: TPU, PA, PETG', it:'Materiali: TPU, PA, PETG' },
+  'prod.funktionsteile.item5.spec2': { de:'Print-in-Place möglich', en:'Print-in-Place possible', fr:'Print-in-Place possible', es:'Print-in-Place posible', it:'Print-in-Place possibile' },
+  'prod.funktionsteile.item5.spec3': { de:'Preis: ab 6 €', en:'Price: from 6 €', fr:'Prix : à partir de 6 €', es:'Precio: desde 6 €', it:'Prezzo: da 6 €' },
+  'prod.funktionsteile.item6': { de:'Dichtungen & Puffer', en:'Seals & Bumpers', fr:'Joints & Amortisseurs', es:'Juntas & Amortiguadores', it:'Guarnizioni & Ammortizzatori' },
+  'prod.funktionsteile.item6.long': { de:'Flexible Dichtungsringe, Vibrationsdämpfer und Stoßfänger aus TPU.', en:'Flexible seal rings, vibration dampers and bumpers made of TPU.', fr:"Joints d'étanchéité flexibles, amortisseurs de vibrations et pare-chocs en TPU.", es:'Anillos de sellado flexibles, amortiguadores de vibración y topes de TPU.', it:'Anelli di tenuta flessibili, smorzatori di vibrazioni e paraurti in TPU.' },
+  'prod.funktionsteile.item6.spec1': { de:'Material: TPU (Shore 95A)', en:'Material: TPU (Shore 95A)', fr:'Matériau : TPU (Shore 95A)', es:'Material: TPU (Shore 95A)', it:'Materiale: TPU (Shore 95A)' },
+  'prod.funktionsteile.item6.spec2': { de:'Wasserfest', en:'Waterproof', fr:'Étanche', es:'Resistente al agua', it:'Impermeabile' },
+  'prod.funktionsteile.item6.spec3': { de:'Preis: ab 4 €', en:'Price: from 4 €', fr:'Prix : à partir de 4 €', es:'Precio: desde 4 €', it:'Prezzo: da 4 €' },
+  'prod.maker.item1.long': { de:'Sensor-Mounts, Kamera-Halter, Kabelmanagement und Wandbefestigungen für Zigbee, Shelly, Aqara & Co.', en:'Sensor mounts, camera holders, cable management and wall brackets for Zigbee, Shelly, Aqara & Co.', fr:'Supports de capteurs, supports de caméra, gestion de câbles et fixations murales pour Zigbee, Shelly, Aqara & Co.', es:'Soportes de sensores, soportes de cámara, gestión de cables y fijaciones de pared para Zigbee, Shelly, Aqara & Co.', it:'Supporti sensori, supporti telecamera, gestione cavi e staffe a muro per Zigbee, Shelly, Aqara & Co.' },
+  'prod.maker.item1.spec1': { de:'Material: PLA, PETG', en:'Material: PLA, PETG', fr:'Matériau : PLA, PETG', es:'Material: PLA, PETG', it:'Materiale: PLA, PETG' },
+  'prod.maker.item1.spec2': { de:'Schraublos oder mit Schrauben', en:'Screwless or with screws', fr:'Sans vis ou avec vis', es:'Sin tornillos o con tornillos', it:'Senza viti o con viti' },
+  'prod.maker.item1.spec3': { de:'Preis: ab 3 €', en:'Price: from 3 €', fr:'Prix : à partir de 3 €', es:'Precio: desde 3 €', it:'Prezzo: da 3 €' },
+  'prod.maker.item2.long': { de:'Tool-Holder, Bit-Halter, Sortierboxen und Wandsysteme. Schluss mit Chaos in der Werkstatt.', en:'Tool holders, bit holders, sorting boxes and wall systems. No more chaos in the workshop.', fr:"Porte-outils, porte-embouts, boîtes de tri et systèmes muraux. Fini le chaos dans l'atelier.", es:'Portaherramientas, portapuntas, cajas clasificadoras y sistemas de pared. Se acabó el caos en el taller.', it:'Portautensili, portapunte, scatole di selezione e sistemi a parete. Basta con il caos in officina.' },
+  'prod.maker.item2.spec1': { de:'Material: PLA, PETG', en:'Material: PLA, PETG', fr:'Matériau : PLA, PETG', es:'Material: PLA, PETG', it:'Materiale: PLA, PETG' },
+  'prod.maker.item2.spec2': { de:'Modular erweiterbar', en:'Modular expandable', fr:'Modulaire et extensible', es:'Modular y ampliable', it:'Modulare e ampliabile' },
+  'prod.maker.item2.spec3': { de:'Preis: ab 5 €', en:'Price: from 5 €', fr:'Prix : à partir de 5 €', es:'Precio: desde 5 €', it:'Prezzo: da 5 €' },
+  'prod.maker.item3.long': { de:'Architekturmodelle, Gelände für Tabletop, Fahrzeugteile und Schiffsmodelle. FDM oder Resin je nach Detail.', en:'Architectural models, terrain for tabletop, vehicle parts and ship models. FDM or Resin depending on detail.', fr:"Maquettes d'architecture, terrains pour jeux de plateau, pièces de véhicules et modèles navals. FDM ou Résine selon le détail.", es:'Maquetas arquitectónicas, terrenos para juegos de mesa, piezas de vehículos y modelos navales. FDM o Resina según el detalle.', it:'Modelli architettonici, terreni per giochi da tavolo, parti di veicoli e modelli navali. FDM o Resina a seconda del dettaglio.' },
+  'prod.maker.item3.spec1': { de:'FDM oder Resin', en:'FDM or Resin', fr:'FDM ou Résine', es:'FDM o Resina', it:'FDM o Resina' },
+  'prod.maker.item3.spec2': { de:'Maßstab nach Wunsch', en:'Scale as desired', fr:'Échelle au choix', es:'Escala a elección', it:'Scala a scelta' },
+  'prod.maker.item3.spec3': { de:'Preis: ab 8 €', en:'Price: from 8 €', fr:'Prix : à partir de 8 €', es:'Precio: desde 8 €', it:'Prezzo: da 8 €' },
+  'prod.maker.item4': { de:'Raspberry Pi & Arduino Zubehör', en:'Raspberry Pi & Arduino Accessories', fr:'Accessoires Raspberry Pi & Arduino', es:'Accesorios Raspberry Pi & Arduino', it:'Accessori Raspberry Pi & Arduino' },
+  'prod.maker.item4.long': { de:'Gehäuse, Halterungen, Einbaurahmen und Abstandshalter für Einplatinencomputer und Mikrocontroller.', en:'Housings, mounts, mounting frames and spacers for single-board computers and microcontrollers.', fr:'Boîtiers, supports, cadres de montage et entretoises pour ordinateurs monocarte et microcontrôleurs.', es:'Carcasas, soportes, marcos de montaje y separadores para computadoras de placa única y microcontroladores.', it:'Alloggiamenti, supporti, telai di montaggio e distanziali per computer a scheda singola e microcontrollori.' },
+  'prod.maker.item4.spec1': { de:'Material: PETG, ABS', en:'Material: PETG, ABS', fr:'Matériau : PETG, ABS', es:'Material: PETG, ABS', it:'Materiale: PETG, ABS' },
+  'prod.maker.item4.spec2': { de:'Passgenau', en:'Precision-fit', fr:'Ajustement précis', es:'Ajuste preciso', it:'Calzata precisa' },
+  'prod.maker.item4.spec3': { de:'Preis: ab 4 €', en:'Price: from 4 €', fr:'Prix : à partir de 4 €', es:'Precio: desde 4 €', it:'Prezzo: da 4 €' },
+  'prod.maker.item5': { de:'Drohnen-Teile', en:'Drone Parts', fr:'Pièces pour drones', es:'Piezas para drones', it:'Parti per droni' },
+  'prod.maker.item5.long': { de:'Propeller-Guards, Kamerahalter, Landegestelle und GoPro-Mounts. Leicht und stabil.', en:'Propeller guards, camera holders, landing gear and GoPro mounts. Light and sturdy.', fr:"Protège-hélices, supports de caméra, trains d'atterrissage et supports GoPro. Légers et solides.", es:'Protectores de hélice, soportes de cámara, trenes de aterrizaje y soportes GoPro. Ligeros y resistentes.', it:'Protezioni per eliche, supporti telecamera, carrelli di atterraggio e supporti GoPro. Leggeri e robusti.' },
+  'prod.maker.item5.spec1': { de:'Material: PLA-CF, PETG', en:'Material: PLA-CF, PETG', fr:'Matériau : PLA-CF, PETG', es:'Material: PLA-CF, PETG', it:'Materiale: PLA-CF, PETG' },
+  'prod.maker.item5.spec2': { de:'Leichtbau-optimiert', en:'Lightweight optimised', fr:'Optimisé poids léger', es:'Optimizado para peso ligero', it:'Ottimizzato per leggerezza' },
+  'prod.maker.item5.spec3': { de:'Preis: ab 6 €', en:'Price: from 6 €', fr:'Prix : à partir de 6 €', es:'Precio: desde 6 €', it:'Prezzo: da 6 €' },
+  'prod.maker.item6': { de:'Retro & Gaming', en:'Retro & Gaming', fr:'Retro & Gaming', es:'Retro & Gaming', it:'Retro & Gaming' },
+  'prod.maker.item6.long': { de:'Controller-Halter, Cartridge-Ständer, Gehäuse für Retro-Pi, Arcade-Buttons und Joystick-Mounts.', en:'Controller holders, cartridge stands, housings for Retro-Pi, arcade buttons and joystick mounts.', fr:'Supports de manettes, présentoirs de cartouches, boîtiers pour Retro-Pi, boutons arcade et supports de joystick.', es:'Soportes de mandos, expositores de cartuchos, carcasas para Retro-Pi, botones arcade y soportes de joystick.', it:'Supporti per controller, stand per cartucce, alloggiamenti per Retro-Pi, pulsanti arcade e supporti per joystick.' },
+  'prod.maker.item6.spec1': { de:'Multi-Color möglich', en:'Multi-colour possible', fr:'Multi-couleur possible', es:'Multi-color posible', it:'Multi-colore possibile' },
+  'prod.maker.item6.spec2': { de:'Auch mit Gravur', en:'Also with engraving', fr:'Aussi avec gravure', es:'También con grabado', it:'Anche con incisione' },
+  'prod.maker.item6.spec3': { de:'Preis: ab 5 €', en:'Price: from 5 €', fr:'Prix : à partir de 5 €', es:'Precio: desde 5 €', it:'Prezzo: da 5 €' },
+
+  // ===== VALUES SECTION =====
+  'values.title':                  { de:'Was uns ausmacht',              en:'What makes us different',          fr:'Ce qui nous distingue',            es:'Lo que nos define',                it:'Cosa ci contraddistingue'           },
+  'values.quality.title':          { de:'Qualität ohne Kompromisse',      en:'Quality without compromise',       fr:'Qualité sans compromis',           es:'Calidad sin compromisos',           it:'Qualità senza compromessi'          },
+  'values.quality.text':           { de:'Jedes Teil wird geprüft bevor es rausgeht. Kein Druck verlässt die Werkstatt der nicht unseren Standards entspricht.', en:'Every part is checked before it leaves. No print leaves the workshop that does not meet our standards.', fr:'Chaque pièce est vérifiée avant de partir. Aucune impression ne quitte notre atelier sans répondre à nos exigences.', es:'Cada pieza se comprueba antes de salir. Ningún trabajo abandona el taller sin cumplir nuestros estándares.', it:'Ogni pezzo viene controllato prima di uscire. Nessuna stampa lascia il laboratorio senza soddisfare i nostri standard.' },
+  'values.speed.title':            { de:'Schnell & Vielseitig',              en:'Fast & Versatile',                fr:'Rapide & Polyvalent',                es:'Rápido & Versátil',                it:'Veloce & Versatile'              },
+  'values.speed.text':             { de:'Von der Idee zum fertigen Teil in 2 bis 5 Werktagen. FDM, Resin, Laser — wenn du es dir vorstellen kannst, können wir es bauen.', en:'From idea to finished part in 2 to 5 business days. Rush orders available on request.', fr:"De l'idée à la pièce finie en 2 à 5 jours. FDM, Résine, Laser — si vous pouvez l'imaginer, nous pouvons le construire.", es:'De la idea a la pieza terminada en 2 a 5 días hábiles. Pedidos urgentes bajo consulta.', it:"Dall'idea al pezzo in 2-5 giorni. FDM, Resina, Laser — se puoi immaginarlo, possiamo costruirlo." },
+  'values.local.title':            { de:'Direkt aus den Alpen',           en:'Straight from the Alps',           fr:'Directement des Alpes',            es:'Directamente desde los Alpes',      it:'Direttamente dalle Alpi'            },
+  'values.local.text':             { de:'Lokale Fertigung, kurze Wege, persönlicher Kontakt. Kein anonymer Großbetrieb.', en:'Local production, short distances, personal contact. No anonymous large operation.', fr:'Production locale, courtes distances, contact personnel. Pas de grande entreprise anonyme.', es:'Producción local, distancias cortas, contacto personal. Sin grandes empresas anónimas.', it:'Produzione locale, percorsi brevi, contatto personale. Niente grandi aziende anonime.' },
+  'values.solar.title':            { de:'Solarbetrieben',                  en:'Solar-powered',                    fr:'Alimenté au solaire',              es:'Alimentado con energía solar',      it:'Alimentato con energia solare'      },
+  'values.solar.text':             { de:'Unsere Drucker und Laser laufen größtenteils auf Solarstrom vom eigenen Dach. Gut fürs Gewissen, gut fürs Klima.', en:'Our printers and lasers run mostly on solar power from our own roof. Good for the conscience, good for the climate.', fr:'Nos imprimantes et lasers fonctionnent principalement à l\'énergie solaire de notre propre toit. Bon pour la conscience, bon pour le climat.', es:'Nuestras impresoras y láseres funcionan principalmente con energía solar de nuestro propio tejado. Bueno para la conciencia, bueno para el clima.', it:'Le nostre stampanti e i laser funzionano principalmente con energia solare dal nostro tetto. Bene per la coscienza, bene per il clima.' },
+  'values.handmade.title':         { de:'Handarbeit mit Herz',            en:'Handcraft with heart',             fr:'Artisanat avec passion',           es:'Artesanía con corazón',             it:'Artigianato con passione'           },
+  'values.handmade.text':          { de:'Jedes Stück bekommt die volle Aufmerksamkeit. Nachbearbeitung, Qualitätskontrolle, sorgfältige Verpackung.', en:'Every piece gets full attention. Post-processing, quality control, careful packaging.', fr:'Chaque pièce reçoit toute notre attention. Post-traitement, contrôle qualité, emballage soigné.', es:'Cada pieza recibe toda la atención. Postprocesado, control de calidad, embalaje cuidadoso.', it:'Ogni pezzo riceve la massima attenzione. Post-lavorazione, controllo qualità, imballaggio accurato.' },
+  'values.possibilities.title':   { de:'Grenzenlose Möglichkeiten',      en:'Limitless possibilities',          fr:'Possibilités infinies',            es:'Posibilidades infinitas',           it:'Possibilità infinite'               },
+  'values.possibilities.text':    { de:'FDM, Resin, Laser, CNC — von der Miniatur bis zum Gehäuse. Und wenn unsere Kapazitäten mal nicht reichen, greifen wir auf ein Netzwerk spezialisierter Partner zurück.', en:'FDM, Resin, Laser — from miniature to housing. And if a project exceeds our capacity, we tap into a network of specialised partners.', fr:'FDM, Resin, Laser — de la miniature au boîtier. Si vous pouvez l\'imaginer, nous pouvons le construire.', es:'FDM, Resin, Laser — desde la miniatura hasta la carcasa. Y si un proyecto supera nuestra capacidad, recurrimos a una red de socios especializados.', it:'FDM, Resin, Laser — dalla miniatura all\'alloggiamento. Se riesci a immaginarlo, possiamo costruirlo.' },
+
+  // ===== FEATURED PRODUCT SPOTLIGHT =====
+  'featured.photo.hint':           { de:'Produktfoto kommt',              en:'Product photo coming soon',        fr:'Photo produit bientôt',            es:'Foto del producto pronto',          it:'Foto prodotto in arrivo'            },
+  'featured.badge':                { de:'Highlight',                      en:'Highlight',                        fr:'Coup de coeur',                    es:'Destacado',                         it:'In evidenza'                        },
+  'featured.title':                { de:'Dein Projekt hier',              en:'Your project here',                fr:'Votre projet ici',                 es:'Tu proyecto aquí',                  it:'Il tuo progetto qui'                },
+  'featured.text':                 { de:'Egal ob Prototyp, Kleinserie oder Einzelstück — wir bringen deine Idee in Form. Erzähl uns was du brauchst und wir machen dir ein Angebot.', en:'Whether prototype, small series or one-off — we bring your idea to life. Tell us what you need and we will make you an offer.', fr:'Que ce soit un prototype, une petite série ou une pièce unique — nous donnons forme à votre idée. Dites-nous ce dont vous avez besoin et nous vous ferons une offre.', es:'Ya sea prototipo, serie corta o pieza única — damos forma a tu idea. Cuéntanos qué necesitas y te hacemos una oferta.', it:'Che sia un prototipo, una piccola serie o un pezzo unico — diamo forma alla tua idea. Dicci di cosa hai bisogno e ti facciamo un preventivo.' },
+  'featured.stat1.val':            { de:'2-5 Tage',                       en:'2-5 days',                         fr:'2-5 jours',                        es:'2-5 días',                          it:'2-5 giorni'                                },
+  'featured.stat1.label':          { de:'Lieferzeit',               en:'Express available',                fr:'Livraison',                 es:'Express disponible',                it:'Express disponibile'                },
+  'featured.stat2.val':            { de:'ab 5€',                          en:'from 5€',                          fr:'dès 5€',                           es:'desde 5€',                          it:'da 5€'                              },
+  'featured.stat2.label':          { de:'pro Teil',                       en:'per part',                         fr:'par pièce',                        es:'por pieza',                         it:'per pezzo'                          },
+  'featured.stat3.val':            { de:'EU',                             en:'EU',                               fr:'UE',                               es:'UE',                                it:'UE'                                 },
+  'featured.stat3.label':          { de:'Versand',                        en:'Shipping',                         fr:'Livraison',                        es:'Envío',                             it:'Spedizione'                         },
+  'featured.cta':                  { de:'Jetzt anfragen',                 en:'Request now',                      fr:'Demander maintenant',              es:'Solicitar ahora',                   it:'Richiedi ora'                       },
+
+  // ===== AVAILABILITY BADGES =====
+  'prod.available':                 { de:'✓ Verfügbar',                    en:'✓ Available',                      fr:'✓ Disponible',                     es:'✓ Disponible',                      it:'✓ Disponibile'                      },
+  'prod.onorder':                   { de:'⏱ Auf Bestellung',               en:'⏱ On order',                       fr:'⏱ Sur commande',                   es:'⏱ Bajo pedido',                     it:'⏱ Su ordinazione'                  },
+  'prod.soldout':                   { de:'✕ Ausverkauft',                   en:'✕ Sold out',                       fr:'✕ Épuisé',                         es:'✕ Agotado',                         it:'✕ Esaurito'                         },
+
+  // ===== AUTH & PROFIL =====
+  'nav.login':           { de:'Anmelden',       en:'Sign in',        fr:'Se connecter',     es:'Iniciar sesión',   it:'Accedi'           },
+  'nav.register':        { de:'Registrieren',    en:'Register',       fr:"S'inscrire",       es:'Registrarse',      it:'Registrati'       },
+  'nav.myaccount':       { de:'Mein Konto',      en:'My Account',     fr:'Mon compte',       es:'Mi cuenta',        it:'Il mio account'   },
+
+  'auth.login.title':    { de:'Anmelden',        en:'Sign in',        fr:'Se connecter',     es:'Iniciar sesión',   it:'Accedi'           },
+  'auth.register.title': { de:'Registrieren',    en:'Register',       fr:"S'inscrire",       es:'Registrarse',      it:'Registrati'       },
+  'auth.email':          { de:'E-Mail',           en:'Email',          fr:'E-mail',           es:'Correo electrónico', it:'Email'          },
+  'auth.password':       { de:'Passwort',         en:'Password',       fr:'Mot de passe',     es:'Contraseña',       it:'Password'         },
+  'auth.name':           { de:'Vor- und Nachname', en:'Full name',     fr:'Prénom et nom',    es:'Nombre completo',  it:'Nome e cognome'   },
+  'auth.confirm':        { de:'Passwort wiederholen', en:'Confirm password', fr:'Confirmer le mot de passe', es:'Repetir contraseña', it:'Conferma password' },
+  'auth.login.btn':      { de:'Anmelden',        en:'Sign in',        fr:'Se connecter',     es:'Iniciar sesión',   it:'Accedi'           },
+  'auth.register.btn':   { de:'Konto erstellen', en:'Create account', fr:'Créer un compte',  es:'Crear cuenta',     it:'Crea account'     },
+  'auth.forgot':         { de:'Passwort vergessen?', en:'Forgot password?', fr:'Mot de passe oublié ?', es:'¿Olvidaste tu contraseña?', it:'Password dimenticata?' },
+  'auth.forgot.hint':    { de:'Diese Funktion kommt mit dem Hostinger-Backend.', en:'This feature will come with the Hostinger backend.', fr:'Cette fonction arrivera avec le backend Hostinger.', es:'Esta función llegará con el backend de Hostinger.', it:'Questa funzione arriverà con il backend Hostinger.' },
+
+  'auth.error.email':    { de:'Bitte gib eine gültige E-Mail ein.', en:'Please enter a valid email.', fr:'Veuillez entrer un email valide.', es:'Introduce un correo válido.', it:'Inserisci un\'email valida.' },
+  'auth.error.password': { de:'Mindestens 8 Zeichen.', en:'At least 8 characters.', fr:'Au moins 8 caractères.', es:'Al menos 8 caracteres.', it:'Almeno 8 caratteri.' },
+  'auth.error.name':     { de:'Mindestens 2 Zeichen.', en:'At least 2 characters.', fr:'Au moins 2 caractères.', es:'Al menos 2 caracteres.', it:'Almeno 2 caratteri.' },
+  'auth.error.exists':   { de:'Diese E-Mail ist bereits registriert.', en:'This email is already registered.', fr:'Cet email est déjà enregistré.', es:'Este correo ya está registrado.', it:'Questa email è già registrata.' },
+  'auth.error.nomatch':  { de:'Passwörter stimmen nicht überein.', en:'Passwords do not match.', fr:'Les mots de passe ne correspondent pas.', es:'Las contraseñas no coinciden.', it:'Le password non corrispondono.' },
+  'auth.error.wrong':    { de:'E-Mail oder Passwort falsch.', en:'Incorrect email or password.', fr:'Email ou mot de passe incorrect.', es:'Correo o contraseña incorrectos.', it:'Email o password errati.' },
+
+  'profil.title':        { de:'Mein Profil',     en:'My Profile',     fr:'Mon profil',       es:'Mi perfil',        it:'Il mio profilo'   },
+  'profil.since':        { de:'Mitglied seit',    en:'Member since',   fr:'Membre depuis',    es:'Miembro desde',    it:'Membro dal'       },
+  'profil.address':      { de:'Adresse',          en:'Address',        fr:'Adresse',          es:'Dirección',        it:'Indirizzo'        },
+  'profil.street':       { de:'Straße & Nr.',     en:'Street & No.',   fr:'Rue et n°',        es:'Calle y n.º',     it:'Via e n.'         },
+  'profil.zip':          { de:'PLZ',              en:'ZIP',            fr:'Code postal',      es:'Código postal',    it:'CAP'              },
+  'profil.city':         { de:'Stadt',            en:'City',           fr:'Ville',            es:'Ciudad',           it:'Città'            },
+  'profil.country':      { de:'Land',             en:'Country',        fr:'Pays',             es:'País',             it:'Paese'            },
+  'profil.orders':       { de:'Meine Bestellungen', en:'My Orders',   fr:'Mes commandes',    es:'Mis pedidos',      it:'I miei ordini'    },
+  'profil.orders.date':  { de:'Datum',            en:'Date',           fr:'Date',             es:'Fecha',            it:'Data'             },
+  'profil.orders.item':  { de:'Artikel',          en:'Item',           fr:'Article',          es:'Artículo',         it:'Articolo'         },
+  'profil.orders.price': { de:'Preis',            en:'Price',          fr:'Prix',             es:'Precio',           it:'Prezzo'           },
+  'profil.orders.status':{ de:'Status',           en:'Status',         fr:'Statut',           es:'Estado',           it:'Stato'            },
+  'profil.orders.empty': { de:'Noch keine Bestellungen.', en:'No orders yet.', fr:'Pas encore de commandes.', es:'Aún no hay pedidos.', it:'Nessun ordine ancora.' },
+  'profil.save':         { de:'Speichern',        en:'Save',           fr:'Enregistrer',      es:'Guardar',          it:'Salva'            },
+  'profil.saved':        { de:'Gespeichert!',     en:'Saved!',         fr:'Enregistré !',     es:'¡Guardado!',       it:'Salvato!'         },
+  'profil.logout':       { de:'Abmelden',         en:'Sign out',       fr:'Se déconnecter',   es:'Cerrar sesión',    it:'Esci'             },
+  'profil.delete':       { de:'Konto löschen',    en:'Delete account', fr:'Supprimer le compte', es:'Eliminar cuenta', it:'Elimina account' },
+  'profil.delete.confirm': { de:'Bist du sicher? Alle Daten werden gelöscht.', en:'Are you sure? All data will be deleted.', fr:'Es-tu sûr ? Toutes les données seront supprimées.', es:'¿Estás seguro? Todos los datos se eliminarán.', it:'Sei sicuro? Tutti i dati verranno eliminati.' },
+
+};
+
+
+// ===== ENGINE =====
+function setLang(lang) {
+  const supported = ['de','en','fr','es','it'];
+  if (!supported.includes(lang)) lang = 'de';
+  localStorage.setItem('pita-lang', lang);
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const t = TRANSLATIONS[key];
+    if (!t || t[lang] === undefined) return;
+    const val = t[lang];
+    const attr = el.getAttribute('data-i18n-attr');
+    if (attr) { el.setAttribute(attr, val); return; }
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') { el.placeholder = val; return; }
+    if (el.tagName === 'OPTION') { el.textContent = val; return; }
+    el.innerHTML = val;
+  });
+
+  document.querySelectorAll('.lang-switcher button[data-lang]').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+
+  // Clippy & andere Listener benachrichtigen
+  document.dispatchEvent(new CustomEvent('pita-lang-changed', { detail: { lang } }));
+}
+
+function getLang() {
+  const stored = localStorage.getItem('pita-lang');
+  const browser = (navigator.language || 'de').slice(0,2);
+  const supported = ['de','en','fr','es','it'];
+  if (stored && supported.includes(stored)) return stored;
+  if (supported.includes(browser)) return browser;
+  return 'de';
+}
+
+document.addEventListener('DOMContentLoaded', () => setLang(getLang()));
+
+// ─── COMPACT LANG SWITCHER ──────────
+function toggleLangDropdown() {
+  const dd = document.getElementById('lang-dropdown');
+  if (dd) dd.classList.toggle('open');
+}
+// Schließen bei Klick außerhalb
+document.addEventListener('click', (e) => {
+  const dd = document.getElementById('lang-dropdown');
+  const btn = document.getElementById('lang-current-btn');
+  if (dd && btn && !dd.contains(e.target) && e.target !== btn) {
+    dd.classList.remove('open');
+  }
+});
+// Flag aktualisieren nach Sprachwechsel
+const _origSetLang = typeof setLang === 'function' ? setLang : null;
+(function() {
+  const flagMap = { de:'🇩🇪', en:'🇬🇧', fr:'🇫🇷', es:'🇪🇸', it:'🇮🇹' };
+  const origSet = window.setLang;
+  window.setLang = function(lang) {
+    origSet(lang);
+    const btn = document.getElementById('lang-current-btn');
+    if (btn) btn.textContent = flagMap[lang] || '🌐';
+    // Active state
+    document.querySelectorAll('.lang-dropdown button').forEach(b => {
+      b.classList.toggle('lang-active', b.getAttribute('data-lang') === lang);
+    });
+    // Dropdown schließen
+    const dd = document.getElementById('lang-dropdown');
+    if (dd) dd.classList.remove('open');
+    // Solar-Widget Sprache aktualisieren
+    if (window.refreshSolarWidget) window.refreshSolarWidget();
+  };
+})();
+// Initiale Flag setzen
+document.addEventListener('DOMContentLoaded', () => {
+  const flagMap = { de:'🇩🇪', en:'🇬🇧', fr:'🇫🇷', es:'🇪🇸', it:'🇮🇹' };
+  const lang = localStorage.getItem('pita-lang') || 'de';
+  const btn = document.getElementById('lang-current-btn');
+  if (btn) btn.textContent = flagMap[lang] || '🌐';
+  document.querySelectorAll('.lang-dropdown button').forEach(b => {
+    b.classList.toggle('lang-active', b.getAttribute('data-lang') === lang);
+  });
+});
+
+// ─── ACTIVE NAV LINK ──────────
+document.addEventListener('DOMContentLoaded', () => {
+  const path = window.location.pathname;
+  document.querySelectorAll('.nav a').forEach(a => {
+    const href = a.getAttribute('href') || '';
+    // Exakte Matches oder Prefix-Matches
+    const isActive = 
+      (href === 'materialien.html' && path.includes('materialien')) ||
+      (href === '../materialien.html' && path.includes('materialien')) ||
+      (href === 'produkte.html' && (path.includes('produkte'))) ||
+      (href === '../produkte.html' && path.includes('produkte')) ||
+      (href === 'blog.html' && path.includes('blog')) ||
+      (href === '../blog.html' && path.includes('blog')) ||
+      (path.includes('leistungen') && href.includes('#leistungen')) ||
+      (path.includes('3d-druck') && href.includes('#leistungen')) ||
+      (path.includes('resin') && href.includes('#leistungen')) ||
+      (path.includes('laser') && href.includes('#leistungen')) ||
+      (path.includes('prototyp') && href.includes('#leistungen'));
+    if (isActive) a.classList.add('nav-active');
+  });
+});
+
+  // === Terrain-Seite (3D-Reliefkarte) ===
+  'terrain.hero.title':    { de:'🏔️ 3D-Reliefkarte', en:'🏔️ 3D Terrain Model', fr:'🏔️ Carte en relief 3D', es:'🏔️ Mapa de relieve 3D', it:'🏔️ Mappa in rilievo 3D' },
+  'terrain.hero.sub':      { de:'Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.', en:'Your mountain. Your memory. From real NASA elevation data.', fr:'Ton sommet. Ton souvenir. A partir de vraies donnees NASA.', es:'Tu montaña. Tu recuerdo. De datos de elevación NASA reales.', it:'La tua montagna. Il tuo ricordo. Da veri dati di elevazione NASA.' },
+  
+  'terrain.step1.title':   { de:'Modellgröße wählen', en:'Choose model size', fr:'Choisir la taille du modele', es:'Elegir tamaño del modelo', it:'Scegli dimensione modello' },
+  'terrain.size.compact':  { de:'Kompakt · Schreibtisch', en:'Compact · Desk', fr:'Compact · Bureau', es:'Compacto · Escritorio', it:'Compatto · Scrivania' },
+  'terrain.size.standard': { de:'Standard · Wanddeko', en:'Standard · Wall decor', fr:'Standard · Déco murale', es:'Estándar · Decoración mural', it:'Standard · Deco parete' },
+  'terrain.size.large':    { de:'Groß · Premium', en:'Large · Premium', fr:'Grand · Premium', es:'Grande · Premium', it:'Grande · Premium' },
+  'terrain.size.custom':   { de:'Custom', en:'Custom', fr:'Personnalisé', es:'Personalizado', it:'Personalizzato' },
+  'terrain.size.custom.desc': { de:'Individuelle Größe', en:'Custom size', fr:'Taille personnalisée', es:'Tamaño personalizado', it:'Dimensione personalizzata' },
+  'terrain.size.custom.width': { de:'Breite (mm):', en:'Width (mm):', fr:'Largeur (mm) :', es:'Ancho (mm):', it:'Larghezza (mm):' },
+  'terrain.size.custom.depth': { de:'Tiefe (mm):', en:'Depth (mm):', fr:'Profondeur (mm) :', es:'Profundidad (mm):', it:'Profondità (mm):' },
+  'terrain.size.custom.hint': { de:'💡 Max. 300×300 mm', en:'💡 Max. 300×300 mm', fr:'💡 Max. 300×300 mm', es:'💡 Máx. 300×300 mm', it:'💡 Max. 300×300 mm' },
+  'terrain.size.custom.error': { de:'⚠️ Maximale Größe überschritten! Max. 300×300 mm', en:'⚠️ Maximum size exceeded! Max. 300×300 mm', fr:'⚠️ Taille max. dépassée ! Max. 300×300 mm', es:'⚠️ ¡Tamaño máximo excedido! Máx. 300×300 mm', it:'⚠️ Dimensione massima superata! Max. 300×300 mm' },
+  
+  'terrain.step2.title':   { de:'Gebiet wählen', en:'Choose region', fr:'Choisir la région', es:'Elegir región', it:'Scegli regione' },
+  'terrain.mode.search':   { de:'📍 Bekannte Orte', en:'📍 Known places', fr:'📍 Lieux connus', es:'📍 Lugares conocidos', it:'📍 Luoghi conosciuti' },
+  'terrain.mode.rectangle':{ de:'🗺️ Freie Rechteck-Auswahl', en:'🗺️ Free rectangle selection', fr:'🗺️ Sélection libre', es:'🗺️ Selección libre', it:'🗺️ Selezione libera' },
+  'terrain.mode.manual':   { de:'⌨️ Koordinaten eingeben', en:'⌨️ Enter coordinates', fr:'⌨️ Entrer coordonnées', es:'⌨️ Ingresar coordenadas', it:'⌨️ Inserisci coordinate' },
+  'terrain.preset.zugspitze': { de:'Zugspitze', en:'Zugspitze', fr:'Zugspitze', es:'Zugspitze', it:'Zugspitze' },
+  'terrain.preset.matterhorn': { de:'Matterhorn', en:'Matterhorn', fr:'Cervin', es:'Cervino', it:'Cervino' },
+  'terrain.coord.apply':   { de:'Koordinaten übernehmen', en:'Apply coordinates', fr:'Appliquer coordonnées', es:'Aplicar coordenadas', it:'Applica coordinate' },
+  
+  'terrain.step3.title':   { de:'3D-Vorschau', en:'3D Preview', fr:'Aperçu 3D', es:'Vista previa 3D', it:'Anteprima 3D' },
+  'terrain.preview.hint':  { de:'🏔 Klicke auf Vorschau generieren um dein Modell zu sehen', en:'🏔 Click Generate preview to see your model', fr:'🏔 Clique sur Générer aperçu pour voir ton modèle', es:'🏔 Haz clic en Generar vista previa para ver tu modelo', it:'🏔 Clicca su Genera anteprima per vedere il tuo modello' },
+  'terrain.preview.generate': { de:'🔍 Vorschau generieren', en:'🔍 Generate preview', fr:'🔍 Générer aperçu', es:'🔍 Generar vista previa', it:'🔍 Genera anteprima' },
+  'terrain.preview.ready':  { de:'Bereit zum Generieren!', en:'Ready to generate!', fr:'Prêt à générer !', es:'¡Listo para generar!', it:'Pronto per generare!' },
+  'terrain.preview.select': { de:'Wähle Größe und Gebiet aus', en:'Select size and region', fr:'Sélectionne taille et région', es:'Selecciona tamaño y región', it:'Seleziona dimensione e regione' },
+  'terrain.preview.generating': { de:'🔄 Generiere...', en:'🔄 Generating...', fr:'🔄 Génération...', es:'🔄 Generando...', it:'🔄 Generazione...' },
+  'terrain.preview.processing': { de:'⏳ Verarbeite...', en:'⏳ Processing...', fr:'⏳ Traitement...', es:'⏳ Procesando...', it:'⏳ Elaborazione...' },
+  'terrain.preview.loading': { de:'✅ Lade Vorschau...', en:'✅ Loading preview...', fr:'✅ Chargement aperçu...', es:'✅ Cargando vista previa...', it:'✅ Caricamento anteprima...' },
+  'terrain.preview.error':  { de:'❌ Fehler:', en:'❌ Error:', fr:'❌ Erreur :', es:'❌ Error:', it:'❌ Errore:' },
+  'terrain.preview.reset':  { de:'🔄 Zurücksetzen', en:'🔄 Reset', fr:'🔄 Réinitialiser', es:'🔄 Restablecer', it:'🔄 Ripristina' },
+  'terrain.preview.wireframe': { de:'🔲 Wireframe', en:'🔲 Wireframe', fr:'🔲 Fil de fer', es:'🔲 Marco de alambre', it:'🔲 Wireframe' },
+  
+  'terrain.step4.title':   { de:'Material & Extras', en:'Material & Extras', fr:'Matériau & Extras', es:'Material & Extras', it:'Materiale & Extra' },
+  'terrain.material.choose': { de:'Material wählen:', en:'Choose material:', fr:'Choisir matériau :', es:'Elegir material:', it:'Scegli materiale:' },
+  'terrain.material.pla':  { de:'PLA', en:'PLA', fr:'PLA', es:'PLA', it:'PLA' },
+  'terrain.material.pla.desc': { de:'Standard (inkl.)', en:'Standard (incl.)', fr:'Standard (incl.)', es:'Estándar (incl.)', it:'Standard (incl.)' },
+  'terrain.material.petg': { de:'PETG', en:'PETG', fr:'PETG', es:'PETG', it:'PETG' },
+  'terrain.material.petg.price': { de:'+10€', en:'+10€', fr:'+10€', es:'+10€', it:'+10€' },
+  'terrain.wooden.base':   { de:'Holzsockel:', en:'Wooden base:', fr:'Socle en bois :', es:'Base de madera:', it:'Base in legno:' },
+  'terrain.wooden.none':   { de:'Kein Sockel', en:'No base', fr:'Pas de socle', es:'Sin base', it:'Nessuna base' },
+  'terrain.wooden.linde':  { de:'Linde (+25€)', en:'Linden (+25€)', fr:'Tilleul (+25€)', es:'Tilo (+25€)', it:'Tiglio (+25€)' },
+  'terrain.wooden.eiche':  { de:'Eiche (+28€)', en:'Oak (+28€)', fr:'Chêne (+28€)', es:'Roble (+28€)', it:'Quercia (+28€)' },
+  
+  'terrain.summary.title': { de:'Deine Bestellung', en:'Your order', fr:'Ta commande', es:'Tu pedido', it:'Il tuo ordine' },
+  'terrain.summary.size':  { de:'Größe:', en:'Size:', fr:'Taille :', es:'Tamaño:', it:'Dimensione:' },
+  'terrain.summary.region': { de:'Gebiet:', en:'Region:', fr:'Région :', es:'Región:', it:'Regione:' },
+  'terrain.summary.material': { de:'Material:', en:'Material:', fr:'Matériau :', es:'Material:', it:'Materiale:' },
+  'terrain.summary.base':  { de:'Holzsockel:', en:'Wooden base:', fr:'Socle :', es:'Base:', it:'Base:' },
+  'terrain.summary.base.no': { de:'Nein', en:'No', fr:'Non', es:'No', it:'No' },
+  'terrain.summary.total': { de:'Gesamtpreis:', en:'Total price:', fr:'Prix total :', es:'Precio total:', it:'Prezzo totale:' },
+  // === Terrain-Seite (3D-Reliefkarte) ===
+  'terrain.hero.title':    { de:'🏔️ 3D-Reliefkarte', en:'🏔️ 3D Terrain Model', fr:'🏔️ Carte en relief 3D', es:'🏔️ Mapa de relieve 3D', it:'🏔️ Mappa in rilievo 3D' },
+  'terrain.hero.sub':      { de:'Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.', en:'Your mountain. Your memory. From real NASA elevation data.', fr:'Ton sommet. Ton souvenir. A partir de vraies données NASA.', es:'Tu montaña. Tu recuerdo. De datos de elevación NASA reales.', it:'La tua montagna. Il tuo ricordo. Da veri dati di elevazione NASA.' },
+  
+  'terrain.step1.title':   { de:'Modellgröße wählen', en:'Choose model size', fr:'Choisir la taille du modèle', es:'Elegir tamaño del modelo', it:'Scegli dimensione modello' },
+  'terrain.size.compact':  { de:'Kompakt · Schreibtisch', en:'Compact · Desk', fr:'Compact · Bureau', es:'Compacto · Escritorio', it:'Compatto · Scrivania' },
+  'terrain.size.standard': { de:'Standard · Wanddeko', en:'Standard · Wall decor', fr:'Standard · Déco murale', es:'Estándar · Decoración mural', it:'Standard · Deco parete' },
+  'terrain.size.large':    { de:'Groß · Premium', en:'Large · Premium', fr:'Grand · Premium', es:'Grande · Premium', it:'Grande · Premium' },
+  'terrain.size.custom':   { de:'Custom', en:'Custom', fr:'Personnalisé', es:'Personalizado', it:'Personalizzato' },
+  'terrain.size.custom.desc': { de:'Individuelle Größe', en:'Custom size', fr:'Taille personnalisée', es:'Tamaño personalizado', it:'Dimensione personalizzata' },
+  'terrain.size.custom.width': { de:'Breite (mm):', en:'Width (mm):', fr:'Largeur (mm) :', es:'Ancho (mm):', it:'Larghezza (mm):' },
+  'terrain.size.custom.depth': { de:'Tiefe (mm):', en:'Depth (mm):', fr:'Profondeur (mm) :', es:'Profundidad (mm):', it:'Profondità (mm):' },
+  'terrain.size.custom.hint': { de:'💡 Max. 300×300 mm', en:'💡 Max. 300×300 mm', fr:'💡 Max. 300×300 mm', es:'💡 Máx. 300×300 mm', it:'💡 Max. 300×300 mm' },
+  'terrain.size.custom.error': { de:'⚠️ Maximale Größe überschritten! Max. 300×300 mm', en:'⚠️ Maximum size exceeded! Max. 300×300 mm', fr:'⚠️ Taille max. dépassée ! Max. 300×300 mm', es:'⚠️ ¡Tamaño máximo excedido! Máx. 300×300 mm', it:'⚠️ Dimensione massima superata! Max. 300×300 mm' },
+  
+  'terrain.step2.title':   { de:'Gebiet wählen', en:'Choose region', fr:'Choisir la région', es:'Elegir región', it:'Scegli regione' },
+  'terrain.mode.search':   { de:'📍 Bekannte Orte', en:'📍 Known places', fr:'📍 Lieux connus', es:'📍 Lugares conocidos', it:'📍 Luoghi conosciuti' },
+  'terrain.mode.rectangle':{ de:'🗺️ Freie Rechteck-Auswahl', en:'🗺️ Free rectangle selection', fr:'🗺️ Sélection libre', es:'🗺️ Selección libre', it:'🗺️ Selezione libera' },
+  'terrain.mode.manual':   { de:'⌨️ Koordinaten eingeben', en:'⌨️ Enter coordinates', fr:'⌨️ Entrer coordonnées', es:'⌨️ Ingresar coordenadas', it:'⌨️ Inserisci coordinate' },
+  'terrain.coord.apply':   { de:'Koordinaten übernehmen', en:'Apply coordinates', fr:'Appliquer coordonnées', es:'Aplicar coordenadas', it:'Applica coordinate' },
+  
+  'terrain.step3.title':   { de:'3D-Vorschau', en:'3D Preview', fr:'Aperçu 3D', es:'Vista previa 3D', it:'Anteprima 3D' },
+  'terrain.preview.hint':  { de:'🏔 Klicke auf Vorschau generieren um dein Modell zu sehen', en:'🏔 Click Generate preview to see your model', fr:'🏔 Clique sur Générer aperçu pour voir ton modèle', es:'🏔 Haz clic en Generar vista previa para ver tu modelo', it:'🏔 Clicca su Genera anteprima per vedere il tuo modello' },
+  'terrain.preview.generate': { de:'🔍 Vorschau generieren', en:'🔍 Generate preview', fr:'🔍 Générer aperçu', es:'🔍 Generar vista previa', it:'🔍 Genera anteprima' },
+  'terrain.preview.ready':  { de:'Bereit zum Generieren!', en:'Ready to generate!', fr:'Prêt à générer !', es:'¡Listo para generar!', it:'Pronto per generare!' },
+  'terrain.preview.select': { de:'Wähle Größe und Gebiet aus', en:'Select size and region', fr:'Sélectionne taille et région', es:'Selecciona tamaño y región', it:'Seleziona dimensione e regione' },
+  'terrain.preview.generating': { de:'🔄 Generiere...', en:'🔄 Generating...', fr:'🔄 Génération...', es:'🔄 Generando...', it:'🔄 Generazione...' },
+  'terrain.preview.processing': { de:'⏳ Verarbeite...', en:'⏳ Processing...', fr:'⏳ Traitement...', es:'⏳ Procesando...', it:'⏳ Elaborazione...' },
+  'terrain.preview.loading': { de:'✅ Lade Vorschau...', en:'✅ Loading preview...', fr:'✅ Chargement aperçu...', es:'✅ Cargando vista previa...', it:'✅ Caricamento anteprima...' },
+  'terrain.preview.error':  { de:'❌ Fehler:', en:'❌ Error:', fr:'❌ Erreur :', es:'❌ Error:', it:'❌ Errore:' },
+  'terrain.preview.reset':  { de:'🔄 Zurücksetzen', en:'🔄 Reset', fr:'🔄 Réinitialiser', es:'🔄 Restablecer', it:'🔄 Ripristina' },
+  'terrain.preview.wireframe': { de:'🔲 Wireframe', en:'🔲 Wireframe', fr:'🔲 Fil de fer', es:'🔲 Marco de alambre', it:'🔲 Wireframe' },
+  
+  'terrain.step4.title':   { de:'Material & Extras', en:'Material & Extras', fr:'Matériau & Extras', es:'Material & Extras', it:'Materiale & Extra' },
+  'terrain.material.choose': { de:'Material wählen:', en:'Choose material:', fr:'Choisir matériau :', es:'Elegir material:', it:'Scegli materiale:' },
+  'terrain.material.pla':  { de:'PLA', en:'PLA', fr:'PLA', es:'PLA', it:'PLA' },
+  'terrain.material.pla.desc': { de:'Standard (inkl.)', en:'Standard (incl.)', fr:'Standard (incl.)', es:'Estándar (incl.)', it:'Standard (incl.)' },
+  'terrain.material.petg': { de:'PETG', en:'PETG', fr:'PETG', es:'PETG', it:'PETG' },
+  'terrain.material.petg.price': { de:'+10€', en:'+10€', fr:'+10€', es:'+10€', it:'+10€' },
+  'terrain.wooden.base':   { de:'Holzsockel:', en:'Wooden base:', fr:'Socle en bois :', es:'Base de madera:', it:'Base in legno:' },
+  'terrain.wooden.none':   { de:'Kein Sockel', en:'No base', fr:'Pas de socle', es:'Sin base', it:'Nessuna base' },
+  'terrain.wooden.linde':  { de:'Linde (+25€)', en:'Linden (+25€)', fr:'Tilleul (+25€)', es:'Tilo (+25€)', it:'Tiglio (+25€)' },
+  'terrain.wooden.eiche':  { de:'Eiche (+28€)', en:'Oak (+28€)', fr:'Chêne (+28€)', es:'Roble (+28€)', it:'Quercia (+28€)' },
+  
+  'terrain.summary.title': { de:'Deine Bestellung', en:'Your order', fr:'Ta commande', es:'Tu pedido', it:'Il tuo ordine' },
+  'terrain.summary.size':  { de:'Größe:', en:'Size:', fr:'Taille :', es:'Tamaño:', it:'Dimensione:' },
+  'terrain.summary.region': { de:'Gebiet:', en:'Region:', fr:'Région :', es:'Región:', it:'Regione:' },
+  'terrain.summary.material': { de:'Material:', en:'Material:', fr:'Matériau :', es:'Material:', it:'Materiale:' },
+  'terrain.summary.base':  { de:'Holzsockel:', en:'Wooden base:', fr:'Socle :', es:'Base:', it:'Base:' },
+  'terrain.summary.base.no': { de:'Nein', en:'No', fr:'Non', es:'No', it:'No' },
+  'terrain.summary.total': { de:'Gesamtpreis:', en:'Total price:', fr:'Prix total :', es:'Precio total:', it:'Prezzo totale:' },
+  
+  'terrain.action.cart':   { de:'🛒 In den Warenkorb', en:'🛒 Add to cart', fr:'🛒 Ajouter au panier', es:'🛒 Añadir al carrito', it:'🛒 Aggiungi al carrello' },
+  'terrain.action.stl':    { de:'📥 STL herunterladen', en:'📥 Download STL', fr:'📥 Télécharger STL', es:'📥 Descargar STL', it:'📥 Scarica STL' },
+  'terrain.action.first':  { de:'Bitte erst Vorschau generieren klicken!', en:'Please click Generate preview first!', fr:'Clique d\'abord sur Générer aperçu !', es:'¡Haz clic primero en Generar vista previa!', it:'Clicca prima su Genera anteprima!' },
+  'terrain.action.success': { de:'✅ Produkt zum Warenkorb hinzugefügt!', en:'✅ Product added to cart!', fr:'✅ Produit ajouté au panier !', es:'✅ ¡Producto añadido al carrito!', it:'✅ Prodotto aggiunto al carrello!' },
+
+  'terrain.coord.minlat': { de:'Min Lat', en:'Min Lat', fr:'Lat Min', es:'Lat Mín', it:'Lat Min' },
+  'terrain.coord.maxlat': { de:'Max Lat', en:'Max Lat', fr:'Lat Max', es:'Lat Máx', it:'Lat Max' },
+  'terrain.coord.minlon': { de:'Min Lon', en:'Min Lon', fr:'Lon Min', es:'Lon Mín', it:'Lon Min' },
+  'terrain.coord.maxlon': { de:'Max Lon', en:'Max Lon', fr:'Lon Max', es:'Lon Máx', it:'Lon Max' },
+
+};

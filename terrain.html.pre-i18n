@@ -567,28 +567,14 @@
           <div class="nav-dropdown-menu">
             <a href="leistungen/3d-druck.html">🖨️ 3D-Druck</a>
             <a href="leistungen/lasercutting.html">✂️ Lasercutting</a>
-            <a href="leistungen/lasergravur.html">🔍 Lasergravur</a>
-            <a href="leistungen/resin-druck.html">💧 Resin-Druck</a>
-            <a href="leistungen/prototyping.html">🔧 Prototyping</a>
-            <a href="materialien.html">🧪 Materialien</a>
+            <a href="leistungen/lasergravur.html">🔍 Lasergravur</a><a href="leistungen/resin-druck.html">💧 Resin-Druck</a><a href="leistungen/prototyping.html">🔧 Prototyping</a><a href="materialien.html">🧪 Materialien</a>
           </div>
         </div>
         <a href="ueber-uns.html">Über uns</a>
-        <a href="blog.html">Blog</a>
         <a href="index.html#kontakt">Kontakt</a>
       </nav>
       <div class="header-actions">
-<div class="lang-switcher-compact">
-        <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
-        <div class="lang-dropdown" id="lang-dropdown">
-          <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪 DE</button>
-          <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧 EN</button>
-          <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷 FR</button>
-          <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸 ES</button>
-          <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹 IT</button>
-        </div>
-      </div>
-                <a href="warenkorb.html" class="cart-icon">🛒<span id="cart-badge" class="cart-badge"></span></a>
+        <a href="warenkorb.html" class="cart-icon">🛒<span id="cart-badge" class="cart-badge"></span></a>
       </div>
       <button class="mobile-toggle">☰</button>
     </div>
@@ -599,8 +585,8 @@
     <!-- Hero -->
     <section class="terrain-hero">
       <div class="terrain-hero-content">
-        <h1 data-i18n="terrain.hero.title">🏔️ 3D-Reliefkarte</h1>
-        <p data-i18n="terrain.hero.sub">Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</p>
+        <h1>🏔️ 3D-Reliefkarte</h1>
+        <p>Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</p>
 <p style="font-size: 0.95rem; color: var(--accent); margin-top: 12px; font-weight: 500;">💡 Wir fertigen nur quadratische Reliefkarten (z.B. 15×15 cm)</p>
       </div>
     </section>
@@ -611,27 +597,27 @@
         
         <!-- SCHRITT 1: Modellgröße wählen -->
         <div class="config-card">
-          <h2><span class="step-number">1</span> <span data-i18n="terrain.step1.title">Modellgröße wählen</span></h2>
+          <h2><span class="step-number">1</span> Modellgröße wählen</h2>
           
           <div class="size-selection-grid">
             <div class="size-option" data-size="10x10" data-width="100" data-height="100" data-price="29">
               <h3>10 × 10 cm</h3>
-              <p class="dimensions" data-i18n="terrain.size.compact">Kompakt · Schreibtisch</p>
+              <p class="dimensions">Kompakt · Schreibtisch</p>
               <p class="price">29€</p>
             </div>
             <div class="size-option" data-size="15x15" data-width="150" data-height="150" data-price="49">
               <h3>15 × 15 cm</h3>
-              <p class="dimensions" data-i18n="terrain.size.standard">Standard · Wanddeko</p>
+              <p class="dimensions">Standard · Wanddeko</p>
               <p class="price">49€</p>
             </div>
             <div class="size-option" data-size="20x20" data-width="200" data-height="200" data-price="69">
               <h3>20 × 20 cm</h3>
-              <p class="dimensions" data-i18n="terrain.size.large">Groß · Premium</p>
+              <p class="dimensions">Groß · Premium</p>
               <p class="price">69€</p>
             </div>
             <div class="size-option" data-size="custom" data-width="0" data-height="0" data-price="0">
               <h3>Custom</h3>
-              <p class="dimensions" data-i18n="terrain.size.custom.desc">Individuelle Größe</p>
+              <p class="dimensions">Individuelle Größe</p>
               <p class="price">—</p>
             </div>
           </div>
@@ -640,12 +626,18 @@
 
         <!-- SCHRITT 2: Gebiet wählen -->
         <div class="config-card">
-          <h2><span class="step-number">2</span> <span data-i18n="terrain.step2.title">Gebiet wählen</span></h2>
+          <h2><span class="step-number">2</span> Gebiet wählen</h2>
           
           <div class="map-mode-toggle">
-            <button class="map-mode-btn active" data-mode="search" data-i18n="terrain.mode.search">📍 Bekannte Orte</button>
-            <button class="map-mode-btn" data-mode="rectangle" data-i18n="terrain.mode.rectangle">🗺️ Freie Rechteck-Auswahl</button>
-            <button class="map-mode-btn" data-mode="manual" data-i18n="terrain.mode.manual">⌨️ Koordinaten eingeben</button>
+            <button class="map-mode-btn active" data-mode="search">
+              📍 Bekannte Orte
+            </button>
+            <button class="map-mode-btn" data-mode="rectangle">
+              🗺️ Freie Rechteck-Auswahl
+            </button>
+            <button class="map-mode-btn" data-mode="manual">
+              ⌨️ Koordinaten eingeben
+            </button>
           </div>
           
           <!-- Preset Locations -->
@@ -735,7 +727,7 @@
 
         <!-- SCHRITT 3: 3D-Vorschau -->
         <div class="config-card" id="preview-section">
-          <h2><span class="step-number">3</span> <span data-i18n="terrain.step3.title">3D-Vorschau</span></h2>
+          <h2><span class="step-number">3</span> 3D-Vorschau</h2>
           
           <div class="preview-container">
             <div class="preview-placeholder" id="preview-placeholder">
@@ -751,9 +743,9 @@
 
         <!-- SCHRITT 4: Material-Optionen (NACH erfolgreicher Generierung) -->
         <div class="config-card" id="material-section" style="display: none;">
-          <h2><span class="step-number">4</span> <span data-i18n="terrain.step4.title">Material & Extras</span></h2>
+          <h2><span class="step-number">4</span> Material & Extras</h2>
           
-          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);"><span data-i18n="terrain.material.choose">Material wählen:</span></h3>
+          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);">Material wählen:</h3>
           <div class="material-options">
             <div class="material-btn selected" data-material="pla" data-price="0">
               <strong>PLA</strong>
@@ -765,7 +757,7 @@
             </div>
           </div>
           
-          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);"><span data-i18n="terrain.wooden.base">Holzsockel:</span></h3>
+          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Holzsockel:</h3>
           <select class="wooden-base-select" id="wooden-base-select">
             <option value="none" data-price="0">Kein Sockel</option>
             <option value="linde" data-price="25">Linde (+25€)</option>
@@ -773,32 +765,32 @@
           </select>
 
           <div class="summary-card">
-            <h3 data-i18n="terrain.summary.title">Deine Bestellung</h3>
+            <h3>Deine Bestellung</h3>
             <div class="summary-item">
-              <span data-i18n="terrain.summary.size">Größe:</span>
+              <span>Größe:</span>
               <span id="sum-size">—</span>
             </div>
             <div class="summary-item">
-              <span data-i18n="terrain.summary.region">Gebiet:</span>
+              <span>Gebiet:</span>
               <span id="sum-location">—</span>
             </div>
             <div class="summary-item">
-              <span data-i18n="terrain.summary.material">Material:</span>
+              <span>Material:</span>
               <span id="sum-material">PLA Standard</span>
             </div>
             <div class="summary-item">
-              <span data-i18n="terrain.wooden.base">Holzsockel:</span>
+              <span>Holzsockel:</span>
               <span id="sum-base">Nein</span>
             </div>
             <div class="summary-item">
-              <span data-i18n="terrain.summary.total">Gesamtpreis:</span>
+              <span>Gesamtpreis:</span>
               <span id="sum-price">—</span>
             </div>
           </div>
 
           <div class="action-buttons">
-            <button class="btn-primary" id="add-to-cart" data-i18n="terrain.action.cart">🛒 In den Warenkorb</button>
-            <button class="btn-secondary" id="download-stl" data-i18n="terrain.action.stl">📥 STL herunterladen</button>
+            <button class="btn-primary" id="add-to-cart">🛒 In den Warenkorb</button>
+            <button class="btn-secondary" id="download-stl">📥 STL herunterladen</button>
           </div>
         </div>
 

@@ -532,6 +532,16 @@
       }
     }
     
+    @media (max-width: 768px) {
+      #map {
+        height: 300px;
+      }
+      .preview-container {
+        height: 40vh;
+        min-height: 300px;
+      }
+    }
+
     @media (max-width: 640px) {
       .coord-display {
         grid-template-columns: 1fr 1fr;
@@ -567,18 +577,14 @@
           <div class="nav-dropdown-menu">
             <a href="leistungen/3d-druck.html">🖨️ 3D-Druck</a>
             <a href="leistungen/lasercutting.html">✂️ Lasercutting</a>
-            <a href="leistungen/lasergravur.html">🔍 Lasergravur</a>
-            <a href="leistungen/resin-druck.html">💧 Resin-Druck</a>
-            <a href="leistungen/prototyping.html">🔧 Prototyping</a>
-            <a href="materialien.html">🧪 Materialien</a>
+            <a href="leistungen/lasergravur.html">🔍 Lasergravur</a><a href="leistungen/resin-druck.html">💧 Resin-Druck</a><a href="leistungen/prototyping.html">🔧 Prototyping</a><a href="materialien.html">🧪 Materialien</a>
           </div>
         </div>
         <a href="ueber-uns.html">Über uns</a>
-        <a href="blog.html">Blog</a>
         <a href="index.html#kontakt">Kontakt</a>
       </nav>
       <div class="header-actions">
-<div class="lang-switcher-compact">
+        <div class="lang-switcher-compact">
         <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
         <div class="lang-dropdown" id="lang-dropdown">
           <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪 DE</button>
@@ -588,7 +594,7 @@
           <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹 IT</button>
         </div>
       </div>
-                <a href="warenkorb.html" class="cart-icon">🛒<span id="cart-badge" class="cart-badge"></span></a>
+        <a href="warenkorb.html" class="cart-icon">🛒<span id="cart-badge" class="cart-badge"></span></a>
       </div>
       <button class="mobile-toggle">☰</button>
     </div>
@@ -599,9 +605,8 @@
     <!-- Hero -->
     <section class="terrain-hero">
       <div class="terrain-hero-content">
-        <h1 data-i18n="terrain.hero.title">🏔️ 3D-Reliefkarte</h1>
-        <p data-i18n="terrain.hero.sub">Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</p>
-<p style="font-size: 0.95rem; color: var(--accent); margin-top: 12px; font-weight: 500;">💡 Wir fertigen nur quadratische Reliefkarten (z.B. 15×15 cm)</p>
+        <h1><span data-i18n="terrain.hero.title">🏔️ 3D-Reliefkarte</span></h1>
+        <p><span data-i18n="terrain.hero.sub">Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</span></p>
       </div>
     </section>
 
@@ -636,16 +641,34 @@
             </div>
           </div>
           
-<div class="custom-size-inputs" id="custom-size-inputs">            <div>              <label>Seitenlänge (mm):</label>              <input type="number" id="custom-width" min="50" max="300" step="1" placeholder="z.B. 150">            </div>            <p class="custom-size-hint">💡 Wir fertigen nur <strong>quadratische</strong> Reliefkarten (z.B. 15×15 cm). Max. 300×300 mm</p>            <p class="custom-size-error" id="custom-size-error">⚠️ Maximale Größe überschritten! Max. 300 mm</p>          </div>
+          <div class="custom-size-inputs" id="custom-size-inputs">
+            <div>
+              <label data-i18n="terrain.size.custom.width">Breite (mm):</label>
+              <input type="number" id="custom-width" min="50" max="300" step="1" placeholder="z.B. 180">
+            </div>
+            <div>
+              <label data-i18n="terrain.size.custom.depth">Tiefe (mm):</label>
+              <input type="number" id="custom-height" min="50" max="300" step="1" placeholder="z.B. 120">
+            </div>
+            <p class="custom-size-hint" data-i18n="terrain.size.custom.hint">💡 Max. 300×300 mm</p>
+            <p class="custom-size-error" id="custom-size-error" data-i18n="terrain.size.custom.error">⚠️ Maximale Größe überschritten! Max. 300×300 mm</p>
+          </div>
+        </div>
 
         <!-- SCHRITT 2: Gebiet wählen -->
         <div class="config-card">
           <h2><span class="step-number">2</span> <span data-i18n="terrain.step2.title">Gebiet wählen</span></h2>
           
           <div class="map-mode-toggle">
-            <button class="map-mode-btn active" data-mode="search" data-i18n="terrain.mode.search">📍 Bekannte Orte</button>
-            <button class="map-mode-btn" data-mode="rectangle" data-i18n="terrain.mode.rectangle">🗺️ Freie Rechteck-Auswahl</button>
-            <button class="map-mode-btn" data-mode="manual" data-i18n="terrain.mode.manual">⌨️ Koordinaten eingeben</button>
+            <button class="map-mode-btn active" data-mode="search">
+              <span data-i18n="terrain.mode.search">📍 Bekannte Orte</span>
+            </button>
+            <button class="map-mode-btn" data-mode="rectangle">
+              <span data-i18n="terrain.mode.rectangle">🗺️ Freie Rechteck-Auswahl</span>
+            </button>
+            <button class="map-mode-btn" data-mode="manual">
+              <span data-i18n="terrain.mode.manual">⌨️ Koordinaten eingeben</span>
+            </button>
           </div>
           
           <!-- Preset Locations -->
@@ -680,19 +703,19 @@
           <div id="manual-coords-section" style="display: none; margin-bottom: 20px;">
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px;">
               <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Min Lat:</label>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;" data-i18n="terrain.coord.minlat">Min Lat:</label>
                 <input type="number" id="manual-lat-min" step="0.0001" placeholder="47.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
               </div>
               <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Max Lat:</label>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;" data-i18n="terrain.coord.maxlat">Max Lat:</label>
                 <input type="number" id="manual-lat-max" step="0.0001" placeholder="47.5" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
               </div>
               <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Min Lon:</label>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;" data-i18n="terrain.coord.minlon">Min Lon:</label>
                 <input type="number" id="manual-lon-min" step="0.0001" placeholder="10.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
               </div>
               <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Max Lon:</label>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;" data-i18n="terrain.coord.maxlon">Max Lon:</label>
                 <input type="number" id="manual-lon-max" step="0.0001" placeholder="11.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
               </div>
             </div>
@@ -705,19 +728,19 @@
           
           <div class="coord-display">
             <div class="coord-item">
-              <label>Min Lat</label>
+              <label data-i18n="terrain.coord.minlat">Min Lat</label>
               <strong id="coord-lat-min">—</strong>
             </div>
             <div class="coord-item">
-              <label>Max Lat</label>
+              <label data-i18n="terrain.coord.maxlat">Max Lat</label>
               <strong id="coord-lat-max">—</strong>
             </div>
             <div class="coord-item">
-              <label>Min Lon</label>
+              <label data-i18n="terrain.coord.minlon">Min Lon</label>
               <strong id="coord-lon-min">—</strong>
             </div>
             <div class="coord-item">
-              <label>Max Lon</label>
+              <label data-i18n="terrain.coord.maxlon">Max Lon</label>
               <strong id="coord-lon-max">—</strong>
             </div>
           </div>
@@ -725,10 +748,10 @@
           <!-- Generate Preview Button - DIREKT nach Karte -->
           <div class="generate-preview-section">
             <button class="btn-generate-preview" id="generate-preview" disabled>
-              🔍 Vorschau generieren
+              <span data-i18n="terrain.preview.generate">🔍 Vorschau generieren</span>
             </button>
             <p style="margin-top: 12px; color: var(--text-secondary); font-size: 0.9rem;">
-              Wähle Größe und Gebiet aus
+              <span data-i18n="terrain.preview.select">Wähle Größe und Gebiet aus</span>
             </p>
           </div>
         </div>
@@ -739,25 +762,25 @@
           
           <div class="preview-container">
             <div class="preview-placeholder" id="preview-placeholder">
-              <p>🏔 Klicke auf "Vorschau generieren" um dein Modell zu sehen</p>
+              <p><span data-i18n="terrain.preview.hint">🏔 Klicke auf "Vorschau generieren" um dein Modell zu sehen</span></p>
             </div>
             <canvas id="preview-canvas"></canvas>
             <div class="preview-controls" style="display: none;" id="preview-controls">
-              <button class="preview-btn" id="reset-camera">🔄 Zurücksetzen</button>
-              <button class="preview-btn" id="toggle-wireframe">🔲 Wireframe</button>
+              <button class="preview-btn" id="reset-camera" data-i18n="terrain.preview.reset">🔄 Zurücksetzen</button>
+              <button class="preview-btn" id="toggle-wireframe" data-i18n="terrain.preview.wireframe">🔲 Wireframe</button>
             </div>
           </div>
         </div>
 
         <!-- SCHRITT 4: Material-Optionen (NACH erfolgreicher Generierung) -->
         <div class="config-card" id="material-section" style="display: none;">
-          <h2><span class="step-number">4</span> <span data-i18n="terrain.step4.title">Material & Extras</span></h2>
+          <h2><span class="step-number">4</span> <span data-i18n="terrain.step4.title">Material <h2><span class="step-number">4</span> Material & Extras</h2> Extras</span></h2>
           
-          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);"><span data-i18n="terrain.material.choose">Material wählen:</span></h3>
+          <h3 data-i18n="terrain.material.choose" style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);"><span data-i18n="terrain.material.choose">Material wählen:</span></h3>
           <div class="material-options">
             <div class="material-btn selected" data-material="pla" data-price="0">
               <strong>PLA</strong>
-              <small>Standard (inkl.)</small>
+              <small><span data-i18n="terrain.material.pla.desc">Standard (inkl.)</span></small>
             </div>
             <div class="material-btn" data-material="petg" data-price="10">
               <strong>PETG</strong>
@@ -765,15 +788,15 @@
             </div>
           </div>
           
-          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);"><span data-i18n="terrain.wooden.base">Holzsockel:</span></h3>
+          <h3 data-i18n="terrain.wooden.base" style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);"><span data-i18n="terrain.wooden.base">Holzsockel:</span></h3>
           <select class="wooden-base-select" id="wooden-base-select">
-            <option value="none" data-price="0">Kein Sockel</option>
-            <option value="linde" data-price="25">Linde (+25€)</option>
-            <option value="eiche" data-price="28">Eiche (+28€)</option>
+            <option value="none" data-price="0" data-i18n="terrain.wooden.none">Kein Sockel</option>
+            <option value="linde" data-price="25" data-i18n="terrain.wooden.linde">Linde (+25€)</option>
+            <option value="eiche" data-price="28" data-i18n="terrain.wooden.eiche">Eiche (+28€)</option>
           </select>
 
           <div class="summary-card">
-            <h3 data-i18n="terrain.summary.title">Deine Bestellung</h3>
+            <h3><span data-i18n="terrain.summary.title">Deine Bestellung</span></h3>
             <div class="summary-item">
               <span data-i18n="terrain.summary.size">Größe:</span>
               <span id="sum-size">—</span>
@@ -787,7 +810,7 @@
               <span id="sum-material">PLA Standard</span>
             </div>
             <div class="summary-item">
-              <span data-i18n="terrain.wooden.base">Holzsockel:</span>
+              <span><span data-i18n="terrain.wooden.base">Holzsockel:</span></span>
               <span id="sum-base">Nein</span>
             </div>
             <div class="summary-item">
@@ -797,8 +820,8 @@
           </div>
 
           <div class="action-buttons">
-            <button class="btn-primary" id="add-to-cart" data-i18n="terrain.action.cart">🛒 In den Warenkorb</button>
-            <button class="btn-secondary" id="download-stl" data-i18n="terrain.action.stl">📥 STL herunterladen</button>
+            <button class="btn-primary" id="add-to-cart"><span data-i18n="terrain.action.cart">🛒 In den Warenkorb</span></button>
+            <button class="btn-secondary" id="download-stl" disabled><span data-i18n="terrain.action.stl">📥 STL herunterladen</span></button>
           </div>
         </div>
 
@@ -819,6 +842,17 @@
   <!-- Cart Badge -->
   <script src="cart.js"></script>
   
+  <script>
+  // i18n Helper-Funktion für dynamische Texte
+  function t(key) {
+    var lang = localStorage.getItem("pita-lang") || "de";
+    return (window.TRANSLATIONS && window.TRANSLATIONS[key] && window.TRANSLATIONS[key][lang]) || key;
+  }
+  </script>
+
+  <script>
+  </script>
+
   <script type="module">
     // ========================================
     // Configuration State
@@ -862,7 +896,43 @@
         updateSummary();
       });
     });
-// Custom Size Inputs with Validation (NUR QUADRATISCH)    function validateCustomSize() {      const width = parseInt(document.getElementById("custom-width").value) || 0;      const errorEl = document.getElementById("custom-size-error");            if (width > 300) {        errorEl.style.display = "block";        config.widthMM = 0;        config.heightMM = 0;        checkIfReadyForPreview();        updateSummary();        return false;      } else {        errorEl.style.display = "none";        config.widthMM = width;        config.heightMM = width;  // 🔥 QUADRATISCH: depth = width        checkIfReadyForPreview();        updateSummary();        return true;      }    }        document.getElementById("custom-width")?.addEventListener("input", validateCustomSize);
+
+    // Custom Size Inputs with Validation
+    function validateCustomSize() {
+      const width = parseInt(document.getElementById('custom-width').value) || 0;
+      const height = parseInt(document.getElementById('custom-height').value) || 0;
+      const errorEl = document.getElementById('custom-size-error');
+      
+      if (width > 300 || height > 300) {
+        errorEl.style.display = 'block';
+        config.widthMM = 0;
+        config.heightMM = 0;
+        checkIfReadyForPreview();
+        updateSummary();
+        return false;
+      } else {
+        errorEl.style.display = 'none';
+        config.widthMM = width;
+        config.heightMM = height;
+        checkIfReadyForPreview();
+        updateSummary();
+        return true;
+      }
+    }
+    
+    document.getElementById('custom-width')?.addEventListener('input', validateCustomSize);
+    document.getElementById('custom-height')?.addEventListener('input', validateCustomSize);
+
+    // ========================================
+    // SCHRITT 2: Leaflet Map mit Modi
+    // ========================================
+    const map = L.map('map', {
+      center: [47.0, 10.0],
+      zoom: 6,
+      scrollWheelZoom: true
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap',
       maxZoom: 18
     }).addTo(map);
@@ -891,6 +961,16 @@
         // Enable/Disable Rectangle Drawing
         if (currentMode === 'rectangle') {
           enableRectangleDraw();
+          // 🔥 NEUE FUNKTION: Rechteck-Tool sofort aktivieren
+          setTimeout(() => {
+            if (drawControl && drawControl._toolbars && drawControl._toolbars.draw) {
+              const rectangleHandler = drawControl._toolbars.draw._modes.rectangle;
+              if (rectangleHandler && rectangleHandler.handler) {
+                rectangleHandler.handler.enable();
+                console.log('✅ Rectangle-Draw-Tool automatisch aktiviert');
+              }
+            }
+          }, 100);
         } else {
           disableRectangleDraw();
         }
@@ -922,17 +1002,6 @@
       });
       
       map.addControl(drawControl);
-      map.addControl(drawControl);
-
-      // 🔥 AUTO-ACTIVATE RECTANGLE DRAW TOOL
-      setTimeout(() => {
-        if (drawControl && drawControl._toolbars && drawControl._toolbars.draw) {
-          const rectangleBtn = drawControl._toolbars.draw._modes.rectangle;
-          if (rectangleBtn && rectangleBtn.handler) {
-            rectangleBtn.handler.enable();
-          }
-        }
-      }, 100);
     }
 
     function disableRectangleDraw() {
@@ -952,7 +1021,16 @@
       
       drawnItems.addLayer(layer);
       drawnRectangle = layer;
-const bounds = layer.getBounds();      const center = bounds.getCenter();            // 🔥 FORCE SQUARE: Berechne größere Dimension      const latDiff = bounds.getNorth() - bounds.getSouth();      const lonDiff = bounds.getEast() - bounds.getWest();      const maxDiff = Math.max(latDiff, lonDiff);            // Erstelle quadratisches Bounds      const squareBounds = L.latLngBounds(        [center.lat - maxDiff/2, center.lng - maxDiff/2],        [center.lat + maxDiff/2, center.lng + maxDiff/2]      );            // Nutze squareBounds für Config      config.bounds = {        minLat: squareBounds.getSouth(),        maxLat: squareBounds.getNorth(),        minLon: squareBounds.getWest(),        maxLon: squareBounds.getEast()      };      config.locationName = "Freie Auswahl (quadratisch)";
+      
+      const bounds = layer.getBounds();
+      config.bounds = {
+        minLat: bounds.getSouth(),
+        maxLat: bounds.getNorth(),
+        minLon: bounds.getWest(),
+        maxLon: bounds.getEast()
+      };
+      config.locationName = 'Freie Auswahl';
+      
       updateCoordDisplay();
       checkIfReadyForPreview();
       updateSummary();
@@ -1085,14 +1163,19 @@ const bounds = layer.getBounds();      const center = bounds.getCenter();       
       const ready = config.size && config.widthMM > 0 && config.heightMM > 0 && config.bounds;
       
       btn.disabled = !ready;
-      btn.nextElementSibling.textContent = ready 
+      btn.nextElementSibling.innerHTML = ready ? t("terrain.preview.ready") : t("terrain.preview.select");
         ? 'Bereit zum Generieren!' 
-        : 'Wähle Größe und Gebiet aus';
+        : '<span data-i18n="terrain.preview.select">Wähle Größe und Gebiet aus</span>';
     }
 
     // ========================================
     // Generate Preview
-document.getElementById("generate-preview").addEventListener("click", async () => {      const btn = document.getElementById("generate-preview");      const originalText = btn.textContent;            // 🔥 ERZWINGE QUADRATISCH      if (config.widthMM !== config.heightMM) {        alert("💡 Nur quadratische Modelle möglich! Bitte gleiche Seitenlänge wählen.");        btn.textContent = originalText;        btn.disabled = false;        return;      }            btn.textContent = "🔄 Generiere...";
+    // ========================================
+    document.getElementById('generate-preview').addEventListener('click', async () => {
+      const btn = document.getElementById('generate-preview');
+      const originalText = btn.textContent;
+      btn.textContent = t('terrain.preview.generating');
+      btn.disabled = true;
       
       try {
         const latDiff = config.bounds.maxLat - config.bounds.minLat;
@@ -1100,7 +1183,7 @@ document.getElementById("generate-preview").addEventListener("click", async () =
         const centerLat = (config.bounds.minLat + config.bounds.maxLat) / 2;
         const centerLon = (config.bounds.minLon + config.bounds.maxLon) / 2;
         
-        const response = await fetch('http://69.62.105.159/api/generate', {
+        const response = await fetch('/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -1117,12 +1200,16 @@ document.getElementById("generate-preview").addEventListener("click", async () =
         
         const { job_id } = await response.json();
         config.currentJobId = job_id;
-        btn.textContent = '⏳ Verarbeite...';
+        btn.textContent = t('terrain.preview.processing');
         
         let status = 'pending';
-        while (status !== 'done') {
+        let pollAttempts = 0;
+        const MAX_POLL_ATTEMPTS = 60; // 2 Minuten (60 × 2 Sekunden)
+        while (status !== "done" && pollAttempts < MAX_POLL_ATTEMPTS) {
           await new Promise(resolve => setTimeout(resolve, 2000));
-          const statusResponse = await fetch(`http://69.62.105.159/api/status/${job_id}`);
+          pollAttempts++;
+          if (pollAttempts >= MAX_POLL_ATTEMPTS) throw new Error(t("terrain.api.timeout"));
+          const statusResponse = await fetch(`/api/status/${job_id}`);
           const data = await statusResponse.json();
           status = data.status;
           
@@ -1130,7 +1217,7 @@ document.getElementById("generate-preview").addEventListener("click", async () =
           if (data.progress) btn.textContent = `⏳ ${data.progress}%...`;
         }
         
-        btn.textContent = '✅ Lade Vorschau...';
+        btn.textContent = t('terrain.preview.loading');
         
         load3DModel(job_id);
         
@@ -1145,6 +1232,7 @@ document.getElementById("generate-preview").addEventListener("click", async () =
         // Show material section
         setTimeout(() => {
           document.getElementById('material-section').style.display = 'block';
+        document.getElementById("download-stl").disabled = false;
           btn.textContent = originalText;
           btn.disabled = false;
         }, 2000);
@@ -1152,7 +1240,7 @@ document.getElementById("generate-preview").addEventListener("click", async () =
       } catch (error) {
         btn.textContent = originalText;
         btn.disabled = false;
-        alert('❌ Fehler: ' + error.message);
+        alert(t('terrain.preview.error') + ' ' + error.message);
       }
     });
 
@@ -1219,16 +1307,16 @@ document.getElementById("generate-preview").addEventListener("click", async () =
     // ========================================
     document.getElementById('download-stl').addEventListener('click', () => {
       if (!config.currentJobId) {
-        alert('Bitte erst "Vorschau generieren" klicken!');
+        alert(t('terrain.action.first'));
         return;
       }
-      window.location.href = `http://69.62.105.159/api/download/${config.currentJobId}`;
+      window.location.href = `/api/download/${config.currentJobId}`;
     });
 
     // Add to Cart
     document.getElementById('add-to-cart').addEventListener('click', () => {
       if (!config.currentJobId) {
-        alert('Bitte erst "Vorschau generieren" klicken!');
+        alert(t('terrain.action.first'));
         return;
       }
       
@@ -1263,10 +1351,7 @@ document.getElementById("generate-preview").addEventListener("click", async () =
       // In Warenkorb legen
       addToCart(productId, productName, total, 1);
       
-      alert(`✅ Produkt zum Warenkorb hinzugefügt!
-
-${productName}
-Preis: ${total}€`);
+      alert(t("terrain.action.success") + "\n\n" + productName + "\nPreis: " + total + "u20ac");
     });
 
     // ========================================
@@ -1333,7 +1418,7 @@ Preis: ${total}€`);
     
     function loadTerrainModel(jobId) {
       const loader = new STLLoader();
-      const url = `http://69.62.105.159/api/download/${jobId}`;
+      const url = `/api/download/${jobId}`;
       
       if (mesh) scene.remove(mesh);
       
@@ -1409,5 +1494,7 @@ Preis: ${total}€`);
     init3DPreview();
   </script>
 
+  <!-- Clippy Assistant -->
+  <script src="clippy.js?v=1774052069"></script>
 </body>
 </html>

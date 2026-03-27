@@ -2040,6 +2040,302 @@
     thoughtIndex = 0;
     if (thoughtVisible) {
       thoughtText.textContent = getThoughtMessages()[0];
+  // ========================================
+  // TERRAIN-SPEZIFISCHER FLOW (5 Sprachen)
+  // ========================================
+  var TERRAIN_FLOW = {
+    de: {
+      greeting: 'Hallo! 🏔️ Ich helfe dir bei deiner 3D-Reliefkarte. Welche Größe möchtest du?',
+      sizeOptions: [
+        { id: '10x10', label: '10 × 10 cm (29€)' },
+        { id: '15x15', label: '15 × 15 cm (49€)' },
+        { id: '20x20', label: '20 × 20 cm (69€)' },
+        { id: 'custom', label: 'Custom' }
+      ],
+      regionPrompt: 'Perfekt! Welches Gebiet möchtest du?',
+      regionOptions: [
+        { id: 'zugspitze', label: '🏔️ Zugspitze' },
+        { id: 'matterhorn', label: '⛰️ Matterhorn' },
+        { id: 'grossglockner', label: '🗻 Großglockner' },
+        { id: 'mont_blanc', label: '🏔️ Mont Blanc' },
+        { id: 'watzmann', label: '⛰️ Watzmann' },
+        { id: 'custom', label: '📍 Anderer Ort' }
+      ],
+      materialPrompt: 'Super! Material?',
+      materialOptions: [
+        { id: 'pla', label: 'PLA (Standard, inkl.)' },
+        { id: 'petg', label: 'PETG (+10€, robuster)' }
+      ],
+      basePrompt: 'Holzsockel dazu?',
+      baseOptions: [
+        { id: 'none', label: 'Nein danke' },
+        { id: 'linde', label: 'Linde (+25€)' },
+        { id: 'eiche', label: 'Eiche (+28€)' }
+      ],
+      summary: 'Deine Konfiguration:\n{{size}}\n{{region}}\n{{material}}\n{{base}}\nPreis: {{price}}€',
+      nextSteps: 'Was möchtest du tun?',
+      nextOptions: [
+        { id: 'generate', label: '🔍 Vorschau generieren' },
+        { id: 'cart', label: '🛒 In den Warenkorb' },
+        { id: 'stl', label: '📥 STL downloaden' }
+      ]
+    },
+    en: {
+      greeting: 'Hi! 🏔️ I\'ll help you with your 3D terrain model. What size would you like?',
+      sizeOptions: [
+        { id: '10x10', label: '10 × 10 cm (29€)' },
+        { id: '15x15', label: '15 × 15 cm (49€)' },
+        { id: '20x20', label: '20 × 20 cm (69€)' },
+        { id: 'custom', label: 'Custom' }
+      ],
+      regionPrompt: 'Perfect! Which region would you like?',
+      regionOptions: [
+        { id: 'zugspitze', label: '🏔️ Zugspitze' },
+        { id: 'matterhorn', label: '⛰️ Matterhorn' },
+        { id: 'grossglockner', label: '🗻 Grossglockner' },
+        { id: 'mont_blanc', label: '🏔️ Mont Blanc' },
+        { id: 'watzmann', label: '⛰️ Watzmann' },
+        { id: 'custom', label: '📍 Other location' }
+      ],
+      materialPrompt: 'Great! Material?',
+      materialOptions: [
+        { id: 'pla', label: 'PLA (Standard, incl.)' },
+        { id: 'petg', label: 'PETG (+10€, stronger)' }
+      ],
+      basePrompt: 'Wooden base?',
+      baseOptions: [
+        { id: 'none', label: 'No thanks' },
+        { id: 'linde', label: 'Linden (+25€)' },
+        { id: 'eiche', label: 'Oak (+28€)' }
+      ],
+      summary: 'Your configuration:\n{{size}}\n{{region}}\n{{material}}\n{{base}}\nPrice: {{price}}€',
+      nextSteps: 'What would you like to do?',
+      nextOptions: [
+        { id: 'generate', label: '🔍 Generate preview' },
+        { id: 'cart', label: '🛒 Add to cart' },
+        { id: 'stl', label: '📥 Download STL' }
+      ]
+    },
+    fr: {
+      greeting: 'Salut ! 🏔️ Je t\'aide avec ta carte en relief 3D. Quelle taille veux-tu ?',
+      sizeOptions: [
+        { id: '10x10', label: '10 × 10 cm (29€)' },
+        { id: '15x15', label: '15 × 15 cm (49€)' },
+        { id: '20x20', label: '20 × 20 cm (69€)' },
+        { id: 'custom', label: 'Personnalisé' }
+      ],
+      regionPrompt: 'Parfait ! Quelle région veux-tu ?',
+      regionOptions: [
+        { id: 'zugspitze', label: '🏔️ Zugspitze' },
+        { id: 'matterhorn', label: '⛰️ Cervin' },
+        { id: 'grossglockner', label: '🗻 Grossglockner' },
+        { id: 'mont_blanc', label: '🏔️ Mont Blanc' },
+        { id: 'watzmann', label: '⛰️ Watzmann' },
+        { id: 'custom', label: '📍 Autre lieu' }
+      ],
+      materialPrompt: 'Super ! Matériau ?',
+      materialOptions: [
+        { id: 'pla', label: 'PLA (Standard, incl.)' },
+        { id: 'petg', label: 'PETG (+10€, plus robuste)' }
+      ],
+      basePrompt: 'Socle en bois ?',
+      baseOptions: [
+        { id: 'none', label: 'Non merci' },
+        { id: 'linde', label: 'Tilleul (+25€)' },
+        { id: 'eiche', label: 'Chêne (+28€)' }
+      ],
+      summary: 'Ta configuration :\n{{size}}\n{{region}}\n{{material}}\n{{base}}\nPrix : {{price}}€',
+      nextSteps: 'Que veux-tu faire ?',
+      nextOptions: [
+        { id: 'generate', label: '🔍 Générer aperçu' },
+        { id: 'cart', label: '🛒 Ajouter au panier' },
+        { id: 'stl', label: '📥 Télécharger STL' }
+      ]
+    },
+    es: {
+      greeting: '¡Hola! 🏔️ Te ayudo con tu mapa de relieve 3D. ¿Qué tamaño quieres?',
+      sizeOptions: [
+        { id: '10x10', label: '10 × 10 cm (29€)' },
+        { id: '15x15', label: '15 × 15 cm (49€)' },
+        { id: '20x20', label: '20 × 20 cm (69€)' },
+        { id: 'custom', label: 'Personalizado' }
+      ],
+      regionPrompt: '¡Perfecto! ¿Qué región quieres?',
+      regionOptions: [
+        { id: 'zugspitze', label: '🏔️ Zugspitze' },
+        { id: 'matterhorn', label: '⛰️ Cervino' },
+        { id: 'grossglockner', label: '🗻 Grossglockner' },
+        { id: 'mont_blanc', label: '🏔️ Mont Blanc' },
+        { id: 'watzmann', label: '⛰️ Watzmann' },
+        { id: 'custom', label: '📍 Otro lugar' }
+      ],
+      materialPrompt: '¡Genial! ¿Material?',
+      materialOptions: [
+        { id: 'pla', label: 'PLA (Estándar, incl.)' },
+        { id: 'petg', label: 'PETG (+10€, más robusto)' }
+      ],
+      basePrompt: '¿Base de madera?',
+      baseOptions: [
+        { id: 'none', label: 'No gracias' },
+        { id: 'linde', label: 'Tilo (+25€)' },
+        { id: 'eiche', label: 'Roble (+28€)' }
+      ],
+      summary: 'Tu configuración:\n{{size}}\n{{region}}\n{{material}}\n{{base}}\nPrecio: {{price}}€',
+      nextSteps: '¿Qué quieres hacer?',
+      nextOptions: [
+        { id: 'generate', label: '🔍 Generar vista previa' },
+        { id: 'cart', label: '🛒 Añadir al carrito' },
+        { id: 'stl', label: '📥 Descargar STL' }
+      ]
+    },
+    it: {
+      greeting: 'Ciao! 🏔️ Ti aiuto con la tua mappa in rilievo 3D. Che dimensione vuoi?',
+      sizeOptions: [
+        { id: '10x10', label: '10 × 10 cm (29€)' },
+        { id: '15x15', label: '15 × 15 cm (49€)' },
+        { id: '20x20', label: '20 × 20 cm (69€)' },
+        { id: 'custom', label: 'Personalizzato' }
+      ],
+      regionPrompt: 'Perfetto! Quale regione vuoi?',
+      regionOptions: [
+        { id: 'zugspitze', label: '🏔️ Zugspitze' },
+        { id: 'matterhorn', label: '⛰️ Cervino' },
+        { id: 'grossglockner', label: '🗻 Grossglockner' },
+        { id: 'mont_blanc', label: '🏔️ Mont Blanc' },
+        { id: 'watzmann', label: '⛰️ Watzmann' },
+        { id: 'custom', label: '📍 Altro luogo' }
+      ],
+      materialPrompt: 'Ottimo! Materiale?',
+      materialOptions: [
+        { id: 'pla', label: 'PLA (Standard, incl.)' },
+        { id: 'petg', label: 'PETG (+10€, più robusto)' }
+      ],
+      basePrompt: 'Base in legno?',
+      baseOptions: [
+        { id: 'none', label: 'No grazie' },
+        { id: 'linde', label: 'Tiglio (+25€)' },
+        { id: 'eiche', label: 'Quercia (+28€)' }
+      ],
+      summary: 'La tua configurazione:\n{{size}}\n{{region}}\n{{material}}\n{{base}}\nPrezzo: {{price}}€',
+      nextSteps: 'Cosa vuoi fare?',
+      nextOptions: [
+        { id: 'generate', label: '🔍 Genera anteprima' },
+        { id: 'cart', label: '🛒 Aggiungi al carrello' },
+        { id: 'stl', label: '📥 Scarica STL' }
+      ]
+    }
+  };
+
+  // Optional: Sprachauswahl beim ersten Besuch auf terrain.html
+  function maybePromptLanguage() {
+    if (window.location.pathname.indexOf('terrain.html') === -1) return;
+    
+    var hasSeenPrompt = localStorage.getItem('terrain-lang-prompt-seen');
+    if (hasSeenPrompt) return;
+    
+    var lang = clippyLang();
+    var prompts = {
+      de: 'Hallo! Welche Sprache bevorzugst du?',
+      en: 'Hello! Which language do you prefer?',
+      fr: 'Salut! Quelle langue préfères-tu?',
+      es: '¡Hola! ¿Qué idioma prefieres?',
+      it: 'Ciao! Quale lingua preferisci?'
+    };
+    
+    var langOptions = [
+      { id: 'de', label: '🇩🇪 Deutsch' },
+      { id: 'en', label: '🇬🇧 English' },
+      { id: 'fr', label: '🇫🇷 Français' },
+      { id: 'es', label: '🇪🇸 Español' },
+      { id: 'it', label: '🇮🇹 Italiano' }
+    ];
+    
+    setTimeout(function() {
+      addBotMessage(prompts[lang] || prompts.de);
+      addOptions(langOptions, function(selectedLang) {
+        if (window.setLang) {
+          window.setLang(selectedLang);
+        }
+        localStorage.setItem('terrain-lang-prompt-seen', 'true');
+        addBotMessage('✅ Sprache gespeichert!');
+        setTimeout(initTerrainFlow, 800);
+      });
+    }, 2000);
+  }
+
+  // Trigger
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', maybePromptLanguage);
+  } else {
+    maybePromptLanguage();
+  }
+
+  // Terrain-Flow-Logik
+  function initTerrainFlow() {
+    if (window.location.pathname.indexOf('terrain.html') === -1) return;
+    
+    var lang = clippyLang();
+    var flow = TERRAIN_FLOW[lang] || TERRAIN_FLOW.de;
+    
+    setTimeout(function() {
+      addBotMessage(flow.greeting);
+      addOptions(flow.sizeOptions, function(sizeId) {
+        userState.terrainSize = sizeId;
+        addBotMessage(flow.regionPrompt);
+        addOptions(flow.regionOptions, function(regionId) {
+          userState.terrainRegion = regionId;
+          addBotMessage(flow.materialPrompt);
+          addOptions(flow.materialOptions, function(materialId) {
+            userState.terrainMaterial = materialId;
+            addBotMessage(flow.basePrompt);
+            addOptions(flow.baseOptions, function(baseId) {
+              userState.terrainBase = baseId;
+              showTerrainSummary(flow);
+            });
+          });
+        });
+      });
+    }, 1500);
+  }
+
+  function showTerrainSummary(flow) {
+    var sizeLabels = { '10x10': '10×10 cm', '15x15': '15×15 cm', '20x20': '20×20 cm', 'custom': 'Custom' };
+    var regionLabels = { zugspitze: 'Zugspitze', matterhorn: 'Matterhorn', grossglockner: 'Großglockner', mont_blanc: 'Mont Blanc', watzmann: 'Watzmann', custom: '...' };
+    var materialLabels = { pla: 'PLA', petg: 'PETG (+10€)' };
+    var baseLabels = { none: '-', linde: 'Linde (+25€)', eiche: 'Eiche (+28€)' };
+    
+    var basePrice = { '10x10': 29, '15x15': 49, '20x20': 69, 'custom': 50 }[userState.terrainSize] || 50;
+    var materialExtra = userState.terrainMaterial === 'petg' ? 10 : 0;
+    var baseExtra = { none: 0, linde: 25, eiche: 28 }[userState.terrainBase] || 0;
+    var total = basePrice + materialExtra + baseExtra;
+    
+    var summary = flow.summary
+      .replace('{{size}}', sizeLabels[userState.terrainSize])
+      .replace('{{region}}', regionLabels[userState.terrainRegion])
+      .replace('{{material}}', materialLabels[userState.terrainMaterial])
+      .replace('{{base}}', baseLabels[userState.terrainBase])
+      .replace('{{price}}', total);
+    
+    addBotMessage(summary);
+    addBotMessage(flow.nextSteps);
+    addOptions(flow.nextOptions, function(action) {
+      if (action === 'generate') {
+        document.getElementById('generate-preview')?.click();
+        addBotMessage('Vorschau wird generiert...');
+      } else if (action === 'cart') {
+        document.getElementById('add-to-cart')?.click();
+      } else if (action === 'stl') {
+        document.getElementById('download-stl')?.click();
+      }
+    });
+  }
+
+  // Trigger
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTerrainFlow);
+  } else {
+    initTerrainFlow();
+  }
     }
   });
 

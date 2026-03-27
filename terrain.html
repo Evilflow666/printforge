@@ -574,6 +574,16 @@
         <a href="index.html#kontakt">Kontakt</a>
       </nav>
       <div class="header-actions">
+        <div class="lang-switcher-compact">
+        <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪 DE</button>
+          <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧 EN</button>
+          <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷 FR</button>
+          <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸 ES</button>
+          <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹 IT</button>
+        </div>
+      </div>
         <a href="warenkorb.html" class="cart-icon">🛒<span id="cart-badge" class="cart-badge"></span></a>
       </div>
       <button class="mobile-toggle">☰</button>
@@ -585,8 +595,8 @@
     <!-- Hero -->
     <section class="terrain-hero">
       <div class="terrain-hero-content">
-        <h1>🏔️ 3D-Reliefkarte</h1>
-        <p>Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</p>
+        <h1><span data-i18n="terrain.hero.title">🏔️ 3D-Reliefkarte</span></h1>
+        <p><span data-i18n="terrain.hero.sub">Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</span></p>
       </div>
     </section>
 
@@ -596,58 +606,58 @@
         
         <!-- SCHRITT 1: Modellgröße wählen -->
         <div class="config-card">
-          <h2><span class="step-number">1</span> Modellgröße wählen</h2>
+          <h2><span class="step-number">1</span> <span data-i18n="terrain.step1.title">Modellgröße wählen</span></h2>
           
           <div class="size-selection-grid">
             <div class="size-option" data-size="10x10" data-width="100" data-height="100" data-price="29">
               <h3>10 × 10 cm</h3>
-              <p class="dimensions">Kompakt · Schreibtisch</p>
+              <p class="dimensions" data-i18n="terrain.size.compact">Kompakt · Schreibtisch</p>
               <p class="price">29€</p>
             </div>
             <div class="size-option" data-size="15x15" data-width="150" data-height="150" data-price="49">
               <h3>15 × 15 cm</h3>
-              <p class="dimensions">Standard · Wanddeko</p>
+              <p class="dimensions" data-i18n="terrain.size.standard">Standard · Wanddeko</p>
               <p class="price">49€</p>
             </div>
             <div class="size-option" data-size="20x20" data-width="200" data-height="200" data-price="69">
               <h3>20 × 20 cm</h3>
-              <p class="dimensions">Groß · Premium</p>
+              <p class="dimensions" data-i18n="terrain.size.large">Groß · Premium</p>
               <p class="price">69€</p>
             </div>
             <div class="size-option" data-size="custom" data-width="0" data-height="0" data-price="0">
               <h3>Custom</h3>
-              <p class="dimensions">Individuelle Größe</p>
+              <p class="dimensions" data-i18n="terrain.size.custom.desc">Individuelle Größe</p>
               <p class="price">—</p>
             </div>
           </div>
           
           <div class="custom-size-inputs" id="custom-size-inputs">
             <div>
-              <label>Breite (mm):</label>
+              <label data-i18n="terrain.size.custom.width">Breite (mm):</label>
               <input type="number" id="custom-width" min="50" max="300" step="1" placeholder="z.B. 180">
             </div>
             <div>
-              <label>Tiefe (mm):</label>
+              <label data-i18n="terrain.size.custom.depth">Tiefe (mm):</label>
               <input type="number" id="custom-height" min="50" max="300" step="1" placeholder="z.B. 120">
             </div>
-            <p class="custom-size-hint">💡 Max. 300×300 mm</p>
-            <p class="custom-size-error" id="custom-size-error">⚠️ Maximale Größe überschritten! Max. 300×300 mm</p>
+            <p class="custom-size-hint" data-i18n="terrain.size.custom.hint">💡 Max. 300×300 mm</p>
+            <p class="custom-size-error" id="custom-size-error" data-i18n="terrain.size.custom.error">⚠️ Maximale Größe überschritten! Max. 300×300 mm</p>
           </div>
         </div>
 
         <!-- SCHRITT 2: Gebiet wählen -->
         <div class="config-card">
-          <h2><span class="step-number">2</span> Gebiet wählen</h2>
+          <h2><span class="step-number">2</span> <span data-i18n="terrain.step2.title">Gebiet wählen</span></h2>
           
           <div class="map-mode-toggle">
             <button class="map-mode-btn active" data-mode="search">
-              📍 Bekannte Orte
+              <span data-i18n="terrain.mode.search">📍 Bekannte Orte</span>
             </button>
             <button class="map-mode-btn" data-mode="rectangle">
-              🗺️ Freie Rechteck-Auswahl
+              <span data-i18n="terrain.mode.rectangle">🗺️ Freie Rechteck-Auswahl</span>
             </button>
             <button class="map-mode-btn" data-mode="manual">
-              ⌨️ Koordinaten eingeben
+              <span data-i18n="terrain.mode.manual">⌨️ Koordinaten eingeben</span>
             </button>
           </div>
           
@@ -683,19 +693,19 @@
           <div id="manual-coords-section" style="display: none; margin-bottom: 20px;">
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px;">
               <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Min Lat:</label>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;" data-i18n="terrain.coord.minlat">Min Lat:</label>
                 <input type="number" id="manual-lat-min" step="0.0001" placeholder="47.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
               </div>
               <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Max Lat:</label>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;" data-i18n="terrain.coord.maxlat">Max Lat:</label>
                 <input type="number" id="manual-lat-max" step="0.0001" placeholder="47.5" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
               </div>
               <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Min Lon:</label>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;" data-i18n="terrain.coord.minlon">Min Lon:</label>
                 <input type="number" id="manual-lon-min" step="0.0001" placeholder="10.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
               </div>
               <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Max Lon:</label>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;" data-i18n="terrain.coord.maxlon">Max Lon:</label>
                 <input type="number" id="manual-lon-max" step="0.0001" placeholder="11.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
               </div>
             </div>
@@ -708,19 +718,19 @@
           
           <div class="coord-display">
             <div class="coord-item">
-              <label>Min Lat</label>
+              <label data-i18n="terrain.coord.minlat">Min Lat</label>
               <strong id="coord-lat-min">—</strong>
             </div>
             <div class="coord-item">
-              <label>Max Lat</label>
+              <label data-i18n="terrain.coord.maxlat">Max Lat</label>
               <strong id="coord-lat-max">—</strong>
             </div>
             <div class="coord-item">
-              <label>Min Lon</label>
+              <label data-i18n="terrain.coord.minlon">Min Lon</label>
               <strong id="coord-lon-min">—</strong>
             </div>
             <div class="coord-item">
-              <label>Max Lon</label>
+              <label data-i18n="terrain.coord.maxlon">Max Lon</label>
               <strong id="coord-lon-max">—</strong>
             </div>
           </div>
@@ -728,39 +738,39 @@
           <!-- Generate Preview Button - DIREKT nach Karte -->
           <div class="generate-preview-section">
             <button class="btn-generate-preview" id="generate-preview" disabled>
-              🔍 Vorschau generieren
+              <span data-i18n="terrain.preview.generate">🔍 Vorschau generieren</span>
             </button>
             <p style="margin-top: 12px; color: var(--text-secondary); font-size: 0.9rem;">
-              Wähle Größe und Gebiet aus
+              <span data-i18n="terrain.preview.select">Wähle Größe und Gebiet aus</span>
             </p>
           </div>
         </div>
 
         <!-- SCHRITT 3: 3D-Vorschau -->
         <div class="config-card" id="preview-section">
-          <h2><span class="step-number">3</span> 3D-Vorschau</h2>
+          <h2><span class="step-number">3</span> <span data-i18n="terrain.step3.title">3D-Vorschau</span></h2>
           
           <div class="preview-container">
             <div class="preview-placeholder" id="preview-placeholder">
-              <p>🏔 Klicke auf "Vorschau generieren" um dein Modell zu sehen</p>
+              <p><span data-i18n="terrain.preview.hint">🏔 Klicke auf "Vorschau generieren" um dein Modell zu sehen</span></p>
             </div>
             <canvas id="preview-canvas"></canvas>
             <div class="preview-controls" style="display: none;" id="preview-controls">
-              <button class="preview-btn" id="reset-camera">🔄 Zurücksetzen</button>
-              <button class="preview-btn" id="toggle-wireframe">🔲 Wireframe</button>
+              <button class="preview-btn" id="reset-camera" data-i18n="terrain.preview.reset">🔄 Zurücksetzen</button>
+              <button class="preview-btn" id="toggle-wireframe" data-i18n="terrain.preview.wireframe">🔲 Wireframe</button>
             </div>
           </div>
         </div>
 
         <!-- SCHRITT 4: Material-Optionen (NACH erfolgreicher Generierung) -->
         <div class="config-card" id="material-section" style="display: none;">
-          <h2><span class="step-number">4</span> Material & Extras</h2>
+          <h2><span class="step-number">4</span> <span data-i18n="terrain.step4.title">Material <h2><span class="step-number">4</span> Material & Extras</h2> Extras</span></h2>
           
-          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);">Material wählen:</h3>
+          <h3 data-i18n="terrain.material.choose" style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);"><span data-i18n="terrain.material.choose">Material wählen:</span></h3>
           <div class="material-options">
             <div class="material-btn selected" data-material="pla" data-price="0">
               <strong>PLA</strong>
-              <small>Standard (inkl.)</small>
+              <small><span data-i18n="terrain.material.pla.desc">Standard (inkl.)</span></small>
             </div>
             <div class="material-btn" data-material="petg" data-price="10">
               <strong>PETG</strong>
@@ -768,40 +778,40 @@
             </div>
           </div>
           
-          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Holzsockel:</h3>
+          <h3 data-i18n="terrain.wooden.base" style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);"><span data-i18n="terrain.wooden.base">Holzsockel:</span></h3>
           <select class="wooden-base-select" id="wooden-base-select">
-            <option value="none" data-price="0">Kein Sockel</option>
-            <option value="linde" data-price="25">Linde (+25€)</option>
-            <option value="eiche" data-price="28">Eiche (+28€)</option>
+            <option value="none" data-price="0" data-i18n="terrain.wooden.none">Kein Sockel</option>
+            <option value="linde" data-price="25" data-i18n="terrain.wooden.linde">Linde (+25€)</option>
+            <option value="eiche" data-price="28" data-i18n="terrain.wooden.eiche">Eiche (+28€)</option>
           </select>
 
           <div class="summary-card">
-            <h3>Deine Bestellung</h3>
+            <h3><span data-i18n="terrain.summary.title">Deine Bestellung</span></h3>
             <div class="summary-item">
-              <span>Größe:</span>
+              <span data-i18n="terrain.summary.size">Größe:</span>
               <span id="sum-size">—</span>
             </div>
             <div class="summary-item">
-              <span>Gebiet:</span>
+              <span data-i18n="terrain.summary.region">Gebiet:</span>
               <span id="sum-location">—</span>
             </div>
             <div class="summary-item">
-              <span>Material:</span>
+              <span data-i18n="terrain.summary.material">Material:</span>
               <span id="sum-material">PLA Standard</span>
             </div>
             <div class="summary-item">
-              <span>Holzsockel:</span>
+              <span><span data-i18n="terrain.wooden.base">Holzsockel:</span></span>
               <span id="sum-base">Nein</span>
             </div>
             <div class="summary-item">
-              <span>Gesamtpreis:</span>
+              <span data-i18n="terrain.summary.total">Gesamtpreis:</span>
               <span id="sum-price">—</span>
             </div>
           </div>
 
           <div class="action-buttons">
-            <button class="btn-primary" id="add-to-cart">🛒 In den Warenkorb</button>
-            <button class="btn-secondary" id="download-stl">📥 STL herunterladen</button>
+            <button class="btn-primary" id="add-to-cart"><span data-i18n="terrain.action.cart">🛒 In den Warenkorb</span></button>
+            <button class="btn-secondary" id="download-stl"><span data-i18n="terrain.action.stl">📥 STL herunterladen</span></button>
           </div>
         </div>
 
@@ -822,6 +832,17 @@
   <!-- Cart Badge -->
   <script src="cart.js"></script>
   
+  <script>
+  // i18n Helper-Funktion für dynamische Texte
+  function t(key) {
+    var lang = localStorage.getItem("pita-lang") || "de";
+    return (window.TRANSLATIONS && window.TRANSLATIONS[key] && window.TRANSLATIONS[key][lang]) || key;
+  }
+  </script>
+
+  <script>
+  </script>
+
   <script type="module">
     // ========================================
     // Configuration State
@@ -1132,9 +1153,9 @@
       const ready = config.size && config.widthMM > 0 && config.heightMM > 0 && config.bounds;
       
       btn.disabled = !ready;
-      btn.nextElementSibling.textContent = ready 
+      btn.nextElementSibling.innerHTML = ready ? t("terrain.preview.ready") : t("terrain.preview.select");
         ? 'Bereit zum Generieren!' 
-        : 'Wähle Größe und Gebiet aus';
+        : '<span data-i18n="terrain.preview.select">Wähle Größe und Gebiet aus</span>';
     }
 
     // ========================================
@@ -1143,7 +1164,7 @@
     document.getElementById('generate-preview').addEventListener('click', async () => {
       const btn = document.getElementById('generate-preview');
       const originalText = btn.textContent;
-      btn.textContent = '🔄 Generiere...';
+      btn.textContent = t('terrain.preview.generating');
       btn.disabled = true;
       
       try {
@@ -1169,7 +1190,7 @@
         
         const { job_id } = await response.json();
         config.currentJobId = job_id;
-        btn.textContent = '⏳ Verarbeite...';
+        btn.textContent = t('terrain.preview.processing');
         
         let status = 'pending';
         while (status !== 'done') {
@@ -1182,7 +1203,7 @@
           if (data.progress) btn.textContent = `⏳ ${data.progress}%...`;
         }
         
-        btn.textContent = '✅ Lade Vorschau...';
+        btn.textContent = t('terrain.preview.loading');
         
         load3DModel(job_id);
         
@@ -1204,7 +1225,7 @@
       } catch (error) {
         btn.textContent = originalText;
         btn.disabled = false;
-        alert('❌ Fehler: ' + error.message);
+        alert(t('terrain.preview.error') + ' ' + error.message);
       }
     });
 
@@ -1271,7 +1292,7 @@
     // ========================================
     document.getElementById('download-stl').addEventListener('click', () => {
       if (!config.currentJobId) {
-        alert('Bitte erst "Vorschau generieren" klicken!');
+        alert(t('terrain.action.first'));
         return;
       }
       window.location.href = `http://69.62.105.159/api/download/${config.currentJobId}`;
@@ -1280,7 +1301,7 @@
     // Add to Cart
     document.getElementById('add-to-cart').addEventListener('click', () => {
       if (!config.currentJobId) {
-        alert('Bitte erst "Vorschau generieren" klicken!');
+        alert(t('terrain.action.first'));
         return;
       }
       
@@ -1315,7 +1336,7 @@
       // In Warenkorb legen
       addToCart(productId, productName, total, 1);
       
-      alert(`✅ Produkt zum Warenkorb hinzugefügt!
+      alert(t("terrain.action.success") + "\n\n" + productName + "\nPreis: " + total + "€")!
 
 ${productName}
 Preis: ${total}€`);
@@ -1461,5 +1482,7 @@ Preis: ${total}€`);
     init3DPreview();
   </script>
 
+  <!-- Clippy Assistant -->
+  <script src="clippy.js?v=1774052069"></script>
 </body>
 </html>

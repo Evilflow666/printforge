@@ -567,14 +567,28 @@
           <div class="nav-dropdown-menu">
             <a href="leistungen/3d-druck.html">🖨️ 3D-Druck</a>
             <a href="leistungen/lasercutting.html">✂️ Lasercutting</a>
-            <a href="leistungen/lasergravur.html">🔍 Lasergravur</a><a href="leistungen/resin-druck.html">💧 Resin-Druck</a><a href="leistungen/prototyping.html">🔧 Prototyping</a><a href="materialien.html">🧪 Materialien</a>
+            <a href="leistungen/lasergravur.html">🔍 Lasergravur</a>
+            <a href="leistungen/resin-druck.html">💧 Resin-Druck</a>
+            <a href="leistungen/prototyping.html">🔧 Prototyping</a>
+            <a href="materialien.html">🧪 Materialien</a>
           </div>
         </div>
         <a href="ueber-uns.html">Über uns</a>
+        <a href="blog.html">Blog</a>
         <a href="index.html#kontakt">Kontakt</a>
       </nav>
       <div class="header-actions">
-        <a href="warenkorb.html" class="cart-icon">🛒<span id="cart-badge" class="cart-badge"></span></a>
+<div class="lang-switcher-compact">
+        <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪 DE</button>
+          <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧 EN</button>
+          <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷 FR</button>
+          <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸 ES</button>
+          <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹 IT</button>
+        </div>
+      </div>
+                <a href="warenkorb.html" class="cart-icon">🛒<span id="cart-badge" class="cart-badge"></span></a>
       </div>
       <button class="mobile-toggle">☰</button>
     </div>
@@ -585,8 +599,9 @@
     <!-- Hero -->
     <section class="terrain-hero">
       <div class="terrain-hero-content">
-        <h1>🏔️ 3D-Reliefkarte</h1>
-        <p>Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</p>
+        <h1 data-i18n="terrain.hero.title">🏔️ 3D-Reliefkarte</h1>
+        <p data-i18n="terrain.hero.sub">Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</p>
+<p style="font-size: 0.95rem; color: var(--accent); margin-top: 12px; font-weight: 500;">💡 Wir fertigen nur quadratische Reliefkarten (z.B. 15×15 cm)</p>
       </div>
     </section>
 
@@ -596,59 +611,41 @@
         
         <!-- SCHRITT 1: Modellgröße wählen -->
         <div class="config-card">
-          <h2><span class="step-number">1</span> Modellgröße wählen</h2>
+          <h2><span class="step-number">1</span> <span data-i18n="terrain.step1.title">Modellgröße wählen</span></h2>
           
           <div class="size-selection-grid">
             <div class="size-option" data-size="10x10" data-width="100" data-height="100" data-price="29">
               <h3>10 × 10 cm</h3>
-              <p class="dimensions">Kompakt · Schreibtisch</p>
+              <p class="dimensions" data-i18n="terrain.size.compact">Kompakt · Schreibtisch</p>
               <p class="price">29€</p>
             </div>
             <div class="size-option" data-size="15x15" data-width="150" data-height="150" data-price="49">
               <h3>15 × 15 cm</h3>
-              <p class="dimensions">Standard · Wanddeko</p>
+              <p class="dimensions" data-i18n="terrain.size.standard">Standard · Wanddeko</p>
               <p class="price">49€</p>
             </div>
             <div class="size-option" data-size="20x20" data-width="200" data-height="200" data-price="69">
               <h3>20 × 20 cm</h3>
-              <p class="dimensions">Groß · Premium</p>
+              <p class="dimensions" data-i18n="terrain.size.large">Groß · Premium</p>
               <p class="price">69€</p>
             </div>
             <div class="size-option" data-size="custom" data-width="0" data-height="0" data-price="0">
               <h3>Custom</h3>
-              <p class="dimensions">Individuelle Größe</p>
+              <p class="dimensions" data-i18n="terrain.size.custom.desc">Individuelle Größe</p>
               <p class="price">—</p>
             </div>
           </div>
           
-          <div class="custom-size-inputs" id="custom-size-inputs">
-            <div>
-              <label>Breite (mm):</label>
-              <input type="number" id="custom-width" min="50" max="300" step="1" placeholder="z.B. 180">
-            </div>
-            <div>
-              <label>Tiefe (mm):</label>
-              <input type="number" id="custom-height" min="50" max="300" step="1" placeholder="z.B. 120">
-            </div>
-            <p class="custom-size-hint">💡 Max. 300×300 mm</p>
-            <p class="custom-size-error" id="custom-size-error">⚠️ Maximale Größe überschritten! Max. 300×300 mm</p>
-          </div>
-        </div>
+<div class="custom-size-inputs" id="custom-size-inputs">            <div>              <label>Seitenlänge (mm):</label>              <input type="number" id="custom-width" min="50" max="300" step="1" placeholder="z.B. 150">            </div>            <p class="custom-size-hint">💡 Wir fertigen nur <strong>quadratische</strong> Reliefkarten (z.B. 15×15 cm). Max. 300×300 mm</p>            <p class="custom-size-error" id="custom-size-error">⚠️ Maximale Größe überschritten! Max. 300 mm</p>          </div>
 
         <!-- SCHRITT 2: Gebiet wählen -->
         <div class="config-card">
-          <h2><span class="step-number">2</span> Gebiet wählen</h2>
+          <h2><span class="step-number">2</span> <span data-i18n="terrain.step2.title">Gebiet wählen</span></h2>
           
           <div class="map-mode-toggle">
-            <button class="map-mode-btn active" data-mode="search">
-              📍 Bekannte Orte
-            </button>
-            <button class="map-mode-btn" data-mode="rectangle">
-              🗺️ Freie Rechteck-Auswahl
-            </button>
-            <button class="map-mode-btn" data-mode="manual">
-              ⌨️ Koordinaten eingeben
-            </button>
+            <button class="map-mode-btn active" data-mode="search" data-i18n="terrain.mode.search">📍 Bekannte Orte</button>
+            <button class="map-mode-btn" data-mode="rectangle" data-i18n="terrain.mode.rectangle">🗺️ Freie Rechteck-Auswahl</button>
+            <button class="map-mode-btn" data-mode="manual" data-i18n="terrain.mode.manual">⌨️ Koordinaten eingeben</button>
           </div>
           
           <!-- Preset Locations -->
@@ -738,7 +735,7 @@
 
         <!-- SCHRITT 3: 3D-Vorschau -->
         <div class="config-card" id="preview-section">
-          <h2><span class="step-number">3</span> 3D-Vorschau</h2>
+          <h2><span class="step-number">3</span> <span data-i18n="terrain.step3.title">3D-Vorschau</span></h2>
           
           <div class="preview-container">
             <div class="preview-placeholder" id="preview-placeholder">
@@ -754,9 +751,9 @@
 
         <!-- SCHRITT 4: Material-Optionen (NACH erfolgreicher Generierung) -->
         <div class="config-card" id="material-section" style="display: none;">
-          <h2><span class="step-number">4</span> Material & Extras</h2>
+          <h2><span class="step-number">4</span> <span data-i18n="terrain.step4.title">Material & Extras</span></h2>
           
-          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);">Material wählen:</h3>
+          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);"><span data-i18n="terrain.material.choose">Material wählen:</span></h3>
           <div class="material-options">
             <div class="material-btn selected" data-material="pla" data-price="0">
               <strong>PLA</strong>
@@ -768,7 +765,7 @@
             </div>
           </div>
           
-          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Holzsockel:</h3>
+          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);"><span data-i18n="terrain.wooden.base">Holzsockel:</span></h3>
           <select class="wooden-base-select" id="wooden-base-select">
             <option value="none" data-price="0">Kein Sockel</option>
             <option value="linde" data-price="25">Linde (+25€)</option>
@@ -776,32 +773,32 @@
           </select>
 
           <div class="summary-card">
-            <h3>Deine Bestellung</h3>
+            <h3 data-i18n="terrain.summary.title">Deine Bestellung</h3>
             <div class="summary-item">
-              <span>Größe:</span>
+              <span data-i18n="terrain.summary.size">Größe:</span>
               <span id="sum-size">—</span>
             </div>
             <div class="summary-item">
-              <span>Gebiet:</span>
+              <span data-i18n="terrain.summary.region">Gebiet:</span>
               <span id="sum-location">—</span>
             </div>
             <div class="summary-item">
-              <span>Material:</span>
+              <span data-i18n="terrain.summary.material">Material:</span>
               <span id="sum-material">PLA Standard</span>
             </div>
             <div class="summary-item">
-              <span>Holzsockel:</span>
+              <span data-i18n="terrain.wooden.base">Holzsockel:</span>
               <span id="sum-base">Nein</span>
             </div>
             <div class="summary-item">
-              <span>Gesamtpreis:</span>
+              <span data-i18n="terrain.summary.total">Gesamtpreis:</span>
               <span id="sum-price">—</span>
             </div>
           </div>
 
           <div class="action-buttons">
-            <button class="btn-primary" id="add-to-cart">🛒 In den Warenkorb</button>
-            <button class="btn-secondary" id="download-stl">📥 STL herunterladen</button>
+            <button class="btn-primary" id="add-to-cart" data-i18n="terrain.action.cart">🛒 In den Warenkorb</button>
+            <button class="btn-secondary" id="download-stl" data-i18n="terrain.action.stl">📥 STL herunterladen</button>
           </div>
         </div>
 
@@ -865,43 +862,7 @@
         updateSummary();
       });
     });
-
-    // Custom Size Inputs with Validation
-    function validateCustomSize() {
-      const width = parseInt(document.getElementById('custom-width').value) || 0;
-      const height = parseInt(document.getElementById('custom-height').value) || 0;
-      const errorEl = document.getElementById('custom-size-error');
-      
-      if (width > 300 || height > 300) {
-        errorEl.style.display = 'block';
-        config.widthMM = 0;
-        config.heightMM = 0;
-        checkIfReadyForPreview();
-        updateSummary();
-        return false;
-      } else {
-        errorEl.style.display = 'none';
-        config.widthMM = width;
-        config.heightMM = height;
-        checkIfReadyForPreview();
-        updateSummary();
-        return true;
-      }
-    }
-    
-    document.getElementById('custom-width')?.addEventListener('input', validateCustomSize);
-    document.getElementById('custom-height')?.addEventListener('input', validateCustomSize);
-
-    // ========================================
-    // SCHRITT 2: Leaflet Map mit Modi
-    // ========================================
-    const map = L.map('map', {
-      center: [47.0, 10.0],
-      zoom: 6,
-      scrollWheelZoom: true
-    });
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// Custom Size Inputs with Validation (NUR QUADRATISCH)    function validateCustomSize() {      const width = parseInt(document.getElementById("custom-width").value) || 0;      const errorEl = document.getElementById("custom-size-error");            if (width > 300) {        errorEl.style.display = "block";        config.widthMM = 0;        config.heightMM = 0;        checkIfReadyForPreview();        updateSummary();        return false;      } else {        errorEl.style.display = "none";        config.widthMM = width;        config.heightMM = width;  // 🔥 QUADRATISCH: depth = width        checkIfReadyForPreview();        updateSummary();        return true;      }    }        document.getElementById("custom-width")?.addEventListener("input", validateCustomSize);
       attribution: '© OpenStreetMap',
       maxZoom: 18
     }).addTo(map);
@@ -961,6 +922,17 @@
       });
       
       map.addControl(drawControl);
+      map.addControl(drawControl);
+
+      // 🔥 AUTO-ACTIVATE RECTANGLE DRAW TOOL
+      setTimeout(() => {
+        if (drawControl && drawControl._toolbars && drawControl._toolbars.draw) {
+          const rectangleBtn = drawControl._toolbars.draw._modes.rectangle;
+          if (rectangleBtn && rectangleBtn.handler) {
+            rectangleBtn.handler.enable();
+          }
+        }
+      }, 100);
     }
 
     function disableRectangleDraw() {
@@ -980,16 +952,7 @@
       
       drawnItems.addLayer(layer);
       drawnRectangle = layer;
-      
-      const bounds = layer.getBounds();
-      config.bounds = {
-        minLat: bounds.getSouth(),
-        maxLat: bounds.getNorth(),
-        minLon: bounds.getWest(),
-        maxLon: bounds.getEast()
-      };
-      config.locationName = 'Freie Auswahl';
-      
+const bounds = layer.getBounds();      const center = bounds.getCenter();            // 🔥 FORCE SQUARE: Berechne größere Dimension      const latDiff = bounds.getNorth() - bounds.getSouth();      const lonDiff = bounds.getEast() - bounds.getWest();      const maxDiff = Math.max(latDiff, lonDiff);            // Erstelle quadratisches Bounds      const squareBounds = L.latLngBounds(        [center.lat - maxDiff/2, center.lng - maxDiff/2],        [center.lat + maxDiff/2, center.lng + maxDiff/2]      );            // Nutze squareBounds für Config      config.bounds = {        minLat: squareBounds.getSouth(),        maxLat: squareBounds.getNorth(),        minLon: squareBounds.getWest(),        maxLon: squareBounds.getEast()      };      config.locationName = "Freie Auswahl (quadratisch)";
       updateCoordDisplay();
       checkIfReadyForPreview();
       updateSummary();
@@ -1129,12 +1092,7 @@
 
     // ========================================
     // Generate Preview
-    // ========================================
-    document.getElementById('generate-preview').addEventListener('click', async () => {
-      const btn = document.getElementById('generate-preview');
-      const originalText = btn.textContent;
-      btn.textContent = '🔄 Generiere...';
-      btn.disabled = true;
+document.getElementById("generate-preview").addEventListener("click", async () => {      const btn = document.getElementById("generate-preview");      const originalText = btn.textContent;            // 🔥 ERZWINGE QUADRATISCH      if (config.widthMM !== config.heightMM) {        alert("💡 Nur quadratische Modelle möglich! Bitte gleiche Seitenlänge wählen.");        btn.textContent = originalText;        btn.disabled = false;        return;      }            btn.textContent = "🔄 Generiere...";
       
       try {
         const latDiff = config.bounds.maxLat - config.bounds.minLat;

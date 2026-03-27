@@ -3099,3 +3099,81 @@ body.page-sub {
 .leistungen-more a:hover {
   color: var(--accent, #fa6831);
 }
+/* Footer Social Icons */
+.footer-social {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 20px 0;
+  font-size: 1.5rem;
+}
+
+.footer-social a {
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.footer-social a:hover {
+  color: var(--accent);
+  transform: scale(1.2);
+}
+
+/* Hero Clippy Button - subtiler */
+.clippy-trigger {
+  padding: 12px 24px !important;
+  font-size: 0.9rem !important;
+}
+
+@keyframes clippy-pulse-subtle {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(198, 125, 74, 0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(198, 125, 74, 0); }
+}
+
+.clippy-trigger {
+  animation: clippy-pulse-subtle 3s infinite !important;
+}
+
+.clippy-trigger:hover {
+  animation: none !important;
+}
+
+/* Mobile Grid Fix - 375px → 1-spaltig */
+@media (max-width: 375px) {
+  .produkte-grid,
+  .katalog-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+  
+  .produkte-card,
+  .katalog-item {
+    max-width: 100%;
+  }
+}
+
+/* Hero Clippy Button - subtiler und kleiner */
+#hero-clippy-hint.hero-cta {
+  padding: 14px 28px;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+
+@keyframes hero-clippy-pulse {
+  0%, 100% { 
+    box-shadow: 0 4px 16px rgba(198, 125, 74, 0.15);
+  }
+  50% { 
+    box-shadow: 0 4px 16px rgba(198, 125, 74, 0.15), 
+                0 0 0 6px rgba(198, 125, 74, 0.1);
+  }
+}
+
+#hero-clippy-hint.hero-cta {
+  animation: hero-clippy-pulse 3s ease-in-out infinite;
+}
+
+#hero-clippy-hint.hero-cta:hover {
+  animation: none;
+}

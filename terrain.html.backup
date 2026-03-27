@@ -930,16 +930,6 @@
         // Enable/Disable Rectangle Drawing
         if (currentMode === 'rectangle') {
           enableRectangleDraw();
-          // 🔥 NEUE FUNKTION: Rechteck-Tool sofort aktivieren
-          setTimeout(() => {
-            if (drawControl && drawControl._toolbars && drawControl._toolbars.draw) {
-              const rectangleHandler = drawControl._toolbars.draw._modes.rectangle;
-              if (rectangleHandler && rectangleHandler.handler) {
-                rectangleHandler.handler.enable();
-                console.log('✅ Rectangle-Draw-Tool automatisch aktiviert');
-              }
-            }
-          }, 100);
         } else {
           disableRectangleDraw();
         }

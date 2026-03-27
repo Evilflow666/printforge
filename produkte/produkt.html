@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Produkt – FACTUM3D</title>
+  <link rel="canonical" href="http://69.62.105.159/produkte/produkt.html">
   <meta name="description" content="Produktdetails — FACTUM3D">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +18,7 @@
       <a href="../index.html" class="logo"><img src="../logo.svg" alt="FACTUM3D" class="logo-svg"></a>
       <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
         
-        <div class="nav-dropdown"><a href="../produkte.html" class="nav-dropdown-trigger" data-i18n="nav.produkte">Produkte</a><div class="nav-dropdown-menu"><a href="../produkte/3d-fdm-druck.html" data-i18n="produkte.cat.fdm">🖨️ 3D-FDM-Druck</a><a href="../produkte/lasercut.html" data-i18n="produkte.cat.laser">✂️ Lasercut &amp; Gravur</a></div></div>
+        <div class="nav-dropdown"><a href="../produkte.html" class="nav-dropdown-trigger" data-i18n="nav.produkte">Produkte</a><div class="nav-dropdown-menu"><a href="../produkte/3d-fdm-druck.html" data-i18n="produkte.cat.fdm">🖨️ 3D-FDM-Druck</a><a href="../produkte/lasercut.html" data-i18n="produkte.cat.laser">✂️ Lasercut &amp; Gravur</a><a href="../terrain.html">🏔️ 3D-Reliefkarte</a></div></div>
         <div class="nav-dropdown"><a href="../index.html#leistungen" class="nav-dropdown-trigger" data-i18n="nav.leistungen">Leistungen</a><div class="nav-dropdown-menu"><a href="../leistungen/3d-druck.html">🖨️ 3D-Druck</a><a href="../leistungen/lasercutting.html">✂️ Lasercutting</a><a href="../leistungen/lasergravur.html">🔍 Lasergravur</a><a href="../leistungen/resin-druck.html">💧 Resin-Druck</a><a href="../leistungen/prototyping.html">🔧 Prototyping</a><a href="../materialien.html">🧪 Materialien</a></div></div>
         <a href="../ueber-uns.html" data-i18n="nav.about">Über uns</a>
         <a href="../blog.html" data-i18n="nav.blog">Blog</a>
@@ -81,6 +82,7 @@
 
               <!-- Price -->
               <div class="produkt-price" id="p-price"></div>
+                <small class="price-note">inkl. MwSt., zzgl. Versand</small>
 
               <!-- Staffelpreise -->
               <div class="produkt-staffel" id="p-staffel"></div>
@@ -148,8 +150,14 @@
   <footer class="footer">
     <div class="container footer-inner">
       <span class="logo">FACTUM<span class="accent">3D</span></span>
-      <p><span data-i18n="footer.tagline">Schicht für Schicht. Idee für Idee.</span></p>
-      <div class="footer-links">
+      <p><span data-i18n="footer.tagline">Schicht für Schicht. Idee für Idee.</span></p>    
+    <!-- Social Icons -->
+    <div class="footer-social">
+      <a href="https://primal.net/npub15ham9vsa9ksmftajz2fhs59sx7k67qlea2vcrs4870lk8lsev0eqxyj589" aria-label="Nostr" title="FACTUM3D auf Nostr">🟣</a>
+      <a href="https://t.me/factum3d" aria-label="Telegram" title="FACTUM3D auf Telegram">📱</a>
+      <a href="https://github.com/factum3d" aria-label="GitHub" title="FACTUM3D auf GitHub">💻</a>
+    </div>
+    <div class="footer-links">
         <a href="../blog.html" data-i18n="nav.blog">Blog</a>
         <a href="../faq.html" data-i18n="nav.faq">FAQ</a>
         <a href="../impressum.html" data-i18n="footer.impressum">Impressum</a>
@@ -212,7 +220,7 @@
       if (isPlaceholder) {
         mainGal.innerHTML = '<div class="katalog-item-placeholder" style="height:350px;font-size:2rem;display:flex;align-items:center;justify-content:center;">' + p.images[0] + '</div>';
       } else {
-        mainGal.innerHTML = '<img src="' + p.images[0] + '" alt="' + p.name + '" class="gallery-img" id="gallery-active">';
+        mainGal.innerHTML = '<img loading="lazy" src="' + p.images[0] + '" loading="lazy" alt="' + p.name + '" class="gallery-img" id="gallery-active">';
         p.images.forEach(function(img, i) {
           const thumb = document.createElement('img');
           thumb.src = img;

@@ -1,3 +1,5 @@
+// Alle Preise inkl. 19% MwSt., zzgl. Versandkosten
+// Alle Preise inkl. 19% MwSt., zzgl. Versandkosten
 /**
  * FACTUM3D Product Data — Alle FDM-Produkte
  * Neues Produkt? Einfach unten einen Eintrag ergänzen.

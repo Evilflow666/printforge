@@ -2,7 +2,7 @@
  * FACTUM3D Warenkorb — localStorage-basiert
  */
 
-const CART_KEY = "pita-cart";
+const CART_KEY = "factum3d-cart";
 
 function getCart() {
   try {
@@ -14,7 +14,7 @@ function getCart() {
 
 function saveCart(cart) {
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  document.dispatchEvent(new CustomEvent("pita-cart-changed"));
+  document.dispatchEvent(new CustomEvent("factum3d-cart-changed"));
 }
 
 function addToCart(id, name, price, qty) {
@@ -54,7 +54,7 @@ function getCartCount() {
 
 function clearCart() {
   localStorage.removeItem(CART_KEY);
-  document.dispatchEvent(new CustomEvent("pita-cart-changed"));
+  document.dispatchEvent(new CustomEvent("factum3d-cart-changed"));
 }
 
 /* Badge-Update */
@@ -66,5 +66,5 @@ function updateCartBadge() {
   badge.style.display = count > 0 ? "flex" : "none";
 }
 
-document.addEventListener("pita-cart-changed", updateCartBadge);
+document.addEventListener("factum3d-cart-changed", updateCartBadge);
 document.addEventListener("DOMContentLoaded", updateCartBadge);

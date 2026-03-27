@@ -532,6 +532,26 @@
       }
     }
     
+    @media (max-width: 768px) {
+      #map {
+        height: 300px;
+      }
+      .preview-container {
+        height: 40vh;
+        min-height: 300px;
+      }
+    }
+
+        @media (max-width: 768px) {
+      #map {
+        height: 300px;
+      }
+      .preview-container {
+        height: 40vh;
+        min-height: 300px;
+      }
+    }
+
     @media (max-width: 640px) {
       .coord-display {
         grid-template-columns: 1fr 1fr;
@@ -811,7 +831,7 @@
 
           <div class="action-buttons">
             <button class="btn-primary" id="add-to-cart"><span data-i18n="terrain.action.cart">🛒 In den Warenkorb</span></button>
-            <button class="btn-secondary" id="download-stl"><span data-i18n="terrain.action.stl">📥 STL herunterladen</span></button>
+            <button class="btn-secondary" id="download-stl" disabled><span data-i18n="terrain.action.stl">📥 STL herunterladen</span></button>
           </div>
         </div>
 
@@ -1173,7 +1193,7 @@
         const centerLat = (config.bounds.minLat + config.bounds.maxLat) / 2;
         const centerLon = (config.bounds.minLon + config.bounds.maxLon) / 2;
         
-        const response = await fetch('http://69.62.105.159/api/generate', {
+        const response = await fetch('/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -1193,12 +1213,17 @@
         btn.textContent = t('terrain.preview.processing');
         
         let status = 'pending';
-        while (status !== 'done') {
+        let pollAttempts = 0;
+        const MAX_POLL_ATTEMPTS = 60; // 2 Minuten (60 × 2 Sekunden)
+        while (status !== "done" && pollAttempts < MAX_POLL_ATTEMPTS) {
           await new Promise(resolve => setTimeout(resolve, 2000));
-          const statusResponse = await fetch(`http://69.62.105.159/api/status/${job_id}`);
+          pollAttempts++;
+          if (pollAttempts >= MAX_POLL_ATTEMPTS) throw new Error(t("terrain.api.timeout"));
+          const statusResponse = await fetch(`/api/status/${job_id}`);
           const data = await statusResponse.json();
           status = data.status;
           
+          if (pollAttempts >= MAX_POLL_ATTEMPTS) throw new Error(t('terrain.api.timeout'));
           if (data.error) throw new Error(data.error);
           if (data.progress) btn.textContent = `⏳ ${data.progress}%...`;
         }
@@ -1218,6 +1243,8 @@
         // Show material section
         setTimeout(() => {
           document.getElementById('material-section').style.display = 'block';
+        document.getElementById('download-stl').disabled = false;
+        document.getElementById("download-stl").disabled = false;
           btn.textContent = originalText;
           btn.disabled = false;
         }, 2000);
@@ -1295,7 +1322,7 @@
         alert(t('terrain.action.first'));
         return;
       }
-      window.location.href = `http://69.62.105.159/api/download/${config.currentJobId}`;
+      window.location.href = `/api/download/${config.currentJobId}`;
     });
 
     // Add to Cart
@@ -1336,10 +1363,7 @@
       // In Warenkorb legen
       addToCart(productId, productName, total, 1);
       
-      alert(t("terrain.action.success") + "\n\n" + productName + "\nPreis: " + total + "€")!
-
-${productName}
-Preis: ${total}€`);
+      alert(t("terrain.action.success") + "\n\n" + productName + "\nPreis: " + total + "u20ac");
     });
 
     // ========================================
@@ -1406,7 +1430,7 @@ Preis: ${total}€`);
     
     function loadTerrainModel(jobId) {
       const loader = new STLLoader();
-      const url = `http://69.62.105.159/api/download/${jobId}`;
+      const url = `/api/download/${jobId}`;
       
       if (mesh) scene.remove(mesh);
       

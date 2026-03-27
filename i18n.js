@@ -648,6 +648,8 @@ const TRANSLATIONS = {
   'profil.delete':       { de:'Konto löschen',    en:'Delete account', fr:'Supprimer le compte', es:'Eliminar cuenta', it:'Elimina account' },
   'profil.delete.confirm': { de:'Bist du sicher? Alle Daten werden gelöscht.', en:'Are you sure? All data will be deleted.', fr:'Es-tu sûr ? Toutes les données seront supprimées.', es:'¿Estás seguro? Todos los datos se eliminarán.', it:'Sei sicuro? Tutti i dati verranno eliminati.' },
 
+  "terrain.api.timeout": { de:"⏱ Zeitüberschreitung — API antwortet nicht. Bitte später versuchen.", en:"⏱ Timeout — API not responding. Please try again later.", fr:"⏱ Délai dépassé — API ne répond pas. Réessayez plus tard.", es:"⏱ Tiempo de espera — API no responde. Intenta más tarde.", it:"⏱ Timeout — API non risponde. Riprova più tardi." },
+  "terrain.preview.loadingstl": { de:"📥 Lade 3D-Modell...", en:"📥 Loading 3D model...", fr:"📥 Chargement du modèle 3D...", es:"📥 Cargando modelo 3D...", it:"📥 Caricamento modello 3D..." },
 };
 
 
@@ -870,4 +872,6 @@ document.addEventListener('DOMContentLoaded', () => {
   'terrain.coord.minlon': { de:'Min Lon', en:'Min Lon', fr:'Lon Min', es:'Lon Mín', it:'Lon Min' },
   'terrain.coord.maxlon': { de:'Max Lon', en:'Max Lon', fr:'Lon Max', es:'Lon Máx', it:'Lon Max' },
 
+  "terrain.api.timeout": { de:"⏱ Zeitüberschreitung — API antwortet nicht. Bitte später versuchen.", en:"⏱ Timeout — API not responding. Please try again later.", fr:"⏱ Délai dépassé — API ne répond pas. Réessayez plus tard.", es:"⏱ Tiempo de espera — API no responde. Intenta más tarde.", it:"⏱ Timeout — API non risponde. Riprova più tardi." },
+  "terrain.preview.loadingstl": { de:"📥 Lade 3D-Modell...", en:"📥 Loading 3D model...", fr:"📥 Chargement du modèle 3D...", es:"📥 Cargando modelo 3D...", it:"📥 Caricamento modello 3D..." },
 };

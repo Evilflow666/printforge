@@ -13,7 +13,6 @@
   
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
   
   <!-- Three.js (ES Module) -->
   <script type="importmap">
@@ -76,8 +75,8 @@
     .config-container {
       max-width: 1400px;
       margin: 0 auto;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 30px;
     }
     
@@ -112,97 +111,6 @@
       color: var(--accent);
     }
     
-    /* Size Selection Grid */
-    .size-selection-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    
-    .size-option {
-      padding: 24px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(198, 125, 74, 0.2);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-    }
-    
-    .size-option:hover, .size-option.selected {
-      background: rgba(198, 125, 74, 0.15);
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(198, 125, 74, 0.2);
-    }
-    
-    .size-option h3 {
-      font-size: 1.3rem;
-      margin-bottom: 8px;
-      color: #ffffff;
-    }
-    
-    .size-option .dimensions {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      margin-bottom: 4px;
-    }
-    
-    .size-option .price {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-top: 8px;
-    }
-    
-    /* Custom Size Input */
-    .custom-size-inputs {
-      display: none;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 16px;
-      padding: 16px;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 8px;
-    }
-    
-    .custom-size-inputs.active {
-      display: grid;
-    }
-    
-    .custom-size-inputs label {
-      display: block;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-    
-    .custom-size-inputs input {
-      width: 100%;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(198, 125, 74, 0.3);
-      border-radius: 6px;
-      color: #ffffff;
-      font-size: 1rem;
-    }
-    
-    .custom-size-hint {
-      grid-column: 1 / -1;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-top: -6px;
-    }
-    
-    .custom-size-error {
-      grid-column: 1 / -1;
-      font-size: 0.85rem;
-      color: #ff6b6b;
-      margin-top: -6px;
-      display: none;
-    }
-    
     /* Map Container */
     #map {
       width: 100%;
@@ -210,31 +118,6 @@
       border-radius: 12px;
       border: 2px solid rgba(198, 125, 74, 0.2);
       margin-bottom: 20px;
-    }
-    
-    .map-mode-toggle {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    
-    .map-mode-btn {
-      flex: 1;
-      padding: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(198, 125, 74, 0.2);
-      border-radius: 8px;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      font-size: 0.95rem;
-    }
-    
-    .map-mode-btn:hover, .map-mode-btn.active {
-      background: rgba(198, 125, 74, 0.15);
-      border-color: var(--accent);
-      color: #ffffff;
     }
     
     .preset-grid {
@@ -271,7 +154,7 @@
     
     .coord-display {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       margin-top: 20px;
     }
@@ -295,16 +178,59 @@
       color: var(--accent);
     }
     
-    /* Material Options - Simplified */
-    .material-options {
+    /* Size Selection */
+    .size-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
       margin-bottom: 24px;
     }
     
-    .material-btn {
-      padding: 16px;
+    .size-card {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(198, 125, 74, 0.2);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .size-card:hover, .size-card.selected {
+      background: rgba(198, 125, 74, 0.15);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(198, 125, 74, 0.2);
+    }
+    
+    .size-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+    
+    .size-card .dimensions {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    
+    .size-card .price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    
+    /* Options Grid */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .option-btn {
+      padding: 14px;
       background: rgba(255, 255, 255, 0.05);
       border: 2px solid rgba(198, 125, 74, 0.2);
       border-radius: 8px;
@@ -313,50 +239,20 @@
       text-align: center;
     }
     
-    .material-btn:hover, .material-btn.selected {
+    .option-btn:hover, .option-btn.selected {
       background: rgba(198, 125, 74, 0.15);
       border-color: var(--accent);
     }
     
-    .material-btn strong {
+    .option-btn strong {
       display: block;
       margin-bottom: 4px;
       color: #ffffff;
-      font-size: 1.1rem;
     }
     
-    .material-btn small {
+    .option-btn small {
       color: var(--text-secondary);
       font-size: 0.85rem;
-    }
-    
-    /* Wooden Base Dropdown */
-    .wooden-base-select {
-      width: 100%;
-      padding: 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px solid rgba(198, 125, 74, 0.2);
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      appearance: none;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%23C67D4A" d="M6 8L0 0h12z"/></svg>');
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 40px;
-    }
-    
-    .wooden-base-select:hover {
-      border-color: var(--accent);
-      background-color: rgba(198, 125, 74, 0.05);
-    }
-    
-    .wooden-base-select option {
-      background: #1a1a1a;
-      color: #ffffff;
-      padding: 10px;
     }
     
     /* 3D Preview */
@@ -465,7 +361,6 @@
       text-align: center;
       text-decoration: none;
       display: inline-block;
-      border: none;
     }
     
     .btn-primary {
@@ -480,12 +375,6 @@
       box-shadow: 0 8px 24px rgba(198, 125, 74, 0.3);
     }
     
-    .btn-primary:disabled {
-      background: rgba(198, 125, 74, 0.3);
-      cursor: not-allowed;
-      transform: none;
-    }
-    
     .btn-secondary {
       background: transparent;
       color: var(--accent);
@@ -496,52 +385,22 @@
       background: rgba(198, 125, 74, 0.1);
     }
     
-    .generate-preview-section {
-      margin-top: 24px;
-      text-align: center;
-    }
-    
-    .btn-generate-preview {
-      padding: 18px 40px;
-      background: var(--accent);
-      color: #0B0F19;
-      border: 2px solid var(--accent);
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-    
-    .btn-generate-preview:hover {
-      background: #d8914d;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(198, 125, 74, 0.3);
-    }
-    
-    .btn-generate-preview:disabled {
-      background: rgba(198, 125, 74, 0.3);
-      cursor: not-allowed;
-      transform: none;
-    }
-    
     @media (max-width: 1024px) {
-      .size-selection-grid {
+      .config-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .size-grid {
         grid-template-columns: 1fr;
       }
     }
     
     @media (max-width: 640px) {
       .coord-display {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
       }
       
       .action-buttons {
-        flex-direction: column;
-      }
-      
-      .map-mode-toggle {
         flex-direction: column;
       }
     }
@@ -567,7 +426,7 @@
           <div class="nav-dropdown-menu">
             <a href="leistungen/3d-druck.html">🖨️ 3D-Druck</a>
             <a href="leistungen/lasercutting.html">✂️ Lasercutting</a>
-            <a href="leistungen/lasergravur.html">🔍 Lasergravur</a><a href="leistungen/resin-druck.html">💧 Resin-Druck</a><a href="leistungen/prototyping.html">🔧 Prototyping</a><a href="materialien.html">🧪 Materialien</a>
+            <a href="materialien.html">🧪 Materialien</a>
           </div>
         </div>
         <a href="ueber-uns.html">Über uns</a>
@@ -587,7 +446,6 @@
       <div class="terrain-hero-content">
         <h1>🏔️ 3D-Reliefkarte</h1>
         <p>Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</p>
-<p style="font-size: 0.95rem; color: var(--accent); margin-top: 12px; font-weight: 500;">💡 Wir fertigen nur quadratische Reliefkarten (z.B. 15×15 cm)</p>
       </div>
     </section>
 
@@ -595,101 +453,34 @@
     <section class="config-section">
       <div class="config-container">
         
-        <!-- SCHRITT 1: Modellgröße wählen -->
+        <!-- Left: Map Selection -->
         <div class="config-card">
-          <h2><span class="step-number">1</span> Modellgröße wählen</h2>
+          <h2><span class="step-number">1</span> Gebiet wählen</h2>
           
-          <div class="size-selection-grid">
-            <div class="size-option" data-size="10x10" data-width="100" data-height="100" data-price="29">
-              <h3>10 × 10 cm</h3>
-              <p class="dimensions">Kompakt · Schreibtisch</p>
-              <p class="price">29€</p>
-            </div>
-            <div class="size-option" data-size="15x15" data-width="150" data-height="150" data-price="49">
-              <h3>15 × 15 cm</h3>
-              <p class="dimensions">Standard · Wanddeko</p>
-              <p class="price">49€</p>
-            </div>
-            <div class="size-option" data-size="20x20" data-width="200" data-height="200" data-price="69">
-              <h3>20 × 20 cm</h3>
-              <p class="dimensions">Groß · Premium</p>
-              <p class="price">69€</p>
-            </div>
-            <div class="size-option" data-size="custom" data-width="0" data-height="0" data-price="0">
-              <h3>Custom</h3>
-              <p class="dimensions">Individuelle Größe</p>
-              <p class="price">—</p>
-            </div>
-          </div>
-          
-<div class="custom-size-inputs" id="custom-size-inputs">            <div>              <label>Seitenlänge (mm):</label>              <input type="number" id="custom-width" min="50" max="300" step="1" placeholder="z.B. 150">            </div>            <p class="custom-size-hint">💡 Wir fertigen nur <strong>quadratische</strong> Reliefkarten (z.B. 15×15 cm). Max. 300×300 mm</p>            <p class="custom-size-error" id="custom-size-error">⚠️ Maximale Größe überschritten! Max. 300 mm</p>          </div>
-
-        <!-- SCHRITT 2: Gebiet wählen -->
-        <div class="config-card">
-          <h2><span class="step-number">2</span> Gebiet wählen</h2>
-          
-          <div class="map-mode-toggle">
-            <button class="map-mode-btn active" data-mode="search">
-              📍 Bekannte Orte
-            </button>
-            <button class="map-mode-btn" data-mode="rectangle">
-              🗺️ Freie Rechteck-Auswahl
-            </button>
-            <button class="map-mode-btn" data-mode="manual">
-              ⌨️ Koordinaten eingeben
-            </button>
-          </div>
-          
-          <!-- Preset Locations -->
-          <div id="preset-section" class="preset-grid">
-            <button class="preset-btn" data-lat="47.4211" data-lon="10.9853" data-name="Zugspitze">
+          <div class="preset-grid">
+            <button class="preset-btn" data-lat="47.4211" data-lon="10.9853" data-name="Zugspitze" data-radius="15">
               <strong>Zugspitze</strong>
               <small>2962m · DE</small>
             </button>
-            <button class="preset-btn" data-lat="45.9763" data-lon="7.6586" data-name="Matterhorn">
+            <button class="preset-btn" data-lat="45.9763" data-lon="7.6586" data-name="Matterhorn" data-radius="18">
               <strong>Matterhorn</strong>
               <small>4478m · CH/IT</small>
             </button>
-            <button class="preset-btn" data-lat="47.0745" data-lon="12.6942" data-name="Großglockner">
+            <button class="preset-btn" data-lat="47.0745" data-lon="12.6942" data-name="Großglockner" data-radius="16">
               <strong>Großglockner</strong>
               <small>3798m · AT</small>
             </button>
-            <button class="preset-btn" data-lat="45.8326" data-lon="6.8652" data-name="Mont Blanc">
+            <button class="preset-btn" data-lat="45.8326" data-lon="6.8652" data-name="Mont Blanc" data-radius="20">
               <strong>Mont Blanc</strong>
               <small>4808m · FR/IT</small>
             </button>
-            <button class="preset-btn" data-lat="47.5553" data-lon="12.9786" data-name="Watzmann">
+            <button class="preset-btn" data-lat="47.5553" data-lon="12.9786" data-name="Watzmann" data-radius="12">
               <strong>Watzmann</strong>
               <small>2713m · DE</small>
             </button>
-            <button class="preset-btn" data-lat="46.5369" data-lon="7.9784" data-name="Jungfrau">
+            <button class="preset-btn" data-lat="46.5369" data-lon="7.9784" data-name="Jungfrau" data-radius="18">
               <strong>Jungfrau</strong>
               <small>4158m · CH</small>
-            </button>
-          </div>
-          
-          <!-- Manual Coordinate Input -->
-          <div id="manual-coords-section" style="display: none; margin-bottom: 20px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px;">
-              <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Min Lat:</label>
-                <input type="number" id="manual-lat-min" step="0.0001" placeholder="47.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
-              </div>
-              <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Max Lat:</label>
-                <input type="number" id="manual-lat-max" step="0.0001" placeholder="47.5" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
-              </div>
-              <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Min Lon:</label>
-                <input type="number" id="manual-lon-min" step="0.0001" placeholder="10.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
-              </div>
-              <div>
-                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Max Lon:</label>
-                <input type="number" id="manual-lon-max" step="0.0001" placeholder="11.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
-              </div>
-            </div>
-            <button id="apply-manual-coords" style="margin-top: 12px; padding: 10px 20px; background: var(--accent); color: #0B0F19; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
-              Koordinaten übernehmen
             </button>
           </div>
           
@@ -697,41 +488,106 @@
           
           <div class="coord-display">
             <div class="coord-item">
-              <label>Min Lat</label>
-              <strong id="coord-lat-min">—</strong>
+              <label>Breite</label>
+              <strong id="coord-lat">—</strong>
             </div>
             <div class="coord-item">
-              <label>Max Lat</label>
-              <strong id="coord-lat-max">—</strong>
+              <label>Länge</label>
+              <strong id="coord-lon">—</strong>
             </div>
             <div class="coord-item">
-              <label>Min Lon</label>
-              <strong id="coord-lon-min">—</strong>
+              <label>Radius</label>
+              <strong id="coord-radius">— km</strong>
             </div>
-            <div class="coord-item">
-              <label>Max Lon</label>
-              <strong id="coord-lon-max">—</strong>
-            </div>
-          </div>
-          
-          <!-- Generate Preview Button - DIREKT nach Karte -->
-          <div class="generate-preview-section">
-            <button class="btn-generate-preview" id="generate-preview" disabled>
-              🔍 Vorschau generieren
-            </button>
-            <p style="margin-top: 12px; color: var(--text-secondary); font-size: 0.9rem;">
-              Wähle Größe und Gebiet aus
-            </p>
           </div>
         </div>
 
-        <!-- SCHRITT 3: 3D-Vorschau -->
-        <div class="config-card" id="preview-section">
+        <!-- Right: Configuration -->
+        <div class="config-card">
+          <h2><span class="step-number">2</span> Größe & Optionen</h2>
+          
+          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);">Größe <small style="font-weight: 400;">(Radius passt sich automatisch an)</small>:</h3>
+          <div class="size-grid">
+            <div class="size-card" data-size="desk" data-price="29">
+              <h3>Desk Trophy</h3>
+              <p class="dimensions">120 × 120 mm</p>
+              <p class="price">29€</p>
+              <small style="color: var(--text-secondary); display: block; margin-top: 8px;">~15 km Radius</small>
+            </div>
+            <div class="size-card" data-size="wall" data-price="69">
+              <h3>Wall Art</h3>
+              <p class="dimensions">200 × 200 mm</p>
+              <p class="price">69€</p>
+              <small style="color: var(--text-secondary); display: block; margin-top: 8px;">~30 km Radius</small>
+            </div>
+            <div class="size-card" data-size="mega" data-price="119">
+              <h3>Mega Relief</h3>
+              <p class="dimensions">280 × 280 mm</p>
+              <p class="price">119€</p>
+              <small style="color: var(--text-secondary); display: block; margin-top: 8px;">~50 km Radius</small>
+            </div>
+          </div>
+
+          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Material:</h3>
+          <div class="options-grid">
+            <div class="option-btn selected" data-material="pla" data-price="0">
+              <strong>PLA</strong>
+              <small>Standard (inkl.)</small>
+            </div>
+            <div class="option-btn" data-material="marble" data-price="15">
+              <strong>Marmor</strong>
+              <small>+15€</small>
+            </div>
+            <div class="option-btn" data-material="wood" data-price="12">
+              <strong>Holz</strong>
+              <small>+12€</small>
+            </div>
+            <div class="option-btn" data-material="petg" data-price="10">
+              <strong>PETG</strong>
+              <small>+10€</small>
+            </div>
+          </div>
+
+          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Finish:</h3>
+          <div class="options-grid">
+            <div class="option-btn selected" data-finish="natural" data-price="0">
+              <strong>Natur</strong>
+              <small>Standard (inkl.)</small>
+            </div>
+            <div class="option-btn" data-finish="painted" data-price="35">
+              <strong>Handbemalt</strong>
+              <small>+35€</small>
+            </div>
+            <div class="option-btn" data-finish="gold" data-price="60">
+              <strong>Gold-Edition</strong>
+              <small>+60€</small>
+            </div>
+          </div>
+
+          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Extras:</h3>
+          <div class="options-grid">
+            <div class="option-btn" data-extra="base" data-price="25">
+              <strong>Holzsockel</strong>
+              <small>+25€</small>
+            </div>
+            <div class="option-btn" data-extra="case" data-price="40">
+              <strong>Acryl-Vitrine</strong>
+              <small>+40€</small>
+            </div>
+            <div class="option-btn" data-extra="vase" data-price="-15%">
+              <strong>Vase-Mode</strong>
+              <small>−15% (schneller)</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Width: Preview -->
+        <div class="config-card" style="grid-column: 1 / -1;">
           <h2><span class="step-number">3</span> 3D-Vorschau</h2>
           
           <div class="preview-container">
             <div class="preview-placeholder" id="preview-placeholder">
-              <p>🏔 Klicke auf "Vorschau generieren" um dein Modell zu sehen</p>
+              <p>🏔 Wähle ein Gebiet und klicke auf "Vorschau generieren"</p>
             </div>
             <canvas id="preview-canvas"></canvas>
             <div class="preview-controls" style="display: none;" id="preview-controls">
@@ -739,48 +595,28 @@
               <button class="preview-btn" id="toggle-wireframe">🔲 Wireframe</button>
             </div>
           </div>
-        </div>
-
-        <!-- SCHRITT 4: Material-Optionen (NACH erfolgreicher Generierung) -->
-        <div class="config-card" id="material-section" style="display: none;">
-          <h2><span class="step-number">4</span> Material & Extras</h2>
-          
-          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);">Material wählen:</h3>
-          <div class="material-options">
-            <div class="material-btn selected" data-material="pla" data-price="0">
-              <strong>PLA</strong>
-              <small>Standard (inkl.)</small>
-            </div>
-            <div class="material-btn" data-material="petg" data-price="10">
-              <strong>PETG</strong>
-              <small>+10€</small>
-            </div>
-          </div>
-          
-          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Holzsockel:</h3>
-          <select class="wooden-base-select" id="wooden-base-select">
-            <option value="none" data-price="0">Kein Sockel</option>
-            <option value="linde" data-price="25">Linde (+25€)</option>
-            <option value="eiche" data-price="28">Eiche (+28€)</option>
-          </select>
 
           <div class="summary-card">
-            <h3>Deine Bestellung</h3>
-            <div class="summary-item">
-              <span>Größe:</span>
-              <span id="sum-size">—</span>
-            </div>
+            <h3>Deine Auswahl</h3>
             <div class="summary-item">
               <span>Gebiet:</span>
               <span id="sum-location">—</span>
+            </div>
+            <div class="summary-item">
+              <span>Größe:</span>
+              <span id="sum-size">—</span>
             </div>
             <div class="summary-item">
               <span>Material:</span>
               <span id="sum-material">PLA Standard</span>
             </div>
             <div class="summary-item">
-              <span>Holzsockel:</span>
-              <span id="sum-base">Nein</span>
+              <span>Finish:</span>
+              <span id="sum-finish">Natur</span>
+            </div>
+            <div class="summary-item">
+              <span>Extras:</span>
+              <span id="sum-extras">—</span>
             </div>
             <div class="summary-item">
               <span>Gesamtpreis:</span>
@@ -789,6 +625,7 @@
           </div>
 
           <div class="action-buttons">
+            <button class="btn-primary" id="generate-preview">🔍 Vorschau generieren</button>
             <button class="btn-primary" id="add-to-cart">🛒 In den Warenkorb</button>
             <button class="btn-secondary" id="download-stl">📥 STL herunterladen</button>
           </div>
@@ -799,172 +636,48 @@
 
   </main>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (simplified for now) -->
   <footer class="footer" style="background: rgba(11, 15, 25, 0.95); padding: 40px 20px; text-align: center; color: var(--text-secondary);">
     <p>© 2026 FACTUM3D · <a href="impressum.html" style="color: var(--accent);">Impressum</a> · <a href="datenschutz.html" style="color: var(--accent);">Datenschutz</a></p>
   </footer>
 
-  <!-- Leaflet JS + Leaflet Draw -->
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
   
   <!-- Cart Badge -->
   <script src="cart.js"></script>
   
   <script type="module">
-    // ========================================
     // Configuration State
-    // ========================================
     const config = {
+      lat: null,
+      lon: null,
+      radius: 15,  // Default 15km für Desk Trophy
+      locationName: '',
       size: null,
       sizePrice: 0,
-      widthMM: 0,
-      heightMM: 0,
-      locationName: '',
-      bounds: null,  // { minLat, maxLat, minLon, maxLon }
       material: 'pla',
       materialPrice: 0,
-      woodenBase: 'none',
-      woodenBasePrice: 0,
-      currentJobId: null
+      finish: 'natural',
+      finishPrice: 0,
+      extras: [],
+      vaseMode: false
     };
 
-    // ========================================
-    // SCHRITT 1: Modellgröße
-    // ========================================
-    document.querySelectorAll('.size-option').forEach(option => {
-      option.addEventListener('click', () => {
-        document.querySelectorAll('.size-option').forEach(o => o.classList.remove('selected'));
-        option.classList.add('selected');
-        
-        config.size = option.dataset.size;
-        config.sizePrice = parseInt(option.dataset.price);
-        config.widthMM = parseInt(option.dataset.width);
-        config.heightMM = parseInt(option.dataset.height);
-        
-        const customInputs = document.getElementById('custom-size-inputs');
-        if (config.size === 'custom') {
-          customInputs.classList.add('active');
-        } else {
-          customInputs.classList.remove('active');
-          document.getElementById('custom-size-error').style.display = 'none';
-        }
-        
-        checkIfReadyForPreview();
-        updateSummary();
-      });
+    // Initialize Leaflet Map
+    const map = L.map('map', {
+      center: [47.0, 10.0],
+      zoom: 6,
+      scrollWheelZoom: true
     });
-// Custom Size Inputs with Validation (NUR QUADRATISCH)    function validateCustomSize() {      const width = parseInt(document.getElementById("custom-width").value) || 0;      const errorEl = document.getElementById("custom-size-error");            if (width > 300) {        errorEl.style.display = "block";        config.widthMM = 0;        config.heightMM = 0;        checkIfReadyForPreview();        updateSummary();        return false;      } else {        errorEl.style.display = "none";        config.widthMM = width;        config.heightMM = width;  // 🔥 QUADRATISCH: depth = width        checkIfReadyForPreview();        updateSummary();        return true;      }    }        document.getElementById("custom-width")?.addEventListener("input", validateCustomSize);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap',
       maxZoom: 18
     }).addTo(map);
 
-    let currentMode = 'search';
-    let drawnRectangle = null;
-    let drawControl = null;
-
-    const drawnItems = new L.FeatureGroup();
-    map.addLayer(drawnItems);
-
-    // Map Mode Toggle
-    document.querySelectorAll('.map-mode-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.map-mode-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        currentMode = btn.dataset.mode;
-        
-        // Show/Hide Sections
-        document.getElementById('preset-section').style.display = 
-          currentMode === 'search' ? 'grid' : 'none';
-        document.getElementById('manual-coords-section').style.display = 
-          currentMode === 'manual' ? 'block' : 'none';
-        
-        // Enable/Disable Rectangle Drawing
-        if (currentMode === 'rectangle') {
-          enableRectangleDraw();
-        } else {
-          disableRectangleDraw();
-        }
-      });
-    });
-
-    function enableRectangleDraw() {
-      if (drawControl) map.removeControl(drawControl);
-      
-      drawControl = new L.Control.Draw({
-        draw: {
-          rectangle: {
-            shapeOptions: {
-              color: '#C67D4A',
-              fillColor: '#C67D4A',
-              fillOpacity: 0.2
-            }
-          },
-          polygon: false,
-          polyline: false,
-          circle: false,
-          marker: false,
-          circlemarker: false
-        },
-        edit: {
-          featureGroup: drawnItems,
-          remove: true
-        }
-      });
-      
-      map.addControl(drawControl);
-
-      setTimeout(() => {
-        if (drawControl && drawControl._toolbars && drawControl._toolbars.draw) {
-          const rectangleBtn = drawControl._toolbars.draw._modes.rectangle;
-          if (rectangleBtn && rectangleBtn.handler) {
-            rectangleBtn.handler.enable();
-          }
-        }
-      }, 100);
-    }
-
-    function disableRectangleDraw() {
-      if (drawControl) {
-        map.removeControl(drawControl);
-        drawControl = null;
-      }
-    }
-
-        // Handle Rectangle Draw
-    map.on(L.Draw.Event.CREATED, (e) => {
-      const layer = e.layer;
-      
-      if (drawnRectangle) {
-        drawnItems.removeLayer(drawnRectangle);
-      }
-      
-      drawnItems.addLayer(layer);
-      drawnRectangle = layer;
-const bounds = layer.getBounds();      const center = bounds.getCenter();            // 🔥 FORCE SQUARE: Berechne größere Dimension      const latDiff = bounds.getNorth() - bounds.getSouth();      const lonDiff = bounds.getEast() - bounds.getWest();      const maxDiff = Math.max(latDiff, lonDiff);            // Erstelle quadratisches Bounds      const squareBounds = L.latLngBounds(        [center.lat - maxDiff/2, center.lng - maxDiff/2],        [center.lat + maxDiff/2, center.lng + maxDiff/2]      );            // Nutze squareBounds für Config      config.bounds = {        minLat: squareBounds.getSouth(),        maxLat: squareBounds.getNorth(),        minLon: squareBounds.getWest(),        maxLon: squareBounds.getEast()      };      config.locationName = "Freie Auswahl (quadratisch)";
-      updateCoordDisplay();
-      checkIfReadyForPreview();
-      updateSummary();
-      
-      // 🔥 NEUE FUNKTION: Automatisch Vorschau generieren nach Rechteck-Ziehen
-      if (config.size && config.widthMM > 0 && config.heightMM > 0) {
-        const btn = document.getElementById('generate-preview');
-        if (!btn.disabled) {
-          console.log('✅ Rechteck gesetzt → Starte automatische Vorschau-Generierung');
-          
-          // Optionale kurze Bestätigung anzeigen
-          const placeholder = document.getElementById('preview-placeholder');
-          placeholder.innerHTML = '<p>📍 Gebiet ausgewählt, generiere Vorschau...</p>';
-          
-          // Verzögert aufrufen, damit UI sich aktualisieren kann
-          setTimeout(() => {
-            btn.click();
-          }, 300);
-        }
-      }
-    });
-
+    let marker = null;
+    let circle = null;
 
     // Preset Location Selection
     document.querySelectorAll('.preset-btn').forEach(btn => {
@@ -972,141 +685,191 @@ const bounds = layer.getBounds();      const center = bounds.getCenter();       
         document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         
-        const lat = parseFloat(btn.dataset.lat);
-        const lon = parseFloat(btn.dataset.lon);
-        const radius = 0.15;  // ~15km in Grad
-        
-        config.bounds = {
-          minLat: lat - radius,
-          maxLat: lat + radius,
-          minLon: lon - radius,
-          maxLon: lon + radius
-        };
+        config.lat = parseFloat(btn.dataset.lat);
+        config.lon = parseFloat(btn.dataset.lon);
+        config.radius = parseInt(btn.dataset.radius);
         config.locationName = btn.dataset.name;
         
-        // Draw rectangle on map
-        if (drawnRectangle) drawnItems.removeLayer(drawnRectangle);
-        drawnRectangle = L.rectangle([
-          [config.bounds.minLat, config.bounds.minLon],
-          [config.bounds.maxLat, config.bounds.maxLon]
-        ], {
-          color: '#C67D4A',
-          fillColor: '#C67D4A',
-          fillOpacity: 0.2
-        }).addTo(drawnItems);
-        
-        map.fitBounds(drawnRectangle.getBounds());
-        
+        updateMapMarker();
         updateCoordDisplay();
-        checkIfReadyForPreview();
         updateSummary();
       });
     });
 
-    // Manual Coordinates
-    document.getElementById('apply-manual-coords')?.addEventListener('click', () => {
-      const minLat = parseFloat(document.getElementById('manual-lat-min').value);
-      const maxLat = parseFloat(document.getElementById('manual-lat-max').value);
-      const minLon = parseFloat(document.getElementById('manual-lon-min').value);
-      const maxLon = parseFloat(document.getElementById('manual-lon-max').value);
+    // Map Click Handler
+    map.on('click', (e) => {
+      config.lat = e.latlng.lat.toFixed(4);
+      config.lon = e.latlng.lng.toFixed(4);
+      config.locationName = 'Eigene Auswahl';
       
-      if (!minLat || !maxLat || !minLon || !maxLon) {
-        alert('Bitte alle Koordinaten eingeben!');
-        return;
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      
+      updateMapMarker();
+      updateCoordDisplay();
+      updateSummary();
+    });
+
+    function updateMapMarker() {
+      if (marker) {
+        map.removeLayer(marker);
+        map.removeLayer(circle);
       }
       
-      config.bounds = { minLat, maxLat, minLon, maxLon };
-      config.locationName = 'Manuelle Koordinaten';
-      
-      if (drawnRectangle) drawnItems.removeLayer(drawnRectangle);
-      drawnRectangle = L.rectangle([
-        [minLat, minLon],
-        [maxLat, maxLon]
-      ], {
+      marker = L.marker([config.lat, config.lon]).addTo(map);
+      circle = L.circle([config.lat, config.lon], {
+        radius: config.radius * 1000,
         color: '#C67D4A',
         fillColor: '#C67D4A',
         fillOpacity: 0.2
-      }).addTo(drawnItems);
+      }).addTo(map);
       
-      map.fitBounds(drawnRectangle.getBounds());
-      
-      updateCoordDisplay();
-      checkIfReadyForPreview();
-      updateSummary();
-      
-      // 🔥 AUTOMATISCHE VORSCHAU-GENERIERUNG nach Rechteck-Ziehen
-      if (config.size && config.widthMM > 0 && config.heightMM > 0) {
-        const btn = document.getElementById('generate-preview');
-        if (!btn.disabled) {
-          console.log('✅ Rechteck gesetzt → Starte automatische Vorschau-Generierung');
-          
-          // Kurze Bestätigung anzeigen
-          const placeholder = document.getElementById('preview-placeholder');
-          placeholder.innerHTML = '<p>📍 Gebiet ausgewählt, generiere Vorschau...</p>';
-          
-          // Verzögert aufrufen, damit UI sich aktualisieren kann
-          setTimeout(() => {
-            btn.click();
-          }, 300);
-        }
-      }
-    });
+      map.setView([config.lat, config.lon], 10);
+    }
 
     function updateCoordDisplay() {
-      if (!config.bounds) {
-        document.getElementById('coord-lat-min').textContent = '—';
-        document.getElementById('coord-lat-max').textContent = '—';
-        document.getElementById('coord-lon-min').textContent = '—';
-        document.getElementById('coord-lon-max').textContent = '—';
+      document.getElementById('coord-lat').textContent = config.lat ? config.lat + '°' : '—';
+      document.getElementById('coord-lon').textContent = config.lon ? config.lon + '°' : '—';
+      document.getElementById('coord-radius').textContent = config.radius + ' km';
+    }
+
+    // Size Selection
+    document.querySelectorAll('.size-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.size-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        config.size = card.dataset.size;
+        config.sizePrice = parseInt(card.dataset.price);
+        
+        // Auto-adjust radius based on size (H2D max 300×300mm!)
+        const radiusMap = {
+          desk: 15,   // 120×80mm → ~15 km
+          wall: 30,   // 200×200mm → ~30 km
+          mega: 50    // 280×280mm → ~50 km (max druckbar)
+        };
+        config.radius = radiusMap[config.size] || 20;
+        
+        if (config.lat && config.lon) {
+          updateMapMarker();
+          updateCoordDisplay();
+        }
+        
+        updateSummary();
+      });
+    });
+
+    // Material Selection
+    document.querySelectorAll('[data-material]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-material]').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        config.material = btn.dataset.material;
+        config.materialPrice = parseInt(btn.dataset.price);
+        updateSummary();
+      });
+    });
+
+    // Finish Selection
+    document.querySelectorAll('[data-finish]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-finish]').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        config.finish = btn.dataset.finish;
+        config.finishPrice = parseInt(btn.dataset.price);
+        updateSummary();
+      });
+    });
+
+    // Extras Selection
+    document.querySelectorAll('[data-extra]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('selected');
+        const extra = btn.dataset.extra;
+        const price = btn.dataset.price;
+        
+        if (extra === 'vase') {
+          config.vaseMode = btn.classList.contains('selected');
+        } else {
+          const idx = config.extras.findIndex(e => e.type === extra);
+          if (btn.classList.contains('selected')) {
+            if (idx === -1) config.extras.push({ type: extra, price: parseInt(price) });
+          } else {
+            if (idx !== -1) config.extras.splice(idx, 1);
+          }
+        }
+        updateSummary();
+      });
+    });
+
+    // Update Summary
+    function updateSummary() {
+      document.getElementById('sum-location').textContent = 
+        config.locationName ? `${config.locationName} (${config.radius}km)` : '—';
+      
+      const sizeNames = { desk: 'Desk Trophy (120×120mm)', wall: 'Wall Art (200×200mm)', mega: 'Mega Relief (280×280mm)' };
+      document.getElementById('sum-size').textContent = config.size ? sizeNames[config.size] : '—';
+      
+      const materialNames = { pla: 'PLA Standard', marble: 'Marmor', wood: 'Holz-Filament', petg: 'PETG' };
+      document.getElementById('sum-material').textContent = materialNames[config.material];
+      
+      const finishNames = { natural: 'Natur', painted: 'Handbemalt', gold: 'Gold-Edition' };
+      document.getElementById('sum-finish').textContent = finishNames[config.finish];
+      
+      const extrasText = config.extras.map(e => {
+        const names = { base: 'Holzsockel', case: 'Acryl-Vitrine' };
+        return names[e.type];
+      }).join(', ') + (config.vaseMode ? (config.extras.length ? ', Vase-Mode' : 'Vase-Mode') : '');
+      document.getElementById('sum-extras').textContent = extrasText || '—';
+      
+      let total = config.sizePrice + config.materialPrice + config.finishPrice;
+      config.extras.forEach(e => total += e.price);
+      if (config.vaseMode && config.sizePrice > 0) {
+        total = total * 0.85;
+      }
+      
+      document.getElementById('sum-price').textContent = 
+        total > 0 ? `${total.toFixed(0)}€` : '—';
+    }
+
+    // Generate Preview
+    document.getElementById('generate-preview').addEventListener('click', async () => {
+      if (!config.lat || !config.lon || !config.size) {
+        alert('Bitte wähle zuerst ein Gebiet und eine Größe!');
         return;
       }
       
-      document.getElementById('coord-lat-min').textContent = config.bounds.minLat.toFixed(4) + '°';
-      document.getElementById('coord-lat-max').textContent = config.bounds.maxLat.toFixed(4) + '°';
-      document.getElementById('coord-lon-min').textContent = config.bounds.minLon.toFixed(4) + '°';
-      document.getElementById('coord-lon-max').textContent = config.bounds.maxLon.toFixed(4) + '°';
-    }
-
-    // ========================================
-    // Check if Ready for Preview
-    // ========================================
-    function checkIfReadyForPreview() {
       const btn = document.getElementById('generate-preview');
-      const ready = config.size && config.widthMM > 0 && config.heightMM > 0 && config.bounds;
-      
-      btn.disabled = !ready;
-      btn.nextElementSibling.textContent = ready 
-        ? 'Bereit zum Generieren!' 
-        : 'Wähle Größe und Gebiet aus';
-    }
-
-    // ========================================
-    // Generate Preview
-document.getElementById("generate-preview").addEventListener("click", async () => {      const btn = document.getElementById("generate-preview");      const originalText = btn.textContent;            // 🔥 ERZWINGE QUADRATISCH      if (config.widthMM !== config.heightMM) {        alert("💡 Nur quadratische Modelle möglich! Bitte gleiche Seitenlänge wählen.");        btn.textContent = originalText;        btn.disabled = false;        return;      }            btn.textContent = "🔄 Generiere...";
+      const originalText = btn.textContent;
+      btn.textContent = '🔄 Generiere...';
+      btn.disabled = true;
       
       try {
-        const latDiff = config.bounds.maxLat - config.bounds.minLat;
-        const lonDiff = config.bounds.maxLon - config.bounds.minLon;
-        const centerLat = (config.bounds.minLat + config.bounds.maxLat) / 2;
-        const centerLon = (config.bounds.minLon + config.bounds.maxLon) / 2;
+        // Radius → Grad-Umrechnung (1° ≈ 111km)
+        const radiusInDegrees = config.radius / 111.0;
+        const diameter = radiusInDegrees * 2;
+        
+        const sizes = {
+          desk: { width: diameter, height: diameter, tilewidth: 120 },
+          wall: { width: diameter, height: diameter, tilewidth: 200 },
+          mega: { width: diameter, height: diameter, tilewidth: 280 }  // H2D max!
+        };
+        
+        const sizeParams = sizes[config.size];
         
         const response = await fetch('http://69.62.105.159/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            lat: centerLat,
-            lon: centerLon,
-            width: lonDiff,
-            height: latDiff,
+            lat: config.lat,
+            lon: config.lon,
+            width: sizeParams.width,
+            height: sizeParams.height,
             z_scale: 1.8,
             base_height_mm: 8.0,
-            tilewidth_mm: config.widthMM,
-            tileheight_mm: config.heightMM
+            tilewidth_mm: sizeParams.tilewidth
           })
         });
         
         const { job_id } = await response.json();
-        config.currentJobId = job_id;
         btn.textContent = '⏳ Verarbeite...';
         
         let status = 'pending';
@@ -1124,17 +887,7 @@ document.getElementById("generate-preview").addEventListener("click", async () =
         
         load3DModel(job_id);
         
-        // Scroll to preview
         setTimeout(() => {
-          document.getElementById('preview-section').scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'start' 
-          });
-        }, 500);
-        
-        // Show material section
-        setTimeout(() => {
-          document.getElementById('material-section').style.display = 'block';
           btn.textContent = originalText;
           btn.disabled = false;
         }, 2000);
@@ -1146,117 +899,18 @@ document.getElementById("generate-preview").addEventListener("click", async () =
       }
     });
 
-    // ========================================
-    // Material Options (SCHRITT 4)
-    // ========================================
-    document.querySelectorAll('.material-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.material-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        config.material = btn.dataset.material;
-        config.materialPrice = parseInt(btn.dataset.price);
-        updateSummary();
-      });
-    });
-
-    // Wooden Base Dropdown
-    document.getElementById('wooden-base-select')?.addEventListener('change', (e) => {
-      const option = e.target.selectedOptions[0];
-      config.woodenBase = option.value;
-      config.woodenBasePrice = parseInt(option.dataset.price);
-      updateSummary();
-    });
-
-    // ========================================
-    // Update Summary
-    // ========================================
-    function updateSummary() {
-      const sizeNames = {
-        '10x10': '10 × 10 cm',
-        '15x15': '15 × 15 cm',
-        '20x20': '20 × 20 cm',
-        'custom': `${(config.widthMM/10).toFixed(0)} × ${(config.heightMM/10).toFixed(0)} mm`
-      };
-      document.getElementById('sum-size').textContent = config.size ? sizeNames[config.size] : '—';
-      
-      document.getElementById('sum-location').textContent = config.locationName || '—';
-      
-      const materialNames = { pla: 'PLA Standard', petg: 'PETG' };
-      document.getElementById('sum-material').textContent = materialNames[config.material];
-      
-      // Wooden Base Display
-      const baseNames = {
-        'none': 'Nein',
-        'linde': 'Linde (+25€)',
-        'eiche': 'Eiche (+28€)'
-      };
-      document.getElementById('sum-base').textContent = baseNames[config.woodenBase];
-      
-      let total = config.sizePrice + config.materialPrice + config.woodenBasePrice;
-      
-      // Custom size: estimate price (e.g. 0.50€ per cm²)
-      if (config.size === 'custom' && config.widthMM > 0 && config.heightMM > 0) {
-        const area = (config.widthMM / 10) * (config.heightMM / 10);
-        total = Math.ceil(area * 0.5) + config.materialPrice + config.woodenBasePrice;
-      }
-      
-      document.getElementById('sum-price').textContent = 
-        total > 0 ? `${total.toFixed(0)}€` : '—';
-    }
-
-    // ========================================
     // Download STL
-    // ========================================
     document.getElementById('download-stl').addEventListener('click', () => {
-      if (!config.currentJobId) {
-        alert('Bitte erst "Vorschau generieren" klicken!');
-        return;
-      }
-      window.location.href = `http://69.62.105.159/api/download/${config.currentJobId}`;
+      alert('STL-Download: Bitte erst "Vorschau generieren" klicken, dann wird der Download automatisch gestartet.\n\n(Verbesserung folgt: direkter Download ohne Vorschau)');
     });
 
     // Add to Cart
     document.getElementById('add-to-cart').addEventListener('click', () => {
-      if (!config.currentJobId) {
-        alert('Bitte erst "Vorschau generieren" klicken!');
+      if (!config.lat || !config.lon || !config.size) {
+        alert('Bitte wähle zuerst ein Gebiet und eine Größe!');
         return;
       }
-      
-      // Berechne Gesamtpreis
-      let total = config.sizePrice + config.materialPrice + config.woodenBasePrice;
-      
-      if (config.size === 'custom' && config.widthMM > 0 && config.heightMM > 0) {
-        const area = (config.widthMM / 10) * (config.heightMM / 10);
-        total = Math.ceil(area * 0.5) + config.materialPrice + config.woodenBasePrice;
-      }
-      
-      // Material-Namen
-      const materialNames = { pla: 'PLA Standard', petg: 'PETG' };
-      const baseNames = {
-        'none': '',
-        'linde': ' · Linde-Sockel',
-        'eiche': ' · Eiche-Sockel'
-      };
-      const sizeNames = {
-        '10x10': '10 × 10 cm',
-        '15x15': '15 × 15 cm',
-        '20x20': '20 × 20 cm',
-        'custom': `${(config.widthMM/10).toFixed(0)} × ${(config.heightMM/10).toFixed(0)} mm`
-      };
-      
-      // Produktname zusammenstellen
-      const productName = `3D-Reliefkarte: ${config.locationName || 'Unbenannt'} (${sizeNames[config.size] || config.size}) · ${materialNames[config.material]}${baseNames[config.woodenBase]}`;
-      
-      // Produkt-ID (unique pro Konfiguration)
-      const productId = `terrain-${config.currentJobId}`;
-      
-      // In Warenkorb legen
-      addToCart(productId, productName, total, 1);
-      
-      alert(`✅ Produkt zum Warenkorb hinzugefügt!
-
-${productName}
-Preis: ${total}€`);
+      alert('✅ Produkt zum Warenkorb hinzugefügt!\n\n(Warenkorb-Integration folgt)');
     });
 
     // ========================================
@@ -1270,6 +924,7 @@ Preis: ${total}€`);
     let scene, camera, renderer, controls, mesh;
     let wireframeEnabled = false;
     
+    // Make load3DModel globally accessible
     window.load3DModel = function(jobId) {
       loadTerrainModel(jobId);
     };
@@ -1335,9 +990,6 @@ Preis: ${total}€`);
           geometry.boundingBox.getCenter(center);
           geometry.translate(-center.x, -center.y, -center.z);
           
-          // Rotiere das Modell so dass es flach auf dem Boden liegt (Y-up)
-          geometry.rotateX(-Math.PI / 2);
-          
           const material = new THREE.MeshPhongMaterial({
             color: 0xaaaaaa,
             shininess: 50,
@@ -1353,7 +1005,7 @@ Preis: ${total}€`);
           const fov = camera.fov * (Math.PI / 180);
           const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.5;
           
-          camera.position.set(cameraZ * 0.8, cameraZ * 1.2, cameraZ * 0.8);
+          camera.position.set(cameraZ * 0.5, cameraZ * 1.2, cameraZ * 0.8);
           camera.lookAt(0, 0, 0);
           controls.target.set(0, 0, 0);
           controls.update();
@@ -1382,7 +1034,7 @@ Preis: ${total}€`);
         const fov = camera.fov * (Math.PI / 180);
         const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.5;
         
-        camera.position.set(cameraZ * 0.8, cameraZ * 1.2, cameraZ * 0.8);
+        camera.position.set(cameraZ * 0.5, cameraZ * 1.2, cameraZ * 0.8);
         camera.lookAt(0, 0, 0);
         controls.target.set(0, 0, 0);
         controls.update();

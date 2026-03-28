@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Funktionsteile & Ersatzteile – FACTUM3D Katalog</title>
+  <meta name="description" content="Kaputt? Gibt's nicht mehr? Wir drucken es neu.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=1774482848">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://plausible.io http://69.62.105.159:32768;">
+  <script src="../i18n.js?v=1774473468"></script>
+  
+</head>
+<body class="page-sub">
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><img src="../logo.svg" alt="FACTUM3D" class="logo-svg"></a>
+      <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
+        
+        <div class="nav-dropdown"><a href="../produkte.html" class="nav-dropdown-trigger" data-i18n="nav.produkte">Produkte</a><div class="nav-dropdown-menu"><a href="../produkte/3d-fdm-druck.html" data-i18n="produkte.cat.fdm">🖨️ 3D-FDM-Druck</a><a href="../produkte/lasercut.html" data-i18n="produkte.cat.laser">✂️ Lasercut &amp; Gravur</a></div></div>
+        <div class="nav-dropdown"><a href="../index.html#leistungen" class="nav-dropdown-trigger" data-i18n="nav.leistungen">Leistungen</a><div class="nav-dropdown-menu"><a href="../leistungen/3d-druck.html">🖨️ 3D-Druck</a><a href="../leistungen/lasercutting.html">✂️ Lasercutting</a><a href="../leistungen/lasergravur.html">🔍 Lasergravur</a><a href="../leistungen/resin-druck.html">💧 Resin-Druck</a><a href="../leistungen/prototyping.html">🔧 Prototyping</a><a href="../materialien.html">🧪 Materialien</a></div></div>
+        <a href="../ueber-uns.html" data-i18n="nav.about">Über uns</a>
+        <a href="../blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="../index.html#kontakt" data-i18n="nav.kontakt">Kontakt</a>
+      
+      
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switcher-compact">
+        <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪 DE</button>
+          <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧 EN</button>
+          <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷 FR</button>
+          <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸 ES</button>
+          <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹 IT</button>
+        </div>
+      </div>
+        <a href="../warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
+        <div class="header-auth" id="header-auth">
+        <button onclick="openAuthModal('login')" class="auth-icon-btn" id="nav-login-btn" title="Anmelden / Registrieren">👤</button>
+        <a href="../profil.html" class="auth-icon-btn auth-icon-active" id="nav-user-btn" style="display:none" title="Mein Konto">👤</a>
+      </div>
+      </div>
+      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+  <div class="sub-page-wrapper">
+  <!-- KATEGORIE-NAVIGATION -->
+  <div class="kat-subnav">
+    <div class="container">
+      <a href="../produkte/funktionsteile.html" class="kat-subnav-link kat-subnav-active" data-i18n="prod.funktionsteile.title">⚙️ Funktionsteile</a>
+      <a href="../produkte/deko.html" data-i18n="prod.deko.title" class="kat-subnav-link">🎨 Deko & Geschenke</a>
+      <a href="../produkte/business.html" data-i18n="prod.business.title" class="kat-subnav-link">💼 Business</a>
+      <a href="../produkte/maker.html" data-i18n="prod.maker.title" class="kat-subnav-link">🛠️ Maker & DIY</a>
+    </div>
+  </div>
+
+    <section class="sub-hero">
+      <div class="container">
+        <h1>⚙️ <span class="accent" data-i18n="prod.func">Funktionsteile & Ersatzteile</span></h1>
+        <p data-i18n="prod.func.desc">Kaputt? Gibt's nicht mehr? Wir drucken es neu.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="katalog-detail-grid">
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/funktionsteile-1.webp" alt="Zahnräder & Mechanik" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.funktionsteile.item1">Zahnräder & Mechanik</h3>
+            <p data-i18n="prod.funktionsteile.item1.long" class="katalog-detail-desc">Ersatzteile für Maschinen, Geräte und Haushalt. Verschleißteile wie Zahnräder, Adapter und Halterungen, maßgefertigt aus PLA, PETG oder Nylon.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.funktionsteile.item1.spec1">Materialien: PLA, PETG, PA (Nylon)</li>
+              <li data-i18n="prod.funktionsteile.item1.spec2">Toleranz: ±0.2mm</li>
+              <li data-i18n="prod.funktionsteile.item1.spec3">Preis: ab 5 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('funktionsteile-item1', &quot;Zahnräder &amp; Mechanik&quot;, 5, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/funktionsteile-2.webp" alt="Gehäuse & Abdeckungen" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.funktionsteile.item2">Gehäuse & Abdeckungen</h3>
+            <p data-i18n="prod.funktionsteile.item2.long" class="katalog-detail-desc">Individuelle Elektronik-Gehäuse, Schutzabdeckungen und Einhausungen. Passgenau für Arduino, Raspberry Pi, Sensoren und mehr.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.funktionsteile.item2.spec1">Materialien: PETG, ABS, ASA</li>
+              <li data-i18n="prod.funktionsteile.item2.spec2">Multi-Color möglich</li>
+              <li data-i18n="prod.funktionsteile.item2.spec3">Preis: ab 8 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('funktionsteile-item2', &quot;Gehäuse &amp; Abdeckungen&quot;, 8, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/funktionsteile-3.webp" alt="Clips & Verbinder" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.funktionsteile.item3">Clips & Verbinder</h3>
+            <p data-i18n="prod.funktionsteile.item3.long" class="katalog-detail-desc">Kabelclips, Rohrhalter, Schnappverschlüsse und Montage-Adapter. Kleine Teile, große Wirkung.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.funktionsteile.item3.spec1">Materialien: PLA, PETG, TPU</li>
+              <li data-i18n="prod.funktionsteile.item3.spec2">Auch in Kleinserien</li>
+              <li data-i18n="prod.funktionsteile.item3.spec3">Preis: ab 2 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('funktionsteile-item3', &quot;Clips &amp; Verbinder&quot;, 2, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/funktionsteile-4.webp" alt="Adapter & Übergangsstücke" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.funktionsteile.item4">Adapter & Übergangsstücke</h3>
+            <p data-i18n="prod.funktionsteile.item4.long" class="katalog-detail-desc">Wenn nichts passt, drucken wir den Adapter. Schlauchverbinder, Gewindeadapter, Reduzierstücke.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.funktionsteile.item4.spec1">Materialien: PETG, PA, ABS</li>
+              <li data-i18n="prod.funktionsteile.item4.spec2">Nach Maß oder STL</li>
+              <li data-i18n="prod.funktionsteile.item4.spec3">Preis: ab 5 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('funktionsteile-item4', &quot;Adapter &amp; Übergangsstücke&quot;, 5, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/funktionsteile-5.webp" alt="Scharniere & Gelenke" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.funktionsteile.item5">Scharniere & Gelenke</h3>
+            <p data-i18n="prod.funktionsteile.item5.long" class="katalog-detail-desc">Funktionale Scharniere, Drehgelenke und Klappenmechanismen, auch aus flexiblem TPU.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.funktionsteile.item5.spec1">Materialien: TPU, PA, PETG</li>
+              <li data-i18n="prod.funktionsteile.item5.spec2">Print-in-Place möglich</li>
+              <li data-i18n="prod.funktionsteile.item5.spec3">Preis: ab 6 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('funktionsteile-item5', &quot;Scharniere &amp; Gelenke&quot;, 6, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/funktionsteile-6.webp" alt="Dichtungen & Puffer" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.funktionsteile.item6">Dichtungen & Puffer</h3>
+            <p data-i18n="prod.funktionsteile.item6.long" class="katalog-detail-desc">Flexible Dichtungsringe, Vibrationsdämpfer und Stoßfänger aus TPU.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.funktionsteile.item6.spec1">Material: TPU (Shore 95A)</li>
+              <li data-i18n="prod.funktionsteile.item6.spec2">Wasserfest</li>
+              <li data-i18n="prod.funktionsteile.item6.spec3">Preis: ab 4 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('funktionsteile-item6', &quot;Dichtungen &amp; Puffer&quot;, 4, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" style="text-align:center;">
+      <div class="container">
+        <p style="color:var(--text-secondary);margin-bottom:8px;" data-i18n="prod.custom.title">Du hast etwas anderes im Kopf?</p>
+        <p style="color:var(--text-secondary);margin-bottom:20px;font-size:0.9rem;" data-i18n="prod.custom.desc">Wir fertigen auch individuelle Projekte. Schreib uns einfach.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo">FACTUM<span class="accent">3D</span></span>
+      <p><span data-i18n="footer.tagline">Schicht für Schicht. Idee für Idee.</span></p>
+            <div class="footer-links">
+        <a href="../blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="../faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="../impressum.html"><span data-i18n="footer.impressum">Impressum</span></a>
+        <a href="../datenschutz.html"><span data-i18n="footer.datenschutz">Datenschutz</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copy">&copy; 2026 FACTUM3D. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js?v=1774052069"></script>
+  <script src="../clippy.js?v=1774052069"></script>
+  <script src="../cart.js"></script>
+  <script src="../auth.js"></script>
+</body>
+</html>

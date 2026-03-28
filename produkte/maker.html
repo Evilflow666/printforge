@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maker & DIY – FACTUM3D Katalog</title>
+  <meta name="description" content="Für Bastler, Tüftler und Kreative.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=1774482848">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://plausible.io http://69.62.105.159:32768;">
+  <script src="../i18n.js?v=1774473468"></script>
+  
+</head>
+<body class="page-sub">
+  <header class="header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><img src="../logo.svg" alt="FACTUM3D" class="logo-svg"></a>
+      <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
+        
+        <div class="nav-dropdown"><a href="../produkte.html" class="nav-dropdown-trigger" data-i18n="nav.produkte">Produkte</a><div class="nav-dropdown-menu"><a href="../produkte/3d-fdm-druck.html" data-i18n="produkte.cat.fdm">🖨️ 3D-FDM-Druck</a><a href="../produkte/lasercut.html" data-i18n="produkte.cat.laser">✂️ Lasercut &amp; Gravur</a></div></div>
+        <div class="nav-dropdown"><a href="../index.html#leistungen" class="nav-dropdown-trigger" data-i18n="nav.leistungen">Leistungen</a><div class="nav-dropdown-menu"><a href="../leistungen/3d-druck.html">🖨️ 3D-Druck</a><a href="../leistungen/lasercutting.html">✂️ Lasercutting</a><a href="../leistungen/lasergravur.html">🔍 Lasergravur</a><a href="../leistungen/resin-druck.html">💧 Resin-Druck</a><a href="../leistungen/prototyping.html">🔧 Prototyping</a><a href="../materialien.html">🧪 Materialien</a></div></div>
+        <a href="../ueber-uns.html" data-i18n="nav.about">Über uns</a>
+        <a href="../blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="../index.html#kontakt" data-i18n="nav.kontakt">Kontakt</a>
+      
+      
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switcher-compact">
+        <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪 DE</button>
+          <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧 EN</button>
+          <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷 FR</button>
+          <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸 ES</button>
+          <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹 IT</button>
+        </div>
+      </div>
+        <a href="../warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
+        <div class="header-auth" id="header-auth">
+        <button onclick="openAuthModal('login')" class="auth-icon-btn" id="nav-login-btn" title="Anmelden / Registrieren">👤</button>
+        <a href="../profil.html" class="auth-icon-btn auth-icon-active" id="nav-user-btn" style="display:none" title="Mein Konto">👤</a>
+      </div>
+      </div>
+      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+  <div class="sub-page-wrapper">
+  <!-- KATEGORIE-NAVIGATION -->
+  <div class="kat-subnav">
+    <div class="container">
+      <a href="../produkte/funktionsteile.html" data-i18n="prod.funktionsteile.title" class="kat-subnav-link">⚙️ Funktionsteile</a>
+      <a href="../produkte/deko.html" data-i18n="prod.deko.title" class="kat-subnav-link">🎨 Deko & Geschenke</a>
+      <a href="../produkte/business.html" data-i18n="prod.business.title" class="kat-subnav-link">💼 Business</a>
+      <a href="../produkte/maker.html" class="kat-subnav-link kat-subnav-active" data-i18n="prod.maker.title">🛠️ Maker & DIY</a>
+    </div>
+  </div>
+
+    <section class="sub-hero">
+      <div class="container">
+        <h1>🔧 <span class="accent" data-i18n="prod.maker">Maker & DIY</span></h1>
+        <p data-i18n="prod.maker.desc">Für Bastler, Tüftler und Kreative.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="katalog-detail-grid">
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/maker-1.webp" alt="Smart Home Halterungen" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.maker.item1">Smart Home Halterungen</h3>
+            <p data-i18n="prod.maker.item1.long" class="katalog-detail-desc">Sensor-Mounts, Kamera-Halter, Kabelmanagement und Wandbefestigungen für Zigbee, Shelly, Aqara & Co.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.maker.item1.spec1">Material: PLA, PETG</li>
+              <li data-i18n="prod.maker.item1.spec2">Schraublos oder mit Schrauben</li>
+              <li data-i18n="prod.maker.item1.spec3">Preis: ab 3 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('maker-item1', &quot;Smart Home Halterungen&quot;, 3, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/maker-2.webp" alt="Werkzeug-Organizer" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.maker.item2">Werkzeug-Organizer</h3>
+            <p data-i18n="prod.maker.item2.long" class="katalog-detail-desc">Tool-Holder, Bit-Halter, Sortierboxen und Wandsysteme. Schluss mit Chaos in der Werkstatt.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.maker.item2.spec1">Material: PLA, PETG</li>
+              <li data-i18n="prod.maker.item2.spec2">Modular erweiterbar</li>
+              <li data-i18n="prod.maker.item2.spec3">Preis: ab 5 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('maker-item2', &quot;Werkzeug-Organizer&quot;, 5, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/maker-3.webp" alt="Modellbau" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.maker.item3">Modellbau</h3>
+            <p data-i18n="prod.maker.item3.long" class="katalog-detail-desc">Architekturmodelle, Gelände für Tabletop, Fahrzeugteile und Schiffsmodelle. FDM oder Resin je nach Detail.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.maker.item3.spec1">FDM oder Resin</li>
+              <li data-i18n="prod.maker.item3.spec2">Maßstab nach Wunsch</li>
+              <li data-i18n="prod.maker.item3.spec3">Preis: ab 8 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('maker-item3', &quot;Modellbau&quot;, 8, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/maker-4.webp" alt="Raspberry Pi & Arduino Zubehör" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.maker.item4">Raspberry Pi & Arduino Zubehör</h3>
+            <p data-i18n="prod.maker.item4.long" class="katalog-detail-desc">Gehäuse, Halterungen, Einbaurahmen und Abstandshalter für Einplatinencomputer und Mikrocontroller.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.maker.item4.spec1">Material: PETG, ABS</li>
+              <li data-i18n="prod.maker.item4.spec2">Passgenau</li>
+              <li data-i18n="prod.maker.item4.spec3">Preis: ab 4 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('maker-item4', &quot;Raspberry Pi &amp; Arduino Zubehör&quot;, 4, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/maker-5.webp" alt="Drohnen-Teile" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.maker.item5">Drohnen-Teile</h3>
+            <p data-i18n="prod.maker.item5.long" class="katalog-detail-desc">Propeller-Guards, Kamerahalter, Landegestelle und GoPro-Mounts. Leicht und stabil.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.maker.item5.spec1">Material: PLA-CF, PETG</li>
+              <li data-i18n="prod.maker.item5.spec2">Leichtbau-optimiert</li>
+              <li data-i18n="prod.maker.item5.spec3">Preis: ab 6 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('maker-item5', &quot;Drohnen-Teile&quot;, 6, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        <div class="katalog-detail-item">
+          <div class="katalog-detail-img">
+            <div class="katalog-item-placeholder" style="height:200px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1.5px dashed rgba(255,255,255,0.1);">📷</div>
+            <!-- Bild später: <img src="../images/produkte/maker-6.webp" alt="Retro & Gaming" loading="lazy"> -->
+          </div>
+          <div class="katalog-detail-text">
+            <span class="avail-badge avail-stock" data-i18n="prod.available">✓ Verfügbar</span>
+            <h3 data-i18n="prod.maker.item6">Retro & Gaming</h3>
+            <p data-i18n="prod.maker.item6.long" class="katalog-detail-desc">Controller-Halter, Cartridge-Ständer, Gehäuse für Retro-Pi, Arcade-Buttons und Joystick-Mounts.</p>
+            <ul class="katalog-detail-specs">
+              <li data-i18n="prod.maker.item6.spec1">Multi-Color möglich</li>
+              <li data-i18n="prod.maker.item6.spec2">Auch mit Gravur</li>
+              <li data-i18n="prod.maker.item6.spec3">Preis: ab 5 €</li>
+            </ul>
+            <button class="btn btn-primary btn-sm btn-cart" onclick="addToCart('maker-item6', &quot;Retro &amp; Gaming&quot;, 5, 1)" data-i18n="cart.add">In den Warenkorb</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" style="text-align:center;">
+      <div class="container">
+        <p style="color:var(--text-secondary);margin-bottom:8px;" data-i18n="prod.custom.title">Du hast etwas anderes im Kopf?</p>
+        <p style="color:var(--text-secondary);margin-bottom:20px;font-size:0.9rem;" data-i18n="prod.custom.desc">Wir fertigen auch individuelle Projekte. Schreib uns einfach.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo">FACTUM<span class="accent">3D</span></span>
+      <p><span data-i18n="footer.tagline">Schicht für Schicht. Idee für Idee.</span></p>
+            <div class="footer-links">
+        <a href="../blog.html" data-i18n="nav.blog">Blog</a>
+        <a href="../faq.html" data-i18n="nav.faq">FAQ</a>
+        <a href="../impressum.html"><span data-i18n="footer.impressum">Impressum</span></a>
+        <a href="../datenschutz.html"><span data-i18n="footer.datenschutz">Datenschutz</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="footer.copy">&copy; 2026 FACTUM3D. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js?v=1774052069"></script>
+  <script src="../clippy.js?v=1774052069"></script>
+  <script src="../cart.js"></script>
+  <script src="../auth.js"></script>
+</body>
+</html>

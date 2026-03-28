@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3D-Reliefkarte | Terrain-Modelle aus NASA-Daten | FACTUM3D</title>
+  <meta name="description" content="Personalisierte 3D-Geländemodelle aus echten NASA-Höhendaten. Zugspitze, Matterhorn, Watzmann & mehr. Ab 29€. Made in Germany."/>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=9999">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+  
+  <!-- Three.js (ES Module) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  
+  <script src="i18n.js?v=9999"></script>
+  
+  <style>
+    /* Terrain-spezifische Styles */
+    .terrain-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(198, 125, 74, 0.1), transparent),
+                  url('alps-hero.webp') center/cover;
+      position: relative;
+      padding: 120px 20px 60px;
+    }
+    
+    .terrain-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(11, 15, 25, 0.8) 100%);
+    }
+    
+    .terrain-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+    
+    .terrain-hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      color: #ffffff;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+    }
+    
+    .terrain-hero p {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 2rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    }
+    
+    .config-section {
+      padding: 60px 20px;
+      background: linear-gradient(180deg, rgba(11, 15, 25, 0.95) 0%, rgba(11, 15, 25, 1) 100%);
+    }
+    
+    .config-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .config-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(198, 125, 74, 0.15);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .config-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(198, 125, 74, 0.2);
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    
+    /* Size Selection Grid */
+    .size-selection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .size-option {
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(198, 125, 74, 0.2);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .size-option:hover, .size-option.selected {
+      background: rgba(198, 125, 74, 0.15);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(198, 125, 74, 0.2);
+    }
+    
+    .size-option h3 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+    
+    .size-option .dimensions {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    
+    .size-option .price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 8px;
+    }
+    
+    /* Custom Size Input */
+    .custom-size-inputs {
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+    }
+    
+    .custom-size-inputs.active {
+      display: grid;
+    }
+    
+    .custom-size-inputs label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    
+    .custom-size-inputs input {
+      width: 100%;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(198, 125, 74, 0.3);
+      border-radius: 6px;
+      color: #ffffff;
+      font-size: 1rem;
+    }
+    
+    /* Map Container */
+    #map {
+      width: 100%;
+      height: 500px;
+      border-radius: 12px;
+      border: 2px solid rgba(198, 125, 74, 0.2);
+      margin-bottom: 20px;
+    }
+    
+    .map-mode-toggle {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    
+    .map-mode-btn {
+      flex: 1;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(198, 125, 74, 0.2);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    
+    .map-mode-btn:hover, .map-mode-btn.active {
+      background: rgba(198, 125, 74, 0.15);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+    
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .preset-btn {
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(198, 125, 74, 0.2);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    .preset-btn:hover, .preset-btn.active {
+      background: rgba(198, 125, 74, 0.15);
+      border-color: var(--accent);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+    
+    .preset-btn strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #ffffff;
+    }
+    
+    .coord-display {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .coord-item {
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .coord-item label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    
+    .coord-item strong {
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+    
+    /* Material Options - Simplified */
+    .material-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    
+    .material-btn {
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(198, 125, 74, 0.2);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .material-btn:hover, .material-btn.selected {
+      background: rgba(198, 125, 74, 0.15);
+      border-color: var(--accent);
+    }
+    
+    .material-btn strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #ffffff;
+      font-size: 1.1rem;
+    }
+    
+    .material-btn small {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+    
+    /* Checkbox Toggle */
+    .checkbox-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(198, 125, 74, 0.2);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .checkbox-option:hover, .checkbox-option.selected {
+      background: rgba(198, 125, 74, 0.15);
+      border-color: var(--accent);
+    }
+    
+    .checkbox-option label {
+      font-size: 1rem;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .checkbox-option input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    
+    .checkbox-option .price-tag {
+      font-weight: 600;
+      color: var(--accent);
+    }
+    
+    /* 3D Preview */
+    .preview-container {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid rgba(198, 125, 74, 0.2);
+    }
+    
+    #preview-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    
+    .preview-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      background: rgba(11, 15, 25, 0.8);
+      z-index: 1;
+    }
+    
+    .preview-controls {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: 8px;
+      z-index: 2;
+    }
+    
+    .preview-btn {
+      padding: 8px 14px;
+      background: rgba(11, 15, 25, 0.9);
+      border: 1px solid rgba(198, 125, 74, 0.3);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+    
+    .preview-btn:hover {
+      background: rgba(198, 125, 74, 0.2);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+    
+    /* Summary */
+    .summary-card {
+      background: rgba(198, 125, 74, 0.1);
+      border: 2px solid rgba(198, 125, 74, 0.3);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+    
+    .summary-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+    
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(198, 125, 74, 0.2);
+      color: var(--text-secondary);
+    }
+    
+    .summary-item:last-child {
+      border-bottom: none;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 12px;
+      padding-top: 16px;
+      border-top: 2px solid rgba(198, 125, 74, 0.3);
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    
+    .btn-primary, .btn-secondary {
+      flex: 1;
+      padding: 16px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      border: none;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+      color: #0B0F19;
+      border: 2px solid var(--accent);
+    }
+    
+    .btn-primary:hover {
+      background: #d8914d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(198, 125, 74, 0.3);
+    }
+    
+    .btn-primary:disabled {
+      background: rgba(198, 125, 74, 0.3);
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+    
+    .btn-secondary:hover {
+      background: rgba(198, 125, 74, 0.1);
+    }
+    
+    .generate-preview-section {
+      margin-top: 24px;
+      text-align: center;
+    }
+    
+    .btn-generate-preview {
+      padding: 18px 40px;
+      background: var(--accent);
+      color: #0B0F19;
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    
+    .btn-generate-preview:hover {
+      background: #d8914d;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(198, 125, 74, 0.3);
+    }
+    
+    .btn-generate-preview:disabled {
+      background: rgba(198, 125, 74, 0.3);
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    @media (max-width: 1024px) {
+      .size-selection-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .coord-display {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .map-mode-toggle {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="logo.svg" alt="FACTUM3D" class="logo-svg"></a>
+      <nav class="nav" id="mainNav">
+        <div class="nav-dropdown">
+          <a href="produkte.html" class="nav-dropdown-trigger">Produkte</a>
+          <div class="nav-dropdown-menu">
+            <a href="produkte/3d-fdm-druck.html">🖨️ 3D-FDM-Druck</a>
+            <a href="produkte/lasercut.html">✂️ Lasercut & Gravur</a>
+            <a href="terrain.html" class="active">🏔️ 3D-Reliefkarte</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <a href="#leistungen" class="nav-dropdown-trigger">Leistungen</a>
+          <div class="nav-dropdown-menu">
+            <a href="leistungen/3d-druck.html">🖨️ 3D-Druck</a>
+            <a href="leistungen/lasercutting.html">✂️ Lasercutting</a>
+            <a href="materialien.html">🧪 Materialien</a>
+          </div>
+        </div>
+        <a href="ueber-uns.html">Über uns</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+      <div class="header-actions">
+        <a href="warenkorb.html" class="cart-icon">🛒<span id="cart-badge" class="cart-badge"></span></a>
+      </div>
+      <button class="mobile-toggle">☰</button>
+    </div>
+  </header>
+
+  <main id="content" role="main">
+    
+    <!-- Hero -->
+    <section class="terrain-hero">
+      <div class="terrain-hero-content">
+        <h1>🏔️ 3D-Reliefkarte</h1>
+        <p>Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</p>
+      </div>
+    </section>
+
+    <!-- Configurator -->
+    <section class="config-section">
+      <div class="config-container">
+        
+        <!-- SCHRITT 1: Modellgröße wählen -->
+        <div class="config-card">
+          <h2><span class="step-number">1</span> Modellgröße wählen</h2>
+          
+          <div class="size-selection-grid">
+            <div class="size-option" data-size="10x10" data-width="100" data-height="100" data-price="29">
+              <h3>10 × 10 cm</h3>
+              <p class="dimensions">Kompakt · Schreibtisch</p>
+              <p class="price">29€</p>
+            </div>
+            <div class="size-option" data-size="15x15" data-width="150" data-height="150" data-price="49">
+              <h3>15 × 15 cm</h3>
+              <p class="dimensions">Standard · Wanddeko</p>
+              <p class="price">49€</p>
+            </div>
+            <div class="size-option" data-size="20x20" data-width="200" data-height="200" data-price="69">
+              <h3>20 × 20 cm</h3>
+              <p class="dimensions">Groß · Premium</p>
+              <p class="price">69€</p>
+            </div>
+            <div class="size-option" data-size="custom" data-width="0" data-height="0" data-price="0">
+              <h3>Custom</h3>
+              <p class="dimensions">Individuelle Größe</p>
+              <p class="price">—</p>
+            </div>
+          </div>
+          
+          <div class="custom-size-inputs" id="custom-size-inputs">
+            <div>
+              <label>Breite (cm):</label>
+              <input type="number" id="custom-width" min="5" max="28" step="1" placeholder="z.B. 18">
+            </div>
+            <div>
+              <label>Tiefe (cm):</label>
+              <input type="number" id="custom-height" min="5" max="28" step="1" placeholder="z.B. 12">
+            </div>
+          </div>
+        </div>
+
+        <!-- SCHRITT 2: Gebiet wählen -->
+        <div class="config-card">
+          <h2><span class="step-number">2</span> Gebiet wählen</h2>
+          
+          <div class="map-mode-toggle">
+            <button class="map-mode-btn active" data-mode="search">
+              📍 Bekannte Orte
+            </button>
+            <button class="map-mode-btn" data-mode="rectangle">
+              🗺️ Freie Rechteck-Auswahl
+            </button>
+            <button class="map-mode-btn" data-mode="manual">
+              ⌨️ Koordinaten eingeben
+            </button>
+          </div>
+          
+          <!-- Preset Locations -->
+          <div id="preset-section" class="preset-grid">
+            <button class="preset-btn" data-lat="47.4211" data-lon="10.9853" data-name="Zugspitze">
+              <strong>Zugspitze</strong>
+              <small>2962m · DE</small>
+            </button>
+            <button class="preset-btn" data-lat="45.9763" data-lon="7.6586" data-name="Matterhorn">
+              <strong>Matterhorn</strong>
+              <small>4478m · CH/IT</small>
+            </button>
+            <button class="preset-btn" data-lat="47.0745" data-lon="12.6942" data-name="Großglockner">
+              <strong>Großglockner</strong>
+              <small>3798m · AT</small>
+            </button>
+            <button class="preset-btn" data-lat="45.8326" data-lon="6.8652" data-name="Mont Blanc">
+              <strong>Mont Blanc</strong>
+              <small>4808m · FR/IT</small>
+            </button>
+            <button class="preset-btn" data-lat="47.5553" data-lon="12.9786" data-name="Watzmann">
+              <strong>Watzmann</strong>
+              <small>2713m · DE</small>
+            </button>
+            <button class="preset-btn" data-lat="46.5369" data-lon="7.9784" data-name="Jungfrau">
+              <strong>Jungfrau</strong>
+              <small>4158m · CH</small>
+            </button>
+          </div>
+          
+          <!-- Manual Coordinate Input -->
+          <div id="manual-coords-section" style="display: none; margin-bottom: 20px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px;">
+              <div>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Min Lat:</label>
+                <input type="number" id="manual-lat-min" step="0.0001" placeholder="47.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
+              </div>
+              <div>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Max Lat:</label>
+                <input type="number" id="manual-lat-max" step="0.0001" placeholder="47.5" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
+              </div>
+              <div>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Min Lon:</label>
+                <input type="number" id="manual-lon-min" step="0.0001" placeholder="10.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
+              </div>
+              <div>
+                <label style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Max Lon:</label>
+                <input type="number" id="manual-lon-max" step="0.0001" placeholder="11.0" style="width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(198,125,74,0.3); border-radius: 6px; color: #fff;">
+              </div>
+            </div>
+            <button id="apply-manual-coords" style="margin-top: 12px; padding: 10px 20px; background: var(--accent); color: #0B0F19; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+              Koordinaten übernehmen
+            </button>
+          </div>
+          
+          <div id="map"></div>
+          
+          <div class="coord-display">
+            <div class="coord-item">
+              <label>Min Lat</label>
+              <strong id="coord-lat-min">—</strong>
+            </div>
+            <div class="coord-item">
+              <label>Max Lat</label>
+              <strong id="coord-lat-max">—</strong>
+            </div>
+            <div class="coord-item">
+              <label>Min Lon</label>
+              <strong id="coord-lon-min">—</strong>
+            </div>
+            <div class="coord-item">
+              <label>Max Lon</label>
+              <strong id="coord-lon-max">—</strong>
+            </div>
+          </div>
+          
+          <!-- Generate Preview Button - DIREKT nach Karte -->
+          <div class="generate-preview-section">
+            <button class="btn-generate-preview" id="generate-preview" disabled>
+              🔍 Vorschau generieren
+            </button>
+            <p style="margin-top: 12px; color: var(--text-secondary); font-size: 0.9rem;">
+              Wähle Größe und Gebiet aus
+            </p>
+          </div>
+        </div>
+
+        <!-- SCHRITT 3: 3D-Vorschau -->
+        <div class="config-card" id="preview-section">
+          <h2><span class="step-number">3</span> 3D-Vorschau</h2>
+          
+          <div class="preview-container">
+            <div class="preview-placeholder" id="preview-placeholder">
+              <p>🏔 Klicke auf "Vorschau generieren" um dein Modell zu sehen</p>
+            </div>
+            <canvas id="preview-canvas"></canvas>
+            <div class="preview-controls" style="display: none;" id="preview-controls">
+              <button class="preview-btn" id="reset-camera">🔄 Zurücksetzen</button>
+              <button class="preview-btn" id="toggle-wireframe">🔲 Wireframe</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCHRITT 4: Material-Optionen (NACH erfolgreicher Generierung) -->
+        <div class="config-card" id="material-section" style="display: none;">
+          <h2><span class="step-number">4</span> Material & Extras</h2>
+          
+          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);">Material wählen:</h3>
+          <div class="material-options">
+            <div class="material-btn selected" data-material="pla" data-price="0">
+              <strong>PLA</strong>
+              <small>Standard (inkl.)</small>
+            </div>
+            <div class="material-btn" data-material="petg" data-price="10">
+              <strong>PETG</strong>
+              <small>+10€</small>
+            </div>
+          </div>
+          
+          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Extras:</h3>
+          <div class="checkbox-option" id="wooden-base-option">
+            <label>
+              <input type="checkbox" id="wooden-base-checkbox">
+              <span>Holzsockel mit Gravur</span>
+            </label>
+            <span class="price-tag">+25€</span>
+          </div>
+
+          <div class="summary-card">
+            <h3>Deine Bestellung</h3>
+            <div class="summary-item">
+              <span>Größe:</span>
+              <span id="sum-size">—</span>
+            </div>
+            <div class="summary-item">
+              <span>Gebiet:</span>
+              <span id="sum-location">—</span>
+            </div>
+            <div class="summary-item">
+              <span>Material:</span>
+              <span id="sum-material">PLA Standard</span>
+            </div>
+            <div class="summary-item">
+              <span>Holzsockel:</span>
+              <span id="sum-base">Nein</span>
+            </div>
+            <div class="summary-item">
+              <span>Gesamtpreis:</span>
+              <span id="sum-price">—</span>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn-primary" id="add-to-cart">🛒 In den Warenkorb</button>
+            <button class="btn-secondary" id="download-stl">📥 STL herunterladen</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="background: rgba(11, 15, 25, 0.95); padding: 40px 20px; text-align: center; color: var(--text-secondary);">
+    <p>© 2026 FACTUM3D · <a href="impressum.html" style="color: var(--accent);">Impressum</a> · <a href="datenschutz.html" style="color: var(--accent);">Datenschutz</a></p>
+  </footer>
+
+  <!-- Leaflet JS + Leaflet Draw -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+  
+  <!-- Cart Badge -->
+  <script src="cart.js"></script>
+  
+  <script type="module">
+    // ========================================
+    // Configuration State
+    // ========================================
+    const config = {
+      size: null,
+      sizePrice: 0,
+      widthMM: 0,
+      heightMM: 0,
+      locationName: '',
+      bounds: null,  // { minLat, maxLat, minLon, maxLon }
+      material: 'pla',
+      materialPrice: 0,
+      woodenBase: false,
+      currentJobId: null
+    };
+
+    // ========================================
+    // SCHRITT 1: Modellgröße
+    // ========================================
+    document.querySelectorAll('.size-option').forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelectorAll('.size-option').forEach(o => o.classList.remove('selected'));
+        option.classList.add('selected');
+        
+        config.size = option.dataset.size;
+        config.sizePrice = parseInt(option.dataset.price);
+        config.widthMM = parseInt(option.dataset.width);
+        config.heightMM = parseInt(option.dataset.height);
+        
+        const customInputs = document.getElementById('custom-size-inputs');
+        if (config.size === 'custom') {
+          customInputs.classList.add('active');
+        } else {
+          customInputs.classList.remove('active');
+        }
+        
+        checkIfReadyForPreview();
+        updateSummary();
+      });
+    });
+
+    // Custom Size Inputs
+    document.getElementById('custom-width')?.addEventListener('input', () => {
+      config.widthMM = parseInt(document.getElementById('custom-width').value) * 10 || 0;
+      updateSummary();
+    });
+    
+    document.getElementById('custom-height')?.addEventListener('input', () => {
+      config.heightMM = parseInt(document.getElementById('custom-height').value) * 10 || 0;
+      updateSummary();
+    });
+
+    // ========================================
+    // SCHRITT 2: Leaflet Map mit Modi
+    // ========================================
+    const map = L.map('map', {
+      center: [47.0, 10.0],
+      zoom: 6,
+      scrollWheelZoom: true
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap',
+      maxZoom: 18
+    }).addTo(map);
+
+    let currentMode = 'search';
+    let drawnRectangle = null;
+    let drawControl = null;
+
+    const drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+
+    // Map Mode Toggle
+    document.querySelectorAll('.map-mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.map-mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        currentMode = btn.dataset.mode;
+        
+        // Show/Hide Sections
+        document.getElementById('preset-section').style.display = 
+          currentMode === 'search' ? 'grid' : 'none';
+        document.getElementById('manual-coords-section').style.display = 
+          currentMode === 'manual' ? 'block' : 'none';
+        
+        // Enable/Disable Rectangle Drawing
+        if (currentMode === 'rectangle') {
+          enableRectangleDraw();
+        } else {
+          disableRectangleDraw();
+        }
+      });
+    });
+
+    function enableRectangleDraw() {
+      if (drawControl) map.removeControl(drawControl);
+      
+      drawControl = new L.Control.Draw({
+        draw: {
+          rectangle: {
+            shapeOptions: {
+              color: '#C67D4A',
+              fillColor: '#C67D4A',
+              fillOpacity: 0.2
+            }
+          },
+          polygon: false,
+          polyline: false,
+          circle: false,
+          marker: false,
+          circlemarker: false
+        },
+        edit: {
+          featureGroup: drawnItems,
+          remove: true
+        }
+      });
+      
+      map.addControl(drawControl);
+    }
+
+    function disableRectangleDraw() {
+      if (drawControl) {
+        map.removeControl(drawControl);
+        drawControl = null;
+      }
+    }
+
+    // Handle Rectangle Draw
+    map.on(L.Draw.Event.CREATED, (e) => {
+      const layer = e.layer;
+      
+      if (drawnRectangle) {
+        drawnItems.removeLayer(drawnRectangle);
+      }
+      
+      drawnItems.addLayer(layer);
+      drawnRectangle = layer;
+      
+      const bounds = layer.getBounds();
+      config.bounds = {
+        minLat: bounds.getSouth(),
+        maxLat: bounds.getNorth(),
+        minLon: bounds.getWest(),
+        maxLon: bounds.getEast()
+      };
+      config.locationName = 'Freie Auswahl';
+      
+      updateCoordDisplay();
+      checkIfReadyForPreview();
+      updateSummary();
+    });
+
+    // Preset Location Selection
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const lat = parseFloat(btn.dataset.lat);
+        const lon = parseFloat(btn.dataset.lon);
+        const radius = 0.15;  // ~15km in Grad
+        
+        config.bounds = {
+          minLat: lat - radius,
+          maxLat: lat + radius,
+          minLon: lon - radius,
+          maxLon: lon + radius
+        };
+        config.locationName = btn.dataset.name;
+        
+        // Draw rectangle on map
+        if (drawnRectangle) drawnItems.removeLayer(drawnRectangle);
+        drawnRectangle = L.rectangle([
+          [config.bounds.minLat, config.bounds.minLon],
+          [config.bounds.maxLat, config.bounds.maxLon]
+        ], {
+          color: '#C67D4A',
+          fillColor: '#C67D4A',
+          fillOpacity: 0.2
+        }).addTo(drawnItems);
+        
+        map.fitBounds(drawnRectangle.getBounds());
+        
+        updateCoordDisplay();
+        checkIfReadyForPreview();
+        updateSummary();
+      });
+    });
+
+    // Manual Coordinates
+    document.getElementById('apply-manual-coords')?.addEventListener('click', () => {
+      const minLat = parseFloat(document.getElementById('manual-lat-min').value);
+      const maxLat = parseFloat(document.getElementById('manual-lat-max').value);
+      const minLon = parseFloat(document.getElementById('manual-lon-min').value);
+      const maxLon = parseFloat(document.getElementById('manual-lon-max').value);
+      
+      if (!minLat || !maxLat || !minLon || !maxLon) {
+        alert('Bitte alle Koordinaten eingeben!');
+        return;
+      }
+      
+      config.bounds = { minLat, maxLat, minLon, maxLon };
+      config.locationName = 'Manuelle Koordinaten';
+      
+      if (drawnRectangle) drawnItems.removeLayer(drawnRectangle);
+      drawnRectangle = L.rectangle([
+        [minLat, minLon],
+        [maxLat, maxLon]
+      ], {
+        color: '#C67D4A',
+        fillColor: '#C67D4A',
+        fillOpacity: 0.2
+      }).addTo(drawnItems);
+      
+      map.fitBounds(drawnRectangle.getBounds());
+      
+      updateCoordDisplay();
+      checkIfReadyForPreview();
+      updateSummary();
+    });
+
+    function updateCoordDisplay() {
+      if (!config.bounds) {
+        document.getElementById('coord-lat-min').textContent = '—';
+        document.getElementById('coord-lat-max').textContent = '—';
+        document.getElementById('coord-lon-min').textContent = '—';
+        document.getElementById('coord-lon-max').textContent = '—';
+        return;
+      }
+      
+      document.getElementById('coord-lat-min').textContent = config.bounds.minLat.toFixed(4) + '°';
+      document.getElementById('coord-lat-max').textContent = config.bounds.maxLat.toFixed(4) + '°';
+      document.getElementById('coord-lon-min').textContent = config.bounds.minLon.toFixed(4) + '°';
+      document.getElementById('coord-lon-max').textContent = config.bounds.maxLon.toFixed(4) + '°';
+    }
+
+    // ========================================
+    // Check if Ready for Preview
+    // ========================================
+    function checkIfReadyForPreview() {
+      const btn = document.getElementById('generate-preview');
+      const ready = config.size && config.widthMM > 0 && config.heightMM > 0 && config.bounds;
+      
+      btn.disabled = !ready;
+      btn.nextElementSibling.textContent = ready 
+        ? 'Bereit zum Generieren!' 
+        : 'Wähle Größe und Gebiet aus';
+    }
+
+    // ========================================
+    // Generate Preview
+    // ========================================
+    document.getElementById('generate-preview').addEventListener('click', async () => {
+      const btn = document.getElementById('generate-preview');
+      const originalText = btn.textContent;
+      btn.textContent = '🔄 Generiere...';
+      btn.disabled = true;
+      
+      try {
+        const latDiff = config.bounds.maxLat - config.bounds.minLat;
+        const lonDiff = config.bounds.maxLon - config.bounds.minLon;
+        const centerLat = (config.bounds.minLat + config.bounds.maxLat) / 2;
+        const centerLon = (config.bounds.minLon + config.bounds.maxLon) / 2;
+        
+        const response = await fetch('http://69.62.105.159/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            lat: centerLat,
+            lon: centerLon,
+            width: lonDiff,
+            height: latDiff,
+            z_scale: 1.8,
+            base_height_mm: 8.0,
+            tilewidth_mm: config.widthMM,
+            tileheight_mm: config.heightMM
+          })
+        });
+        
+        const { job_id } = await response.json();
+        config.currentJobId = job_id;
+        btn.textContent = '⏳ Verarbeite...';
+        
+        let status = 'pending';
+        while (status !== 'done') {
+          await new Promise(resolve => setTimeout(resolve, 2000));
+          const statusResponse = await fetch(`http://69.62.105.159/api/status/${job_id}`);
+          const data = await statusResponse.json();
+          status = data.status;
+          
+          if (data.error) throw new Error(data.error);
+          if (data.progress) btn.textContent = `⏳ ${data.progress}%...`;
+        }
+        
+        btn.textContent = '✅ Lade Vorschau...';
+        
+        load3DModel(job_id);
+        
+        // Scroll to preview
+        setTimeout(() => {
+          document.getElementById('preview-section').scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }, 500);
+        
+        // Show material section
+        setTimeout(() => {
+          document.getElementById('material-section').style.display = 'block';
+          btn.textContent = originalText;
+          btn.disabled = false;
+        }, 2000);
+        
+      } catch (error) {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        alert('❌ Fehler: ' + error.message);
+      }
+    });
+
+    // ========================================
+    // Material Options (SCHRITT 4)
+    // ========================================
+    document.querySelectorAll('.material-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.material-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        config.material = btn.dataset.material;
+        config.materialPrice = parseInt(btn.dataset.price);
+        updateSummary();
+      });
+    });
+
+    document.getElementById('wooden-base-checkbox')?.addEventListener('change', (e) => {
+      config.woodenBase = e.target.checked;
+      if (config.woodenBase) {
+        document.getElementById('wooden-base-option').classList.add('selected');
+      } else {
+        document.getElementById('wooden-base-option').classList.remove('selected');
+      }
+      updateSummary();
+    });
+
+    // ========================================
+    // Update Summary
+    // ========================================
+    function updateSummary() {
+      const sizeNames = {
+        '10x10': '10 × 10 cm',
+        '15x15': '15 × 15 cm',
+        '20x20': '20 × 20 cm',
+        'custom': `${(config.widthMM/10).toFixed(0)} × ${(config.heightMM/10).toFixed(0)} cm`
+      };
+      document.getElementById('sum-size').textContent = config.size ? sizeNames[config.size] : '—';
+      
+      document.getElementById('sum-location').textContent = config.locationName || '—';
+      
+      const materialNames = { pla: 'PLA Standard', petg: 'PETG' };
+      document.getElementById('sum-material').textContent = materialNames[config.material];
+      
+      document.getElementById('sum-base').textContent = config.woodenBase ? 'Ja (+25€)' : 'Nein';
+      
+      let total = config.sizePrice + config.materialPrice;
+      if (config.woodenBase) total += 25;
+      
+      // Custom size: estimate price (e.g. 0.50€ per cm²)
+      if (config.size === 'custom' && config.widthMM > 0 && config.heightMM > 0) {
+        const area = (config.widthMM / 10) * (config.heightMM / 10);
+        total = Math.ceil(area * 0.5) + config.materialPrice;
+        if (config.woodenBase) total += 25;
+      }
+      
+      document.getElementById('sum-price').textContent = 
+        total > 0 ? `${total.toFixed(0)}€` : '—';
+    }
+
+    // ========================================
+    // Download STL
+    // ========================================
+    document.getElementById('download-stl').addEventListener('click', () => {
+      if (!config.currentJobId) {
+        alert('Bitte erst "Vorschau generieren" klicken!');
+        return;
+      }
+      window.location.href = `http://69.62.105.159/api/download/${config.currentJobId}`;
+    });
+
+    // Add to Cart
+    document.getElementById('add-to-cart').addEventListener('click', () => {
+      if (!config.currentJobId) {
+        alert('Bitte erst "Vorschau generieren" klicken!');
+        return;
+      }
+      alert('✅ Produkt zum Warenkorb hinzugefügt!\n\n(Warenkorb-Integration folgt)');
+    });
+
+    // ========================================
+    // Three.js 3D Preview
+    // ========================================
+    
+    import * as THREE from 'three';
+    import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    
+    let scene, camera, renderer, controls, mesh;
+    let wireframeEnabled = false;
+    
+    window.load3DModel = function(jobId) {
+      loadTerrainModel(jobId);
+    };
+    
+    function init3DPreview() {
+      const canvas = document.getElementById('preview-canvas');
+      const container = document.querySelector('.preview-container');
+      
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x0a0a0a);
+      
+      camera = new THREE.PerspectiveCamera(45, container.clientWidth / 500, 0.1, 1000);
+      camera.position.set(150, 150, 150);
+      
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+      renderer.setSize(container.clientWidth, 500);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+      scene.add(ambientLight);
+      
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+      directionalLight.position.set(100, 100, 50);
+      scene.add(directionalLight);
+      
+      const directionalLight2 = new THREE.DirectionalLight(0xC67D4A, 0.3);
+      directionalLight2.position.set(-50, 50, -50);
+      scene.add(directionalLight2);
+      
+      controls = new OrbitControls(camera, canvas);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      
+      const gridHelper = new THREE.GridHelper(200, 20, 0xC67D4A, 0x1a1a1a);
+      scene.add(gridHelper);
+      
+      window.addEventListener('resize', () => {
+        camera.aspect = container.clientWidth / 500;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, 500);
+      });
+      
+      animate();
+    }
+    
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    
+    function loadTerrainModel(jobId) {
+      const loader = new STLLoader();
+      const url = `http://69.62.105.159/api/download/${jobId}`;
+      
+      if (mesh) scene.remove(mesh);
+      
+      loader.load(
+        url,
+        (geometry) => {
+          geometry.computeBoundingBox();
+          const center = new THREE.Vector3();
+          geometry.boundingBox.getCenter(center);
+          geometry.translate(-center.x, -center.y, -center.z);
+          
+          const material = new THREE.MeshPhongMaterial({
+            color: 0xaaaaaa,
+            shininess: 50,
+            flatShading: true
+          });
+          
+          mesh = new THREE.Mesh(geometry, material);
+          scene.add(mesh);
+          
+          const box = new THREE.Box3().setFromObject(mesh);
+          const size = box.getSize(new THREE.Vector3());
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const fov = camera.fov * (Math.PI / 180);
+          const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.5;
+          
+          camera.position.set(cameraZ, cameraZ * 0.7, cameraZ);
+          camera.lookAt(0, 0, 0);
+          controls.target.set(0, 0, 0);
+          controls.update();
+          
+          document.getElementById('preview-placeholder').style.display = 'none';
+          document.getElementById('preview-controls').style.display = 'flex';
+        },
+        (xhr) => {
+          const percent = (xhr.loaded / xhr.total * 100).toFixed(0);
+          document.getElementById('preview-placeholder').innerHTML = 
+            `<p>📥 Lade 3D-Modell... ${percent}%</p>`;
+        },
+        (error) => {
+          console.error('STL Load Error:', error);
+          document.getElementById('preview-placeholder').innerHTML = 
+            '<p>❌ Fehler beim Laden</p>';
+        }
+      );
+    }
+    
+    document.getElementById('reset-camera')?.addEventListener('click', () => {
+      if (mesh) {
+        const box = new THREE.Box3().setFromObject(mesh);
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const fov = camera.fov * (Math.PI / 180);
+        const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.5;
+        
+        camera.position.set(cameraZ, cameraZ * 0.7, cameraZ);
+        camera.lookAt(0, 0, 0);
+        controls.target.set(0, 0, 0);
+        controls.update();
+      }
+    });
+    
+    document.getElementById('toggle-wireframe')?.addEventListener('click', () => {
+      if (mesh) {
+        wireframeEnabled = !wireframeEnabled;
+        mesh.material.wireframe = wireframeEnabled;
+      }
+    });
+    
+    init3DPreview();
+  </script>
+
+</body>
+</html>

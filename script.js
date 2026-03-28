@@ -37,18 +37,80 @@ function showContactFile(file) {
   contactFileName.style.color = '';
 }
 
+function contactLang() {
+  const stored = localStorage.getItem('pita-lang');
+  if (stored) return stored;
+  return (document.documentElement.lang || 'de').slice(0, 2);
+}
+
+function contactCopy() {
+  const lang = contactLang();
+  const copy = {
+    de: { sending: 'Wird gesendet...', success: '✅ Anfrage gespeichert. Wir melden uns so schnell wie möglich.', error: '❌ Anfrage konnte gerade nicht gespeichert werden. Bitte später erneut versuchen.' },
+    en: { sending: 'Sending...', success: '✅ Request saved. We will get back to you as soon as possible.', error: '❌ Request could not be saved right now. Please try again later.' },
+    fr: { sending: 'Envoi...', success: '✅ Demande enregistree. Nous reviendrons vers vous rapidement.', error: '❌ La demande n a pas pu etre enregistree pour le moment. Merci de reessayer plus tard.' },
+    es: { sending: 'Enviando...', success: '✅ Solicitud guardada. Te responderemos lo antes posible.', error: '❌ La solicitud no pudo guardarse ahora mismo. Intentalo de nuevo mas tarde.' },
+    it: { sending: 'Invio...', success: '✅ Richiesta salvata. Ti risponderemo il prima possibile.', error: '❌ La richiesta non puo essere salvata in questo momento. Riprova piu tardi.' }
+  };
+  return copy[lang] || copy.de;
+}
+
+function ensureContactStatus() {
+  let el = document.getElementById('contactStatus');
+  if (el) return el;
+  el = document.createElement('p');
+  el.id = 'contactStatus';
+  el.style.marginTop = '12px';
+  el.style.fontWeight = '600';
+  contactForm.appendChild(el);
+  return el;
+}
+
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
     if (!contactForm.checkValidity()) {
-      e.preventDefault();
       contactForm.reportValidity();
       return;
     }
 
     const submitBtn = contactForm.querySelector('button[type="submit"]');
-    if (!submitBtn) return;
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Wird gesendet...';
+    const statusEl = ensureContactStatus();
+    const copy = contactCopy();
+    const originalHtml = submitBtn ? submitBtn.innerHTML : '';
+
+    statusEl.textContent = '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = copy.sending;
+    }
+
+    try {
+      const formData = new FormData(contactForm);
+      const res = await fetch(contactForm.action || '/api/contact', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      let data = null;
+      try { data = await res.json(); } catch (_) {}
+      if (!res.ok || !data || data.ok !== true) throw new Error('request_failed');
+
+      contactForm.reset();
+      if (contactFileName) contactFileName.textContent = '';
+      statusEl.textContent = copy.success;
+      statusEl.style.color = '#4caf50';
+    } catch (err) {
+      statusEl.textContent = copy.error;
+      statusEl.style.color = '#f44336';
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+      }
+    }
   });
 }
 

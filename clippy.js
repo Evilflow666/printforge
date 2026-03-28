@@ -18,6 +18,7 @@
   }
 
   var OLLAMA_URL = 'http://69.62.105.159:32768/api/chat';
+  var CHAT_BACKEND_ENABLED = false; // local advisor mode until a real chat backend exists
 
   var VOLUME_MAP = { stamp: 5, phone: 80, shoebox: 800, bigger: 1600 };
   var AREA_MAP = { card: 46, a5: 311, a4: 623, bigger: 1200 };
@@ -903,6 +904,7 @@
   }
 
   (function warmupOllama() {
+    if (!CHAT_BACKEND_ENABLED || !OLLAMA_URL) return;
     fetch(OLLAMA_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1855,31 +1857,103 @@
     appendProductSuggestions(state.answers.service);
   }
 
+  function rememberAssistantExchange(userMessage, replyText) {
+    state.history.push({ role: 'user', content: userMessage });
+    state.history.push({ role: 'assistant', content: replyText });
+    return replyText;
+  }
+
+  function localAdvisorReply(userMessage) {
+    var tx = textSet();
+    var lang = clippyLang();
+    var msg = String(userMessage || '').toLowerCase();
+    var usage = state.answers.usage;
+    var advice = getMaterialRecommendation(usage, lang);
+    var calc = null;
+    try { calc = calculatePrice(state.answers, null); } catch (e) {}
+
+    var intro = {
+      de: 'Ich helfe dir direkt mit Preisrahmen, Materialempfehlung und Dateicheck weiter.',
+      en: 'I can help directly with price range, material guidance, and file checks.',
+      fr: 'Je peux aider directement avec une estimation de prix, un conseil materiau et un controle de fichier.',
+      es: 'Puedo ayudarte directamente con rango de precio, recomendacion de material y revision de archivo.',
+      it: 'Posso aiutarti subito con fascia di prezzo, consiglio materiale e controllo file.'
+    };
+
+    var prompt = {
+      de: 'Frag mich am besten gezielt nach Material, Preis, Lieferzeit oder Upload.',
+      en: 'Best ask me directly about material, price, lead time, or file upload.',
+      fr: 'Demande-moi plutot le materiau, le prix, le delai ou le fichier.',
+      es: 'Preguntame mejor por material, precio, plazo o archivo.',
+      it: 'Chiedimi pure materiale, prezzo, tempi o file.'
+    };
+
+    var contact = {
+      de: 'Fuer die finale Anfrage kannst du danach direkt in den Anfragebereich springen. Ich helfe dir hier vorher beim Eingrenzen.',
+      en: 'For the final inquiry you can jump to the contact section afterwards. I can narrow it down for you here first.',
+      fr: 'Pour la demande finale, tu peux ensuite aller a la section contact. Ici, je t aide d abord a cadrer le projet.',
+      es: 'Para la solicitud final puedes ir despues a la seccion de contacto. Aqui te ayudo primero a concretarlo.',
+      it: 'Per la richiesta finale puoi poi andare alla sezione contatto. Qui prima ti aiuto a definire meglio il progetto.'
+    };
+
+    if (/versand|shipping|livraison|spedizione|envio/.test(msg)) {
+      return rememberAssistantExchange(userMessage, tx.shipping);
+    }
+
+    if (/liefer|delivery|lead time|delai|consegna|entrega/.test(msg)) {
+      return rememberAssistantExchange(userMessage, tx.shipping);
+    }
+
+    if (/material|pla|petg|abs|asa|resin|holz|wood|acryl|acrylic|tpu|nylon|carbon|cf/.test(msg)) {
+      var materialReply = advice ? ('💡 ' + advice) : ((intro[lang] || intro.de) + '\n\n' + (prompt[lang] || prompt.de));
+      return rememberAssistantExchange(userMessage, materialReply);
+    }
+
+    if (/preis|price|cost|quote|angebot|devis|preventivo|precio/.test(msg) && calc) {
+      return rememberAssistantExchange(userMessage, buildResultMessage(calc));
+    }
+
+    if (/kontakt|contact|email|anfrage|request|devis|angebot/.test(msg)) {
+      return rememberAssistantExchange(userMessage, contact[lang] || contact.de);
+    }
+
+    var generic = (intro[lang] || intro.de) + (advice ? ('\n\n💡 ' + advice) : '') + '\n\n' + (prompt[lang] || prompt.de);
+    return rememberAssistantExchange(userMessage, generic);
+  }
+
   async function callOllama(userMessage) {
+    if (!CHAT_BACKEND_ENABLED || !OLLAMA_URL) {
+      return localAdvisorReply(userMessage);
+    }
+
     var messages = [{ role: 'system', content: buildSystemPrompt() }]
       .concat(state.history)
       .concat([{ role: 'user', content: userMessage }]);
 
-    var res = await fetch(OLLAMA_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      signal: AbortSignal.timeout(60000),
-      body: JSON.stringify({
-        model: 'mistral:7b',
-        stream: false,
-        keep_alive: '30m',
-        messages: messages
-      })
-    });
+    try {
+      var res = await fetch(OLLAMA_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: AbortSignal.timeout(60000),
+        body: JSON.stringify({
+          model: 'mistral:7b',
+          stream: false,
+          keep_alive: '30m',
+          messages: messages
+        })
+      });
 
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    var json = await res.json();
-    var out = (json && json.message && json.message.content) ? String(json.message.content).trim() : '';
-    if (!out) throw new Error('Empty response');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var json = await res.json();
+      var out = (json && json.message && json.message.content) ? String(json.message.content).trim() : '';
+      if (!out) throw new Error('Empty response');
 
-    state.history.push({ role: 'user', content: userMessage });
-    state.history.push({ role: 'assistant', content: out });
-    return out;
+      state.history.push({ role: 'user', content: userMessage });
+      state.history.push({ role: 'assistant', content: out });
+      return out;
+    } catch (err) {
+      return localAdvisorReply(userMessage);
+    }
   }
 
   function finishQuestionsWithInstantPrice() {

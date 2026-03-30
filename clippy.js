@@ -108,6 +108,7 @@
         browseIntro: 'Klar, hier kannst du direkt durch unsere Produktkategorien stöbern:',
         fdm: '🛒 Fertige FDM-Produkte ansehen',
         laser: '✂️ Lasercut-Sortiment ansehen',
+        terrain: '🏔️ 3D-Reliefkarte konfigurieren',
         all: '📦 Alle Produkte'
       },
       q: {
@@ -120,7 +121,8 @@
             { id: 'resin', label: '🧪 Resin-Druck' },
             { id: 'laser_cut', label: '✂️ Laser schneiden' },
             { id: 'laser_engrave', label: '🔥 Laser gravieren' },
-            { id: 'prototype', label: '🔩 Prototyp/Beratung' }
+            { id: 'prototype', label: '🔩 Prototyp/Beratung' },
+            { id: 'terrain', label: '🏔️ 3D-Reliefkarte' }
           ]
         },
         usage: {
@@ -297,7 +299,8 @@
             { id: 'resin', label: '🧪 Resin Print' },
             { id: 'laser_cut', label: '✂️ Laser Cutting' },
             { id: 'laser_engrave', label: '🔥 Laser Engraving' },
-            { id: 'prototype', label: '🔩 Prototype/Consulting' }
+            { id: 'prototype', label: '🔩 Prototype/Consulting' },
+            { id: 'terrain', label: '🏔️ 3D Relief Map' }
           ]
         },
         usage: {
@@ -463,7 +466,8 @@
             { id: 'resin', label: '🧪 Impression resine' },
             { id: 'laser_cut', label: '✂️ Decoupe laser' },
             { id: 'laser_engrave', label: '🔥 Gravure laser' },
-            { id: 'prototype', label: '🔩 Prototype/Conseil' }
+            { id: 'prototype', label: '🔩 Prototype/Conseil' },
+            { id: 'terrain', label: '🏔️ Carte en relief 3D' }
           ]
         },
         usage: {
@@ -618,6 +622,7 @@
         browseIntro: 'Claro, aqui puedes explorar nuestras categorias de productos:',
         fdm: '🛒 Ver productos FDM terminados',
         laser: '✂️ Ver catalogo de corte laser',
+        terrain: '🏔️ Configurar mapa en relieve 3D',
         all: '📦 Todos los productos'
       },
       q: {
@@ -630,7 +635,8 @@
             { id: 'resin', label: '🧪 Impresion en resina' },
             { id: 'laser_cut', label: '✂️ Corte laser' },
             { id: 'laser_engrave', label: '🔥 Grabado laser' },
-            { id: 'prototype', label: '🔩 Prototipo/Consultoria' }
+            { id: 'prototype', label: '🔩 Prototipo/Consultoria' },
+            { id: 'terrain', label: '🏔️ Mapa en relieve 3D' }
           ]
         },
         usage: {
@@ -785,6 +791,7 @@
         browseIntro: 'Certo, qui puoi sfogliare le nostre categorie di prodotti:',
         fdm: '🛒 Vedi prodotti FDM pronti',
         laser: '✂️ Vedi assortimento taglio laser',
+        terrain: '🏔️ Configura mappa in rilievo 3D',
         all: '📦 Tutti i prodotti'
       },
       q: {
@@ -797,7 +804,8 @@
             { id: 'resin', label: '🧪 Stampa in resina' },
             { id: 'laser_cut', label: '✂️ Taglio laser' },
             { id: 'laser_engrave', label: '🔥 Incisione laser' },
-            { id: 'prototype', label: '🔩 Prototipo/Consulenza' }
+            { id: 'prototype', label: '🔩 Prototipo/Consulenza' },
+            { id: 'terrain', label: '🏔️ Mappa in rilievo 3D' }
           ]
         },
         usage: {
@@ -1278,16 +1286,16 @@
     '#clippy-container{position:fixed;right:16px;bottom:16px;z-index:2147483000;font-family:Arial,sans-serif;}',
     '.clippy-toggle{background:none;border:none;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));transition:transform 0.2s;}',
     '.clippy-toggle:hover{transform:translateY(-2px) scale(1.05);}',
-    '.clippy-label{background:#C67D4A;color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;margin-top:2px;white-space:nowrap;}',
+    '.clippy-label{background:#C67D4A;color:#fff;font-size:13px;font-weight:700;padding:4px 10px;border-radius:999px;margin-top:4px;white-space:nowrap;}',
     '@keyframes clippy-wiggle{0%,100%{transform:rotate(0deg);}25%{transform:rotate(-8deg);}75%{transform:rotate(8deg);}}',
     '.clippy-wiggle{animation:clippy-wiggle 0.4s ease-in-out;}',
-    '#clippy-chat{position:absolute;right:0;bottom:calc(100% + 12px);width:min(370px,calc(100vw - 24px));height:min(560px,calc(100vh - 120px));background:#0B0F19;border:1px solid rgba(198,125,74,0.2);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.5);backdrop-filter:blur(8px);display:flex;flex-direction:column;overflow:hidden;}',
+    '#clippy-chat{position:absolute;right:0;bottom:calc(100% + 12px);width:min(480px,calc(100vw - 24px));height:min(680px,calc(100vh - 100px));background:#0B0F19;border:1px solid rgba(198,125,74,0.2);border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,0.5);backdrop-filter:blur(8px);display:flex;flex-direction:column;overflow:hidden;}',
     '.clippy-hidden{display:none !important;}',
-    '.clippy-header{height:48px;background:#C67D4A;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 12px;font-size:14px;}',
+    '.clippy-header{height:54px;background:#C67D4A;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16px;font-size:15px;}',
     '.clippy-close{border:0;background:transparent;color:#fff;font-size:20px;cursor:pointer;}',
     '.clippy-close:hover{color:#E8E6E1;}',
     '#clippy-messages{flex:1;overflow:auto;padding:12px;background:rgba(11,15,25,0.95);display:flex;flex-direction:column;gap:8px;}',
-    '.clippy-msg{max-width:92%;padding:9px 11px;border-radius:12px;line-height:1.35;font-size:14px;white-space:pre-wrap;}',
+    '.clippy-msg{max-width:92%;padding:11px 14px;border-radius:12px;line-height:1.45;font-size:15px;white-space:pre-wrap;}',
     '.clippy-bot{align-self:flex-start;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:#E8E6E1;}',
     '.clippy-user{align-self:flex-end;background:#C67D4A;color:#fff;}',
     '.clippy-question{align-self:flex-start;background:rgba(198,125,74,0.15);border:1px solid rgba(198,125,74,0.3);color:#E8E6E1;}',
@@ -1300,7 +1308,7 @@
     '#clippy-input:focus{border-color:rgba(198,125,74,0.6);}',
     '#clippy-send{border:0;background:#C67D4A;color:#fff;border-radius:10px;padding:9px 12px;cursor:pointer;}',
     '#clippy-send[disabled]{opacity:.5;cursor:not-allowed;}',
-    '@media (max-width:520px){#clippy-container{right:8px;bottom:8px;}#clippy-chat{width:calc(100vw - 16px);height:min(72vh,620px);right:0;bottom:calc(100% + 12px);}}',
+    '@media (max-width:520px){#clippy-container{right:8px;bottom:8px;}#clippy-chat{width:calc(100vw - 16px);height:min(80vh,700px);right:0;bottom:calc(100% + 12px);}}',
     '.clippy-thought{position:absolute;bottom:calc(100% + 18px);right:0;background:rgba(15,15,30,0.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.12);color:#e8e6e1;padding:10px 16px;border-radius:14px;font-size:0.85rem;max-width:220px;text-align:center;opacity:0;transform:translateY(8px);transition:opacity 0.4s ease,transform 0.4s ease;pointer-events:none;line-height:1.4;box-shadow:0 4px 16px rgba(0,0,0,0.3);}',
     '.clippy-thought.visible{opacity:1;transform:translateY(0);pointer-events:auto;}',
     '.clippy-thought::after{content:"";position:absolute;bottom:-8px;right:24px;width:14px;height:14px;background:rgba(15,15,30,0.85);border-right:1px solid rgba(255,255,255,0.12);border-bottom:1px solid rgba(255,255,255,0.12);transform:rotate(45deg);}',
@@ -1323,7 +1331,7 @@
     '  </div>',
     '  <div id="clippy-thought" class="clippy-thought"><span id="clippy-thought-text"></span></div>',
     '  <button id="clippy-toggle" class="clippy-toggle" aria-label="Clippy">',
-    '    <svg viewBox="0 0 100 160" width="56" height="84" class="clippy-svg" id="clippy-svg">',
+    '    <svg viewBox="0 0 100 160" width="88" height="132" class="clippy-svg" id="clippy-svg">',
     '      <ellipse cx="50" cy="95" rx="18" ry="50" fill="none" stroke="#5C5C5C" stroke-width="8" stroke-linecap="round"/>',
     '      <ellipse cx="42" cy="55" rx="8" ry="10" fill="white" stroke="#888" stroke-width="2"/>',
     '      <ellipse cx="43" cy="56" rx="3.5" ry="4.5" fill="#222" class="clippy-pupil-l"/>',
@@ -1624,6 +1632,9 @@
     if (service === 'laser_cut' || service === 'laser_engrave' || service === 'browse') {
       links.push({ label: ps.laser || '✂️ Laser products', href: clippyBase() + 'produkte/lasercut.html' });
     }
+    if (service === 'browse') {
+      links.push({ label: ps.terrain || '🏔️ 3D Relief Map', href: clippyBase() + 'terrain.html' });
+    }
     links.push({ label: ps.all || '📦 All products', href: clippyBase() + 'produkte.html' });
 
     var wrap = document.createElement('div');
@@ -1715,6 +1726,30 @@
       state.step = 4;
       appendMessage(textSet().productSuggestions.browseIntro, 'bot');
       appendProductSuggestions('browse');
+      return;
+    }
+    if (key === 'service' && value === 'terrain') {
+      state.finishedQuestions = true;
+      state.step = 4;
+      var terrainMsg = {
+        de: '🏔️ Auf unserer Reliefkarten-Seite kannst du dein eigenes 3D-Geländemodell aus echten NASA-Höhendaten konfigurieren — Gebiet wählen, Größe, Material und Sockel auswählen, Vorschau generieren und direkt bestellen!',
+        en: '🏔️ On our relief map page you can configure your own 3D terrain model from real NASA elevation data — choose your area, size, material and base, generate a preview and order directly!',
+        fr: '🏔️ Sur notre page carte en relief, vous pouvez configurer votre propre modèle 3D à partir de données d\'altitude NASA — choisissez la zone, la taille, le matériau et le socle, générez un aperçu et commandez directement !',
+        es: '🏔️ En nuestra página de mapas en relieve puedes configurar tu propio modelo 3D con datos de elevación NASA reales — elige zona, tamaño, material y base, genera una vista previa y pide directamente!',
+        it: '🏔️ Sulla nostra pagina mappe in rilievo puoi configurare il tuo modello 3D da dati altimetrici NASA reali — scegli area, dimensione, materiale e base, genera un\'anteprima e ordina direttamente!'
+      };
+      var lang = clippyLang();
+      appendMessage(terrainMsg[lang] || terrainMsg.de, 'bot');
+      var linkText = { de: '🏔️ Zur Reliefkarte', en: '🏔️ Go to Relief Map', fr: '🏔️ Vers la carte en relief', es: '🏔️ Ir al mapa en relieve', it: '🏔️ Vai alla mappa in rilievo' };
+      var wrap = document.createElement('div');
+      wrap.className = 'clippy-options';
+      var btn = document.createElement('button');
+      btn.className = 'clippy-option-btn';
+      btn.type = 'button';
+      btn.textContent = linkText[lang] || linkText.de;
+      btn.addEventListener('click', function() { window.location.href = 'terrain.html'; });
+      wrap.appendChild(btn);
+      document.querySelector('.clippy-messages').appendChild(wrap);
       return;
     }
     state.step += 1;

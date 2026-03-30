@@ -25,7 +25,7 @@
     }
   </script>
   
-  <script src="i18n.js?v=1774473468"></script>
+  <script src="i18n.js?v=1774892401"></script>
   
   <style>
     /* Terrain-spezifische Styles */
@@ -415,7 +415,7 @@
       <a href="index.html" class="logo"><img src="logo.svg" alt="FACTUM3D" class="logo-svg"></a>
       <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
         
-        <div class="nav-dropdown"><a href="produkte.html" class="nav-dropdown-trigger" data-i18n="nav.produkte">Produkte</a><div class="nav-dropdown-menu"><a href="produkte/3d-fdm-druck.html" data-i18n="produkte.cat.fdm">🖨️ 3D-FDM-Druck</a><a href="produkte/lasercut.html" data-i18n="produkte.cat.laser">✂️ Lasercut &amp; Gravur</a><a href="terrain.html">🏔️ 3D-Reliefkarte</a></div></div>
+        <div class="nav-dropdown"><a href="produkte.html" class="nav-dropdown-trigger" data-i18n="nav.produkte">Produkte</a><div class="nav-dropdown-menu"><a href="produkte/3d-fdm-druck.html" data-i18n="produkte.cat.fdm">🖨️ 3D-FDM-Druck</a><a href="produkte/lasercut.html" data-i18n="produkte.cat.laser">✂️ Lasercut &amp; Gravur</a><a href="terrain.html" data-i18n="produkte.cat.terrain">🏔️ 3D-Reliefkarte</a></div></div>
         <div class="nav-dropdown"><a href="index.html#leistungen" class="nav-dropdown-trigger" data-i18n="nav.leistungen">Leistungen</a><div class="nav-dropdown-menu"><a href="leistungen/3d-druck.html">🖨️ 3D-Druck</a><a href="leistungen/lasercutting.html">✂️ Lasercutting</a><a href="leistungen/lasergravur.html">🔍 Lasergravur</a><a href="leistungen/resin-druck.html">💧 Resin-Druck</a><a href="leistungen/prototyping.html">🔧 Prototyping</a><a href="materialien.html">🧪 Materialien</a></div></div>
         <a href="ueber-uns.html" data-i18n="nav.about">Über uns</a>
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
@@ -424,9 +424,23 @@
       
       </nav>
       <div class="header-actions">
-        <a href="warenkorb.html" class="cart-icon">🛒<span id="cart-badge" class="cart-badge"></span></a>
+        <div class="lang-switcher-compact">
+          <button class="lang-current" id="lang-current-btn" onclick="toggleLangDropdown()" title="Sprache">🇩🇪</button>
+          <div class="lang-dropdown" id="lang-dropdown">
+            <button onclick="setLang('de')" data-lang="de" title="Deutsch">🇩🇪 DE</button>
+            <button onclick="setLang('en')" data-lang="en" title="English">🇬🇧 EN</button>
+            <button onclick="setLang('fr')" data-lang="fr" title="Français">🇫🇷 FR</button>
+            <button onclick="setLang('es')" data-lang="es" title="Español">🇪🇸 ES</button>
+            <button onclick="setLang('it')" data-lang="it" title="Italiano">🇮🇹 IT</button>
+          </div>
+        </div>
+        <a href="warenkorb.html" class="cart-icon" aria-label="Warenkorb" title="Warenkorb" style="position:relative;">🛒<span id="cart-badge" class="cart-badge"></span></a>
+        <div class="header-auth" id="header-auth">
+          <button onclick="openAuthModal('login')" class="auth-icon-btn" id="nav-login-btn" title="Anmelden / Registrieren">👤</button>
+          <a href="profil.html" class="auth-icon-btn auth-icon-active" id="nav-user-btn" style="display:none" title="Mein Konto">👤</a>
+        </div>
       </div>
-      <button class="mobile-toggle">☰</button>
+      <button class="mobile-toggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
     </div>
   </header>
 
@@ -435,8 +449,8 @@
     <!-- Hero -->
     <section class="terrain-hero">
       <div class="terrain-hero-content">
-        <h1>🏔️ 3D-Reliefkarte</h1>
-        <p>Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</p>
+        <h1>🏔️ <span data-i18n="terrain.hero.title">3D-Reliefkarte</span></h1>
+        <p data-i18n="terrain.hero.subtitle">Dein Berg. Deine Erinnerung. Aus echten NASA-Höhendaten.</p>
       </div>
     </section>
 
@@ -446,7 +460,7 @@
         
         <!-- Left: Map Selection -->
         <div class="config-card">
-          <h2><span class="step-number">1</span> Gebiet wählen</h2>
+          <h2><span class="step-number">1</span> <span data-i18n="terrain.step1">Gebiet wählen</span></h2>
           
           <div class="preset-grid">
             <button class="preset-btn" data-lat="47.4211" data-lon="10.9853" data-name="Zugspitze" data-radius="15">
@@ -475,19 +489,20 @@
             </button>
           </div>
           
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 12px; text-align: center;" data-i18n="terrain.preset.hint">📍 Wähle einen Vorschlag oder <strong style="color: #fff;">klicke direkt auf die Karte</strong> um dein eigenes Gebiet zu bestimmen.</p>
           <div id="map"></div>
           
           <div class="coord-display">
             <div class="coord-item">
-              <label>Breite</label>
+              <label data-i18n="terrain.coord.lat">Breite</label>
               <strong id="coord-lat">—</strong>
             </div>
             <div class="coord-item">
-              <label>Länge</label>
+              <label data-i18n="terrain.coord.lon">Länge</label>
               <strong id="coord-lon">—</strong>
             </div>
             <div class="coord-item">
-              <label>Radius</label>
+              <label data-i18n="terrain.coord.radius">Radius</label>
               <strong id="coord-radius">— km</strong>
             </div>
           </div>
@@ -495,130 +510,103 @@
 
         <!-- Right: Configuration -->
         <div class="config-card">
-          <h2><span class="step-number">2</span> Größe & Optionen</h2>
+          <h2><span class="step-number">2</span> <span data-i18n="terrain.step2">Größe & Optionen</span></h2>
           
-          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);">Größe <small style="font-weight: 400;">(Radius passt sich automatisch an)</small>:</h3>
+          <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--text-secondary);"><span data-i18n="terrain.size">Größe</span> <small style="font-weight: 400;">(<span data-i18n="terrain.size.hint">Radius passt sich automatisch an</span>)</small>:</h3>
           <div class="size-grid">
             <div class="size-card" data-size="desk" data-price="29">
-              <h3>Desk Trophy</h3>
+              <h3 data-i18n="terrain.size.desk">Desk Trophy</h3>
               <p class="dimensions">120 × 120 mm</p>
               <p class="price">29€</p>
-              <small style="color: var(--text-secondary); display: block; margin-top: 8px;">~15 km Radius</small>
+              <small style="color: var(--text-secondary); display: block; margin-top: 8px;">~15 km <span data-i18n="terrain.coord.radius">Radius</span></small>
             </div>
             <div class="size-card" data-size="wall" data-price="69">
-              <h3>Wall Art</h3>
+              <h3 data-i18n="terrain.size.wall">Wall Art</h3>
               <p class="dimensions">200 × 200 mm</p>
               <p class="price">69€</p>
-              <small style="color: var(--text-secondary); display: block; margin-top: 8px;">~30 km Radius</small>
+              <small style="color: var(--text-secondary); display: block; margin-top: 8px;">~30 km <span data-i18n="terrain.coord.radius">Radius</span></small>
             </div>
             <div class="size-card" data-size="mega" data-price="119">
-              <h3>Mega Relief</h3>
-              <p class="dimensions">280 × 280 mm</p>
+              <h3 data-i18n="terrain.size.mega">Mega Relief</h3>
+              <p class="dimensions">250 × 250 mm</p>
               <p class="price">119€</p>
-              <small style="color: var(--text-secondary); display: block; margin-top: 8px;">~50 km Radius</small>
+              <small style="color: var(--text-secondary); display: block; margin-top: 8px;">~50 km <span data-i18n="terrain.coord.radius">Radius</span></small>
             </div>
           </div>
 
-          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Material:</h3>
+          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);"><span data-i18n="terrain.material">Material</span>:</h3>
           <div class="options-grid">
             <div class="option-btn selected" data-material="pla" data-price="0">
-              <strong>PLA</strong>
-              <small>Standard (inkl.)</small>
-            </div>
-            <div class="option-btn" data-material="marble" data-price="15">
-              <strong>Marmor</strong>
-              <small>+15€</small>
-            </div>
-            <div class="option-btn" data-material="wood" data-price="12">
-              <strong>Holz</strong>
-              <small>+12€</small>
+              <strong data-i18n="terrain.material.pla">PLA Standard</strong>
+              <small data-i18n="terrain.included">inkl.</small>
             </div>
             <div class="option-btn" data-material="petg" data-price="10">
-              <strong>PETG</strong>
+              <strong data-i18n="terrain.material.petg">PETG</strong>
               <small>+10€</small>
             </div>
           </div>
 
-          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Finish:</h3>
+          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);"><span data-i18n="terrain.base">Sockel</span>:</h3>
           <div class="options-grid">
-            <div class="option-btn selected" data-finish="natural" data-price="0">
-              <strong>Natur</strong>
-              <small>Standard (inkl.)</small>
+            <div class="option-btn selected" data-extra="none" data-price="0">
+              <strong data-i18n="terrain.base.none">Ohne</strong>
+              <small data-i18n="terrain.included">inkl.</small>
             </div>
-            <div class="option-btn" data-finish="painted" data-price="35">
-              <strong>Handbemalt</strong>
-              <small>+35€</small>
-            </div>
-            <div class="option-btn" data-finish="gold" data-price="60">
-              <strong>Gold-Edition</strong>
-              <small>+60€</small>
-            </div>
-          </div>
-
-          <h3 style="font-size: 1.1rem; margin: 24px 0 12px; color: var(--text-secondary);">Extras:</h3>
-          <div class="options-grid">
-            <div class="option-btn" data-extra="base" data-price="25">
-              <strong>Holzsockel</strong>
+            <div class="option-btn" data-extra="wood-base" data-price="25">
+              <strong data-i18n="terrain.base.wood">Holzsockel</strong>
               <small>+25€</small>
             </div>
-            <div class="option-btn" data-extra="case" data-price="40">
-              <strong>Acryl-Vitrine</strong>
-              <small>+40€</small>
-            </div>
-            <div class="option-btn" data-extra="vase" data-price="-15%">
-              <strong>Vase-Mode</strong>
-              <small>−15% (schneller)</small>
+            <div class="option-btn" data-extra="concrete-base" data-price="30">
+              <strong data-i18n="terrain.base.concrete">Betonsockel</strong>
+              <small>+30€</small>
             </div>
           </div>
         </div>
 
         <!-- Full Width: Preview -->
         <div class="config-card" style="grid-column: 1 / -1;">
-          <h2><span class="step-number">3</span> 3D-Vorschau</h2>
+          <h2><span class="step-number">3</span> <span data-i18n="terrain.step3">3D-Vorschau</span></h2>
           
           <div class="preview-container">
             <div class="preview-placeholder" id="preview-placeholder">
-              <p>🏔 Wähle ein Gebiet und klicke auf "Vorschau generieren"</p>
+              <p data-i18n="terrain.preview.hint">🏔 Wird gerade generiert...</p>
             </div>
             <canvas id="preview-canvas"></canvas>
             <div class="preview-controls" style="display: none;" id="preview-controls">
-              <button class="preview-btn" id="reset-camera">🔄 Zurücksetzen</button>
-              <button class="preview-btn" id="toggle-wireframe">🔲 Wireframe</button>
+              <button class="preview-btn" id="reset-camera">🔄 <span data-i18n="terrain.btn.reset">Zurücksetzen</span></button>
+              <button class="preview-btn" id="toggle-wireframe">🔲 <span data-i18n="terrain.btn.wireframe">Wireframe</span></button>
             </div>
           </div>
 
           <div class="summary-card">
-            <h3>Deine Auswahl</h3>
+            <h3 data-i18n="terrain.summary">Deine Auswahl</h3>
             <div class="summary-item">
-              <span>Gebiet:</span>
+              <span data-i18n="terrain.summary.area">Gebiet:</span>
               <span id="sum-location">—</span>
             </div>
             <div class="summary-item">
-              <span>Größe:</span>
+              <span data-i18n="terrain.summary.size">Größe:</span>
               <span id="sum-size">—</span>
             </div>
             <div class="summary-item">
-              <span>Material:</span>
+              <span data-i18n="terrain.summary.material">Material:</span>
               <span id="sum-material">PLA Standard</span>
             </div>
             <div class="summary-item">
-              <span>Finish:</span>
-              <span id="sum-finish">Natur</span>
-            </div>
-            <div class="summary-item">
-              <span>Extras:</span>
+              <span data-i18n="terrain.summary.base">Sockel:</span>
               <span id="sum-extras">—</span>
             </div>
             <div class="summary-item">
-              <span>Gesamtpreis:</span>
+              <span data-i18n="terrain.summary.total">Gesamtpreis:</span>
               <span id="sum-price">—</span>
             </div>
           </div>
 
           <div class="action-buttons">
-            <button class="btn-primary" id="generate-preview">🔍 Vorschau generieren</button>
-            <button class="btn-primary" id="add-to-cart">🛒 In den Warenkorb</button>
-            <button class="btn-secondary" id="download-stl">📥 STL herunterladen</button>
+            <button class="btn-primary" id="generate-preview">🔍 <span data-i18n="terrain.btn.preview">Vorschau generieren</span></button>
+            <button class="btn-primary" id="add-to-cart">🛒 <span data-i18n="terrain.btn.cart">In den Warenkorb</span></button>
+            <!-- STL-Download nur intern via Umbrel -->
+            <button class="btn-secondary" id="download-stl" style="display:none;">📥 <span data-i18n="terrain.btn.download">STL herunterladen</span></button>
           </div>
         </div>
 
@@ -653,8 +641,11 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   
-  <!-- Cart Badge -->
-  <script src="cart.js"></script>
+  <!-- Cart, Auth, Script, Clippy -->
+  <script src="cart.js?v=1774892401"></script>
+  <script src="auth.js"></script>
+  <script src="script.js?v=1774884827"></script>
+  <script src="clippy.js?v=1774891823"></script>
   
   <script type="module">
     // Configuration State
@@ -667,10 +658,9 @@
       sizePrice: 0,
       material: 'pla',
       materialPrice: 0,
-      finish: 'natural',
-      finishPrice: 0,
-      extras: [],
-      vaseMode: false
+      base: 'none',
+      basePrice: 0,
+      jobId: null   // wird nach erfolgreicher Generierung gesetzt
     };
 
     // Initialize Leaflet Map
@@ -702,6 +692,7 @@
         updateMapMarker();
         updateCoordDisplay();
         updateSummary();
+        autoGenerateIfReady();
       });
     });
 
@@ -709,13 +700,14 @@
     map.on('click', (e) => {
       config.lat = e.latlng.lat.toFixed(4);
       config.lon = e.latlng.lng.toFixed(4);
-      config.locationName = 'Eigene Auswahl';
+      config.locationName = (typeof t === 'function') ? t('terrain.custom.area') : 'Eigene Auswahl';
       
       document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
       
       updateMapMarker();
       updateCoordDisplay();
       updateSummary();
+      autoGenerateIfReady();
     });
 
     function updateMapMarker() {
@@ -763,6 +755,7 @@
         }
         
         updateSummary();
+        autoGenerateIfReady();
       });
     });
 
@@ -777,34 +770,13 @@
       });
     });
 
-    // Finish Selection
-    document.querySelectorAll('[data-finish]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('[data-finish]').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        config.finish = btn.dataset.finish;
-        config.finishPrice = parseInt(btn.dataset.price);
-        updateSummary();
-      });
-    });
-
-    // Extras Selection
+    // Base/Sockel Selection (mutually exclusive)
     document.querySelectorAll('[data-extra]').forEach(btn => {
       btn.addEventListener('click', () => {
-        btn.classList.toggle('selected');
-        const extra = btn.dataset.extra;
-        const price = btn.dataset.price;
-        
-        if (extra === 'vase') {
-          config.vaseMode = btn.classList.contains('selected');
-        } else {
-          const idx = config.extras.findIndex(e => e.type === extra);
-          if (btn.classList.contains('selected')) {
-            if (idx === -1) config.extras.push({ type: extra, price: parseInt(price) });
-          } else {
-            if (idx !== -1) config.extras.splice(idx, 1);
-          }
-        }
+        document.querySelectorAll('[data-extra]').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        config.base = btn.dataset.extra;
+        config.basePrice = parseInt(btn.dataset.price);
         updateSummary();
       });
     });
@@ -814,29 +786,38 @@
       document.getElementById('sum-location').textContent = 
         config.locationName ? `${config.locationName} (${config.radius}km)` : '—';
       
-      const sizeNames = { desk: 'Desk Trophy (120×120mm)', wall: 'Wall Art (200×200mm)', mega: 'Mega Relief (280×280mm)' };
+      const _t = (typeof t === 'function') ? t : (k) => k;
+      const sizeNames = { desk: _t('terrain.size.desk') + ' (120×120mm)', wall: _t('terrain.size.wall') + ' (200×200mm)', mega: _t('terrain.size.mega') + ' (250×250mm)' };
       document.getElementById('sum-size').textContent = config.size ? sizeNames[config.size] : '—';
       
-      const materialNames = { pla: 'PLA Standard', marble: 'Marmor', wood: 'Holz-Filament', petg: 'PETG' };
-      document.getElementById('sum-material').textContent = materialNames[config.material];
+      const materialNames = { pla: _t('terrain.material.pla'), petg: _t('terrain.material.petg') };
+      document.getElementById('sum-material').textContent = materialNames[config.material] || config.material;
       
-      const finishNames = { natural: 'Natur', painted: 'Handbemalt', gold: 'Gold-Edition' };
-      document.getElementById('sum-finish').textContent = finishNames[config.finish];
+      const baseNames = { none: _t('terrain.base.none'), 'wood-base': _t('terrain.base.wood'), 'concrete-base': _t('terrain.base.concrete') };
+      document.getElementById('sum-extras').textContent = baseNames[config.base] || '—';
       
-      const extrasText = config.extras.map(e => {
-        const names = { base: 'Holzsockel', case: 'Acryl-Vitrine' };
-        return names[e.type];
-      }).join(', ') + (config.vaseMode ? (config.extras.length ? ', Vase-Mode' : 'Vase-Mode') : '');
-      document.getElementById('sum-extras').textContent = extrasText || '—';
-      
-      let total = config.sizePrice + config.materialPrice + config.finishPrice;
-      config.extras.forEach(e => total += e.price);
-      if (config.vaseMode && config.sizePrice > 0) {
-        total = total * 0.85;
-      }
+      let total = config.sizePrice + config.materialPrice + config.basePrice;
       
       document.getElementById('sum-price').textContent = 
         total > 0 ? `${total.toFixed(0)}€` : '—';
+    }
+
+    // Bei Sprachwechsel Summary aktualisieren
+    document.addEventListener('pita-lang-changed', () => updateSummary());
+
+    // Auto-generate when both location and size are selected
+    let autoGenerating = false;
+    function autoGenerateIfReady() {
+      if (config.lat && config.lon && config.size && !autoGenerating) {
+        document.getElementById('generate-preview').click();
+      }
+    }
+
+    function scrollToPreview() {
+      const previewCard = document.querySelector('.preview-container');
+      if (previewCard) {
+        previewCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
 
     // Generate Preview
@@ -847,19 +828,26 @@
       }
       
       const btn = document.getElementById('generate-preview');
-      const originalText = btn.textContent;
-      btn.textContent = '🔄 Generiere...';
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '🔄 Generiere...';
       btn.disabled = true;
+      autoGenerating = true;
+      
+      scrollToPreview();
       
       try {
-        // Radius → Grad-Umrechnung (1° ≈ 111km)
-        const radiusInDegrees = config.radius / 111.0;
-        const diameter = radiusInDegrees * 2;
+        // Radius → Grad-Umrechnung, korrigiert für Breitengrad
+        // 1° Lat ≈ 111 km (konstant), 1° Lon ≈ 111 km × cos(lat)
+        const latRad = parseFloat(config.lat) * Math.PI / 180;
+        const degLat = config.radius / 111.0;           // N-S Ausdehnung in Grad
+        const degLon = config.radius / (111.0 * Math.cos(latRad)); // E-W korrigiert
+        const diameterLat = degLat * 2;
+        const diameterLon = degLon * 2;
         
         const sizes = {
-          desk: { width: diameter, height: diameter, tilewidth: 120 },
-          wall: { width: diameter, height: diameter, tilewidth: 200 },
-          mega: { width: diameter, height: diameter, tilewidth: 280 }  // H2D max!
+          desk: { width: diameterLon, height: diameterLat, tilewidth: 120 },
+          wall: { width: diameterLon, height: diameterLat, tilewidth: 200 },
+          mega: { width: diameterLon, height: diameterLat, tilewidth: 250 }
         };
         
         const sizeParams = sizes[config.size];
@@ -879,7 +867,7 @@
         });
         
         const { job_id } = await response.json();
-        btn.textContent = '⏳ Verarbeite...';
+        btn.innerHTML = '⏳ Verarbeite...';
         
         let status = 'pending';
         while (status !== 'done') {
@@ -889,37 +877,174 @@
           status = data.status;
           
           if (data.error) throw new Error(data.error);
-          if (data.progress) btn.textContent = `⏳ ${data.progress}%...`;
+          if (data.progress) btn.innerHTML = `⏳ ${data.progress}%...`;
         }
         
-        btn.textContent = '✅ Lade Vorschau...';
+        btn.innerHTML = '✅ Lade Vorschau...';
+        
+        // Job-ID speichern für Cart & Download
+        config.jobId = job_id;
+        
+        // Download- und Cart-Buttons aktivieren
+        document.getElementById('download-stl').classList.add('ready');
+        document.getElementById('add-to-cart').classList.add('ready');
         
         load3DModel(job_id);
         
         setTimeout(() => {
-          btn.textContent = originalText;
+          btn.innerHTML = originalHTML;
           btn.disabled = false;
+          autoGenerating = false;
         }, 2000);
         
       } catch (error) {
-        btn.textContent = originalText;
+        btn.innerHTML = originalHTML;
         btn.disabled = false;
+        autoGenerating = false;
         alert('❌ Fehler: ' + error.message);
       }
     });
 
     // Download STL
     document.getElementById('download-stl').addEventListener('click', () => {
-      alert('STL-Download: Bitte erst "Vorschau generieren" klicken, dann wird der Download automatisch gestartet.\n\n(Verbesserung folgt: direkter Download ohne Vorschau)');
-    });
-
-    // Add to Cart
-    document.getElementById('add-to-cart').addEventListener('click', () => {
-      if (!config.lat || !config.lon || !config.size) {
-        alert('Bitte wähle zuerst ein Gebiet und eine Größe!');
+      if (!config.jobId) {
+        alert('Bitte erst eine Vorschau generieren!');
         return;
       }
-      alert('✅ Produkt zum Warenkorb hinzugefügt!\n\n(Warenkorb-Integration folgt)');
+      // Direkter Download über versteckten Link
+      const a = document.createElement('a');
+      a.href = `http://69.62.105.159/api/download/${config.jobId}`;
+      a.download = `${config.locationName || 'terrain'}_${config.size || 'model'}.stl`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    });
+
+    // Add to Cart — mit Archiv-Endpoint für permanente STL-Speicherung
+    document.getElementById('add-to-cart').addEventListener('click', async () => {
+      try {
+        console.log('[FACTUM3D Cart] Click — config:', JSON.stringify({
+          lat: config.lat, lon: config.lon, size: config.size, jobId: config.jobId
+        }));
+
+        if (!config.lat || !config.lon || !config.size) {
+          alert('Bitte wähle zuerst ein Gebiet und eine Größe!');
+          return;
+        }
+        if (!config.jobId) {
+          alert('Bitte erst eine Vorschau generieren!');
+          return;
+        }
+
+        const btn = document.getElementById('add-to-cart');
+        const origHTML = btn.innerHTML;
+        btn.innerHTML = '\u23f3 Archiviere...';
+        btn.disabled = true;
+
+        // Bounding Box berechnen
+        const latRad = parseFloat(config.lat) * Math.PI / 180;
+        const degLat = config.radius / 111.0;
+        const degLon = config.radius / (111.0 * Math.cos(latRad));
+        const bbox = {
+          south: parseFloat(config.lat) - degLat,
+          north: parseFloat(config.lat) + degLat,
+          west:  parseFloat(config.lon) - degLon,
+          east:  parseFloat(config.lon) + degLon
+        };
+
+        const sizeLabels = { desk: 'Desk Trophy', wall: 'Wall Art', mega: 'Mega Relief' };
+        const sizeDims   = { desk: '120\u00d7120mm', wall: '200\u00d7200mm', mega: '250\u00d7250mm' };
+        const materialLabels = { pla: 'PLA', petg: 'PETG' };
+        const baseLabels = { none: 'Ohne', 'wood-base': 'Holzsockel', 'concrete-base': 'Betonsockel' };
+        const totalPrice = config.sizePrice + config.materialPrice + config.basePrice;
+
+        // Archiv-Endpoint aufrufen — STL wird dauerhaft gespeichert
+        let archiveId = null;
+        let archiveDownloadUrl = 'http://69.62.105.159/api/download/' + config.jobId;
+        let archiveMetaUrl = null;
+
+        try {
+          const archiveRes = await fetch('http://69.62.105.159/api/archive', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              job_id: config.jobId,
+              location_name: config.locationName || '',
+              lat: parseFloat(config.lat),
+              lon: parseFloat(config.lon),
+              radius: config.radius,
+              size: config.size,
+              material: config.material,
+              base: config.base,
+              price: totalPrice
+            })
+          });
+          if (archiveRes.ok) {
+            const archiveData = await archiveRes.json();
+            archiveId = archiveData.archive_id;
+            archiveDownloadUrl = 'http://69.62.105.159' + archiveData.download_url;
+            archiveMetaUrl = 'http://69.62.105.159' + archiveData.metadata_url;
+            console.log('[FACTUM3D Archive] Archived:', archiveId);
+          } else {
+            console.warn('[FACTUM3D Archive] Archive failed, using temp job URL');
+          }
+        } catch (archErr) {
+          console.warn('[FACTUM3D Archive] Archive error:', archErr);
+        }
+
+        const itemId = archiveId ? 'terrain-' + archiveId : 'terrain-' + config.jobId;
+
+        const cartItem = {
+          id: itemId,
+          type: 'terrain',
+          name: '\ud83c\udfd4\ufe0f ' + (config.locationName || 'Relief') + ' \u2014 ' + sizeLabels[config.size],
+          price: totalPrice,
+          qty: 1,
+          job_id: config.jobId,
+          archive_id: archiveId,
+          locationName: config.locationName,
+          lat: parseFloat(config.lat),
+          lon: parseFloat(config.lon),
+          radius: config.radius,
+          bbox: bbox,
+          size: config.size,
+          sizeDimensions: sizeDims[config.size],
+          material: config.material,
+          materialLabel: materialLabels[config.material],
+          materialPrice: config.materialPrice,
+          base: config.base,
+          baseLabel: baseLabels[config.base],
+          basePrice: config.basePrice,
+          download_url: archiveDownloadUrl,
+          meta_url: archiveMetaUrl,
+          created: new Date().toISOString()
+        };
+
+        console.log('[FACTUM3D Cart] Adding item:', cartItem);
+
+        if (typeof addRichToCart !== 'function') {
+          console.error('[FACTUM3D Cart] addRichToCart not found! Falling back to addToCart');
+          addToCart(itemId, cartItem.name, totalPrice, 1);
+        } else {
+          addRichToCart(cartItem);
+        }
+
+        // Visuelles Feedback
+        btn.innerHTML = '\u2705 Im Warenkorb!';
+        btn.style.background = '#2ecc71';
+        btn.disabled = false;
+        setTimeout(() => {
+          btn.innerHTML = origHTML;
+          btn.style.background = '';
+        }, 2000);
+
+      } catch (err) {
+        console.error('[FACTUM3D Cart] Error:', err);
+        alert('Fehler beim Hinzuf\u00fcgen: ' + err.message);
+        const btn = document.getElementById('add-to-cart');
+        btn.innerHTML = '\ud83d\uded2 <span data-i18n="terrain.btn.cart">In den Warenkorb</span>';
+        btn.disabled = false;
+      }
     });
 
     // ========================================
@@ -994,10 +1119,16 @@
       loader.load(
         url,
         (geometry) => {
+          // STL from TouchTerrain: Z-up → Three.js Y-up
+          geometry.rotateX(-Math.PI / 2);
+          
+          // Center on XZ, place bottom on Y=0 (ground)
           geometry.computeBoundingBox();
           const center = new THREE.Vector3();
           geometry.boundingBox.getCenter(center);
-          geometry.translate(-center.x, -center.y, -center.z);
+          geometry.translate(-center.x, 0, -center.z);
+          geometry.computeBoundingBox();
+          geometry.translate(0, -geometry.boundingBox.min.y, 0);
           
           const material = new THREE.MeshPhongMaterial({
             color: 0xaaaaaa,
@@ -1010,13 +1141,15 @@
           
           const box = new THREE.Box3().setFromObject(mesh);
           const size = box.getSize(new THREE.Vector3());
+          const boxCenter = new THREE.Vector3();
+          box.getCenter(boxCenter);
           const maxDim = Math.max(size.x, size.y, size.z);
           const fov = camera.fov * (Math.PI / 180);
-          const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.5;
+          const dist = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.5;
           
-          camera.position.set(cameraZ * 0.5, cameraZ * 1.2, cameraZ * 0.8);
-          camera.lookAt(0, 0, 0);
-          controls.target.set(0, 0, 0);
+          camera.position.set(dist * 0.6, dist * 0.8, dist * 0.6);
+          camera.lookAt(boxCenter);
+          controls.target.copy(boxCenter);
           controls.update();
           
           document.getElementById('preview-placeholder').style.display = 'none';
@@ -1039,13 +1172,15 @@
       if (mesh) {
         const box = new THREE.Box3().setFromObject(mesh);
         const size = box.getSize(new THREE.Vector3());
+        const boxCenter = new THREE.Vector3();
+        box.getCenter(boxCenter);
         const maxDim = Math.max(size.x, size.y, size.z);
         const fov = camera.fov * (Math.PI / 180);
-        const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.5;
+        const dist = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.5;
         
-        camera.position.set(cameraZ * 0.5, cameraZ * 1.2, cameraZ * 0.8);
-        camera.lookAt(0, 0, 0);
-        controls.target.set(0, 0, 0);
+        camera.position.set(dist * 0.6, dist * 0.8, dist * 0.6);
+        camera.lookAt(boxCenter);
+        controls.target.copy(boxCenter);
         controls.update();
       }
     });

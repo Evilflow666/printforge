@@ -45,7 +45,7 @@
   <meta name="theme-color" content="#0B0F19">
   <!-- Plausible Analytics (privacy-friendly) -->
   <script defer data-domain="69.62.105.159" src="https://plausible.io/js/plausible.js"></script>
-  <script src="i18n.js?v=1774473468"></script>
+  <script src="i18n.js?v=1774892401"></script>
 </head>
 <body>
 
@@ -58,7 +58,7 @@
       <a href="index.html" class="logo"><img src="logo.svg" alt="FACTUM3D" class="logo-svg"></a>
       <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
         
-        <div class="nav-dropdown"><a href="produkte.html" class="nav-dropdown-trigger" data-i18n="nav.produkte">Produkte</a><div class="nav-dropdown-menu"><a href="produkte/3d-fdm-druck.html" data-i18n="produkte.cat.fdm">🖨️ 3D-FDM-Druck</a><a href="produkte/lasercut.html" data-i18n="produkte.cat.laser">✂️ Lasercut &amp; Gravur</a><a href="terrain.html">🏔️ 3D-Reliefkarte</a></div></div>
+        <div class="nav-dropdown"><a href="produkte.html" class="nav-dropdown-trigger" data-i18n="nav.produkte">Produkte</a><div class="nav-dropdown-menu"><a href="produkte/3d-fdm-druck.html" data-i18n="produkte.cat.fdm">🖨️ 3D-FDM-Druck</a><a href="produkte/lasercut.html" data-i18n="produkte.cat.laser">✂️ Lasercut &amp; Gravur</a><a href="terrain.html" data-i18n="produkte.cat.terrain">🏔️ 3D-Reliefkarte</a></div></div>
         <div class="nav-dropdown"><a href="#leistungen" class="nav-dropdown-trigger" data-i18n="nav.leistungen">Leistungen</a><div class="nav-dropdown-menu"><a href="leistungen/3d-druck.html">🖨️ 3D-Druck</a><a href="leistungen/lasercutting.html">✂️ Lasercutting</a><a href="leistungen/lasergravur.html">🔍 Lasergravur</a><a href="leistungen/resin-druck.html">💧 Resin-Druck</a><a href="leistungen/prototyping.html">🔧 Prototyping</a><a href="materialien.html">🧪 Materialien</a></div></div>
         <a href="ueber-uns.html" data-i18n="nav.about">Über uns</a>
         <a href="blog.html" data-i18n="nav.blog">Blog</a>
@@ -122,7 +122,7 @@
           </div>
           <div class="terrain-cta-row">
             <a href="terrain.html" class="btn btn-terrain">Jetzt ausprobieren →</a>
-            <span class="terrain-price">ab 19,90 €</span>
+            <span class="terrain-price">ab 29,99 €</span>
           </div>
         </div>
         <div class="terrain-banner-visual">
@@ -164,6 +164,14 @@
   </section>
 
   <style>
+    /* Values Grid: 4 Spalten responsive */
+    @media (max-width: 1024px) {
+      .values-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 640px) {
+      .values-grid { grid-template-columns: 1fr !important; }
+    }
+
     /* 🏔️ Terrain Highlight Banner */
     .terrain-banner {
       position: relative;
@@ -318,28 +326,27 @@
   <section id="values" class="section">
     <div class="container">
       <h2 data-i18n="values.title">Was uns ausmacht</h2>
-      <div class="grid-3 values-grid">
+      <div class="values-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
         <div class="value-card">
           <span class="value-icon">🎯</span>
           <h3 data-i18n="values.quality.title">Qualität ohne Kompromisse</h3>
-          <p data-i18n="values.quality.text">Jedes Teil wird geprüft bevor es rausgeht. Kein Druck verlässt die Werkstatt der nicht unseren Standards entspricht.</p>
+          <p data-i18n="values.quality.text">Unsere Printfarm mit FDM-Druckern, Resin und CO₂-Laser liefert vom Prototyp bis zur Kleinserie — jedes Teil wird geprüft, bevor es rausgeht.</p>
         </div>
         <div class="value-card">
           <span class="value-icon">⚡</span>
           <h3 data-i18n="values.speed.title">Schnell & Vielseitig</h3>
-          <p data-i18n="values.speed.text">Von der Idee zum fertigen Teil in 2 bis 5 Werktagen. FDM, Resin oder Laser: Wenn du es dir vorstellen kannst, bauen wir es.</p>
+          <p data-i18n="values.speed.text">FDM, Resin, Lasercut, Gravur — alles unter einem Dach. Von der Idee zum fertigen Teil in 2–5 Werktagen. Einzel- oder Serienfertigung.</p>
         </div>
         <div class="value-card">
           <span class="value-icon">☀️</span>
           <h3 data-i18n="values.solar.title">Solarbetrieben</h3>
-          <p data-i18n="values.solar.text">Unsere Drucker und Laser laufen größtenteils auf Solarstrom vom eigenen Dach. Gut fürs Gewissen, gut fürs Klima.</p>
+          <p data-i18n="values.solar.text">Unsere Printfarm läuft mit 4,3 kWp Solartracker und 23 kWh Speicher. Gut fürs Gewissen, gut fürs Klima — und für den Preis.</p>
         </div>
         <div class="value-card">
           <span class="value-icon">🤝</span>
           <h3 data-i18n="values.handmade.title">Handarbeit mit Herz</h3>
-          <p data-i18n="values.handmade.text">Jedes Stück bekommt die volle Aufmerksamkeit. Nachbearbeitung, Qualitätskontrolle, sorgfältige Verpackung.</p>
+          <p data-i18n="values.handmade.text">Kein Massenware-Feeling. Jedes Stück wird nachbearbeitet, kontrolliert und sorgfältig verpackt — als wär's für uns selbst.</p>
         </div>
-
       </div>
     </div>
   </section>
@@ -533,10 +540,10 @@
     </div>
   </footer>
 
-  <script src="cart.js"></script>
+  <script src="cart.js?v=1774892401"></script>
   <script src="auth.js"></script>
-  <script src="script.js?v=1774052069"></script>
-  <script src="clippy.js?v=1774052069"></script>
+  <script src="script.js?v=1774884827"></script>
+  <script src="clippy.js?v=1774891823"></script>
   <script>
     (function () {
       var hint = document.getElementById('hero-clippy-hint');
